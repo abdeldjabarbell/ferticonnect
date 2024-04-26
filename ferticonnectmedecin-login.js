@@ -29,7 +29,7 @@ const retourne = document.getElementById("retourne");
 
 retourne.addEventListener("click", async (e) => {
     e.preventDefault();
-    window.location.replace("/index.html");
+    window.location.replace("index.html");
 
 });
 
