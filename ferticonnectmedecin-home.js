@@ -26,16 +26,28 @@ homebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "none";
     midleespace.style.display = "flex";
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Pour un défilement fluide
+    });
 });
 cabinsbtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "block";
     rightespace.style.display = "none";
     midleespace.style.display = "none";
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Pour un défilement fluide
+    });
 });
 messagebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Pour un défilement fluide
+    });
 });
 
 
