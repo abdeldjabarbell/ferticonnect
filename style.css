@@ -1216,6 +1216,12 @@ transition: .2s ease;
     width: 20px;
     height: 20px;
     }
+    .btnjaime:hover{
+      background-color: transparent;
+    }
+    .btncomment:hover{
+      background-color: transparent;
+    }
 
 
 }
