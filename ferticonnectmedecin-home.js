@@ -26,30 +26,27 @@ homebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "none";
     midleespace.style.display = "flex";
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Pour un défilement fluide
-    });
+    scrollToTop()
 });
 cabinsbtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "block";
     rightespace.style.display = "none";
     midleespace.style.display = "none";
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Pour un défilement fluide
-    });
+    scrollToTop()
 });
 messagebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Pour un défilement fluide
-    });
+    scrollToTop()
 });
 
+
+
+function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 
 tailledecran();
 window.addEventListener('resize', tailledecran);
