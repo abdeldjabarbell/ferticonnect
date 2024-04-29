@@ -15,11 +15,13 @@
 :root{
    --bg-color:#f4fbf9;
    --second-bg-color:#bcc9c7;
+   --pub-bg-color:#c8d6d442;
    --second2-bg-color:#004f64;
    --text-color:#000000;
    --btn-color:#559692;
    --btnHover-color:#53e8de;
    --error-text: rgb(160, 13, 0);
+
 }
 html{
    font-size: 62.5%;
@@ -366,6 +368,7 @@ input:focus {
     background-color:rgb(0, 45, 0); 
   }
 
+
   .btn.modifier{
     display: block; 
     width: 150px; 
@@ -492,7 +495,8 @@ input:focus {
 
   /*-----------------------------------------------------loader*/
 
-  
+    /*-----------------------------------------------------wating ------*/
+
   .wating{
     display: flex;
     width: 100vw;
@@ -530,10 +534,520 @@ input:focus {
     100% { transform: rotate(360deg); }
   }
   
+    /*-----------------------------------------------------wating ------*/
+    /*-----------------------------------------------------home page medecin  ------*/
 
   
+.bgHome{
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  padding: 6% 10px ;
+  background-color: var(--bg-color);
+  
+}
+.leftespace{
+ width: 30%;
+ min-height:100vh ;
+ padding: 20px;
+}
+.profilinfobg{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 5px;
+  border-radius: 7px;
+  transition: .2s ease;
+  cursor: pointer;
+}
+.profilinfobg h1{
+  font-size: 1.3rem;
+  padding-left: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--second2-bg-color);
+
+}
+.verifica{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+.verifica i{
+  font-size: 1.3rem;
+  color: var(--second2-bg-color);
+  padding-left: 10px;
+}
+.photoprofilepubadd1{
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  background-color: #004f64;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photoprofilepubadd1 img{
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+}
+.midleespace{
+  width: 40%;
+  min-height:100vh ;
+  padding: 10px;
+}
+.profilinfobg:hover{
+ background-color: #bcc9c760;
+}
+.mycabinsbg{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pub-bg-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  overflow: hidden;
+  
+}
+
+.rightespace{
+  width: 30%;
+  min-height:100vh ;
+}
+.mescabins_{
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: 370px; /* Ajustez la hauteur selon vos besoins */
+  overflow-y: auto; /* Active le défilement vertical */
+  padding: 10px; /* Ajoute un peu d'espace intérieur */
+}
+.cabinfoss{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid var(--second-bg-color);
+  transition: 0.2s ease;
+}
+.cabinfoss:hover{
+ background-color: #bcc9c78e;
+}
+.mescabins_image{
+  width: 28px;
+  height: 28px;
+  background-color: var(--second2-bg-color);
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 5px;
+}
+.mescabins_image img{
+  width: 28px;
+  height: 28px;
+}
+.mescabins_name h1{
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--second2-bg-color);
+  margin-left: 10px;
+  cursor: pointer;
+}
+.titleoptionmycabinsbg{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--second2-bg-color);
+  color: var(--bg-color);
+  padding: 10px;
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 20;
+  transition: 0.2s ease;
+}
+.titleoptionmycabinsbg:hover{
+  background-color: #008fb6;
+
+}
+.titleoptionmycabinsbg h2{
+ font-size: 1.3rem;
+ cursor: pointer;
+
+}
+.titleoptionmycabinsbg i{
+  font-size: 1.5rem;
+  padding-right: 10px;
+  cursor: pointer;
+
+ }
+
+.navigationbar{
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-color);
+  box-shadow: 0 .5rem 1rem #55969217;
+
+}
+.navigationbar h1{
+  color: var(--second2-bg-color);
+  padding-left: 5px;
+}
+.log{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.log h1{
+  font-weight: 600;
+
+}
+.optionsnavbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
 
 
+}
+.optionsnavbar i{
+  font-size: 2.3rem;
+  color: var(--second2-bg-color);
+  margin-right: 20px;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+.optionsnavbar i:hover{
+  color: var(--btn-color);
+
+}optionsnavbar
+
+.logonav{
+  width: 40px;
+  height: 40px;
+}
+.logonav img{
+  width: 40px;
+  height: 40px;
+
+}
+.addpublication{
+  width: 100%;
+  padding: 10px;
+  background-color: var(--pub-bg-color);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.addpublication1{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.inputpubadd{
+  width: 88%;
+  border-radius: 15px;
+  padding-left: 20px;
+  height: auto; /* Hauteur automatique */
+  min-height: 10px; /* Hauteur minimale de l'input */
+  resize: vertical; /* Permet le redimensionnement vertical uniquement */
+  overflow-y: auto; /* Défilement vertical si nécessaire */
+}
+.photoprofilepubadd{
+  width: 40px;
+  height: 40px;
+  background-color: var(--second2-bg-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photoprofilepubadd img{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ligne_{
+  width: 100%;
+  height: 1px;
+  border-radius: 1px;
+  background-color: var(--second-bg-color);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.addpublication2{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.opt_addpublication2{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+
+}
+.opt_addpublication2 i{
+  font-size: 1.8rem;
+  color: var(--second2-bg-color);
+ }
+ .opt_addpublication2:hover{
+  background-color: #bcc9c7;
+  border-radius: 5px;
+}
+
+
+ 
+.activatoin_compt{
+  position: fixed;
+  z-index: 3000;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #ffffffc7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 9% 2rem;
+}
+.boxactivation input{
+width: 200px;
+border: 1px solid var(--second2-bg-color);
+}
+.boxactivation img{
+ width: 200px;
+}
+    /*-----------------------------------------------------home page medecin  ------*/
+.gallery_{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 5px;
+  object-fit: cover;
+
+}
+.imagge img{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 5px;
+  object-fit: cover;
+}
+    /*----------------------------------------------------publication style  ------*/
+
+.lespublicationslist{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.pubbg_{
+  width: 100%;
+  padding: 10px 0;
+  background-color: var(--pub-bg-color);
+  border-radius: 5px;
+  margin-bottom:10px;
+} 
+.headerpublication{
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.image_user_pub{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--second2-bg-color);
+  margin-right: 10px;
+
+}
+.image_user_pub img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-fit: cover;
+}
+.nameuserpub{
+ height: 20px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+}
+.nameuserpub h1{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.headerpublication i{
+  font-size: 1.2rem;
+}
+.image_publicationbg{
+  width: 100%;
+  height: 380px;
+  background-color: var(--second-bg-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+}
+.image_publicationbg img{
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+}
+.textpublication{
+width: 100%;
+padding: 5px 10px;
+}
+.textpublication{
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.datpublication{
+  font-size: 10px;
+
+}
+
+.infouser_{
+  display: flex;
+  width: 70%;
+  flex-direction: row;
+}
+
+.jaimeandcommentsnum{
+  width: 100%;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.jaimesnum{
+  display: flex;
+  flex-direction: row;
+  height: 3px;
+
+} 
+
+.commentsnum{
+  display: flex;
+  flex-direction: row;
+  height: 3px;
+
+}
+
+.jaimecommentbtns{
+  width: 100%;
+  padding: 2px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+.btnjaime{
+width: 50%;
+padding: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+border-radius: 5px;
+transition: .2s ease;
+
+}
+.btnjaime i{
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+.btncomment{
+  width: 50%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: .2s ease;
+}
+.btncomment i{
+  cursor: pointer;
+  font-size: 1.4rem;
+
+}
+
+.btnjaime:hover{
+  background-color: var(--second-bg-color);
+}
+.btncomment:hover{
+  background-color: var(--second-bg-color);
+}
+
+.navbar_buttom{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  background-color: var(--bg-color);
+  justify-content: space-around;
+  align-items: center;
+}
+.navbar_buttom i{
+  font-size: 1.5rem;
+}
 
 
 
@@ -588,6 +1102,117 @@ input:focus {
     .image_L_R p{
     font-size: 1.8rem;
     }
+    .bgHome{
+      padding-top: 60px;
+      padding: 13% 0px;
+    }
+    .leftespace{
+      width: 100%;
+      display: none;
+    }
+    .rightespace{
+      width: 100%;
+      display: none;
+    }
+    .midleespace{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .logonav img{
+      width: 20px;
+      height: 20px;
+    }
+    .log h1{
+      font-size: 1.3rem;
+    }
+    .optionsnavbar i{
+      font-size: 1.3rem;
+    }
+    .optionsnavbar{
+      justify-content: end;
+    }
+    .photoprofilepubadd{
+      width: 30px;
+      height: 30px;
+    }
+    .photoprofilepubadd img{
+      width: 28px;
+      height: 28px;
+    }
+    .nameuserpub h1{
+      color: var(--second2-bg-color);
+      font-size: .9rem;
+
+    }
+    .headerpublication p{
+      font-size: 0.6rem;
+      color: var(--second2-bg-color);
+    }
+    .headerpublication i{
+      font-size: 0.9rem;
+      color: var(--second2-bg-color);
+    }
+    .jaimeandcommentsnum i{
+      color: var(--second2-bg-color);
+    }
+    .jaimeandcommentsnum p{
+      color: var(--second2-bg-color);
+    }
+    .jaimecommentbtns i{
+      color: var(--second2-bg-color);
+    }
+    .image_publicationbg{
+      height: 270px;
+    }
+    .opt_addpublication2{
+      font-size: 0.9rem;
+    }
+    .textpublication{
+      color: var(--second2-bg-color);
+
+    }
+    .wating_img{
+      width:40px;
+      height: 40px;
+    }
+    .wating_img img{
+      width:30px;
+      height: 30px;
+    }
+    .photoprofilepubadd1{
+    width: 20px;
+    height: 20px;
+    }
+    .photoprofilepubadd1 img{
+    width: 20px;
+    height: 20px;
+    }
+    .profilinfobg h1{
+    font-size: 1rem;
+    }
+    .profilinfobg i{
+    font-size: 1rem;
+    }
+    .mycabinsbg i{
+    font-size: 1rem;
+    }
+    .mycabinsbg h2{
+    font-size: 1rem;
+    }
+    .mescabins_name h1{
+        font-size: 1rem;
+    }
+    .mescabins_image{
+    width: 20px;
+    height: 20px;
+    }
+    .mescabins_image img{
+    width: 20px;
+    height: 20px;
+    }
+
+
 }
 
 
