@@ -348,38 +348,34 @@ try {
     for (const doc of querySnapshot.docs) {
         const idpub = doc.id;
         const data = doc.data();
-        const publication = data.publication;
         const placepub = data.placepub;
         const imageUrl_publication = data.imageUrl_publication;
         
-        // Fonction pour formater un timestamp en "DD MM YYYY heure:minute"
-        function formatterTimestamp(timestamp) {
-            const date = new Date(timestamp.seconds * 1000); // Convertir les secondes en millisecondes
-        
-            // Obtenir les parties de la date
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Les mois sont indexés à partir de 0, donc ajout de 1
-            const year = date.getFullYear();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-        
-            // Formater les parties de la date pour s'assurer qu'elles ont toujours deux chiffres
-            const formattedDay = day < 10 ? '0' + day : day;
-            const formattedMonth = month < 10 ? '0' + month : month;
-            const formattedHours = hours < 10 ? '0' + hours : hours;
-            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-        
-            // Retourner la date formatée au format "DD MM YYYY heure:minute"
-            return `${formattedDay} ${formattedMonth} ${year} ${formattedHours}:${formattedMinutes}`;
-        }
-        
-        // Exemple d'utilisation avec votre timestamp
-        const timestamp = { seconds: 1714246980, nanoseconds: 165000000 }; // Votre timestamp
-        const formattedTimestamp = formatterTimestamp(timestamp);
-        
+         // Fonction pour formater un timestamp en "DD MM YYYY heure:minute"
+         function formatterTimestamp(timestamp) {
+             const date = new Date(timestamp * 1000); // Convertir les secondes en millisecondes
+         
+             const day = date.getDate();
+             const month = date.getMonth() + 1; // Les mois sont indexés à partir de 0, donc ajout de 1
+             const year = date.getFullYear();
+             const hours = date.getHours();
+             const minutes = date.getMinutes();
 
+             const formattedDay = day < 10 ? '0' + day : day;
+             const formattedMonth = month < 10 ? '0' + month : month;
+             const formattedHours = hours < 10 ? '0' + hours : hours;
+             const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+         
+             return `${formattedDay} ${formattedMonth} ${year} ${formattedHours}:${formattedMinutes}`;
+         }
+         
+         // Exemple d'utilisation avec votre timestamp
+         const publication = data.publication.seconds; // Assurez-vous que data.publication contient bien la propriété 'seconds'
+         const formattedTimestamp = formatterTimestamp(publication);
+         
         const iduser = data.iduser;
         const typeuser = data.typeuser;
+        console.log("tome"+formattedTimestamp);
 
         creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub);
 
