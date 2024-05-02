@@ -1,5 +1,15 @@
 
-
+function tailledecran(){
+    const navbar_buttom = document.getElementById('navbar_buttom');
+    const leftespace = document.getElementById('leftespace');
+    const rightespace = document.getElementById('rightespace');
+    const midleespace = document.getElementById('midleespace');
+    if (window.innerWidth < 600) {
+        navbar_buttom.style.display="flex";
+    } else {
+        navbar_buttom.style.display="none";
+    }
+}
 
 const homebtnnavbuttom = document.getElementById('homebtnnavbuttom');
 const cabinsbtnnavbuttom = document.getElementById('cabinsbtnnavbuttom');
@@ -30,8 +40,8 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 
-//tailledecran();
-//window.addEventListener('resize', tailledecran);
+tailledecran();
+window.addEventListener('resize', tailledecran);
 
 const inputpublication = document.getElementById('inputpubadd');
 
