@@ -265,7 +265,6 @@ acive_compt_form.addEventListener("submit", async (e) => {
 const deconnecter_acv_msg = document.getElementById("deconnecter_acv_msg");
 
 
-
 deconnecter_acv_msg.addEventListener("click", async (e) => {
     e.preventDefault();
     logout();
@@ -273,17 +272,19 @@ deconnecter_acv_msg.addEventListener("click", async (e) => {
 
 
 const deconnectionbg = document.getElementById("deconnectionbg");
+
 const loggouut_nav = document.getElementById("loggouut_nav");
 loggouut_nav.addEventListener("click", async (e) => {
     e.preventDefault();
     deconnectionbg.style.display="flex";
 });
-const anulerdeco_neccterbtn = document.getElementById("loggouut_nav");
+
+const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
 anulerdeco_neccterbtn.addEventListener("click", async (e) => {
     e.preventDefault();
     deconnectionbg.style.display="none";
 });
-const deco_neccterbtn = document.getElementById("loggouut_nav");
+const deco_neccterbtn = document.getElementById("deco_neccterbtn");
 deco_neccterbtn.addEventListener("click", async (e) => {
     e.preventDefault();
     logout();
