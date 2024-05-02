@@ -95,7 +95,7 @@ icons.forEach(function(icon) {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth ,signOut} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
-import { getFirestore, doc, getDoc,updateDoc ,addDoc,deleteDoc, query, orderBy,where, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { getFirestore, doc, getDoc,updateDoc ,addDoc,deleteDoc, query, orderBy,limit,where, getDocs, collection, serverTimestamp} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
 
 const firebaseConfig = {
@@ -143,6 +143,9 @@ const typeuserclick = urlParams.get('typeuserclick');
             if(imguser){
                 photoprofilepubadd.src=imguser;
                 photoprofilepubadd1.src=imguser;
+                  photoprofilepubadd.addEventListener('click', () => {
+                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+                  }); 
             }
 
         }
@@ -150,9 +153,7 @@ const typeuserclick = urlParams.get('typeuserclick');
         profilinfobg.addEventListener('click', () => {
             window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
         }); 
-        photoprofilepubadd.addEventListener('click', () => {
-            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
-        }); 
+
         
 
 
@@ -395,68 +396,56 @@ function refreshPage() {
     window.location.reload(); 
 }
 
-
-
 const lespublicationslist = document.getElementById("lespublicationslist");
 
-try {
+const querySnapshot = await getDocs(query(collection(db, 'publications'), orderBy('timestamp', 'desc'), limit(25)));
+querySnapshot.forEach((doc) => {
+    const idpub = doc.id;
+    const data = doc.data();
+    const publication = data.publication;
+    const placepub = data.placepub;
+    const imageUrl_publication = data.imageUrl_publication;
+    
+    const timestamp = data.timestamp; // Suppose que le timestamp est stocké dans un champ "timestamp" du document
+    const seconds = timestamp.seconds;
+    const nanoseconds = timestamp.nanoseconds;
+    // Créer une date à partir de la représentation Firebase Timestamp
+    const milliseconds = seconds * 1000 + nanoseconds / 1000000; // Convertir nanosecondes en millisecondes
+    const date = new Date(milliseconds);
+    
+    // Extraire les composantes de la date
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Les mois commencent à 0, donc on ajoute 1
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    
+    // Formater la date en chaîne de caractères "DD MM YY heure"
+    const formattedTimestamp = `${day}/${month}/${year}   ${hours}h${minutes}`;
+    
+    const iduser = data.iduser;
+    const typeuser = data.typeuser;
 
-    const querySnapshot = await getDocs(query(collection(db, 'publications'), orderBy('timestamp', 'desc')));
+    const pubbg_ = document.createElement("div");
+    pubbg_.className = "pubbg_";
+    creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub);
+    lespublicationslist.appendChild(pubbg_);
 
-    for (const doc of querySnapshot.docs) {
-        const idpub = doc.id;
-        const data = doc.data();
-        const publication = data.publication;
-        const placepub = data.placepub;
-        const imageUrl_publication = data.imageUrl_publication;
-        
-        const timestamp = data.timestamp; // Suppose que le timestamp est stocké dans un champ "timestamp" du document
-        const seconds = timestamp.seconds;
-        const nanoseconds = timestamp.nanoseconds;
-        
-        // Créer une date à partir de la représentation Firebase Timestamp
-        const milliseconds = seconds * 1000 + nanoseconds / 1000000; // Convertir nanosecondes en millisecondes
-        const date = new Date(milliseconds);
-        
-        // Extraire les composantes de la date
-        const day = date.getDate();
-        const month = date.getMonth() + 1; // Les mois commencent à 0, donc on ajoute 1
-        const year = date.getFullYear();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        
-        // Formater la date en chaîne de caractères "DD MM YY heure"
-        const formattedTimestamp = `${day}/${month}/${year}   ${hours}h${minutes}`;
-        
-        console.log(formattedTimestamp);
+});
 
-        const iduser = data.iduser;
-        const typeuser = data.typeuser;
 
-        creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub);
-
-        
-    }
-  
-} catch (error) {
-    console.error("Erreur lors de la récupération des publications:", error);
-}
-async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub){
+async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub){
 
     // Référence au document utilisateur
     const docRef = doc(db, typeuser, iduser);
     try {
         const docSnap = await getDoc(docRef); // Récupération du snapshot du document
-        if (docSnap.exists()) { // Vérification si le document utilisateur existe
             const datauser = docSnap.data(); // Récupération des données du document utilisateur
             const nameuser = datauser.nom;
             const prenameuser = datauser.prenom;
             const imguser = datauser.imguser;
 
             if (placepub === "home") {
-
-                const pubbg_ = document.createElement("div");
-                pubbg_.className = "pubbg_";
 
                 const headerpublication = document.createElement("div");
                 headerpublication.className = "headerpublication";
@@ -596,10 +585,6 @@ async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_pu
                 jaimecommentbtns.appendChild(btncomment);
                 pubbg_.appendChild(jaimecommentbtns);
 
-                
-
-
-                lespublicationslist.appendChild(pubbg_);
                 const user = auth.currentUser;
                 if (user) {
                     const userId = user.uid;                      
@@ -659,13 +644,15 @@ async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_pu
                         console.log("L'utilisateur n'est pas connecté.");
                     }
                 });
+
+
             }
-        } else {
-            console.log("Le document utilisateur n'existe pas.");
-        }
+        
     } catch (error) {
         console.error("Erreur lors de la récupération des données utilisateur:", error);
     }
+
+    
 }
 
 
