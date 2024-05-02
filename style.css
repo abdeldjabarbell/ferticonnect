@@ -1348,10 +1348,12 @@ transition: .2s ease;
     .leftespace{
       width: 100%;
       display: none;
+      flex-direction: column;
     }
     .rightespace{
       width: 100%;
       display: none;
+      flex-direction: column;
     }
     .midleespace{
       width: 100%;
@@ -1525,6 +1527,7 @@ transition: .2s ease;
       .deconnection{
         width: 70%;
       }
+      
 
 
 }

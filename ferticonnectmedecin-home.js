@@ -1,21 +1,5 @@
 
-function tailledecran(){
-    const navbar_buttom = document.getElementById('navbar_buttom');
-    const leftespace = document.getElementById('leftespace');
-    const rightespace = document.getElementById('rightespace');
-    const midleespace = document.getElementById('midleespace');
-    if (window.innerWidth < 600) {
-        navbar_buttom.style.display="flex";
-        leftespace.style.display = "none";
-        rightespace.style.display = "none";
-        midleespace.style.display = "flex";
-    } else {
-        navbar_buttom.style.display="none";
-        leftespace.style.display = "block";
-        rightespace.style.display = "block";
-        midleespace.style.display = "block";
-    }
-}
+
 
 const homebtnnavbuttom = document.getElementById('homebtnnavbuttom');
 const cabinsbtnnavbuttom = document.getElementById('cabinsbtnnavbuttom');
@@ -27,7 +11,7 @@ homebtnnavbuttom.addEventListener('click', function() {
     scrollToTop()
 });
 cabinsbtnnavbuttom.addEventListener('click', function() {
-    leftespace.style.display = "block";
+    leftespace.style.display = "flex";
     rightespace.style.display = "none";
     midleespace.style.display = "none";
     scrollToTop()
