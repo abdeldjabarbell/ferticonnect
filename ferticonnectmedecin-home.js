@@ -558,7 +558,8 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 
                 const btnjaimei1 = document.createElement("i");
                 btnjaimei1.className = "bi bi-hand-thumbs-up";
-                
+                btnjaimei1.style.display = "flex";
+
                 const btnjaimei2 = document.createElement("i");
                 btnjaimei2.className = "bi bi-hand-thumbs-up-fill";
                 btnjaimei2.style.display = "none";
@@ -584,12 +585,17 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                       const querySnapshot = await getDocs(docRef);
                       querySnapshot.forEach((doc) => {
                           const data = doc.data();
-                          if (data.userid === userId) {
+                          const userjaimeid = data.iduser;
+                          console.log("userjaimeid=> "+userjaimeid);
+                           console.log("uid=> "+userId);
+                           console.log("-------- ");
+
+                          if (userjaimeid === userId) {
                               btnjaimei1.style.display = "none";
                               btnjaimei2.style.display = "flex";
                           } else {
-                              btnjaimei1.style.display = "none";
-                              btnjaimei2.style.display = "flex";
+                              btnjaimei1.style.display = "flex";
+                              btnjaimei2.style.display = "none";
                           }
                       });
                   

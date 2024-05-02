@@ -297,8 +297,7 @@ const firebaseConfig = {
         }
         
 
-
-       const deconnectionbg = document.getElementById("deconnectionbg");
+        const deconnectionbg = document.getElementById("deconnectionbg");
         
         const loggouut_nav = document.getElementById("loggouut_nav");
         loggouut_nav.addEventListener("click", async (e) => {
@@ -317,7 +316,6 @@ const firebaseConfig = {
             logout();
         });
         
-
     } else {
 
         console.log("---------");
