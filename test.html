@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sélectionner une photo</title>
+</head>
+<body>
+
+<div id="selectPhoto" style="width: 200px; height: 200px; background-color: lightgray; cursor: pointer;">
+  Cliquez ici pour sélectionner une photo
+</div>
+
+<script>
+document.getElementById('selectPhoto').addEventListener('click', function() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = function(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    
+    reader.onload = function() {
+      var img = document.createElement('img');
+      img.src = reader.result;
+      img.style.maxWidth = '100%';
+      img.style.maxHeight = '100%';
+      document.body.appendChild(img);
+    };
+  };
+  input.click();
+});
+</script>
+
+</body>
+</html>

@@ -39,7 +39,7 @@
     <div class="bgHome">
 
         <div class="leftespace" id="leftespace">
-            <div class="profilinfobg">
+            <div class="profilinfobg" id="profilinfobg">
                 <div class="photoprofilepubadd1">
                     <img id="photoprofilepubadd1" src="img/ferticonnectiLogoWhite.png" alt="">
                 </div>
@@ -276,11 +276,12 @@
                 <div class="ligne_"></div>
 
                 <div class="addpublication2">
-                    <div >
-                        <input class="opt_addpublication2" type="file" id="fileInput1">
-                        <div class="gallery_" id="gallery1" style="display: none;">
-                            <div class ="imagge" id ="imagge1"></div>
-                        </div>
+                     <div class="opt_addpublication2" id="importphoto">
+                            <i class="bi bi-images"></i>
+                     </div>
+
+                    <div class="gallery_" id="gallery1" style="display: none;">
+                        <div class ="imagge" id ="imagge1"></div>
                     </div>
 
                     
@@ -298,7 +299,7 @@
             
         </div>
     </div>
-    <div class="navbar_buttom" id="navbar_buttom">
+    <div class="navbar_buttom" id="navbar_buttom"style="display: none;">
         <div class="iconnavbar">
             <i class="bi bi-house-heart-fill" id="homebtnnavbuttom"></i>
         </div>

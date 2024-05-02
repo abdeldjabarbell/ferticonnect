@@ -502,6 +502,7 @@ input:focus {
     width: 100vw;
     height: 100vh;
     background-color: #004e64aa;
+    backdrop-filter: blur(10px);
     z-index: 2000;
     position: fixed;
     top: 0;
@@ -583,19 +584,20 @@ input:focus {
 .photoprofilepubadd1{
   width: 30px;
   height: 30px;
-
   border-radius: 50%;
   background-color: #004f64;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid var(--second2-bg-color);
 }
 .photoprofilepubadd1 img{
   width: 28px;
   height: 28px;
   object-fit: cover;
 }
+
 .midleespace{
   width: 40%;
   min-height:100vh ;
@@ -718,6 +720,7 @@ input:focus {
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 .log h1{
   font-weight: 600;
@@ -911,6 +914,8 @@ border: 1px solid var(--second2-bg-color);
   align-items: center;
   overflow: hidden;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .nameuserpub{
  height: 20px;
@@ -922,6 +927,7 @@ border: 1px solid var(--second2-bg-color);
 .nameuserpub h1{
   font-size: 1.3rem;
   font-weight: 600;
+  cursor: pointer;
 }
 .headerpublication i{
   font-size: 1.2rem;
@@ -954,7 +960,7 @@ padding: 5px 10px;
   font-weight: 500;
 }
 .datpublication{
-  font-size: 15px;
+  font-size: 10px;
 
 }
 
@@ -1050,8 +1056,217 @@ transition: .2s ease;
   font-size: 2rem;
 }
 
+/*-------------------------- profile user -----------------------------*/
 
+.completeprofilnotif{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: red;
 
+}
+.completeprofilnotif i{
+ font-size: 1.3rem;
+ padding-right: 10px;
+}
+.completeprofilnotif h3{
+  font-size: 1.3rem;
+ }
+.profileBg{
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 6% 9% 10px;
+  justify-content: start;
+  align-items: start;
+
+}
+.photoprophletcouverture{
+  width: 100%;
+  height: 300px;
+  background-color: #004f64;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 80px;
+}
+.photoprophletcouverture img{
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid var(--second2-bg-color);
+
+}
+.photoprofile{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  position: absolute;
+  bottom: -70px;
+  left: 10%;
+ 
+  
+}
+
+.nomeUtulisateur{
+  width: 100%;
+}
+.nomeUtulisateur h1{
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.photoprofile img{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--second2-bg-color);
+  overflow: hidden;
+}
+.btnprfil{
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: var(--second-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.btnprfil i{
+  font-size: 1.6rem;
+  color: var(--second2-bg-color);
+}
+.btnprfil:hover{
+  background-color: var(--pub-bg-color);
+  border: 1px solid var(--second-bg-color);
+}
+.btnprfil.act i{
+  color: #008fb6;
+}
+.compeleleprofile p{
+  font-size: 1.1rem;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.compeleleprofile p:hover{
+  margin-left: 10px;
+  font-weight: 600;
+}
+.abonneretmessage{
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.compeleleprofile{
+  width: 100%;
+  padding:10px;
+  border: 1px solid var(--second2-bg-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  
+}
+.nomeUtulisateur p{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.nomeUtulisateur i{
+  padding-left: 10px;
+}
+.nomeUtulisateur{
+  display: flex;
+  flex-direction: row;
+  color: var(--second2-bg-color);
+}
+.photoprofilchangerbg{
+  width: 100vw;
+  height: 100vh;
+  background-color: #004e646e;
+  backdrop-filter: blur(10px);
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bgcahngePhoto{
+  width: 50vw;
+  height: 90vh;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-direction: column;
+}
+.photochanger{
+  width: 200px;
+  height: 200px;
+  background-color: var(--second2-bg-color);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid var(--second2-bg-color);
+  margin-bottom: 20px;
+
+}
+.photochanger i{
+  font-size: 6rem;
+  color: var(--bg-color);
+}
+.nouveauimage img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.btns_bg_info{
+  display: flex;
+  flex-direction: row;
+}
+.photochanger_couverture{
+  width: 100%;
+  height: 150px;
+  background-color: var(--second2-bg-color);
+  border: 2px solid var(--second2-bg-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.nouveauimage_couv{
+  width: 100%;
+  height: 100%;
+}
+.nouveauimage_couv img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photochanger_couverture i{
+  font-size: 6rem;
+  color: var(--bg-color);
+
+}
 @media (max-width:617px){
     .bg_choix_user{
         width: 100vw;
@@ -1120,11 +1335,14 @@ transition: .2s ease;
       flex-direction: column;
     }
     .logonav img{
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
     }
     .log h1{
-      font-size: 1.3rem;
+      font-size: 1.6rem;
+    }
+    .optionsnavbar{
+      width: auto;
     }
     .optionsnavbar i{
       font-size: 1.3rem;
@@ -1169,7 +1387,7 @@ transition: .2s ease;
       height: 350px;
 
     }
-
+    
     .opt_addpublication2{
       font-size: 0.9rem;
     }
@@ -1222,6 +1440,62 @@ transition: .2s ease;
     .btncomment:hover{
       background-color: transparent;
     }
+    .completeprofilnotif i{
+      font-size: 1rem;
+      padding-left: 10px;
+      color: red;
+
+     }
+     .completeprofilnotif h3{
+       font-size: 1rem;
+       color: red;
+
+      }
+      
+      .photoprophletcouverture{
+        height: 150px;
+        margin-bottom: 50px;
+
+      }
+      .photoprophletcouverture img{
+        width: 100%;
+        height: 150px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .photoprofile{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+        bottom: -40px;
+        left: 3%;
+      }
+      .photoprofile img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+
+      }
+      .profileBg{
+        flex-direction: column;
+        padding: 15% 7% 10px;
+        justify-content: start;
+        align-items: start;
+      
+      }
+      .bgcahngePhoto{
+        width: 80vw;
+        height: 80vh;
+      }
+      .photochanger{
+        width: 150px;
+        height: 150px;
+      }
+      .photochanger i{
+        font-size: 5rem;
+      }
+      
 
 
 }

@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FertiConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
+    
+</head>
+<body>
+    <div class="navigationbar">
+        <div class="log" id="log">
+            <div class="logonav">
+                <img src="img/ferticonnectiLogoGreen.png" alt="">
+            </div>
+            <h1> FertiConnect</h1>
+        </div>
+        <div class="completeprofilnotif" id="completeprofilnotif" style="display: flex;">
+            <i class="bi bi-info-circle-fill"></i>
+            <h3 id="pourcentage">Complete votre profile 5%</h3>
+        </div>
+
+
+        <div class="optionsnavbar">
+            <i class="bi bi-gear-wide-connected"></i>
+        </div>
+
+
+
+    </div>
+    
+    <div class="profileBg">
+        <div class="photoprophletcouverture" >
+            <img id="photocouverture" src="img/ferticonnectiLogoWhite.png" alt="">
+            <div class="photoprofile" >
+                <img id="photoprofile" src="img/ferticonnectiLogoGreen.png" alt="">
+            </div>
+        </div>
+        <div class="nomeUtulisateur">
+            <h1 id="nameuser"></h1>
+            <i id="nameuser_i" class="bi bi-patch-check-fill" style="display: none;"></i>
+        </div>
+        <div class="nomeUtulisateur">
+            <p id="numberdabonner">0 abonnés</p>
+        </div>
+        <div class="abonneretmessage">
+            <div class="btnprfil" id="abonnerbutton" style="display: none;">
+                <i class="bi bi-person-plus-fill"></i>
+            </div>
+            <div class="btnprfil" id="messagebutton" style="display: none;">
+                <i class="bi bi-chat-heart-fill"></i>
+            </div>
+            <div class="btnprfil" id="infobtn" style="display: none;">
+                <i class="bi bi-info-circle-fill"></i>
+            </div>
+        </div>
+        <div class="compeleleprofile" id="compeleleprofile" style="display: none;">
+            <p id="etap1">Vérifiez votre compte.</p>
+            <p id="etap2">Ajoutez une photo de profil.</p>
+            <p id="etap3">Ajoutez une photo de couverture.</p>
+            <p id="etap4">Remplissez le formulaire.</p>
+        </div>        
+
+    </div>
+
+    <div class="photoprofilchangerbg" id="photoprofilchangerbg" style="display: none;">
+        <div class="bgcahngePhoto">
+            <h3>Modifiez votre image de profil</h3>
+            <br>
+            <div class="photochanger" id="photochanger">
+                <i id="photochanger_i" class="bi bi-person-bounding-box" style="display: flex;"></i>
+                <div class="nouveauimage" id="photochanger_gallery" style="display: none;" >
+                    <img src="" alt="">
+                </div>
+            </div>
+            <div class="btns_bg_info">
+               <button class="btn souvgarder" type="submit" id="partagerphotoPbtn" style="display: none;">
+                    <div id="originalprofile" style="display: block;">
+                        Partager
+                    </div>
+                    <div class="cs-loader-inner" id="loaderprofile" style="display: none;">
+                        <label>	●</label>
+                        <label>	●</label>
+                        <label>	●</label>
+                        <label>	●</label>
+                    </div>
+                    <div id="Doneprofile" style="display: none;">
+                        terminée
+                    </div>
+              </button>
+              <br>
+              <button class="btn supprimer" id="fermer1">fermer</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
+        <div class="bgcahngePhoto">
+            <h3>Modifiez votre image de couverture</h3>
+            <br>
+            <div class="photochanger_couverture" id="photochanger_couverture">
+
+                <i id="photochanger_couverture_i" class="bi bi-image-fill" style="display: flex;"></i>
+                <div class="nouveauimage_couv" id="nouveauimage_couv" style="display: none;" >
+                </div>
+            </div>
+            <br>
+            <div class="btns_bg_info">
+               <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
+                    <div id="original_couv" style="display: block;">
+                        Partager
+                    </div>
+                    <div class="cs-loader-inner" id="loader_couv" style="display: none;">
+                        <label>	●</label>
+                        <label>	●</label>
+                        <label>	●</label>
+                        <label>	●</label>
+                    </div>
+                    <div id="Done_couv" style="display: none;">
+                        terminée
+                    </div>
+              </button>
+              <br>
+              <button class="btn supprimer" id="fermer2">fermer</button>
+            </div>
+
+        </div>
+    </div>
+
+<div class="wating" id="wating" style="display: none;">
+    <div class="wating_img">
+        <img src="img/ferticonnectiLogoGreen.png" alt="">
+    </div>
+
+</div>
+
+<script src="ferticonnectmedecin-profilepage.js" type="module"></script>
+
+</body>
+</html>

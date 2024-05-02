@@ -194,7 +194,11 @@ async function signUp() {
             email: registerEmail,
             mot_de_passe: registerPassword,
             statut_du_compte: "desactive",
-            code : code
+            code : code,
+            imguser:"",
+            imgcouvertureuser:"",
+            formulaire:"vide",
+            typeOfUser:typeOfUser
         });
 
 
@@ -275,12 +279,8 @@ async function loginAfterRegister() {
         console.log('Connecté en tant que:', user.email);
         setTimeout(() => {   
             wating.style.display="none"
-            if(typeOfUser=== "patient"){
-                window.location.replace("ferticonnectpatients-home.html");
-            }
-            else{
-                window.location.replace("ferticonnectmedecin-home.html");
-            }
+            console.log(typeOfUser);
+            window.location.replace(`ferticonnectmedecin-home.html?typeuserclick=${typeOfUser}`);
         }, 2000);
 
         // Redirigez ici vers une autre page ou effectuez d'autres actions après la connexion réussie

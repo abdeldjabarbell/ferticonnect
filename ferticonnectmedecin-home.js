@@ -1,6 +1,4 @@
 
-
-
 function tailledecran(){
     const navbar_buttom = document.getElementById('navbar_buttom');
     const leftespace = document.getElementById('leftespace');
@@ -97,7 +95,7 @@ icons.forEach(function(icon) {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
-import { getFirestore, doc, getDoc ,addDoc,deleteDoc, query, orderBy,where, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { getFirestore, doc, getDoc,updateDoc ,addDoc,deleteDoc, query, orderBy,where, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
 
 const firebaseConfig = {
@@ -124,13 +122,43 @@ const original = document.getElementById("original");
 const Done = document.getElementById("Done");
 const message_cerification_consol = document.getElementById("message_cerification");
 
+
+// Récupérer l'ID du produit et le nom du magasin à partir de l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const typeuserclick = urlParams.get('typeuserclick');
+
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
         const mail = user.email;
+        const userId = user.uid;
+        console.log(userId);
+        const userRef = doc(db, typeuserclick, userId);
+        const docSnapshot = await getDoc(userRef);
+        
+        if (docSnapshot.exists()) {
+            const photoprofilepubadd = document.getElementById("photoprofilepubadd");
+            const photoprofilepubadd1 = document.getElementById("photoprofilepubadd1");
+            const imguser = docSnapshot.data().imguser;
+            if(imguser){
+                photoprofilepubadd.src=imguser;
+                photoprofilepubadd1.src=imguser;
+            }
+
+        }
+        const profilinfobg = document.getElementById("profilinfobg");
+        profilinfobg.addEventListener('click', () => {
+            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+        }); 
+        photoprofilepubadd.addEventListener('click', () => {
+            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+        }); 
+        
+
+
 
         // Vérification si l'e-mail existe dans la collection "admins"
-        const q = query(collection(db, "medecin"), where("email", "==", mail));
+        const q = query(collection(db, typeuserclick), where("email", "==", mail));
 
         try {
             const querySnapshot = await getDocs(q);
@@ -139,7 +167,7 @@ const message_cerification_consol = document.getElementById("message_cerificatio
                 watingAccount.style.display = "flex";
 
                 const userId = user.uid;
-                const userRef = doc(db, "medecin", userId);
+                const userRef = doc(db, typeuserclick, userId);
                 const docSnapshot = await getDoc(userRef);
 
 
@@ -185,10 +213,11 @@ acive_compt_form.addEventListener("submit", async (e) => {
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             const userId = user.uid;
-            const userRef = doc(db, "medecin", userId);
+            const userRef = doc(db, typeuserclick, userId);
             const docSnapshot = await getDoc(userRef);
             
             if (docSnapshot.exists()) {
+
                 const code = docSnapshot.data().code;
                 const nom = docSnapshot.data().nom;
                 const prenom = docSnapshot.data().prenom;
@@ -200,7 +229,7 @@ acive_compt_form.addEventListener("submit", async (e) => {
 
                 if(code_verification === code) {
                     // Le code de vérification correspond au code dans la base de données
-                    const userDocRef = doc(db, 'medecin', userId);
+                    const userDocRef = doc(db, typeuserclick, userId);
                     await updateDoc(userDocRef, {
                         statut_du_compte: "active"
                     });
@@ -251,53 +280,61 @@ function logout() {
 }
 
 
+
 const partagerntn = document.getElementById("partagerntn");
-const fileInput1 = document.getElementById("fileInput1");
+//const fileInput1 = document.getElementById("fileInput1");
 const inputpubadd = document.getElementById("inputpubadd").value;
 const imagge1 = document.getElementById("imagge1");
 const gallery1 = document.getElementById("gallery1");
 const wating = document.getElementById("wating");
+let file
+document.getElementById('importphoto').addEventListener('click', function() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.id = "fileInput1";
+    input.onchange = function(e) {
+        file = e.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
 
-fileInput1.addEventListener('change', async function(event) {
-    const file = event.target.files[0];
+        reader.onload = function() {
+            const imageUrl = reader.result;
+            gallery1.style.display = "flex";
+            imagge1.innerHTML = "";
 
-    // Conversion de l'image redimensionnée en URL de données (data URL)
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function() {
-      const imageUrl = reader.result;
-      gallery1.style.display="flex";
-      imagge1.innerHTML="";
-
-      // Affichage de l'image dans la galerie
-      const img = document.createElement('img');
-      img.src = imageUrl;
-      imagge1.appendChild(img);
+            // Affichage de l'image dans la galerie
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            imagge1.appendChild(img);
+        };
     };
- 
- 
+    input.click();
 });
-partagerntn.addEventListener("click", async (e) => {
+
+partagerntn.addEventListener("click", async(e) => {
     e.preventDefault();
+    sharePublication(file);
+});
+
+async function sharePublication(file) {
     wating.style.display = "flex";
-    auth.onAuthStateChanged(async (user) => {
+    auth.onAuthStateChanged(async(user) => {
         if (user) {
             const userId = user.uid;
-            if (gallery1.style.display === "flex") {
-                const fileInput1 = document.getElementById('fileInput1');
-                const file1 = fileInput1.files[0];
+            if (file) {
                 try {
                     // Upload des images dans le stockage Firebase
-                    const storageRef1 = ref(storage, 'images/' + file1.name);
-                    await uploadBytes(storageRef1, file1);
+                    const storageRef1 = ref(storage, 'images/' + file.name);
+                    await uploadBytes(storageRef1, file);
                     const downloadURL1 = await getDownloadURL(storageRef1);
                     const inputpubadd = document.getElementById("inputpubadd").value;
                     const docRef = await addDoc(collection(db, 'publications'), {
                         publication: inputpubadd,
                         imageUrl_publication: downloadURL1,
-                        iduser:userId,
-                        placepub:"home",
-                        typeuser:"medecin",
+                        iduser: userId,
+                        placepub: "home",
+                        typeuser: typeuserclick,
                         timestamp: serverTimestamp()
                     });
                     wating.style.display = "none";
@@ -313,10 +350,10 @@ partagerntn.addEventListener("click", async (e) => {
                     // Upload des images dans le stockage Firebase
                     const docRef = await addDoc(collection(db, 'publications'), {
                         publication: inputpubadd,
-                        iduser:userId,
-                        placepub:"home",
+                        iduser: userId,
+                        placepub: "home",
                         timestamp: serverTimestamp(),
-                        typeuser:"medecin"
+                        typeuser: typeuserclick
                     });
                     wating.style.display = "none";
                     refreshPage();
@@ -328,9 +365,9 @@ partagerntn.addEventListener("click", async (e) => {
                     //message_cree_produit.innerHTML = 'Erreur lors du partage du produit: ' + error.message;
                 }
             }
-       }
-   });
-});
+        }
+    });
+}
 
 
 // Recharge la page actuelle
@@ -343,39 +380,38 @@ function refreshPage() {
 const lespublicationslist = document.getElementById("lespublicationslist");
 
 try {
+
     const querySnapshot = await getDocs(query(collection(db, 'publications'), orderBy('timestamp', 'desc')));
 
     for (const doc of querySnapshot.docs) {
         const idpub = doc.id;
         const data = doc.data();
+        const publication = data.publication;
         const placepub = data.placepub;
         const imageUrl_publication = data.imageUrl_publication;
         
-         // Fonction pour formater un timestamp en "DD MM YYYY heure:minute"
-         function formatterTimestamp(timestamp) {
-             const date = new Date(timestamp * 1000); // Convertir les secondes en millisecondes
-         
-             const day = date.getDate();
-             const month = date.getMonth() + 1; // Les mois sont indexés à partir de 0, donc ajout de 1
-             const year = date.getFullYear();
-             const hours = date.getHours();
-             const minutes = date.getMinutes();
+        const timestamp = data.timestamp; // Suppose que le timestamp est stocké dans un champ "timestamp" du document
+        const seconds = timestamp.seconds;
+        const nanoseconds = timestamp.nanoseconds;
+        
+        // Créer une date à partir de la représentation Firebase Timestamp
+        const milliseconds = seconds * 1000 + nanoseconds / 1000000; // Convertir nanosecondes en millisecondes
+        const date = new Date(milliseconds);
+        
+        // Extraire les composantes de la date
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // Les mois commencent à 0, donc on ajoute 1
+        const year = date.getFullYear();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        
+        // Formater la date en chaîne de caractères "DD MM YY heure"
+        const formattedTimestamp = `${day}/${month}/${year}   ${hours}h${minutes}`;
+        
+        console.log(formattedTimestamp);
 
-             const formattedDay = day < 10 ? '0' + day : day;
-             const formattedMonth = month < 10 ? '0' + month : month;
-             const formattedHours = hours < 10 ? '0' + hours : hours;
-             const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-         
-             return `${formattedDay} ${formattedMonth} ${year} ${formattedHours}:${formattedMinutes}`;
-         }
-         
-         // Exemple d'utilisation avec votre timestamp
-         const publication = data.publication.seconds; // Assurez-vous que data.publication contient bien la propriété 'seconds'
-         const formattedTimestamp = formatterTimestamp(publication);
-         
         const iduser = data.iduser;
         const typeuser = data.typeuser;
-        console.log("tome"+formattedTimestamp);
 
         creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub);
 
@@ -404,6 +440,7 @@ async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_pu
 
                 const headerpublication = document.createElement("div");
                 headerpublication.className = "headerpublication";
+                
 
                 const infouser_ = document.createElement("div");
                 infouser_.className = "infouser_";
@@ -428,7 +465,10 @@ async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_pu
 
                 nameuserpub.appendChild(nameuserpubh1);
                 infouser_.appendChild(nameuserpub);
-
+                infouser_.addEventListener('click', () => {
+                    window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduser}&typeuserclick=${typeuser}`; // Redirection vers la page du produit avec l'ID du produit
+                }); 
+                
                 const verifica = document.createElement("div");
                 verifica.className = "verifica";
                 if (typeuser === "medecin") {
@@ -607,6 +647,7 @@ async function creatpost(iduser,typeuser,placepub,formattedTimestamp,imageUrl_pu
         console.error("Erreur lors de la récupération des données utilisateur:", error);
     }
 }
+
 
 
 
