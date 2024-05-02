@@ -30,8 +30,8 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 
-tailledecran();
-window.addEventListener('resize', tailledecran);
+//tailledecran();
+//window.addEventListener('resize', tailledecran);
 
 const inputpublication = document.getElementById('inputpubadd');
 
