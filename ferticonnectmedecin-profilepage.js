@@ -50,7 +50,7 @@ const firebaseConfig = {
 
         const log = document.getElementById("log");
         log.addEventListener('click', function() {
-          window.location.href = `ferticonnectmedecin-home.html?typeuserclick=${typeuserclick}`; 
+            window.history.back();
         });
 
         // Référence au document utilisateur
@@ -295,6 +295,7 @@ const firebaseConfig = {
         }catch (error) {
             console.error("Erreur lors de la récupération des données utilisateur:", error);
         }
+        
 
 
        const deconnectionbg = document.getElementById("deconnectionbg");
