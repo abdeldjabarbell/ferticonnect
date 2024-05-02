@@ -296,7 +296,29 @@ const firebaseConfig = {
             console.error("Erreur lors de la récupération des données utilisateur:", error);
         }
 
+
+       const deconnectionbg = document.getElementById("deconnectionbg");
+        
+        const loggouut_nav = document.getElementById("loggouut_nav");
+        loggouut_nav.addEventListener("click", async (e) => {
+            e.preventDefault();
+            deconnectionbg.style.display="flex";
+        });
+        
+        const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
+        anulerdeco_neccterbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            deconnectionbg.style.display="none";
+        });
+        const deco_neccterbtn = document.getElementById("deco_neccterbtn");
+        deco_neccterbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            logout();
+        });
+        
+
     } else {
+
         console.log("---------");
 
     }
@@ -312,6 +334,14 @@ const typeuserclick = urlParams.get('typeuserclick');
 // Recharge la page actuelle
 function refreshPage() {
     window.location.reload(); 
+}
+// Fonction de déconnexion
+function logout() {
+    signOut(auth).then(() => {
+        window.location.href = 'index.html'; 
+    }).catch((error) => {
+        console.error('Erreur lors de la déconnexion : ', error);
+    });
 }
 
 

@@ -1201,6 +1201,7 @@ transition: .2s ease;
   height: 100vh;
   background-color: #004e646e;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Ajout du préfixe -webkit- */
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -1526,6 +1527,9 @@ transition: .2s ease;
       }
       .deconnection{
         width: 70%;
+      }
+      .navbar_buttom{
+        display: flex;
       }
       
 
