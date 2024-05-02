@@ -20,6 +20,7 @@
     
 </head>
 <body>
+    
     <div class="navigationbar">
         <div class="log">
             <div class="logonav">
@@ -29,7 +30,7 @@
         </div>
 
 
-        <div class="optionsnavbar">
+        <div class="optionsnavbar" id="loggouut_nav">
             <i class="bi bi-gear-wide-connected"></i>
         </div>
 
@@ -357,6 +358,21 @@
             <img src="img/ferticonnectiLogoGreen.png" alt="">
         </div>
 
+    </div>
+
+    <div class="photoprofilchangerbg" id="deconnectionbg" style="display: none;">
+        <div class="deconnection">
+            <p>Souhaites-tu te déconnecter ?</p>
+            <img src="img/undraw_quitting_time_re_1whp.svg" alt="">
+            <br>
+            <div class="btns_bg_info">
+               <button class="btn supprimer" type="submit" id="deco_neccterbtn">déconnecter</button>
+               <br>
+               <button class="btn souvgarder" id="anulerdeco_neccterbtn">fermer</button>
+             </div>
+
+        </div>
+        
     </div>
 
     <script src="ferticonnectmedecin-home.js" type="module"></script>

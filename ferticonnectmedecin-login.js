@@ -336,12 +336,8 @@ async function login() {
         loader.style.display="none"
         Done.style.display="block"
         setTimeout(() => {  
-            if(typeOfUser=== "patient"){
-                window.location.replace("ferticonnectpatients-home.html");
-            }
-            else{
-                window.location.replace("ferticonnectmedecin-home.html");
-            }
+            window.location.replace(`ferticonnectmedecin-home.html?typeuserclick=${typeOfUser}`);
+
         }, 2000);
 
         // Redirigez ici vers une autre page ou effectuez d'autres actions après la connexion réussie
