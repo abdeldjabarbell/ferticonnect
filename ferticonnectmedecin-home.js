@@ -118,6 +118,7 @@ const message_cerification_consol = document.getElementById("message_cerificatio
 // Récupérer l'ID du produit et le nom du magasin à partir de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const typeuserclick = urlParams.get('typeuserclick');
+const typeOfUser = urlParams.get('typeuserclick');
 
   auth.onAuthStateChanged(async (user) => {
     if (user) {
@@ -136,14 +137,14 @@ const typeuserclick = urlParams.get('typeuserclick');
                 photoprofilepubadd.src=imguser;
                 photoprofilepubadd1.src=imguser;
                   photoprofilepubadd.addEventListener('click', () => {
-                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
                   }); 
             }
 
         }
         const profilinfobg = document.getElementById("profilinfobg");
         profilinfobg.addEventListener('click', () => {
-            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
         }); 
 
         
@@ -467,7 +468,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 nameuserpub.appendChild(nameuserpubh1);
                 infouser_.appendChild(nameuserpub);
                 infouser_.addEventListener('click', () => {
-                    window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduser}&typeuserclick=${typeuser}`; // Redirection vers la page du produit avec l'ID du produit
+                    window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduser}&typeuserclick=${typeuser}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
                 }); 
                 
                 const verifica = document.createElement("div");
@@ -513,7 +514,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     pubbg_.appendChild(image_publicationbg);
                 }
 
-
+                
                 const jaimeandcommentsnum = document.createElement("div");
                 jaimeandcommentsnum.className = "jaimeandcommentsnum";
 
@@ -586,9 +587,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                       querySnapshot.forEach((doc) => {
                           const data = doc.data();
                           const userjaimeid = data.iduser;
-                          console.log("userjaimeid=> "+userjaimeid);
-                           console.log("uid=> "+userId);
-                           console.log("-------- ");
 
                           if (userjaimeid === userId) {
                               btnjaimei1.style.display = "none";

@@ -22,7 +22,7 @@ const infobtn = document.getElementById("infobtn");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
-import { getFirestore, doc,setDoc, getDoc,query, where , getDocs,updateDoc ,addDoc ,collection ,serverTimestamp} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { getFirestore, doc,setDoc,deleteDoc, getDoc,query, where , getDocs,updateDoc ,addDoc ,collection ,serverTimestamp} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
 
 const firebaseConfig = {
@@ -53,21 +53,29 @@ const firebaseConfig = {
             window.history.back();
         });
 
-        // Référence au document utilisateur
         const docRef = doc(db, typeuserclick, useridclick);
         try {
-            const docSnap = await getDoc(docRef); // Récupération du snapshot du document
+            const docSnap = await getDoc(docRef); 
             if (docSnap.exists()) {
-                const datauser = docSnap.data(); // Récupération des données du document utilisateur
+                const datauser = docSnap.data(); 
                 const nameuserprofile = datauser.nom;
                 const prenomuserprofile = datauser.prenom;
                 const statut_du_compte = datauser.statut_du_compte;
                 const imguser = datauser.imguser;
                 const imgcouvertureuser = datauser.imgcouvertureuser;
                 const formulaire = datauser.formulaire;
-
                 
+
                 nameuser.innerHTML=prenomuserprofile+" "+ nameuserprofile;
+
+                numberamisList();
+                async function numberamisList(){
+                    const docRef = collection(db,typeuserclick,useridclick,"amis");
+                    const querySnapshot = await getDocs(docRef);
+                    const numberOfDocuments = querySnapshot.size;
+                    numberdabonner.innerHTML = numberOfDocuments +" abonnés";
+                }
+
                 if(typeuserclick === "medecin"){
                     const nameuser_i = document.getElementById("nameuser_i");
                     nameuser_i.style.display="flex";
@@ -290,6 +298,87 @@ const firebaseConfig = {
                     messagebutton.style.display="flex";
                     infobtn.style.display="none";
                     compeleleprofile.style.display="none";
+
+                    const user = auth.currentUser;
+                    if (user) {
+                        const userId = user.uid;                      
+                          const docRef = collection(db,typeuserclick,useridclick,"amis");
+                          const querySnapshot = await getDocs(docRef);
+                          querySnapshot.forEach((doc) => {
+                              const data = doc.data();
+                              const useramisid= data.iduser;
+                              abonnerbutton.classList.contains("btnprfil");
+                              if (useramisid === userId) {
+                                abonnerbutton.classList.add("act");
+                              } else {
+                                if (abonnerbutton.classList.contains("act")) {
+                                    abonnerbutton.classList.remove("act");
+                                }
+                              }
+                          });
+                      
+                    }
+
+                    abonnerbutton.addEventListener('click', async function() {
+                        if (abonnerbutton.classList.contains("btnprfil")) {
+                            if (abonnerbutton.classList.contains("act")) {
+                                abonnerbutton.classList.remove("act");
+                                const user = auth.currentUser;
+                        
+                                if (user) {
+                                    const userId = user.uid; 
+                                    const amisCollectionRef = collection(db, typeuserclick, useridclick, "amis");
+                                    const querySnapshot = await getDocs(query(amisCollectionRef, where("iduser", "==", userId)));
+                                    querySnapshot.forEach(async (doc) => {
+                                        try {
+                                            await deleteDoc(doc.ref);
+                                            await numberamisList();
+                                        } catch (error) {
+                                            console.error("Erreur lors de la suppression du document de la sous-collection 'amis':", error);
+                                        }
+                                    });
+                    
+                                    // Supprimer l'utilisateur actuel de sa propre liste d'amis
+                                    const mesamisCollectionRef = collection(db, typeuseruserauth, userId, "amis");
+                                    const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", userId)));
+                                    mesquerySnapshot.forEach(async (doc) => {
+                                        try {
+                                            await deleteDoc(doc.ref);
+                                        } catch (error) {
+                                            console.error("Erreur lors de la suppression du document de la sous-collection 'mes amis':", error);
+                                        }
+                                    });
+                                }
+                        
+                            } else {
+                                // ajouter amis
+                                const user = auth.currentUser;
+                                if (user) {
+                                    const userId = user.uid;
+                                    // Ajouter l'utilisateur cliqué comme ami
+                                    const docRef = await addDoc(collection(db, typeuserclick, useridclick, "amis"), {
+                                        iduser: userId,
+                                        typeuser :typeuseruserauth,
+                                    });
+                                    await numberamisList();
+
+                                    // Ajouter l'utilisateur cliqué à la liste d'amis de l'utilisateur actuel
+                                    const mesamisRef = await addDoc(collection(db, typeuseruserauth, userId, "amis"), {
+                                        iduser: useridclick,
+                                        typeuser :typeuserclick,
+                                    });
+                                }
+                                abonnerbutton.classList.add("act");
+                            }
+                        }
+                    });
+                    
+                    
+                    
+                    
+                    
+                    
+
                 }
             } 
         }catch (error) {
@@ -327,6 +416,8 @@ const firebaseConfig = {
 const urlParams = new URLSearchParams(window.location.search);
 const useridclick = urlParams.get('useridclick');
 const typeuserclick = urlParams.get('typeuserclick');
+const typeuseruserauth = urlParams.get('typeOfUser');
+
 
 
 
