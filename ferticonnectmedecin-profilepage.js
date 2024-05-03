@@ -340,7 +340,7 @@ const firebaseConfig = {
                     
                                     // Supprimer l'utilisateur actuel de sa propre liste d'amis
                                     const mesamisCollectionRef = collection(db, typeuseruserauth, userId, "amis");
-                                    const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", userId)));
+                                    const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", useridclick)));
                                     mesquerySnapshot.forEach(async (doc) => {
                                         try {
                                             await deleteDoc(doc.ref);
