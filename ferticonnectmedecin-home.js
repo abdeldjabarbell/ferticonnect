@@ -62,6 +62,25 @@ titleoptionmycabinsbg.addEventListener('click', function() {
     }
 });
 
+//mes amis liste 
+const mescabins_2 = document.getElementById('mescabins_2');
+const mycabinsbg2 = document.getElementById('mycabinsbg2');
+const titleoptionmycabinsbg2 = document.getElementById('titleoptionmycabinsbg2');
+
+titleoptionmycabinsbg2.addEventListener('click', function() {
+    if(mescabins_2.style.display === "none") {
+        mescabins_2.style.display = "flex";
+        mycabinsbg2.style.height = "400px";
+    } else {
+        mescabins_2.style.display = "none";
+        mycabinsbg2.style.height = "auto";
+    }
+});
+
+
+
+
+
 var icons = document.querySelectorAll('.iconnavbar');
 
 icons.forEach(function(icon) {
@@ -146,6 +165,60 @@ const typeOfUser = urlParams.get('typeuserclick');
         profilinfobg.addEventListener('click', () => {
             window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
         }); 
+
+        const amisquerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"amis")));
+        amisquerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const iduseramis = data.iduser;
+            const typeuseramis = data.typeuser;
+            console.log("iduseramis="+iduseramis);
+            console.log("typeuseramis="+typeuseramis);
+            recupereAmis(iduseramis,typeuseramis);
+
+
+
+        
+
+        });
+        async function recupereAmis(iduseramis,typeuseramis){
+            const docRef = doc(db, typeuseramis, iduseramis);
+            const docSnap = await getDoc(docRef); 
+            const datauser = docSnap.data(); 
+            const nameuser = datauser.nom;
+            const prenameuser = datauser.prenom;
+            const imguser = datauser.imguser;
+            const type_user = datauser.typeOfUser;
+            
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(imguser){
+                mescabins_image_img.src=imguser;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML=prenameuser+" "+nameuser;
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+            mescabins_2.appendChild(cabinfoss);
+
+            cabinfoss.addEventListener('click', () => {
+                window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+            }); 
+        }
+        
+        
 
         
 

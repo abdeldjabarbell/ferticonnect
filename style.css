@@ -328,6 +328,7 @@ input:focus {
     cursor: pointer;
     transition: 0.3s; 
     border: 1px solid var(--second2-bg-color);
+    overflow: hidden;
   }
   .btnVide:hover {
     background-color:var(--second2-bg-color) ;
@@ -344,6 +345,8 @@ input:focus {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s; 
+    overflow: hidden;
+
   }
   
   .btn:hover {
@@ -362,6 +365,8 @@ input:focus {
     border-radius: 5px;
     cursor: pointer;
     transition:  0.3s; 
+    overflow: hidden;
+
 
   }
   .btn.souvgarder:hover {
@@ -381,6 +386,8 @@ input:focus {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s; 
+    overflow: hidden;
+
   }
   .btn.modifier:hover {
     background-color:rgb(135, 83, 0); 
@@ -399,6 +406,8 @@ input:focus {
     border-radius: 5px;
     cursor: pointer;
     transition:  0.3s; 
+    overflow: hidden;
+
   }
   .btn.supprimer:hover {
     background-color:rgb(135, 0, 0);

@@ -18,6 +18,19 @@ const infobtn = document.getElementById("infobtn");
 
 
 
+const mescabins_2 = document.getElementById('mescabins_2');
+const mycabinsbg2 = document.getElementById('mycabinsbg2');
+const titleoptionmycabinsbg2 = document.getElementById('titleoptionmycabinsbg2');
+
+titleoptionmycabinsbg2.addEventListener('click', function() {
+    if(mescabins_2.style.display === "none") {
+        mescabins_2.style.display = "flex";
+        mycabinsbg2.style.height = "400px";
+    } else {
+        mescabins_2.style.display = "none";
+        mycabinsbg2.style.height = "auto";
+    }
+});
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
@@ -79,6 +92,7 @@ const firebaseConfig = {
                 if(typeuserclick === "medecin"){
                     const nameuser_i = document.getElementById("nameuser_i");
                     nameuser_i.style.display="flex";
+                    mycabinsbg2.style.display="flex";
                 }
                 if(useridclick === iduser){
                     let a = 0;
@@ -412,12 +426,6 @@ const firebaseConfig = {
     }
 });
 
-// Récupérer l'ID du produit et le nom du magasin à partir de l'URL
-const urlParams = new URLSearchParams(window.location.search);
-const useridclick = urlParams.get('useridclick');
-const typeuserclick = urlParams.get('typeuserclick');
-const typeuseruserauth = urlParams.get('typeOfUser');
-
 
 
 
@@ -434,9 +442,82 @@ function logout() {
     });
 }
 
+const confirmeCreecabine = document.getElementById('confirmeCreecabine');
+const original2 = document.getElementById('original2');
+const loader2 = document.getElementById('loader2');
+const Done2 = document.getElementById('Done2');
+const message_creation_canine = document.getElementById('message_creation_canine');
+
+confirmeCreecabine.addEventListener('click', async function() {
+    original2.style.display="none";
+    loader2.style.display="block";
+    const user = auth.currentUser;
+    if (user) {
+        const nomdecabin = document.getElementById("nomdecabin").value;
+        const userId = user.uid; 
+        try {
+            const docRef = await addDoc(collection(db, 'cabines'), {
+                cabineImage: "",
+                nameCabine: nomdecabin,
+                creatorId: userId, 
+            });
+            const cabineId = docRef.id; // Retrieve the ID of the created cabin
+            Done2.style.display="block";
+            original2.style.display="none";
+            loader2.style.display="none";
+            message_creation_canine.textContent = `La cabine a été parfaitement créée. nom de la cabine : ${nomdecabin}`;
+            message_creation_canine.style.color="green";
+            AjouteIdinAccountAdmin(cabineId,userId);
+            AjouteIdinrecherchliste(cabineId,nomdecabin);
+            AjouteIdinSearchlist(cabineId,userId);
+            setTimeout(() => {
+                message_creation_canine.textContent = "";
+                Done2.style.display="none";
+                original2.style.display="block";
+            }, 3000);
+            
+        } catch (error) {
+            original2.style.display="block";
+            loader2.style.display="none";
+            console.error("Error adding Cabine: ", error);
+        }
+    } else {
+        console.log("User not logged in");
+    }
+});
+
+
+async function AjouteIdinAccountAdmin(cabineId,userId){
+    try {
+        const docRef = await addDoc(collection(db, typeuseruserauth,userId,"cabines"), {
+            cabineId: cabineId, 
+        });
+    } catch (error) {
+        console.error("Error adding Cabine in user account: ", error);
+    }
+
+}
+async function  AjouteIdinrecherchliste(cabineId,nomdecabin){
+    const docRef = await addDoc(collection(db, 'rechercheliste'), {
+        idelement: cabineId,
+        nomelement: nomdecabin,
+        typeelement:"cabines"
+    });
+}
+async function  AjouteIdinSearchlist(cabineId,userId){
+    const docmembresRef = await addDoc(collection(db, 'cabines',cabineId,"membres"), {
+        idmembres: userId, 
+        typuser:typeuseruserauth 
+    });
+}
 
 
 
 
 
+// Récupérer l'ID du produit et le nom du magasin à partir de l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const useridclick = urlParams.get('useridclick');
+const typeuserclick = urlParams.get('typeuserclick');
+const typeuseruserauth = urlParams.get('typeOfUser');
 
