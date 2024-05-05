@@ -516,8 +516,9 @@ input:focus {
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: #004e64aa;
+    background-color: #00000050;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Ajout du préfixe -webkit- */
     z-index: 2000;
     position: fixed;
     top: 0;
@@ -785,15 +786,17 @@ input:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 .inputpubadd{
-  width: 88%;
+  width: 80%;
   border-radius: 15px;
   padding-left: 20px;
   height: auto; /* Hauteur automatique */
   min-height: 10px; /* Hauteur minimale de l'input */
   resize: vertical; /* Permet le redimensionnement vertical uniquement */
   overflow-y: auto; /* Défilement vertical si nécessaire */
+  padding: 8px;
 }
 .photoprofilepubadd{
   width: 40px;
@@ -946,6 +949,11 @@ border: 1px solid var(--second2-bg-color);
 }
 .headerpublication i{
   font-size: 1.2rem;
+  color: var(--second2-bg-color);
+
+}
+.headerpublication p{
+  color: var(--second2-bg-color);
 }
 .image_publicationbg{
   width: 100%;
@@ -1208,7 +1216,7 @@ transition: .2s ease;
 .photoprofilchangerbg{
   width: 100vw;
   height: 100vh;
-  background-color: #004e646e;
+  background-color: #00000050;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* Ajout du préfixe -webkit- */
   position: fixed;
@@ -1315,6 +1323,114 @@ transition: .2s ease;
   color: #0000009a;
   text-align: justify; /* Correction de la justification du texte */
 }
+/* -----------------------------------commentaires ------------------ */
+.commentaire_bg{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #00000050;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Ajout du préfixe -webkit- */
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.commentaire_{
+  width: 80%;
+  height: 80%;
+  background-color: #bcc9c7bf;
+  border-radius: 5px;
+  box-shadow: 0 .5rem 1rem #55969217;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.head_commentaire_{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding:15px 30px;
+  align-items: center;
+  background-color: #bcc9c73e;
+  box-shadow: 0 .5rem 0.5rem #37373713;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+}
+.head_commentaire_ h1{
+ font-size: 1.5rem;
+}
+.head_commentaire_ i{
+  font-size: 1.5rem;
+  color: rgba(212, 0, 0, 0.706);
+
+}
+.addcommentaire_bg{
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  z-index: 2500;
+  box-shadow: .5rem 0 0.5rem #37373713;
+}
+.addpublication1 i{
+  font-size: 1.5rem;
+  padding: 8px;
+}
+.photoprofilepubadd.comment{
+  margin: 8px;
+}
+.listeComments_bg{
+  padding: 10px;
+  overflow: scroll;
+}
+.comment_listeComments_bg{
+  width: 100%;
+  padding: 5px;
+  background-color: #bcc9c7b4;
+  display: flex;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.hedercomment{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hedercomment_img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--second2-bg-color);
+  margin: 10px;
+}
+.hedercomment_img img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: center;
+}
+.hedercomment h1{
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width:617px){
     .bg_choix_user{
         width: 100vw;

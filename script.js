@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Après 3 secondes, arrondir les coins, arrêter la rotation et afficher l'image
         setTimeout(function() {
             caeee_logo.style.borderRadius = "50%";
-            caeee_logo.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            caeee_logo.style.transform = 'translate(-50%, -50%) rotate(3600deg)';
             setTimeout(function() {
             imagelogo.style.opacity = "1";
             textLogo.style.top = "120%";

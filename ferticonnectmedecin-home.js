@@ -48,6 +48,13 @@ inputpublication.addEventListener('input', function() {
     inputpublication.style.height = inputpublication.scrollHeight + 'px'; // Ajuste ensuite la hauteur en fonction du contenu
 });
 
+const inputCommentaire = document.getElementById('inputpubadd_comment');
+
+inputCommentaire.addEventListener('input', function() {
+    inputCommentaire.style.height = 'auto'; // Réinitialise d'abord la hauteur à automatique
+    inputCommentaire.style.height = inputCommentaire.scrollHeight + 'px'; // Ajuste ensuite la hauteur en fonction du contenu
+});
+
 const mescabins_ = document.getElementById('mescabins_');
 const mycabinsbg = document.getElementById('mycabinsbg');
 const titleoptionmycabinsbg = document.getElementById('titleoptionmycabinsbg');
@@ -98,11 +105,20 @@ icons.forEach(function(icon) {
 });
 
 
+const head_commentaire_ = document.querySelector('.head_commentaire_');
+const addcommentaire_bg = document.querySelector('.addcommentaire_bg');
+const commentaire_ = document.querySelector('.commentaire_');
+const listeComments_bg = document.querySelector('.commentaire_');
 
+const closecommentair = document.getElementById("closecommentair");
+const commentaire_bg = document.getElementById("commentaire_bg");
 
-
-
-
+closecommentair.addEventListener('click', function() {
+    commentaire_bg.style.display="none";
+});
+closecommentair.addEventListener('click', function() {
+    commentaire_bg.style.display="none";
+});
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth ,signOut} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
@@ -148,6 +164,7 @@ const typeOfUser = urlParams.get('typeuserclick');
         const userRef = doc(db, typeuserclick, userId);
         const docSnapshot = await getDoc(userRef);
         
+        
         if (docSnapshot.exists()) {
             const photoprofilepubadd = document.getElementById("photoprofilepubadd");
             const photoprofilepubadd1 = document.getElementById("photoprofilepubadd1");
@@ -156,6 +173,9 @@ const typeOfUser = urlParams.get('typeuserclick');
                 photoprofilepubadd.src=imguser;
                 photoprofilepubadd1.src=imguser;
                   photoprofilepubadd.addEventListener('click', () => {
+                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+                  }); 
+                  photoprofilepubadd1.addEventListener('click', () => {
                        window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
                   }); 
             }
@@ -174,10 +194,6 @@ const typeOfUser = urlParams.get('typeuserclick');
             console.log("iduseramis="+iduseramis);
             console.log("typeuseramis="+typeuseramis);
             recupereAmis(iduseramis,typeuseramis);
-
-
-
-        
 
         });
         async function recupereAmis(iduseramis,typeuseramis){
@@ -216,6 +232,52 @@ const typeOfUser = urlParams.get('typeuserclick');
             cabinfoss.addEventListener('click', () => {
                 window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
             }); 
+        }
+
+
+        const cabinequerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"cabines")));
+        cabinequerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const cabineId = data.cabineId;
+            console.log("iduseramis="+cabineId);
+            recupereCabine(cabineId);
+
+        });
+        async function recupereCabine(cabineId){
+            const docRef = doc(db, "cabines", cabineId);
+            const docSnap = await getDoc(docRef); 
+            const dataCabine = docSnap.data(); 
+            const nameCabine = dataCabine.nameCabine;
+            const cabine_Image = dataCabine.cabineImage;
+            const creator_Id = dataCabine.creatorId;
+            
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(cabine_Image){
+                mescabins_image_img.src=cabine_Image;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML= nameCabine;
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+            mescabins_.appendChild(cabinfoss);
+
+           // cabinfoss.addEventListener('click', () => {
+           //     window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+           // }); 
         }
         
         
@@ -648,6 +710,140 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 btncomment.className = "btncomment";
                 const btncomment_i = document.createElement("i");
                 btncomment_i.className = "bi bi-chat-left";
+                btncomment.addEventListener('click', async function() {
+                    commentaire_bg.style.display="flex";
+
+                    const height_commentaire_= commentaire_.getBoundingClientRect().height;
+                    const height_addcommentaire_bg = addcommentaire_bg.getBoundingClientRect().height;
+                    const height_head_commentaire_ = head_commentaire_.getBoundingClientRect().height;
+                    commentaire_.style.paddingTop = height_head_commentaire_ + 'px';
+                    commentaire_.style.paddingBottom = height_addcommentaire_bg + 'px';
+                    listeComments_bg.height=(height_commentaire_-height_head_commentaire_+height_addcommentaire_bg)+ 'px';
+
+                    const send_comment = document.getElementById("send_comment");
+                    const photoprofilepubadd_comments = document.getElementById('photoprofilepubadd_comments');
+
+                    if (user) {
+                        const userId = user.uid;
+                        const userRef = doc(db, typeOfUser, userId);
+                        const docSnapshot = await getDoc(userRef);
+                    
+                            const imguser = docSnapshot.data().imguser;
+                            console.log(imguser);
+                            if (imguser) {
+                                photoprofilepubadd_comments.src = imguser;
+                            } else {
+                                photoprofilepubadd_comments.src = "img/ferticonnectiLogoWhite.png";
+                            }
+                    }
+                    AficherLesCommentaire();
+                    async function AficherLesCommentaire(){
+                        wating.style.display = "flex";
+
+                         const querySnapshot = await getDocs(query(collection(db, "publications", idpub, "commentaires"), orderBy('timestamp', 'desc'), limit(25)));
+     
+                         querySnapshot.forEach(async (doc) => {
+                             const idcommentaire = doc.id;
+                             const data = doc.data();
+                             const commentaires = data.commentaires;
+                             const iduser_comment = data.iduser_comment;
+                             const typeusercomment = data.typeuser;
+                             const timestamp = data.timestamp;
+                             await importusercommentinfo(typeusercomment, iduser_comment, commentaires, timestamp);
+                         });
+
+                    }
+                    
+                    async function importusercommentinfo(typeusercomment, iduser_comment, commentaires, timestamp) {
+                        const docRef = doc(db, typeusercomment, iduser_comment);
+                        try {
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+
+                                const datauser = docSnap.data();
+                                const nameuser = datauser.nom;
+                                const prenameuser = datauser.prenom;
+                                const imguser = datauser.imguser;
+
+                                const listeComments_bg_list = document.getElementById("listeComments_bg_list");
+                                listeComments_bg_list.innerHTML="";
+                    
+                                const comment_listeComments_bg = document.createElement('div');
+                                comment_listeComments_bg.className = "comment_listeComments_bg";
+                    
+                                const hedercomment = document.createElement('div');
+                                hedercomment.className = "hedercomment";
+                    
+                                const hedercomment_img = document.createElement('div');
+                                hedercomment_img.className = "hedercomment_img";
+                    
+                                const hedercomment_img_img = document.createElement('img');
+                                hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+                    
+                                const hedercomment_h1 = document.createElement('h1');
+                                hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
+                                const hedercomment_i= document.createElement('i');
+                                if(typeusercomment === "medecin"){
+                                    hedercomment_i.className="bi bi-patch-check-fill";
+                                }
+                                const content_comment = document.createElement('div');
+                                content_comment.className = "content_comment";
+                    
+                                const content_comment_p = document.createElement('p');
+                                content_comment_p.innerHTML = commentaires;
+                    
+                                hedercomment_img.appendChild(hedercomment_img_img);
+
+                                hedercomment.appendChild(hedercomment_img);
+                                hedercomment.appendChild(hedercomment_h1);
+                                hedercomment.appendChild(hedercomment_i);
+                                content_comment.appendChild(content_comment_p);
+                                comment_listeComments_bg.appendChild(hedercomment);
+                                comment_listeComments_bg.appendChild(content_comment);
+                                listeComments_bg_list.appendChild(comment_listeComments_bg);
+                                wating.style.display = "none";
+
+                            }
+
+
+                        } catch (error) {
+                            wating.style.display = "none";
+                            console.error("Une erreur s'est produite lors de l'importation des informations utilisateur :", error);
+                        }
+                    }
+                    
+
+
+                    send_comment.addEventListener("click", async(e) => {
+                        e.preventDefault();
+                        sharePublicationComment();
+                    });
+                    
+                    async function sharePublicationComment() {
+                        wating.style.display = "flex";
+                        auth.onAuthStateChanged(async(user) => {
+                            if (user) {
+                                const userId = user.uid;
+                                    try {
+                                        const inputpubadd_comment = document.getElementById("inputpubadd_comment").value;
+                                        const docRef = await addDoc(collection(db, "publications", idpub, "commentaires"), {
+                                            commentaires: inputpubadd_comment,
+                                            iduser_comment: userId,
+                                            typeuser: typeOfUser,
+                                            timestamp: serverTimestamp()
+                                        });
+                                        wating.style.display = "none";
+                                        AficherLesCommentaire();
+                                    } catch (error) {
+                                        console.error(error);
+                                        wating.style.display = "none";
+                                        //message_cree_produit.innerHTML = 'Erreur lors du partage du produit: ' + error.message;
+                                    }
+                            }
+                        });
+                    }
+                    
+                });
                 btncomment.appendChild(btncomment_i);
                 jaimecommentbtns.appendChild(btncomment);
                 pubbg_.appendChild(jaimecommentbtns);
@@ -723,8 +919,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
     
 }
-
-
 
 
 
