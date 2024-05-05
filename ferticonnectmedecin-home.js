@@ -113,12 +113,14 @@ const listeComments_bg = document.querySelector('.commentaire_');
 const closecommentair = document.getElementById("closecommentair");
 const commentaire_bg = document.getElementById("commentaire_bg");
 
-closecommentair.addEventListener('click', function() {
+closecommentair.onclick = closecommentairFunction;
+
+function closecommentairFunction(){
     commentaire_bg.style.display="none";
-});
-closecommentair.addEventListener('click', function() {
-    commentaire_bg.style.display="none";
-});
+    const listeComments_bg_list = document.getElementById("listeComments_bg_list");
+    listeComments_bg_list.innerHTML="";
+}
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth ,signOut} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
@@ -717,7 +719,10 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 btncomment.className = "btncomment";
                 const btncomment_i = document.createElement("i");
                 btncomment_i.className = "bi bi-chat-left";
-                btncomment.addEventListener('click', async function() {
+
+                btncomment.onclick = afficheLesCommentairesFunction;
+
+                async function afficheLesCommentairesFunction() {
                     commentaire_bg.style.display="flex";
 
                     const height_commentaire_= commentaire_.getBoundingClientRect().height;
@@ -729,7 +734,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
                     const send_comment = document.getElementById("send_comment");
                     const photoprofilepubadd_comments = document.getElementById('photoprofilepubadd_comments');
-
+                    
                     if (user) {
                         const userId = user.uid;
                         const userRef = doc(db, typeOfUser, userId);
@@ -747,7 +752,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     async function AficherLesCommentaire(){
                         const listeComments_bg_list = document.getElementById("listeComments_bg_list");
                         listeComments_bg_list.innerHTML="";
-
+                        
                          const querySnapshot = await getDocs(query(collection(db, "publications", idpub, "commentaires"), orderBy('timestamp', 'desc')));
                             querySnapshot.forEach(async (doc) => {
                                 const idcommentaire = doc.id;
@@ -820,12 +825,12 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     }
                     
 
+                    send_comment.onclick = send_commentFunction;
 
-                    send_comment.addEventListener("click", async(e) => {
-                        e.preventDefault();
+                    async function send_commentFunction(){
                         sharePublicationComment();
                         numbercommentaires();
-                    });
+                    }
                     
                     async function sharePublicationComment() {
                         wating.style.display = "flex";
@@ -842,7 +847,12 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                         });
 
                                         wating.style.display = "none";
+                                        const inputpubadd_comme = document.getElementById("inputpubadd_comment");
+                                        inputpubadd_comme.value="";
+
                                         AficherLesCommentaire();
+
+
                                     } catch (error) {
                                         console.error(error);
                                         wating.style.display = "none";
@@ -852,7 +862,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                         });
                     }
                     
-                });
+                }
 
                 btncomment.appendChild(btncomment_i);
                 jaimecommentbtns.appendChild(btncomment);

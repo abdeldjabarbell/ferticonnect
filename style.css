@@ -12,6 +12,7 @@
 
 
 }
+/*
 :root{
    --bg-color:#f4fbf9;
    --second-bg-color:#bcc9c7;
@@ -22,6 +23,17 @@
    --btnHover-color:#53e8de;
    --error-text: rgb(160, 13, 0);
 
+}
+*/
+:root{
+  --bg-color:#f4fbf9;
+  --second-bg-color:#bcc9c7;
+  --pub-bg-color:#c8d6d442;
+  --second2-bg-color:#004f64;
+  --text-color:#000000;
+  --btn-color:#559692;
+  --btnHover-color:#53e8de;
+  --error-text: rgb(160, 13, 0);
 }
 html{
    font-size: 62.5%;
@@ -1018,7 +1030,6 @@ padding: 5px 10px;
 }
 .commentsnum p{
 margin-left: 3px;
-
 }
 
 .jaimecommentbtns{
@@ -1108,6 +1119,7 @@ transition: .2s ease;
   padding: 6% 9% 10px;
   justify-content: start;
   align-items: start;
+  background-color: var(--bg-color);
 
 }
 .photoprophletcouverture{
@@ -1324,7 +1336,7 @@ transition: .2s ease;
 .fotherprofile p{
   font-size: 1.2rem;
   font-weight: 500;
-  color: #0000009a;
+  color: var(--pub-bg-color);
   text-align: justify; /* Correction de la justification du texte */
 }
 /* -----------------------------------commentaires ------------------ */
@@ -1673,6 +1685,10 @@ transition: .2s ease;
       }
       .navbar_buttom{
         display: flex;
+      }
+      .commentaire_{
+        width: 90%;
+        height: 50%;
       }
 
 }
