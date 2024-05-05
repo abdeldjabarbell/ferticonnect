@@ -1016,6 +1016,10 @@ padding: 5px 10px;
   height: 3px;
 
 }
+.commentsnum p{
+margin-left: 3px;
+
+}
 
 .jaimecommentbtns{
   width: 100%;
@@ -1391,7 +1395,7 @@ transition: .2s ease;
 }
 .listeComments_bg{
   padding: 10px;
-  overflow: scroll;
+  overflow-y: auto;
 }
 .comment_listeComments_bg{
   width: 100%;

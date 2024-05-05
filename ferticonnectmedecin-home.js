@@ -675,7 +675,14 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 const commentsnum_i = document.createElement("i");
                 commentsnum_i.className = "bi bi-chat-left";
                 const commentsnum_p = document.createElement("p");
-                commentsnum_p.innerHTML = "0";
+                numbercommentaires();
+                async function numbercommentaires(){
+                    const docRef = collection(db, "publications", idpub, "commentaires");
+                    const querySnapshot = await getDocs(docRef);
+                    const numberOfDocuments = querySnapshot.size;
+                    commentsnum_p.innerHTML = numberOfDocuments;
+
+                }
                 commentsnum.appendChild(commentsnum_i);
                 commentsnum.appendChild(commentsnum_p);
                 jaimeandcommentsnum.appendChild(commentsnum);
@@ -738,19 +745,22 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     }
                     AficherLesCommentaire();
                     async function AficherLesCommentaire(){
-                        wating.style.display = "flex";
+                        const listeComments_bg_list = document.getElementById("listeComments_bg_list");
+                        listeComments_bg_list.innerHTML="";
 
-                         const querySnapshot = await getDocs(query(collection(db, "publications", idpub, "commentaires"), orderBy('timestamp', 'desc'), limit(25)));
-     
-                         querySnapshot.forEach(async (doc) => {
-                             const idcommentaire = doc.id;
-                             const data = doc.data();
-                             const commentaires = data.commentaires;
-                             const iduser_comment = data.iduser_comment;
-                             const typeusercomment = data.typeuser;
-                             const timestamp = data.timestamp;
-                             await importusercommentinfo(typeusercomment, iduser_comment, commentaires, timestamp);
-                         });
+                         const querySnapshot = await getDocs(query(collection(db, "publications", idpub, "commentaires"), orderBy('timestamp', 'desc')));
+                            querySnapshot.forEach(async (doc) => {
+                                const idcommentaire = doc.id;
+                                const data = doc.data();
+                                const commentaires = data.commentaires;
+                                const iduser_comment = data.iduser_comment;
+                                const typeusercomment = data.typeuser;
+                                const timestamp = data.timestamp;
+                                console.log("comment="+commentaires);
+                                await importusercommentinfo(typeusercomment, iduser_comment, commentaires, timestamp);
+                            });
+       
+
 
                     }
                     
@@ -766,7 +776,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                 const imguser = datauser.imguser;
 
                                 const listeComments_bg_list = document.getElementById("listeComments_bg_list");
-                                listeComments_bg_list.innerHTML="";
                     
                                 const comment_listeComments_bg = document.createElement('div');
                                 comment_listeComments_bg.className = "comment_listeComments_bg";
@@ -801,13 +810,11 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                 comment_listeComments_bg.appendChild(hedercomment);
                                 comment_listeComments_bg.appendChild(content_comment);
                                 listeComments_bg_list.appendChild(comment_listeComments_bg);
-                                wating.style.display = "none";
 
                             }
 
 
                         } catch (error) {
-                            wating.style.display = "none";
                             console.error("Une erreur s'est produite lors de l'importation des informations utilisateur :", error);
                         }
                     }
@@ -817,6 +824,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     send_comment.addEventListener("click", async(e) => {
                         e.preventDefault();
                         sharePublicationComment();
+                        numbercommentaires();
                     });
                     
                     async function sharePublicationComment() {
@@ -832,6 +840,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                             typeuser: typeOfUser,
                                             timestamp: serverTimestamp()
                                         });
+
                                         wating.style.display = "none";
                                         AficherLesCommentaire();
                                     } catch (error) {
@@ -844,6 +853,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     }
                     
                 });
+
                 btncomment.appendChild(btncomment_i);
                 jaimecommentbtns.appendChild(btncomment);
                 pubbg_.appendChild(jaimecommentbtns);
