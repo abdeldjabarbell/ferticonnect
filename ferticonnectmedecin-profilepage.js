@@ -77,10 +77,32 @@ const firebaseConfig = {
                 const imguser = datauser.imguser;
                 const imgcouvertureuser = datauser.imgcouvertureuser;
                 const formulaire = datauser.formulaire;
+
+                const timestamp = datauser.timestamp;
+                const seconds = timestamp.seconds;
+                const nanoseconds = timestamp.nanoseconds;
+                // Créer une date à partir de la représentation Firebase Timestamp
+                const milliseconds = seconds * 1000 + nanoseconds / 1000000; // Convertir nanosecondes en millisecondes
+                const date = new Date(milliseconds);
                 
+                // Tableau des noms de mois
+                const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+                
+                // Extraire les composantes de la date
+                const day = date.getDate();
+                const monthIndex = date.getMonth(); // Les mois commencent à 0
+                const monthName = monthNames[monthIndex];
+                const year = date.getFullYear();
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+                
+                // Formater la date en chaîne de caractères "DD Mois YY heure"
+                const formattedTimestamp = `${day} ${monthName} ${year}`;
+                
+                const fotherprofile = document.getElementById("fotherprofile");
 
                 nameuser.innerHTML=prenomuserprofile+" "+ nameuserprofile;
-
+                fotherprofile.innerHTML="Cet utilisateur s'est enregistré en tant que "+typeuserclick+" sur Ferticonnect le "+formattedTimestamp;
                 numberamisList();
                 async function numberamisList(){
                     const docRef = collection(db,typeuserclick,useridclick,"amis");
@@ -92,7 +114,9 @@ const firebaseConfig = {
                 if(typeuserclick === "medecin"){
                     const nameuser_i = document.getElementById("nameuser_i");
                     nameuser_i.style.display="flex";
-                    mycabinsbg2.style.display="flex";
+                    if(iduser=== useridclick){
+                        mycabinsbg2.style.display="flex";
+                    }
                 }
                 if(useridclick === iduser){
                     let a = 0;

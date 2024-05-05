@@ -104,7 +104,7 @@ const wating = document.getElementById("wating");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword ,sendPasswordResetEmail,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
-import { getFirestore, doc,addDoc, setDoc, query, where , collection, getDocs} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { getFirestore, doc,addDoc, setDoc, query,serverTimestamp, where , collection, getDocs} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBlAbn2DAuE4kSVDtsNgdttwDeBT78YmL8",
@@ -198,7 +198,9 @@ async function signUp() {
             imguser:"",
             imgcouvertureuser:"",
             formulaire:"vide",
-            typeOfUser:typeOfUser
+            typeOfUser:typeOfUser,
+            timestamp: serverTimestamp()
+
         });
         const docRef = await addDoc(collection(db, 'rechercheliste'), {
             idelement: userCredential.user.uid,

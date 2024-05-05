@@ -1301,6 +1301,20 @@ transition: .2s ease;
  font-size: 1.4rem;
  font-weight: 500;
 }
+.fotherprofile{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.fotherprofile p{
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #0000009a;
+  text-align: justify; /* Correction de la justification du texte */
+}
 @media (max-width:617px){
     .bg_choix_user{
         width: 100vw;
