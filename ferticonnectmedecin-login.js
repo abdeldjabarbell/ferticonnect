@@ -159,11 +159,11 @@ async function signUp() {
         
         Email.send({
             Host : "smtp.elasticemail.com",
-            Username : "noreply.ferticonnect@gmail.com",
-            Password : "988317868D85605CEC05377182A01ADBD16F",
+            Username : "ne.pas.rependre.ferticonnect@gmail.com",
+            Password : "B58393493272B1AC4DFEF6455183C24DDCAB",
             To : registerEmail,
-            From : 'noreply.ferticonnect@gmail.com',
-            Subject : "Confirmation de votre compte FertiConnect",
+            From : 'ne.pas.rependre.ferticonnect@gmail.com',
+            Subject : "Confirmation de votre compte",
             Body : 
 
                 "Cher "+registerPrenom+" "+registerNom +",<br>"
