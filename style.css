@@ -1336,7 +1336,7 @@ transition: .2s ease;
 .fotherprofile p{
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--pub-bg-color);
+  color: var(--second2-bg-color);
   text-align: justify; /* Correction de la justification du texte */
 }
 /* -----------------------------------commentaires ------------------ */
