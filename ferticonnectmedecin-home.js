@@ -157,6 +157,16 @@ const urlParams = new URLSearchParams(window.location.search);
 const typeuserclick = urlParams.get('typeuserclick');
 const typeOfUser = urlParams.get('typeuserclick');
 
+
+if(typeOfUser==="medecin"){
+    const veri_acco = document.getElementById("veri_acco");
+    veri_acco.style.display="flex";
+}
+else{
+    const veri_acco = document.getElementById("veri_acco");
+    veri_acco.style.display="none";
+}
+
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
@@ -267,7 +277,7 @@ const typeOfUser = urlParams.get('typeuserclick');
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";
-
+            
             const mescabins_nameh1 = document.createElement('h1');
             mescabins_nameh1.innerHTML= nameCabine;
 
@@ -277,9 +287,10 @@ const typeOfUser = urlParams.get('typeuserclick');
             cabinfoss.appendChild(mescabins_name);
             mescabins_.appendChild(cabinfoss);
 
-           // cabinfoss.addEventListener('click', () => {
-           //     window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-           // }); 
+
+           cabinfoss.addEventListener('click', () => {
+               window.location.href = `ferticonnectmedecin-cabine.html?cabineidclick=${cabineId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+           }); 
         }
         
         
@@ -584,6 +595,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 const infouser_ = document.createElement("div");
                 infouser_.className = "infouser_";
 
+
                 const image_user_pub = document.createElement("div");
                 image_user_pub.className = "image_user_pub";
 
@@ -593,15 +605,40 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 } else {
                     image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
                 }
+                
 
-                image_user_pub.appendChild(image_user_pub_img);
-                infouser_.appendChild(image_user_pub);
 
                 const nameuserpub = document.createElement("div");
                 nameuserpub.className = "nameuserpub";
                 const nameuserpubh1 = document.createElement("h1");
-                nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+                if (typeuser === "patient") {
+                    if(typeOfUser === "patient"){
+                        auth.onAuthStateChanged(async(user) => {
+                            if (user) {
+                                const userId = user.uid;
+                                if(iduser === userId){
+                                    nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+                                }
+                                else{
+                                    image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
+                                    nameuserpubh1.innerHTML ="Utilisateur fertiConnect";
 
+                                }
+
+                            }
+                        });
+                    }
+                    else{
+                        nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+
+                    }
+                }
+                else{
+                     nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+
+                }
+                image_user_pub.appendChild(image_user_pub_img);
+                infouser_.appendChild(image_user_pub);
                 nameuserpub.appendChild(nameuserpubh1);
                 infouser_.appendChild(nameuserpub);
                 infouser_.addEventListener('click', () => {
@@ -615,6 +652,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     verifica_i.className = "bi bi-patch-check-fill";
                     verifica.appendChild(verifica_i);
                 }
+
                 infouser_.appendChild(verifica);
 
                 const verifica1 = document.createElement("div");
@@ -761,7 +799,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                 const iduser_comment = data.iduser_comment;
                                 const typeusercomment = data.typeuser;
                                 const timestamp = data.timestamp;
-                                console.log("comment="+commentaires);
                                 await importusercommentinfo(typeusercomment, iduser_comment, commentaires, timestamp);
                             });
        
@@ -790,24 +827,53 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     
                                 const hedercomment_img = document.createElement('div');
                                 hedercomment_img.className = "hedercomment_img";
-                    
+
                                 const hedercomment_img_img = document.createElement('img');
-                                hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
-                    
                                 const hedercomment_h1 = document.createElement('h1');
-                                hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
+
                                 const hedercomment_i= document.createElement('i');
                                 if(typeusercomment === "medecin"){
                                     hedercomment_i.className="bi bi-patch-check-fill";
                                 }
                                 const content_comment = document.createElement('div');
                                 content_comment.className = "content_comment";
-                    
+                                
                                 const content_comment_p = document.createElement('p');
                                 content_comment_p.innerHTML = commentaires;
+                                if (typeuser === "patient") {
+                                    if(typeOfUser === "patient"){
+                                        auth.onAuthStateChanged(async(user) => {
+                                            if (user) {
+                                                const userId = user.uid;
+                                                if(iduser_comment === userId){
+                                                    hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
+                                                    hedercomment_img_img.src = imguser;
+
+                                                }
+                                                else{
+                                                    hedercomment_h1.innerHTML ="Utilisateur fertiConnect";
+                                                    hedercomment_img_img.src = "img/ferticonnectiLogoWhite.png";
+
+                                                }
+                
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+                                        hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+
+
+                                    }
+                                }
+                                else{
+                                    hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
+                                    hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+
+
+                                }
                     
                                 hedercomment_img.appendChild(hedercomment_img_img);
-
                                 hedercomment.appendChild(hedercomment_img);
                                 hedercomment.appendChild(hedercomment_h1);
                                 hedercomment.appendChild(hedercomment_i);

@@ -322,96 +322,123 @@ const firebaseConfig = {
                 }
                 else{
 
-                    if (imguser==="") { // Vérification si imguser existe
-                        photoprofile.src = "img/ferticonnectiLogoGreen.png";
-                    } else {
-                        photoprofile.src = imguser;
-                    }
-                    if (imgcouvertureuser==="") { // Vérification si couvertur existe
-                        photocouverture.src = "img/ferticonnectiLogoWhite.png";
-                    } else {
-                        photocouverture.src = imgcouvertureuser;
-                    }
-                    abonnerbutton.style.display="flex";
-                    messagebutton.style.display="flex";
-                    infobtn.style.display="none";
-                    compeleleprofile.style.display="none";
-
-                    const user = auth.currentUser;
-                    if (user) {
-                        const userId = user.uid;                      
-                          const docRef = collection(db,typeuserclick,useridclick,"amis");
-                          const querySnapshot = await getDocs(docRef);
-                          querySnapshot.forEach((doc) => {
-                              const data = doc.data();
-                              const useramisid= data.iduser;
-                              abonnerbutton.classList.contains("btnprfil");
-                              if (useramisid === userId) {
-                                abonnerbutton.classList.add("act");
-                              } else {
-                                if (abonnerbutton.classList.contains("act")) {
-                                    abonnerbutton.classList.remove("act");
-                                }
-                              }
-                          });
-                      
-                    }
-
-                    abonnerbutton.addEventListener('click', async function() {
-                        if (abonnerbutton.classList.contains("btnprfil")) {
-                            if (abonnerbutton.classList.contains("act")) {
-                                abonnerbutton.classList.remove("act");
-                                const user = auth.currentUser;
-                        
-                                if (user) {
-                                    const userId = user.uid; 
-                                    const amisCollectionRef = collection(db, typeuserclick, useridclick, "amis");
-                                    const querySnapshot = await getDocs(query(amisCollectionRef, where("iduser", "==", userId)));
-                                    querySnapshot.forEach(async (doc) => {
-                                        try {
-                                            await deleteDoc(doc.ref);
-                                            await numberamisList();
-                                        } catch (error) {
-                                            console.error("Erreur lors de la suppression du document de la sous-collection 'amis':", error);
-                                        }
-                                    });
-                    
-                                    // Supprimer l'utilisateur actuel de sa propre liste d'amis
-                                    const mesamisCollectionRef = collection(db, typeuseruserauth, userId, "amis");
-                                    const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", useridclick)));
-                                    mesquerySnapshot.forEach(async (doc) => {
-                                        try {
-                                            await deleteDoc(doc.ref);
-                                        } catch (error) {
-                                            console.error("Erreur lors de la suppression du document de la sous-collection 'mes amis':", error);
-                                        }
-                                    });
-                                }
-                        
-                            } else {
-                                // ajouter amis
-                                const user = auth.currentUser;
-                                if (user) {
-                                    const userId = user.uid;
-                                    // Ajouter l'utilisateur cliqué comme ami
-                                    const docRef = await addDoc(collection(db, typeuserclick, useridclick, "amis"), {
-                                        iduser: userId,
-                                        typeuser :typeuseruserauth,
-                                    });
-                                    await numberamisList();
-
-                                    // Ajouter l'utilisateur cliqué à la liste d'amis de l'utilisateur actuel
-                                    const mesamisRef = await addDoc(collection(db, typeuseruserauth, userId, "amis"), {
-                                        iduser: useridclick,
-                                        typeuser :typeuserclick,
-                                    });
-                                }
-                                abonnerbutton.classList.add("act");
-                            }
+                    if(typeuseruserauth === "patient"){
+                        if(typeuserclick==="medecin"){
+                            afficheleprofile_med();
                         }
-                    });
-                    
-                    
+                        else{
+                            photoprofile.src = "img/ferticonnectiLogoGreen.png";
+                            photocouverture.src = "img/ferticonnectiLogoWhite.png";
+                            nameuser.innerHTML="Utilisateur fertiConnect";
+                            abonnerbutton.style.display="none";
+                            messagebutton.style.display="none";
+                            infobtn.style.display="none";
+                            compeleleprofile.style.display="none";
+
+
+                        }
+
+                        
+                    }else{
+                        afficheleprofile_med();
+
+                    }
+
+                    async function afficheleprofile_med(){
+                        
+                         if (imguser==="") { // Vérification si imguser existe
+                             photoprofile.src = "img/ferticonnectiLogoGreen.png";
+                         } else {
+                             photoprofile.src = imguser;
+                         }
+                         if (imgcouvertureuser==="") { // Vérification si couvertur existe
+                             photocouverture.src = "img/ferticonnectiLogoWhite.png";
+                         } else {
+                             photocouverture.src = imgcouvertureuser;
+                         }
+                         abonnerbutton.style.display="flex";
+                         messagebutton.style.display="flex";
+                         infobtn.style.display="none";
+                         compeleleprofile.style.display="none";
+                         
+                         const user = auth.currentUser;
+                         if (user) {
+                             const userId = user.uid;                      
+                               const docRef = collection(db,typeuserclick,useridclick,"amis");
+                               const querySnapshot = await getDocs(docRef);
+                               querySnapshot.forEach((doc) => {
+                                   const data = doc.data();
+                                   const useramisid= data.iduser;
+                                   abonnerbutton.classList.contains("btnprfil");
+                                   if (useramisid === userId) {
+                                     abonnerbutton.classList.add("act");
+                                   } else {
+                                     if (abonnerbutton.classList.contains("act")) {
+                                         abonnerbutton.classList.remove("act");
+                                     }
+                                   }
+                               });
+                           
+                         }
+     
+                         abonnerbutton.addEventListener('click', async function() {
+                             if (abonnerbutton.classList.contains("btnprfil")) {
+                                 if (abonnerbutton.classList.contains("act")) {
+                                     abonnerbutton.classList.remove("act");
+                                     const user = auth.currentUser;
+                             
+                                     if (user) {
+                                         const userId = user.uid; 
+                                         const amisCollectionRef = collection(db, typeuserclick, useridclick, "amis");
+                                         const querySnapshot = await getDocs(query(amisCollectionRef, where("iduser", "==", userId)));
+                                         querySnapshot.forEach(async (doc) => {
+                                             try {
+                                                 await deleteDoc(doc.ref);
+                                                 await numberamisList();
+                                             } catch (error) {
+                                                 console.error("Erreur lors de la suppression du document de la sous-collection 'amis':", error);
+                                             }
+                                         });
+                         
+                                         // Supprimer l'utilisateur actuel de sa propre liste d'amis
+                                         const mesamisCollectionRef = collection(db, typeuseruserauth, userId, "amis");
+                                         const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", useridclick)));
+                                         mesquerySnapshot.forEach(async (doc) => {
+                                             try {
+                                                 await deleteDoc(doc.ref);
+                                             } catch (error) {
+                                                 console.error("Erreur lors de la suppression du document de la sous-collection 'mes amis':", error);
+                                             }
+                                         });
+                                     }
+                             
+                                 } else {
+                                     // ajouter amis
+                                     const user = auth.currentUser;
+                                     if (user) {
+                                         const userId = user.uid;
+                                         // Ajouter l'utilisateur cliqué comme ami
+                                         const docRef = await addDoc(collection(db, typeuserclick, useridclick, "amis"), {
+                                             iduser: userId,
+                                             typeuser :typeuseruserauth,
+                                         });
+                                         await numberamisList();
+     
+                                         // Ajouter l'utilisateur cliqué à la liste d'amis de l'utilisateur actuel
+                                         const mesamisRef = await addDoc(collection(db, typeuseruserauth, userId, "amis"), {
+                                             iduser: useridclick,
+                                             typeuser :typeuserclick,
+                                         });
+                                     }
+                                     abonnerbutton.classList.add("act");
+                                 }
+                             }
+                         });
+                         
+                         
+                    }
+
+
                     
                     
                     

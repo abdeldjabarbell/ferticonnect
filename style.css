@@ -22,17 +22,16 @@
    --btn-color:#559692;
    --btnHover-color:#53e8de;
    --error-text: rgb(160, 13, 0);
-
 }
 */
 :root{
-  --bg-color:#f4fbf9;
-  --second-bg-color:#bcc9c7;
+  --bg-color:#F3EEE6;
+  --second-bg-color:#bcc9c1;
   --pub-bg-color:#c8d6d442;
-  --second2-bg-color:#004f64;
+  --second2-bg-color:#29746A;
   --text-color:#000000;
-  --btn-color:#559692;
-  --btnHover-color:#53e8de;
+  --btn-color:#69A88D;
+  --btnHover-color:#53e896;
   --error-text: rgb(160, 13, 0);
 }
 html{
@@ -613,7 +612,7 @@ input:focus {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #004f64;
+  background-color: var(--second2-bg-color);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -710,7 +709,7 @@ input:focus {
   transition: 0.2s ease;
 }
 .titleoptionmycabinsbg:hover{
-  background-color: #008fb6;
+  background-color: var(--btn-color);
 
 }
 .titleoptionmycabinsbg h2{
@@ -925,6 +924,7 @@ border: 1px solid var(--second2-bg-color);
 
 }
 .image_user_pub{
+  position: relative;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -933,6 +933,15 @@ border: 1px solid var(--second2-bg-color);
   align-items: center;
   background-color: var(--second2-bg-color);
   margin-right: 10px;
+  overflow: hidden;
+
+}
+.image_user_pub_flu{
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10px); /* Ajout du préfixe -webkit- */
+  position: absolute;
 
 }
 .image_user_pub img{
@@ -999,6 +1008,7 @@ padding: 5px 10px;
 
 }
 
+
 .infouser_{
   display: flex;
   width: 70%;
@@ -1028,6 +1038,10 @@ padding: 5px 10px;
   height: 3px;
 
 }
+.jaimecommentbtns i{
+  color: var(--second2-bg-color);
+
+}
 .commentsnum p{
 margin-left: 3px;
 }
@@ -1053,6 +1067,7 @@ transition: .2s ease;
 .btnjaime i{
   cursor: pointer;
   font-size: 1.4rem;
+  color: var(--second2-bg-color);
 }
 .btncomment{
   width: 50%;
@@ -1125,7 +1140,7 @@ transition: .2s ease;
 .photoprophletcouverture{
   width: 100%;
   height: 300px;
-  background-color: #004f64;
+  background-color: var(--second2-bg-color);
   position: relative;
   border-radius: 10px;
   margin-bottom: 80px;
@@ -1137,7 +1152,7 @@ transition: .2s ease;
   object-fit: cover;
   border: 2px solid var(--second2-bg-color);
 
-}
+} 
 .photoprofile{
   width: 180px;
   height: 180px;
@@ -1166,6 +1181,7 @@ transition: .2s ease;
   border: 2px solid var(--second2-bg-color);
   overflow: hidden;
 }
+
 .btnprfil{
   width: 100%;
   padding: 5px;
@@ -1188,7 +1204,7 @@ transition: .2s ease;
   border: 1px solid var(--second-bg-color);
 }
 .btnprfil.act i{
-  color: #008fb6;
+  color: var(--btn-color);
 }
 .compeleleprofile p{
   font-size: 1.1rem;
@@ -1321,6 +1337,10 @@ transition: .2s ease;
   height: 40%;
   
 }
+.deconnection svg{
+  height: 40%;
+  
+}
 .deconnection p{
  font-size: 1.4rem;
  font-weight: 500;
@@ -1445,6 +1465,29 @@ transition: .2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.couvertureCabine{
+  width: 100%;
+  height: 150px;
+  background-color: var(--second2-bg-color);
+  border-radius: 10px;
+  border: 2px solid var(--second2-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.couvertureCabine img{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.leftespace h1{
+  margin-top: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 @media (max-width:617px){
@@ -1666,6 +1709,7 @@ transition: .2s ease;
         align-items: start;
       
       }
+      
       .bgcahngePhoto{
         width: 80vw;
         height: 80vh;
@@ -1689,6 +1733,15 @@ transition: .2s ease;
       .commentaire_{
         width: 90%;
         height: 50%;
+      }
+
+      .couvertureCabine{
+        height: 100px;
+
+      }
+      .couvertureCabine img{
+        height: 100px;
+
       }
 
 }
