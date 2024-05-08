@@ -84,6 +84,21 @@ titleoptionmycabinsbg2.addEventListener('click', function() {
     }
 });
 
+// langues liste 
+const mescabins_3 = document.getElementById('mescabins_3');
+const mycabinsbg3 = document.getElementById('mycabinsbg3');
+const titleoptionmycabinsbg3 = document.getElementById('titleoptionmycabinsbg3');
+
+titleoptionmycabinsbg3.addEventListener('click', function() {
+    if(mescabins_3.style.display === "none") {
+        mescabins_3.style.display = "flex";
+        mycabinsbg3.style.height = "400px";
+    } else {
+        mescabins_3.style.display = "none";
+        mycabinsbg3.style.height = "auto";
+    }
+});
+
 
 
 
@@ -203,8 +218,7 @@ else{
             const data = doc.data();
             const iduseramis = data.iduser;
             const typeuseramis = data.typeuser;
-            console.log("iduseramis="+iduseramis);
-            console.log("typeuseramis="+typeuseramis);
+
             recupereAmis(iduseramis,typeuseramis);
 
         });
@@ -245,16 +259,16 @@ else{
                 window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
             }); 
         }
-
+        
 
         const cabinequerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"cabines")));
         cabinequerySnapshot.forEach((doc) => {
             const data = doc.data();
             const cabineId = data.cabineId;
-            console.log("iduseramis="+cabineId);
             recupereCabine(cabineId);
 
         });
+        
         async function recupereCabine(cabineId){
             const docRef = doc(db, "cabines", cabineId);
             const docSnap = await getDoc(docRef); 
@@ -291,6 +305,68 @@ else{
            cabinfoss.addEventListener('click', () => {
                window.location.href = `ferticonnectmedecin-cabine.html?cabineidclick=${cabineId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
            }); 
+        }
+
+
+        //const langauequerySnapshot = doc(db, typeOfUser, userId);
+        const langauequerySnapshot = await getDocs(query(collection(db, "languesList")));
+        langauequerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const langue = data.langue;
+            const langue_image = data.img_langue;
+            console.log("langaue database = "+langue);
+            recupereLang(langue,langue_image);
+
+        });
+        async function recupereLang(langue,langue_image){
+            const docRef = doc(db, typeOfUser, userId);
+            const docSnap = await getDoc(docRef); 
+            const datauser = docSnap.data(); 
+            const lang = datauser.lang;
+
+            console.log("typeOfUser ="+typeOfUser);
+            console.log("userId ="+userId);
+            console.log("lang  ="+lang);
+
+
+
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(langue_image){
+                mescabins_image_img.src=langue_image;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML=" "+langue+" ";
+
+            const langue_check = document.createElement('div');
+            langue_check.className="langue_check";
+            const langue_check_i = document.createElement('i');
+            langue_check_i.className='bi bi-check-lg';
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+
+            if(lang === langue){
+                langue_check.appendChild(langue_check_i);
+                cabinfoss.appendChild(langue_check);
+            }
+            mescabins_3.appendChild(cabinfoss);
+
+            cabinfoss.addEventListener('click', () => {
+                window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+            }); 
         }
         
         
@@ -570,7 +646,9 @@ querySnapshot.forEach((doc) => {
     const pubbg_ = document.createElement("div");
     pubbg_.className = "pubbg_";
     creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub);
-    lespublicationslist.appendChild(pubbg_);
+    if(placepub === "home"){
+        lespublicationslist.appendChild(pubbg_);
+    }
 
 });
 

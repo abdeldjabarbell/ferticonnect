@@ -25,7 +25,7 @@
 }
 */
 :root{
-  --bg-color:#F3EEE6;
+  --bg-color:#e6f3ea;
   --second-bg-color:#bcc9c1;
   --pub-bg-color:#c8d6d442;
   --second2-bg-color:#29746A;
@@ -665,6 +665,7 @@ input:focus {
   align-items: center;
   border-bottom: 1px solid var(--second-bg-color);
   transition: 0.2s ease;
+  position: relative;
 }
 .cabinfoss:hover{
  background-color: #bcc9c78e;
@@ -687,10 +688,26 @@ input:focus {
   height: 28px;
 }
 .mescabins_name h1{
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--second2-bg-color);
   margin-left: 10px;
+  cursor: pointer;
+}
+.langue_check{
+  height: 20px;
+  width:  20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.langue_check i{
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--second2-bg-color);
+  position: absolute;
+  right: 0;
   cursor: pointer;
 }
 .titleoptionmycabinsbg{
@@ -1650,6 +1667,18 @@ transition: .2s ease;
     }
     .mescabins_name h1{
         font-size: 1rem;
+    }
+    .langue_check{
+      height: 15px;
+      width:  15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    .langue_check i{
+      font-size: 1.3rem;
+      color: var(--second2-bg-color);
     }
     .mescabins_image{
     width: 20px;

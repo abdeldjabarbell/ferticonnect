@@ -65,7 +65,7 @@ const firebaseConfig = {
         log.addEventListener('click', function() {
             window.history.back();
         });
-
+        
         const docRef = doc(db, typeuserclick, useridclick);
         try {
             const docSnap = await getDoc(docRef); 
@@ -110,7 +110,7 @@ const firebaseConfig = {
                     const numberOfDocuments = querySnapshot.size;
                     numberdabonner.innerHTML = numberOfDocuments +" abonnés";
                 }
-
+                
                 if(typeuserclick === "medecin"){
                     const nameuser_i = document.getElementById("nameuser_i");
                     nameuser_i.style.display="flex";
@@ -247,6 +247,7 @@ const firebaseConfig = {
                             }
                         }
                     });
+
                     const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
                     const nouveauimage_couv = document.getElementById("nouveauimage_couv");
                     const fermer2 = document.getElementById("fermer2");
@@ -254,6 +255,7 @@ const firebaseConfig = {
                     const Done_couv = document.getElementById("Done_couv");
                     const loader_couv = document.getElementById("loader_couv");
                     const original_couv = document.getElementById("original_couv");
+                    
                     const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
                     etap3.addEventListener('click', function() {
                         photocouverturechangerbg.style.display="flex"
@@ -380,7 +382,7 @@ const firebaseConfig = {
                                });
                            
                          }
-     
+                         
                          abonnerbutton.addEventListener('click', async function() {
                              if (abonnerbutton.classList.contains("btnprfil")) {
                                  if (abonnerbutton.classList.contains("act")) {
@@ -399,7 +401,7 @@ const firebaseConfig = {
                                                  console.error("Erreur lors de la suppression du document de la sous-collection 'amis':", error);
                                              }
                                          });
-                         
+                                         
                                          // Supprimer l'utilisateur actuel de sa propre liste d'amis
                                          const mesamisCollectionRef = collection(db, typeuseruserauth, userId, "amis");
                                          const mesquerySnapshot = await getDocs(query(mesamisCollectionRef, where("iduser", "==", useridclick)));
