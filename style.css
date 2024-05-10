@@ -1716,15 +1716,17 @@ cursor: pointer;
   height: 25px;
   width: 100%;
   position: absolute;
-  bottom: 120px;
+  bottom: -10px;
   z-index: 250;
   cursor: pointer;
+  transition: .3s ease;
 }
 
 .scrollButton i {
   font-size: 2.3rem;
   color: var(--second2-bg-color);
 }
+
 
 
 @media (max-width:617px){
@@ -2001,6 +2003,7 @@ cursor: pointer;
        .bottom_message{
         padding: 15px;
         position: fixed;
+        z-index: 300;
 
 
        }
@@ -2008,6 +2011,7 @@ cursor: pointer;
        .option_header_message{
         display: flex;
        }
+
        
 
 }
