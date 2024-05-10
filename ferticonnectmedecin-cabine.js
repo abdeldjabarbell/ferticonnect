@@ -16,6 +16,7 @@ const discution_bg = document.querySelector('.discution_bg');
 const rightespace = document.querySelector('.rightespace');
 const leftespace = document.querySelector('.leftespace');
 const midleespace = document.querySelector('.midleespace');
+const navbarbuttom = document.querySelector('.navbar_buttom');
 
 
 
@@ -39,12 +40,22 @@ messagebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
+    navbarbuttom.style.display = "none";
 
-    const content_message = document.querySelector('.content_message');
-    content_message.scrollIntoView({ behavior: 'smooth' });
-
+    var contentMessage = document.querySelector('.content_message');
+    if (contentMessage.scrollTo) {
+        contentMessage.scrollTo({
+            top: contentMessage.scrollHeight,
+            behavior: 'smooth' // pour un défilement fluide si pris en charge
+        });
+    } else {
+        // Alternative pour les navigateurs ne prenant pas en charge scrollTo
+        contentMessage.scrollTop = contentMessage.scrollHeight;
+    }
+    
+    
     var navbar_buttom = document.querySelector('.navbar_buttom').clientHeight; 
-   const height_disc_bg = window.innerHeight  - navigationbarHeight - navbar_buttom;
+   const height_disc_bg = window.innerHeight  - navigationbarHeight ;
    discution_bg.style.height = height_disc_bg + "px";
    
    var bottom_message = document.querySelector('.bottom_message').clientHeight;
@@ -71,7 +82,7 @@ messagebtnnavbuttom.addEventListener('click', function() {
     refreshPage();
   });    
 });
-const content_message = document.querySelector('.content_message');
+   const content_message = document.querySelector('.content_message');
    const height_disc_bg = window.innerHeight  - navigationbarHeight;
    discution_bg.style.height = height_disc_bg + "px";
    
@@ -83,35 +94,37 @@ const content_message = document.querySelector('.content_message');
    const optionbg_wind = document.querySelector('.optionbg_wind');
    optionbg_wind.style.top =header_message + "px";
    
-   const option_header_message = document.getElementById('option_header_message');
    const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
+
+
    
    var contentMessage = document.querySelector('.content_message');
-   contentMessage.scrollTop = contentMessage.scrollHeight;
-
+   if (contentMessage.scrollTop !== undefined) {
+       contentMessage.scrollTop = contentMessage.scrollHeight;
+   } else {
+       contentMessage.scrollTo({
+           top: contentMessage.scrollHeight,
+           behavior: 'smooth' // pour un défilement fluide si pris en charge
+       });
+   }
+   
    function toggleScrollButton() {
     var contentMessage = document.querySelector('.content_message');
     var scrollButton = document.getElementById('scrollButton');
 
-    // Utilisation de la propriété scrollHeight pour vérifier si le contenu est en bas
-    if (contentMessage.scrollTop + contentMessage.clientHeight === contentMessage.scrollHeight ||
-        document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
-        scrollButton.style.display = "none";
-    } else {
-        scrollButton.style.display = "flex";
+        // Utilisation de la propriété scrollHeight pour vérifier si le contenu est en bas
+        if (contentMessage.scrollTop + contentMessage.clientHeight === contentMessage.scrollHeight ||
+            document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+            scrollButton.style.display = "none";
+        } else {
+            scrollButton.style.display = "flex";
+        }
     }
-}
 
-
+    
   document.getElementById('content_message').addEventListener('scroll', toggleScrollButton);
 
-   option_header_message.addEventListener('click', function() {
-       if( optionbg_wind.style.display === "flex"){
-           optionbg_wind.style.display = "none";
-       }else{
-           optionbg_wind.style.display = "flex";
-       }
-   });
+
  
    optionbg_wind_btn_home.addEventListener('click', function() {
     refreshPage();
@@ -122,8 +135,17 @@ const content_message = document.querySelector('.content_message');
     var contentMessage = document.querySelector('.content_message');
   
     scrollButton.addEventListener('click', function() {
-        contentMessage.scrollTop = contentMessage.scrollHeight;
+        if (contentMessage.scrollTo) {
+            contentMessage.scrollTo({
+                top: contentMessage.scrollHeight,
+                behavior: 'smooth' // pour un défilement fluide si pris en charge
+            });
+        } else {
+            // Alternative pour les navigateurs ne prenant pas en charge scrollTo
+            contentMessage.scrollTop = contentMessage.scrollHeight;
+        }
     });
+    
   });
 
 function scrollToTop() {
