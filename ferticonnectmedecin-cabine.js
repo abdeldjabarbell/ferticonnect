@@ -37,22 +37,17 @@ cabinsbtnnavbuttom.addEventListener('click', function() {
     scrollToTop()
 });
 messagebtnnavbuttom.addEventListener('click', function() {
+    var bgHome = document.querySelector('.bgHome');
+    bgHome.style.padding="0";
+    var navigationbar = document.querySelector('.navigationbar');
+    navigationbar.style.display = "none";
+
+    
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
     navbarbuttom.style.display = "none";
 
-    var contentMessage = document.querySelector('.content_message');
-    if (contentMessage.scrollTo) {
-        contentMessage.scrollTo({
-            top: contentMessage.scrollHeight + 20,
-            behavior: 'smooth' // pour un défilement fluide si pris en charge
-        });
-    } else {
-        // Alternative pour les navigateurs ne prenant pas en charge scrollTo
-        contentMessage.scrollTop = contentMessage.scrollHeight + 20;
-    }
-    
     
     var navbar_buttom = document.querySelector('.navbar_buttom').clientHeight; 
    const height_disc_bg = window.innerHeight  - navigationbarHeight ;
@@ -80,7 +75,19 @@ messagebtnnavbuttom.addEventListener('click', function() {
  
    optionbg_wind_btn_home.addEventListener('click', function() {
     refreshPage();
-  });    
+  });  
+  
+  var contentMessage = document.querySelector('.content_message');
+  if (contentMessage.scrollTo) {
+      contentMessage.scrollTo({
+          top: contentMessage.scrollHeight ,
+          behavior: 'smooth' // pour un défilement fluide si pris en charge
+      });
+  } else {
+      // Alternative pour les navigateurs ne prenant pas en charge scrollTo
+      contentMessage.scrollTop = contentMessage.scrollHeight ;
+  }
+
 });
    const content_message = document.querySelector('.content_message');
    const height_disc_bg = window.innerHeight  - navigationbarHeight;
@@ -88,7 +95,7 @@ messagebtnnavbuttom.addEventListener('click', function() {
    
    var bottom_message = document.querySelector('.bottom_message').clientHeight;
    var header_message = document.querySelector('.header_message').clientHeight;
-   content_message.style.height = height_disc_bg - header_message - bottom_message + "px";
+   content_message.style.height = height_disc_bg ;
    console.log("content_message = "+content_message.style.height +"   /header_message="+header_message);
    
    const optionbg_wind = document.querySelector('.optionbg_wind');
@@ -103,7 +110,7 @@ messagebtnnavbuttom.addEventListener('click', function() {
        contentMessage.scrollTop = contentMessage.scrollHeight;
    } else {
        contentMessage.scrollTo({
-           top: contentMessage.scrollHeight + 20,
+           top: contentMessage.scrollHeight,
            behavior: 'smooth' // pour un défilement fluide si pris en charge
        });
    }
@@ -115,9 +122,9 @@ function toggleScrollButton() {
     // Utilisation de la propriété scrollHeight pour vérifier si le contenu est en bas
     if (contentMessage.scrollTop + contentMessage.clientHeight  < contentMessage.scrollHeight -400 ||
         document.documentElement.scrollTop + window.innerHeight  < document.documentElement.scrollHeight -400) {
-        scrollButton.style.bottom = "90px"; // Utilisation de 'bottom' au lieu de 'buttom'
+        scrollButton.style.bottom = "40px"; // Utilisation de 'bottom' au lieu de 'buttom'
     } else {
-        scrollButton.style.bottom = "-20px"; // Utilisation de 'bottom' au lieu de 'buttom'
+        scrollButton.style.bottom = "-30px"; // Utilisation de 'bottom' au lieu de 'buttom'
     }
 }
 

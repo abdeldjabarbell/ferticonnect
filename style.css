@@ -1718,7 +1718,7 @@ cursor: pointer;
   height: 25px;
   width: 100%;
   position: absolute;
-  bottom: -10px;
+  bottom: -30px;
   z-index: 250;
   cursor: pointer;
   transition: .3s ease;
@@ -1794,7 +1794,7 @@ cursor: pointer;
     .rightespace{
       width: 100%;
       display: none;
-      height: auto;
+      height: 100vh;
       flex-direction: column;
     }
     .midleespace{
@@ -2011,9 +2011,9 @@ cursor: pointer;
        .option_header_message{
         display: flex;
        }
-
+       
        .content_message{
-        padding-bottom: 70px;
+        padding-bottom: 30px;
         bottom: 0;
         position: absolute;
 
