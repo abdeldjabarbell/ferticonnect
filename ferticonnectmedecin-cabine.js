@@ -9,6 +9,17 @@ function tailledecran(){
     }
 }
 
+var navigationbarHeight = document.querySelector('.navigationbar').clientHeight;
+
+const discution_bg = document.querySelector('.discution_bg');
+
+const rightespace = document.querySelector('.rightespace');
+const leftespace = document.querySelector('.leftespace');
+const midleespace = document.querySelector('.midleespace');
+
+
+
+
 const homebtnnavbuttom = document.getElementById('homebtnnavbuttom');
 const cabinsbtnnavbuttom = document.getElementById('cabinsbtnnavbuttom');
 const messagebtnnavbuttom = document.getElementById('messagebtnnavbuttom');
@@ -28,10 +39,92 @@ messagebtnnavbuttom.addEventListener('click', function() {
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
-    scrollToTop()
+
+    const content_message = document.querySelector('.content_message');
+    content_message.scrollIntoView({ behavior: 'smooth' });
+
+    var navbar_buttom = document.querySelector('.navbar_buttom').clientHeight; 
+   const height_disc_bg = window.innerHeight  - navigationbarHeight - navbar_buttom;
+   discution_bg.style.height = height_disc_bg + "px";
+   
+   var bottom_message = document.querySelector('.bottom_message').clientHeight;
+   var header_message = document.querySelector('.header_message').clientHeight;
+   content_message.style.height = height_disc_bg - header_message - bottom_message + "px";
+   console.log("content_message = "+content_message.style.height +"   /header_message="+header_message);
+   
+   const optionbg_wind = document.querySelector('.optionbg_wind');
+   optionbg_wind.style.top =header_message + "px";
+   
+   const option_header_message = document.getElementById('option_header_message');
+   const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
+   
+   
+   option_header_message.addEventListener('click', function() {
+       if( optionbg_wind.style.display === "flex"){
+           optionbg_wind.style.display = "none";
+       }else{
+           optionbg_wind.style.display = "flex";
+       }
+   });
+ 
+   optionbg_wind_btn_home.addEventListener('click', function() {
+    refreshPage();
+  });    
 });
+const content_message = document.querySelector('.content_message');
+   const height_disc_bg = window.innerHeight  - navigationbarHeight;
+   discution_bg.style.height = height_disc_bg + "px";
+   
+   var bottom_message = document.querySelector('.bottom_message').clientHeight;
+   var header_message = document.querySelector('.header_message').clientHeight;
+   content_message.style.height = height_disc_bg - header_message - bottom_message + "px";
+   console.log("content_message = "+content_message.style.height +"   /header_message="+header_message);
+   
+   const optionbg_wind = document.querySelector('.optionbg_wind');
+   optionbg_wind.style.top =header_message + "px";
+   
+   const option_header_message = document.getElementById('option_header_message');
+   const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
+   
+   var contentMessage = document.querySelector('.content_message');
+   contentMessage.scrollTop = contentMessage.scrollHeight;
+
+   function toggleScrollButton() {
+    var contentMessage = document.querySelector('.content_message');
+    var scrollButton = document.getElementById('scrollButton');
+
+    // Utilisation de la propriété scrollHeight pour vérifier si le contenu est en bas
+    if (contentMessage.scrollTop + contentMessage.clientHeight === contentMessage.scrollHeight ||
+        document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+        scrollButton.style.display = "none";
+    } else {
+        scrollButton.style.display = "flex";
+    }
+}
 
 
+  document.getElementById('content_message').addEventListener('scroll', toggleScrollButton);
+
+   option_header_message.addEventListener('click', function() {
+       if( optionbg_wind.style.display === "flex"){
+           optionbg_wind.style.display = "none";
+       }else{
+           optionbg_wind.style.display = "flex";
+       }
+   });
+ 
+   optionbg_wind_btn_home.addEventListener('click', function() {
+    refreshPage();
+  }); 
+  //scroll to bottom
+  document.addEventListener('DOMContentLoaded', function() {
+    var scrollButton = document.getElementById('scrollButton');
+    var contentMessage = document.querySelector('.content_message');
+  
+    scrollButton.addEventListener('click', function() {
+        contentMessage.scrollTop = contentMessage.scrollHeight;
+    });
+  });
 
 function scrollToTop() {
     document.body.scrollTop = 0;
@@ -70,8 +163,11 @@ titleoptionmycabinsbg.addEventListener('click', function() {
         mycabinsbg.style.height = "auto";
     }
 });
+const titleoptionmycabinsbg4 = document.getElementById('titleoptionmycabinsbg4');
 
-
+titleoptionmycabinsbg4.addEventListener('click', () => {
+    window.location.href = `ferticonnectmedecin-home.html?typeuserclick=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+}); 
 
 var icons = document.querySelectorAll('.iconnavbar');
 
@@ -566,7 +662,7 @@ try {
                                             });
                                         }
                                         else{
-                                            nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+                                            hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
                                             hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
     
     

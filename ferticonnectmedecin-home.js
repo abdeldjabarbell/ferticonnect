@@ -654,7 +654,7 @@ querySnapshot.forEach((doc) => {
 
 
 async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imageUrl_publication,publication,idpub){
-
+    
     // Référence au document utilisateur
     const docRef = doc(db, typeuser, iduser);
     try {
@@ -749,7 +749,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
                 pubbg_.appendChild(headerpublication);
 
-
+                
                 const textpublication = document.createElement("p");
                 textpublication.className="textpublication";
                 textpublication.innerHTML=publication;
@@ -840,7 +840,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
                 async function afficheLesCommentairesFunction() {
                     commentaire_bg.style.display="flex";
-
+                    
                     const height_commentaire_= commentaire_.getBoundingClientRect().height;
                     const height_addcommentaire_bg = addcommentaire_bg.getBoundingClientRect().height;
                     const height_head_commentaire_ = head_commentaire_.getBoundingClientRect().height;
@@ -852,6 +852,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                     const photoprofilepubadd_comments = document.getElementById('photoprofilepubadd_comments');
                     
                     if (user) {
+                        
                         const userId = user.uid;
                         const userRef = doc(db, typeOfUser, userId);
                         const docSnapshot = await getDoc(userRef);
@@ -889,7 +890,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                         try {
                             const docSnap = await getDoc(docRef);
                             if (docSnap.exists()) {
-
+                                
                                 const datauser = docSnap.data();
                                 const nameuser = datauser.nom;
                                 const prenameuser = datauser.prenom;
@@ -938,7 +939,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                         });
                                     }
                                     else{
-                                        nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
+                                        hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
                                         hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
 
 
@@ -967,7 +968,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                             console.error("Une erreur s'est produite lors de l'importation des informations utilisateur :", error);
                         }
                     }
-                    
+                     
 
                     send_comment.onclick = send_commentFunction;
 
