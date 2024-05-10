@@ -1582,6 +1582,8 @@ transition: .2s ease;
  right: 0;
  border-top-left-radius:10px ;
  border-top-right-radius: 10px;
+ z-index: 300;
+
 }
 
 .bottom_message i{
@@ -2004,13 +2006,15 @@ cursor: pointer;
         padding: 15px;
         position: fixed;
         z-index: 300;
-
-
        }
        
        .option_header_message{
         display: flex;
        }
+
+       .content_message{
+        padding-bottom: 70px;
+      }
 
        
 
