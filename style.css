@@ -2014,9 +2014,12 @@ cursor: pointer;
 
        .content_message{
         padding-bottom: 70px;
+        bottom: 0;
+        position: absolute;
+
       }
 
-       
+      
 
 }
 
