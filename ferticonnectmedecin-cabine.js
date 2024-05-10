@@ -137,23 +137,20 @@ function toggleScrollButton() {
    optionbg_wind_btn_home.addEventListener('click', function() {
     refreshPage();
   }); 
-  //scroll to bottom
-  document.addEventListener('DOMContentLoaded', function() {
-    var scrollButton = document.getElementById('scrollButton');
-    var contentMessage = document.querySelector('.content_message');
   
-    scrollButton.addEventListener('click', function() {
-        if (contentMessage.scrollTo) {
-            contentMessage.scrollTo({
-                top: contentMessage.scrollHeight,
-                behavior: 'smooth' // pour un défilement fluide si pris en charge
-            });
-        } else {
-            // Alternative pour les navigateurs ne prenant pas en charge scrollTo
-            contentMessage.scrollTop = contentMessage.scrollHeight;
-        }
-    });
-    
+  var scrollButton = document.getElementById('scrollButton');
+  var contentMessage = document.querySelector('.content_message');
+
+  scrollButton.addEventListener('click', function() {
+      if (contentMessage.scrollTo) {
+          contentMessage.scrollTo({
+              top: contentMessage.scrollHeight,
+              behavior: 'smooth' // pour un défilement fluide si pris en charge
+          });
+      } else {
+          // Alternative pour les navigateurs ne prenant pas en charge scrollTo
+          contentMessage.scrollTop = contentMessage.scrollHeight;
+      }
   });
 
 function scrollToTop() {
