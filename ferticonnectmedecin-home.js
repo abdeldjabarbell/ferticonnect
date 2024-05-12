@@ -4,6 +4,7 @@ import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.5/fireb
 import { getFirestore, doc, getDoc, updateDoc, addDoc,setDoc, deleteDoc, query, orderBy, limit, where, getDocs, collection, serverTimestamp as firestoreServerTimestamp  } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 import { getStorage,  ref as storageRef  , uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
 import { getDatabase,  ref as databaseRef, push, onValue, serverTimestamp as databaseServerTimestamp  } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js';
+import { serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBlAbn2DAuE4kSVDtsNgdttwDeBT78YmL8",
@@ -86,7 +87,11 @@ const firebaseConfig = {
                     const  imageamismessagebg = document.createElement("div");
                     imageamismessagebg.className="imageamismessagebg";
                     const  imageamismessagebgimg = document.createElement("img");
-                    imageamismessagebgimg.src= imageUserlisteamismessage;
+                    if(imageUserlisteamismessage){
+                        imageamismessagebgimg.src= imageUserlisteamismessage;
+                    }else{
+                        imageamismessagebgimg.src= "img/ferticonnectiLogoWhite.png";
+                    }
                     const  nameamismessagebg = document.createElement("div");
                     nameamismessagebg.className="nameamismessagebg";
                     const  nameamismessagebgh1 = document.createElement("h1");
@@ -121,7 +126,11 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
 
     const Image_header_message = document.getElementById("Image_header_message");
     const Image_header_messageimg = document.createElement("img");
-    Image_header_messageimg.src=imageUserlisteamismessage;
+    if(imageUserlisteamismessage){
+        Image_header_messageimg.src= imageUserlisteamismessage;
+    }else{
+        Image_header_messageimg.src= "img/ferticonnectiLogoWhite.png";
+    }
     Image_header_message.appendChild(Image_header_messageimg);
     const name_room_message = document.getElementById("name_room_message");
     name_room_message.innerHTML=prenimUserlisteamismessage+" "+nameUserlisteamismessage;

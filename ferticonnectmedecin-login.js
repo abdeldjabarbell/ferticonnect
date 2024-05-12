@@ -199,6 +199,7 @@ async function signUp() {
             imgcouvertureuser:"",
             formulaire:"vide",
             typeOfUser:typeOfUser,
+            lang:"Français",
             timestamp: serverTimestamp()
 
         });

@@ -1886,7 +1886,35 @@ cursor: pointer;
   
 }
 
+.title_listemesagebg{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.image_title_listemesagebg{
+  background-color: var(--second2-bg-color);
+ width: 25px;
+ height: 25px;
+ display: flex;
+ border-radius: 50%;
+ overflow: hidden;
+}
+.image_title_listemesagebg img{
+  width: 25px;
+ height: 25px;
+ object-fit: cover;
 
+}
+.title_listemesagebg h1{
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--second2-bg-color);
+  padding: 10px;
+
+}
 
 
 
