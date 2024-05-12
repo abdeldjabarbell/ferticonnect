@@ -113,7 +113,111 @@
         </div>
 
         <div class="rightespace" id="rightespace">
+            <div class="discution_bg"  id="discution_bg" style="display: flex;">
+                <div class="header_message">
+                    <div class="Image_header_message" id="Image_header_message"></div>
+                    <div class="name_header_message">
+                        <h1 id="name_room_message"></h1>
+                    </div>
+                    <div class="option_header_message" id="option_header_message">
+                        <i class="bi bi-sliders"></i>
+                    </div>
+                </div>
+                <div class="content_message" id="content_message" ></div>
+                
+                <div class="bottom_message">
+                    <div class="sendImageicon" id="sendImageicon">
+                        <i class="bi bi-image-fill"></i>
+                    </div>
+                    <textarea class="messageecrit" name="" id="messageecrit"placeholder="Écris un message"></textarea>
+                    <div class="sendmessageicon" id="sendmessageicon">
+                        <i class="bi bi-send"></i>
+                    </div>
+                    <p id="QMPEUM" style="display: none;">Que le médecin peut envoyer un message </p>
+                </div>
+                
+                <div class="scrollButton" id="scrollButton">
+                    <i class="bi bi-arrow-down-circle-fill"></i>
+                </div>
+
+                <div class="optionbg_wind" id="optionbg_wind">
+                    <div class="optionbg_wind_btn" id="optionbg_wind_btn_home">
+                        <i class="bi bi-arrow-return-left"></i>
+                        <p>Retourner à la page d'accueil</p>
+                    </div>
+                </div>
+
+                <div class="creeUneRoomCabineBg" id="creeUneRoomCabineBg" style="display: none;">
+                    <div class="bg_cree_CabineRoom_place">
+                        <i class="bi bi-chat-right-text"></i>
+                        <h1>Créez une messagerie pour votre cabinet</h1>
+                        <p> Vous seul pouvez envoyer des messages.</p>                        
+
+                        <button class="btn souvgarder"  id="confirmeCreeMeaasegCabine">
+                            <div id="originalmessageCabine" style="display: block;">
+                                Créez
+                            </div>
+                            <div class="cs-loader-inner" id="loadermessageCabine" style="display: none;">
+                                <label>	●</label>
+                                <label>	●</label>
+                                <label>	●</label>
+                                <label>	●</label>
+                            </div>
+                            <div id="DonemessageCabine" style="display: none;">
+                                terminée
+                            </div>
+                      </button>
+                    </div>
+                </div>
+
+                <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
+                    <div class="bgcahngePhoto">
+                        <h3>Choisir une image à envoyer</h3>
+                        <br>
+                        <div class="photochanger_couverture" id="photochanger_couverture">
             
+                            <i id="photochanger_couverture_i" class="bi bi-image-fill" style="display: flex;"></i>
+                            <div class="nouveauimage_couv" id="nouveauimage_couv" style="display: none;" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="btns_bg_info">
+                           <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
+                                <div id="original_couv" style="display: block;">
+                                    Partager
+                                </div>
+                                <div class="cs-loader-inner" id="loader_couv" style="display: none;">
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                </div>
+                                <div id="Done_couv" style="display: none;">
+                                    terminée
+                                </div>
+                          </button>
+                          <br>
+                          <button class="btn supprimer" id="fermer2">fermer</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="listemesagebg" id="listemesagebg" >
+                <div class="amisbgmessage">
+                    <div class="imageamismessagebg">
+                        <img src="" alt="">
+                    </div>
+                    <div class="nameamismessagebg">
+                        <h1>abdeldjabar</h1>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="navbar_buttom" id="navbar_buttom"style="display: none;">
@@ -127,7 +231,7 @@
             <i class="bi bi-chat-heart" id="messagebtnnavbuttom"></i>
         </div>
         <div class="iconnavbar">
-            <i class="bi bi-bell"></i>
+            <i class="bi bi-search-heart" id="searchbtnnavvbutton"></i>
         </div>
     </div>
 

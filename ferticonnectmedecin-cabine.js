@@ -30,29 +30,31 @@ const IdCabine = urlParams.get('cabineidclick');
 
 
 
-
-
-
-
-
 const sendImageicon = document.getElementById('sendImageicon');
 const messageecrit = document.getElementById('messageecrit');
 const sendmessageicon = document.getElementById('sendmessageicon');
 const QMPEUM_ = document.getElementById('QMPEUM');
 
-if(typeuserclick === "utilsateur"){
-    sendImageicon.style.display="none";
-    messageecrit.style.display="none";
-    sendmessageicon.style.display="none";
-    QMPEUM_.style.display="flex";
-}
-else{
-    sendImageicon.style.display="flex";
-    messageecrit.style.display="flex";
-    sendmessageicon.style.display="flex";
-    QMPEUM_.style.display="none";
-}
 
+const docRef_info_cab = doc(db, "cabines", IdCabine);
+try {
+    const docSnap = await getDoc(docRef_info_cab); // Récupération du snapshot du document
+    const datacabine = docSnap.data(); // Récupération des données du document cabine
+    const cabineImage = datacabine.cabineImage;
+    const creatorId = datacabine.creatorId;
+    const nameCabine = datacabine.nameCabine;
+
+    const name_room_message = document.getElementById("name_room_message");
+    name_room_message.innerHTML= nameCabine;
+    const Image_header_message = document.getElementById("Image_header_message");
+    const Image_header_message_img = document.createElement("img");
+    Image_header_message_img.src=cabineImage;
+    Image_header_message.appendChild(Image_header_message_img)
+
+  
+}catch{
+
+}
 
 
 function tailledecran(){
@@ -100,6 +102,19 @@ function cabinsbtnnavbuttomFunction(){
 }
 messagebtnnavbuttom.onclick = messagebtnnavbuttomFunction;
 function messagebtnnavbuttomFunction(){
+
+    if(typeuserclick === "patient"){
+        sendImageicon.style.display="none";
+        messageecrit.style.display="none";
+        sendmessageicon.style.display="none";
+        QMPEUM_.style.display="flex";
+    }
+    else{
+        sendImageicon.style.display="flex";
+        messageecrit.style.display="flex";
+        sendmessageicon.style.display="flex";
+        QMPEUM_.style.display="none";
+    }
 
     var bgHome = document.querySelector('.bgHome');
     bgHome.style.padding="0";
@@ -154,18 +169,32 @@ function messagebtnnavbuttomFunction(){
 
 
 
+
 }
-
-
 
 
 if (window.innerWidth < 600) {
     creemessagegroup();
     messagegroupeCabine();
+    if(typeuserclick === "patient"){
+        sendImageicon.style.display="none";
+        messageecrit.style.display="none";
+        sendmessageicon.style.display="none";
+        QMPEUM_.style.display="flex";
+        QMPEUM.style.color="var(--bg-color)";
+    }
+    else{
+        sendImageicon.style.display="flex";
+        messageecrit.style.display="flex";
+        sendmessageicon.style.display="flex";
+        QMPEUM_.style.display="none";
+    }
+    
 } else {
     creemessagegroup();
     messagegroupeCabine();
 }
+
 
 
   //---------------------------------------- messagenging--------------------------------
@@ -274,135 +303,129 @@ async function creemessagegroup(){
 
 
             //---------------- send message 
-            async function messagegroupeCabine(){
-                const docRef_CabineRoom = doc(db, "cabines", IdCabine,"messagesCabine","messageCabineroom");
-                try {
-                  const docSnapCabin = await getDoc(docRef_CabineRoom); 
-                    if (docSnapCabin.exists()) {
-                      const dataCabineRoom = docSnapCabin.data(); 
-                      const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
-                      
-                        const database = getDatabase(app);
-                        //const messageRef = databaseRef(database, 'messages');
-                        const messageRef = databaseRef(database, creatIdMessageRoom );
-                      
-                        const messageInput = document.getElementById("messageecrit");
-                        const sendButton = document.getElementById("sendmessageicon");
-                        const messagesDiv = document.getElementById("content_message");
-                        messagesDiv.style.width="100%";
-                        wating.style.display="none";
-                        sendButton.onclick = envoiyerMessage;
-                        // Event listener for sending message
-                        function envoiyerMessage() {
-                             const message = messageInput.value.trim();
-                              const user = auth.currentUser;
-                              if (user) {
-                                const userId = user.uid; 
-                                if (message !== "") {
-                                    push(messageRef, {
-                                        text: message,
-                                        id_usersent:userId,
-                                        timestamp: new Date().getTime() // Use local timestamp
-                                    })
-                                    .then(() => {
-                                        messageInput.value = "";
-                                    })
-                                    .catch((error) => {
-                                        console.error("Error adding message: ", error);
-                                    });
-                                }
-                              }
-                        }
-                        const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
-                        const nouveauimage_couv = document.getElementById("nouveauimage_couv");
-                        const fermer2 = document.getElementById("fermer2");
-                        const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
-                        const Done_couv = document.getElementById("Done_couv");
-                        const loader_couv = document.getElementById("loader_couv");
-                        const original_couv = document.getElementById("original_couv");
-                        
-                        const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
-                        sendImageicon.onclick = openphotocouverturechangerbg;
-                        function openphotocouverturechangerbg(){
-                            photocouverturechangerbg.style.display="flex"
-                        }
-                        fermer2.onclick = closephotocouverturechangerbg;
-                        function closephotocouverturechangerbg(){
-                            photocouverturechangerbg.style.display="none"
-                        }
-                        let file1;
-                        const photochanger_couverture = document.getElementById('photochanger_couverture');
-                        photochanger_couverture.onclick = open_photochanger_couverture;
-                        function open_photochanger_couverture(){
-                            var input = document.createElement('input');
-                            input.type = 'file';
-                            input.accept = 'image/*';
-                            input.id = "fileInput1";
-                            input.onchange = function(e) {
-                                file1 = e.target.files[0];
-                                var reader = new FileReader();
-                                reader.readAsDataURL(file1);
-                                reader.onload = function() {
-                                    const imageUrl = reader.result;
-                                    photochanger_couverture_i.style.display = "none";
-                                    nouveauimage_couv.style.display = "flex";
-                                    partagerphotoPbtn_couv.style.display = "block";
-                                    nouveauimage_couv.innerHTML = "";
-                        
-                                    // Affichage de l'image dans la galerie
-                                    const img = document.createElement('img');
-                                    img.src = imageUrl;
-                                    nouveauimage_couv.appendChild(img);
-                                };
-                            };
-                            input.click();
-                        }
-
-                        partagerphotoPbtn_couv.onclick = partagerphotoPbtn_couvfunction;
-                        async function partagerphotoPbtn_couvfunction(){
-                            original_couv.style.display = "none";
-                            loader_couv.style.display = "block";
-                            loader_couv.style.color="white";
-                        
-                            if (file1) {
-                                try {
-                                    
-                                    const storageRef2 = storageRef(storage, 'images/' + file1.name);
-                                    await uploadBytes(storageRef2, file1);
-                                    const downloadURL2 = await getDownloadURL(storageRef2);
-                                    const user = auth.currentUser;
-                                    if (user) {
-                                      const userId = user.uid; 
-                                      if (downloadURL2) {
-                                          push(messageRef, {
-                                              image_message: downloadURL2,
-                                              id_usersent:userId,
-                                              timestamp: new Date().getTime() // Use local timestamp
-                                          })
-                                          .catch((error) => {
-                                              console.error("Error adding message: ", error);
-                                          });
-                                      }
-                                    }
-                                    original_couv.style.display = "none";
-                                    loader_couv.style.display = "none";
-                                    Done_couv.style.display = "block";
-                                    photocouverturechangerbg.style.display="none"
-
-                                    
-                                } catch (error) {
-                                    console.error(error);
-                                    original_couv.style.display = "block";
-                                    loader_couv.style.display = "none";
-                                    Done_couv.style.display = "none";
-                                    photocouverturechangerbg.style.display="none"
-
+async function messagegroupeCabine(){
+      const docRef_CabineRoom = doc(db, "cabines", IdCabine,"messagesCabine","messageCabineroom");
+      try {
+        const docSnapCabin = await getDoc(docRef_CabineRoom); 
+          if (docSnapCabin.exists()) {
+            const dataCabineRoom = docSnapCabin.data(); 
+            const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
+            
+              const database = getDatabase(app);
+              //const messageRef = databaseRef(database, 'messages');
+              const messageRef = databaseRef(database, creatIdMessageRoom );
+            
+              const messageInput = document.getElementById("messageecrit");
+              const sendButton = document.getElementById("sendmessageicon");
+              const messagesDiv = document.getElementById("content_message");
+              messagesDiv.style.width="100%";
+              wating.style.display="none";
+              sendButton.onclick = envoiyerMessage;
+              // Event listener for sending message
+              function envoiyerMessage() {
+                   const message = messageInput.value.trim();
+                    const user = auth.currentUser;
+                    if (user) {
+                      const userId = user.uid; 
+                      if (message !== "") {
+                          push(messageRef, {
+                              text: message,
+                              id_usersent:userId,
+                              timestamp: new Date().getTime() // Use local timestamp
+                          })
+                          .then(() => {
+                              messageInput.value = "";
+                          })
+                          .catch((error) => {
+                              console.error("Error adding message: ", error);
+                          });
+                      }
+                    }
+              }
+              const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
+              const nouveauimage_couv = document.getElementById("nouveauimage_couv");
+              const fermer2 = document.getElementById("fermer2");
+              const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
+              const Done_couv = document.getElementById("Done_couv");
+              const loader_couv = document.getElementById("loader_couv");
+              const original_couv = document.getElementById("original_couv");
+              
+              const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
+              sendImageicon.onclick = openphotocouverturechangerbg;
+              function openphotocouverturechangerbg(){
+                  photocouverturechangerbg.style.display="flex"
+              }
+              fermer2.onclick = closephotocouverturechangerbg;
+              function closephotocouverturechangerbg(){
+                  photocouverturechangerbg.style.display="none"
+              }
+              let file1;
+              const photochanger_couverture = document.getElementById('photochanger_couverture');
+              photochanger_couverture.onclick = open_photochanger_couverture;
+              function open_photochanger_couverture(){
+                  var input = document.createElement('input');
+                  input.type = 'file';
+                  input.accept = 'image/*';
+                  input.id = "fileInput1";
+                  input.onchange = function(e) {
+                      file1 = e.target.files[0];
+                      var reader = new FileReader();
+                      reader.readAsDataURL(file1);
+                      reader.onload = function() {
+                          const imageUrl = reader.result;
+                          photochanger_couverture_i.style.display = "none";
+                          nouveauimage_couv.style.display = "flex";
+                          partagerphotoPbtn_couv.style.display = "block";
+                          nouveauimage_couv.innerHTML = "";
+              
+                          // Affichage de l'image dans la galerie
+                          const img = document.createElement('img');
+                          img.src = imageUrl;
+                          nouveauimage_couv.appendChild(img);
+                      };
+                  };
+                  input.click();
+            }
+          partagerphotoPbtn_couv.onclick = partagerphotoPbtn_couvfunction;
+     async function partagerphotoPbtn_couvfunction(){
+            original_couv.style.display = "none";
+              loader_couv.style.display = "block";
+                loader_couv.style.color="white";
     
-                                }
-                            }
-                        
-
-                        }
+         if (file1) {
+             try {
+                 
+                 const storageRef2 = storageRef(storage, 'images/' + file1.name);
+                 await uploadBytes(storageRef2, file1);
+                 const downloadURL2 = await getDownloadURL(storageRef2);
+                 const user = auth.currentUser;
+                 if (user) {
+                   const userId = user.uid; 
+                   if (downloadURL2) {
+                       push(messageRef, {
+                           image_message: downloadURL2,
+                           id_usersent:userId,
+                           timestamp: new Date().getTime() // Use local timestamp
+                       })
+                       .catch((error) => {
+                           console.error("Error adding message: ", error);
+                       });
+                   }
+                 }
+                 original_couv.style.display = "none";
+                 loader_couv.style.display = "none";
+                 Done_couv.style.display = "block";
+                 photocouverturechangerbg.style.display="none"
+                 
+             } catch (error) {
+                     console.error(error);
+                     original_couv.style.display = "block";
+                     loader_couv.style.display = "none";
+                     Done_couv.style.display = "none";
+                     photocouverturechangerbg.style.display="none"
+                 }
+             }
+         }
 
 
                           // Function to display messages
@@ -429,6 +452,18 @@ async function creemessagegroup(){
                                             const messageElement_img = document.createElement("img");
                                             messageElement_img.src = message_image;
                                             mon_message.appendChild(messageElement_img);
+
+                                            messageElement_img.onclick = afficheimageFunction;
+                                            function afficheimageFunction(){
+                                                const afficheImagesBg = document.getElementById('afficheImagesBg');
+                                                afficheImagesBg.style.display="flex";
+                                                const afficheImage_place = document.getElementById('afficheImage_place');
+                                                afficheImage_place.style.display="flex";
+                                                afficheImage_place.innerHTML="";
+                                                const afficheImage_placeimg = document.createElement("img");
+                                                afficheImage_placeimg.src = message_image;
+                                                afficheImage_place.appendChild(afficheImage_placeimg);
+                                            }
                                         }
         
                                         monM_bg.appendChild(mon_message);
@@ -439,11 +474,30 @@ async function creemessagegroup(){
                                         monM_bg.className = "autreM_bg";
                                         const mon_message = document.createElement("div");
                                         mon_message.className = "autre_message";
-                                        const messageElement = document.createElement("p");
-                                        messageElement.textContent = message;
-                                        messagesDiv.appendChild(monM_bg);
+                                        if(message){
+                                            const messageElement = document.createElement("p");
+                                            messageElement.innerHTML = message;
+                                            mon_message.appendChild(messageElement);
+                                        }
+                                        if(message_image){
+                                            const messageElement_img = document.createElement("img");
+                                            messageElement_img.src = message_image;
+                                            mon_message.appendChild(messageElement_img);
+                                            messageElement_img.onclick = afficheimageFunction;
+                                            function afficheimageFunction(){
+                                                const afficheImagesBg = document.getElementById('afficheImagesBg');
+                                                afficheImagesBg.style.display="flex";
+                                                const afficheImage_place = document.getElementById('afficheImage_place');
+                                                afficheImage_place.style.display="flex";
+                                                afficheImage_place.innerHTML="";
+                                                const afficheImage_placeimg = document.createElement("img");
+                                                afficheImage_placeimg.src = message_image;
+                                                afficheImage_place.appendChild(afficheImage_placeimg);
+                                            }
+                                             
+                                        }
                                         monM_bg.appendChild(mon_message);
-                                        mon_message.appendChild(messageElement);
+                                        messagesDiv.appendChild(monM_bg);
         
                                     }
         
@@ -463,13 +517,20 @@ async function creemessagegroup(){
                 } catch (error) {
                     wating.style.display="none";
                 }
-              }
+ }
             
-            
-            
+ const afficheImagesBg = document.getElementById('afficheImagesBg');   
+ afficheImagesBg.onclick = closeafficheImagesBgFunction;
+ function closeafficheImagesBgFunction(){
+     const afficheImagesBg = document.getElementById('afficheImagesBg');
+     afficheImagesBg.style.display="none";
+     const afficheImage_place = document.getElementById('afficheImage_place');
+     afficheImage_place.style.display="none"
+     afficheImage_place.innerHTML="";
+ }  
 
 
-
+ 
 
    const content_message = document.querySelector('.content_message');
    const height_disc_bg = window.innerHeight  - navigationbarHeight;
@@ -660,7 +721,6 @@ try {
   const creatorId = datacabine.creatorId;
   const nameCabine = datacabine.nameCabine;
 
-  
 
   const numberofMembre = document.getElementById("numberofMembre");
 

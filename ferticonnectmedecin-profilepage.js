@@ -35,8 +35,9 @@ titleoptionmycabinsbg2.addEventListener('click', function() {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
-import { getFirestore, doc,setDoc,deleteDoc, getDoc,query, where , getDocs,updateDoc ,addDoc ,collection ,serverTimestamp} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
+import { getFirestore, doc, getDoc, updateDoc, addDoc,setDoc, deleteDoc, query, orderBy, limit, where, getDocs, collection, serverTimestamp as firestoreServerTimestamp  } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { getStorage,  ref as storageRef  , uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
+import { getDatabase,  ref as databaseRef, push, onValue, serverTimestamp as databaseServerTimestamp  } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBlAbn2DAuE4kSVDtsNgdttwDeBT78YmL8",
@@ -52,15 +53,76 @@ const firebaseConfig = {
   const auth = getAuth(app);
   const db = getFirestore(app);
   const storage = getStorage(app);
-
-
+  
+  
   auth.onAuthStateChanged(async (user) => {
     if (user) {
-        
         // Récupération de l'adresse e-mail de l'utilisateur connecté
+
+        
         const mail = user.email;
         const iduser = user.uid;
+        console.log('iduser = ' + iduser);
+        const doclistemessageref = collection(db, typeuseruserauth, iduser, "listeMessage");
+        const querySnapshot = await getDocs(doclistemessageref);
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const idRoomMessage = data.idRoomMessage;
+            const idamisMessage = data.idamisMessage;
+            const typeamisMessage = data.typeamisMessage;
+            const messagebutton = document.getElementById('messagebutton');
+            const messagebuttonicon = document.getElementById('messagebuttonicon');
 
+            if (idamisMessage === useridclick) {
+                messagebuttonicon.style.color = "#007bbe";
+                messagebutton.addEventListener('click', async function() {
+                    alert('Vous avez déjà créé un espace de messagerie entre vous deux. Veuillez vérifier votre liste de messages.');
+
+                });
+            }   
+        });
+        
+        console.log("G");
+
+        messagebutton.addEventListener('click', async function() {
+          console.log("messagebutton");
+
+            const user = auth.currentUser;
+            if (user) {
+                 messagebutton.style.display = "none";
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let creatIdMessageRoom = '';
+                for (let i = 0; i < 30; i++) {
+                    const randomIndex = Math.floor(Math.random() * characters.length);
+                    creatIdMessageRoom += characters[randomIndex];
+                }
+                const userId = user.uid; 
+                try {
+                    await setDoc(doc(db, typeuseruserauth, userId, "listeMessage",creatIdMessageRoom), {
+                        idRoomMessage: creatIdMessageRoom,
+                        idamisMessage: useridclick,
+                        TypeamisMessage :typeuserclick
+
+                    });
+                    await setDoc(doc(db, typeuserclick, useridclick, "listeMessage",creatIdMessageRoom), {
+                        idRoomMessage: creatIdMessageRoom,
+                        idamisMessage: userId,
+                        TypeamisMessage :typeuseruserauth
+                    });
+
+                    alert('Veuillez vérifier votre liste de messages.');
+
+                   
+                }catch(error) {
+                    console.error("Error adding document: ", error);
+                }
+                
+
+            }
+ 
+            
+        });
+      
         const log = document.getElementById("log");
         log.addEventListener('click', function() {
             window.history.back();
@@ -247,7 +309,7 @@ const firebaseConfig = {
                             }
                         }
                     });
-
+                    
                     const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
                     const nouveauimage_couv = document.getElementById("nouveauimage_couv");
                     const fermer2 = document.getElementById("fermer2");
