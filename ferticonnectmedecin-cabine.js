@@ -316,6 +316,11 @@ async function messagegroupeCabine(){
               const sendButton = document.getElementById("sendmessageicon");
               const messagesDiv = document.getElementById("content_message");
               messagesDiv.style.width="100%";
+              if(window.innerWidth > 600){
+                var bottom_message = document.querySelector('.bottom_message').clientHeight;
+                messagesDiv.style.bottom = bottom_message+"px";
+                messagesDiv.style.position="absolute";
+              }
               wating.style.display="none";
               sendButton.onclick = envoiyerMessage;
               // Event listener for sending message
@@ -427,6 +432,7 @@ async function messagegroupeCabine(){
 
                           // Function to display messages
                         function displayMessages(snapshot) {
+
                               messagesDiv.innerHTML = "";
                               snapshot.forEach((childSnapshot) => {
                                   const message = childSnapshot.val().text;

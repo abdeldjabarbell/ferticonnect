@@ -31,9 +31,10 @@ const firebaseConfig = {
   discussion_bg.style.position="fixed";
   option_header_message.style.display="flex";
   bottom_message_bar.style.bottom="-120%";
-
+  
   const optionbg_wind_btn_liste_message = document.getElementById('optionbg_wind_btn_liste_message');
   optionbg_wind_btn_liste_message.onclick = closemessagespace;
+  
   function closemessagespace(){
     const optionbg_wind = document.getElementById('optionbg_wind');
     discussion_bg.style.right = "-120%";
@@ -44,19 +45,21 @@ const firebaseConfig = {
     bottom_message_bar.style.bottom="-120%";
     optionbg_wind.style.display = "none";
     const navbarbuttom = document.querySelector('.navbar_buttom');
-    navbarbuttom.style.display = "none";
+    navbarbuttom.style.bottom="0";
+    
   }  
 
-  option_header_message.onclick = dispalydiv;
-  function dispalydiv(){
-    const optionbg_wind = document.getElementById('optionbg_wind');
-    if (optionbg_wind.style.display.display === "flex") {
-        optionbg_wind.style.display = "none";
-    }    
-     if (optionbg_wind.style.display.display === "none") {
-        optionbg_wind.style.display = "flex";
+  
+
+option_header_message.addEventListener('click', function() {
+    const optionbg_wind = document.querySelector('.optionbg_wind');
+    if( optionbg_wind.style.display === "flex"){
+       optionbg_wind.style.display = "none";
+    }else{
+       optionbg_wind.style.display = "flex";
+
     }
-}
+});
 
 
   auth.onAuthStateChanged(async (user) => {
@@ -119,11 +122,11 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
     const discution_bg = document.getElementById("discution_bg");
     discution_bg.style.right = "0";
     var bottom_message = document.querySelector('.bottom_message').clientHeight;
-    content_message.style.bottom = '0px';
+    content_message.style.bottom = bottom_message+"px";
     bottom_message_bar.style.bottom="0";
     const navbarbuttom = document.querySelector('.navbar_buttom');
-    navbarbuttom.style.display = "none";
-
+    navbarbuttom.style.bottom = '-120%';
+    
     const Image_header_message = document.getElementById("Image_header_message");
     const Image_header_messageimg = document.createElement("img");
     if(imageUserlisteamismessage){
@@ -131,6 +134,7 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
     }else{
         Image_header_messageimg.src= "img/ferticonnectiLogoWhite.png";
     }
+    Image_header_message.innerHTML="";
     Image_header_message.appendChild(Image_header_messageimg);
     const name_room_message = document.getElementById("name_room_message");
     name_room_message.innerHTML=prenimUserlisteamismessage+" "+nameUserlisteamismessage;
@@ -425,13 +429,7 @@ function messagebtnnavbuttomFunction(){
     const option_header_message = document.getElementById('option_header_message');
     const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
 
-    option_header_message.addEventListener('click', function() {
-        if( optionbg_wind.style.display === "flex"){
-           optionbg_wind.style.display = "none";
-        }else{
-           optionbg_wind.style.display = "flex";
-        }
-    });
+
     optionbg_wind_btn_home.addEventListener('click', function() {
        refreshPage();
     });  
@@ -583,7 +581,7 @@ const typeOfUser = urlParams.get('typeuserclick');
 // }  
 
 
- 
+
 
    const content_message = document.querySelector('.content_message');
    const height_disc_bg = window.innerHeight  - navigationbarHeight;
