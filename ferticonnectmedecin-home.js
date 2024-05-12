@@ -12,7 +12,8 @@ const firebaseConfig = {
     storageBucket: "ferticonnect.appspot.com",
     messagingSenderId: "1061809723490",
     appId: "1:1061809723490:web:307b939a9e256dcc21593b",
-    measurementId: "G-XZT8HYB0DT"
+    measurementId: "G-XZT8HYB0DT",
+    databaseURL: "https://ferticonnect-default-rtdb.europe-west1.firebasedatabase.app/"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -20,15 +21,43 @@ const firebaseConfig = {
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-
   const discussion_bg = document.querySelector('.discution_bg');
+  const option_header_message = document.getElementById('option_header_message');
+  const bottom_message_bar = document.getElementById('bottom_message');
   discussion_bg.style.right = "-120%";
   discussion_bg.style.zIndex = "240";
-  discussion_bg.style.transition = ".3s ease";
-  discussion_bg.style.position="absolute";
-  discussion_bg.style.width="100%";
-  
-  
+  discussion_bg.style.transition = ".4s ease";
+  discussion_bg.style.position="fixed";
+  option_header_message.style.display="flex";
+  bottom_message_bar.style.bottom="-120%";
+
+  const optionbg_wind_btn_liste_message = document.getElementById('optionbg_wind_btn_liste_message');
+  optionbg_wind_btn_liste_message.onclick = closemessagespace;
+  function closemessagespace(){
+    const optionbg_wind = document.getElementById('optionbg_wind');
+    discussion_bg.style.right = "-120%";
+    discussion_bg.style.zIndex = "240";
+    discussion_bg.style.transition = ".4s ease";
+    discussion_bg.style.position="fixed";
+    option_header_message.style.display="flex";
+    bottom_message_bar.style.bottom="-120%";
+    optionbg_wind.style.display = "none";
+    const navbarbuttom = document.querySelector('.navbar_buttom');
+    navbarbuttom.style.display = "none";
+  }  
+
+  option_header_message.onclick = dispalydiv;
+  function dispalydiv(){
+    const optionbg_wind = document.getElementById('optionbg_wind');
+    if (optionbg_wind.style.display.display === "flex") {
+        optionbg_wind.style.display = "none";
+    }    
+     if (optionbg_wind.style.display.display === "none") {
+        optionbg_wind.style.display = "flex";
+    }
+}
+
+
   auth.onAuthStateChanged(async (user) => {
     if (user){
         const mail = user.email;
@@ -36,16 +65,13 @@ const firebaseConfig = {
         const doclistemessageref = collection(db,typeuserclick,iduser,"listeMessage");
         const querySnapshot = await getDocs(doclistemessageref);
         querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const idRoomMessage= data.idRoomMessage;
-            const idamisMessage= data.idamisMessage;
-            const typeamisMessage= data.TypeamisMessage;
-            console.log("typeamisMessage ="+typeamisMessage);
-            console.log("idamisMessage ="+idamisMessage);
-
-            afficheLesDetaillesDeListe(idamisMessage,typeamisMessage);
+          const data = doc.data();
+          const idRoomMessage= data.idRoomMessage;
+          const idamisMessage= data.idamisMessage;
+          const typeamisMessage= data.TypeamisMessage;
+          afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage);
         });
-        async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage){
+        async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage){
             const docRef = doc(db, typeamisMessage, idamisMessage);
             try {
                 const docSnap = await getDoc(docRef); 
@@ -54,9 +80,7 @@ const firebaseConfig = {
                     const nameUserlisteamismessage = datauser.nom;
                     const prenimUserlisteamismessage = datauser.prenom;
                     const imageUserlisteamismessage = datauser.imguser;
-
                     const  listemesagebg = document.getElementById("listemesagebg");
-
                     const  amisbgmessage = document.createElement("div");
                     amisbgmessage.className="amisbgmessage";
                     const  imageamismessagebg = document.createElement("div");
@@ -67,56 +91,272 @@ const firebaseConfig = {
                     nameamismessagebg.className="nameamismessagebg";
                     const  nameamismessagebgh1 = document.createElement("h1");
                     nameamismessagebgh1.innerHTML=prenimUserlisteamismessage+" "+nameUserlisteamismessage;
-
                     imageamismessagebg.appendChild(imageamismessagebgimg);
                     amisbgmessage.appendChild(imageamismessagebg);
-
                     nameamismessagebg.appendChild(nameamismessagebgh1);
                     amisbgmessage.appendChild(nameamismessagebg);
-
                     listemesagebg.appendChild(amisbgmessage);
-
                     amisbgmessage.onclick = amisbgmessageFunction;
                     function amisbgmessageFunction(){
-                        afficherlesMessages(typeamisMessage, idamisMessage);
+                        afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage);
                     }
-
-
-
                 }
             }
             catch (error){
                 console.error("-----",error);
             }
         }
-      
     }
+});
 
-  });
 
-
- async function afficherlesMessages(typeamisMessage, idamisMessage){
-    const discution_bg = document.querySelector('.discution_bg');
-    discution_bg.innerHTML="";
+async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage){
+    const discution_bg = document.getElementById("discution_bg");
     discution_bg.style.right = "0";
-    discution_bg.style.tranision=".3s ease";
+    var bottom_message = document.querySelector('.bottom_message').clientHeight;
+    content_message.style.bottom = '0px';
+    bottom_message_bar.style.bottom="0";
+    const navbarbuttom = document.querySelector('.navbar_buttom');
+    navbarbuttom.style.display = "none";
 
+    const Image_header_message = document.getElementById("Image_header_message");
+    const Image_header_messageimg = document.createElement("img");
+    Image_header_messageimg.src=imageUserlisteamismessage;
+    Image_header_message.appendChild(Image_header_messageimg);
+    const name_room_message = document.getElementById("name_room_message");
+    name_room_message.innerHTML=prenimUserlisteamismessage+" "+nameUserlisteamismessage;
     
+    const database = getDatabase(app);
+    //const messageRef = databaseRef(database, 'messages');
+    const messageRef = databaseRef(database, idRoomMessage );
+
+    const messageInput = document.getElementById("messageecrit");
+    const sendButton = document.getElementById("sendmessageicon");
+    const messagesDiv = document.getElementById("content_message");
+    messagesDiv.style.width="100%";
+    wating.style.display="none";
+    sendButton.onclick = envoiyerMessage;
+    function envoiyerMessage() {
+        const message = messageInput.value.trim();
+        const user = auth.currentUser;
+        if (user) {
+            const userId = user.uid; 
+            console.log('userId ='+userId);
+
+            if (message !== "") {
+                push(messageRef, {
+                    text: message,
+                    id_usersent:userId,
+                    timestamp: new Date().getTime()
+                })
+                .then(() => {
+                    messageInput.value = "";
+                })
+                .catch((error) => {
+                    console.error("Error adding message: ", error);
+                });
+            }
+            else{
+                console.log("messageInput impty");
+            }
+          }else{console.log("user no");}
+    }
+    const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
+    const nouveauimage_couv = document.getElementById("nouveauimage_couv");
+    const fermer2 = document.getElementById("fermer2");
+    const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
+    const Done_couv = document.getElementById("Done_couv");
+    const loader_couv = document.getElementById("loader_couv");
+    const original_couv = document.getElementById("original_couv");
+    
+    const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
+    sendImageicon.onclick = openphotocouverturechangerbg;
+    function openphotocouverturechangerbg(){
+        photocouverturechangerbg.style.display="flex"
+    }
+    fermer2.onclick = closephotocouverturechangerbg;
+    function closephotocouverturechangerbg(){
+        photocouverturechangerbg.style.display="none"
+    }
+    let file1;
+    const photochanger_couverture = document.getElementById('photochanger_couverture');
+    photochanger_couverture.onclick = open_photochanger_couverture;
+    function open_photochanger_couverture(){
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.id = "fileInput1";
+        input.onchange = function(e) {
+            file1 = e.target.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file1);
+            reader.onload = function() {
+                const imageUrl = reader.result;
+                photochanger_couverture_i.style.display = "none";
+                nouveauimage_couv.style.display = "flex";
+                partagerphotoPbtn_couv.style.display = "block";
+                nouveauimage_couv.innerHTML = "";
+    
+                // Affichage de l'image dans la galerie
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                nouveauimage_couv.appendChild(img);
+            };
+        };
+        input.click();
+    }
+    partagerphotoPbtn_couv.onclick = partagerphotoPbtn_couvfunction;
+    async function partagerphotoPbtn_couvfunction(){
+          original_couv.style.display = "none";
+          loader_couv.style.display = "block";
+          loader_couv.style.color="white";
+          if (file1) {
+              try {
+                  
+                  const storageRef2 = storageRef(storage, 'images/' + file1.name);
+                  await uploadBytes(storageRef2, file1);
+                  const downloadURL2 = await getDownloadURL(storageRef2);
+                  const user = auth.currentUser;
+                  if (user) {
+                    const userId = user.uid; 
+                    if (downloadURL2) {
+                        push(messageRef, {
+                            image_message: downloadURL2,
+                            id_usersent:userId,
+                            timestamp: new Date().getTime()
+                        })
+                        .catch((error) => {
+                            console.error("Error adding message: ", error);
+                        });
+                    }
+                  }
+                  original_couv.style.display = "none";
+                  loader_couv.style.display = "none";
+                  Done_couv.style.display = "block";
+                  photocouverturechangerbg.style.display="none"
+                  
+              } catch (error) {
+                      console.error(error);
+                      original_couv.style.display = "block";
+                      loader_couv.style.display = "none";
+                      Done_couv.style.display = "none";
+                      photocouverturechangerbg.style.display="none"
+                  }
+              }
+    }
+    function displayMessages(snapshot) {
+        messagesDiv.innerHTML = "";
+        
+        snapshot.forEach((childSnapshot) => {
+            const message = childSnapshot.val().text;
+            const message_image = childSnapshot.val().image_message;
+            const mess_user_id = childSnapshot.val().id_usersent;
+            const user = auth.currentUser;
+
+            if (user) {
+              const userId = user.uid; 
+              if(mess_user_id === userId){
+                  const monM_bg = document.createElement("div");
+                  monM_bg.className = "monM_bg";
+                  const mon_message = document.createElement("div");
+                  mon_message.className = "mon_message";
+                  if(message){
+                      const messageElement = document.createElement("p");
+                      messageElement.innerHTML = message;
+                      mon_message.appendChild(messageElement);
+                  }
+                  if(message_image){
+                      const messageElement_img = document.createElement("img");
+                      messageElement_img.src = message_image;
+                      mon_message.appendChild(messageElement_img);
+                      messageElement_img.onclick = afficheimageFunction;
+                      function afficheimageFunction(){
+                          const afficheImagesBg = document.getElementById('afficheImagesBg');
+                          afficheImagesBg.style.display="flex";
+                          const afficheImage_place = document.getElementById('afficheImage_place');
+                          afficheImage_place.style.display="flex";
+                          afficheImage_place.innerHTML="";
+                          const afficheImage_placeimg = document.createElement("img");
+                          afficheImage_placeimg.src = message_image;
+                          afficheImage_place.appendChild(afficheImage_placeimg);
+                      }
+                  }
+                  mon_message.style.width="auto";
+                  mon_message.style.display="flex";
+                  monM_bg.appendChild(mon_message);
+                  messagesDiv.appendChild(monM_bg);
+              }else{
+                  const monM_bg = document.createElement("div");
+                  monM_bg.className = "autreM_bg";
+                  const mon_message = document.createElement("div");
+                  mon_message.className = "autre_message";
+                  if(message){
+                      const messageElement = document.createElement("p");
+                      messageElement.innerHTML = message;
+                      mon_message.appendChild(messageElement);
+                  }
+                  if(message_image){
+                      const messageElement_img = document.createElement("img");
+                      messageElement_img.src = message_image;
+                      mon_message.appendChild(messageElement_img);
+                      messageElement_img.onclick = afficheimageFunction;
+                      function afficheimageFunction(){
+                          const afficheImagesBg = document.getElementById('afficheImagesBg');
+                          afficheImagesBg.style.display="flex";
+                          const afficheImage_place = document.getElementById('afficheImage_place');
+                          afficheImage_place.style.display="flex";
+                          afficheImage_place.innerHTML="";
+                          const afficheImage_placeimg = document.createElement("img");
+                          afficheImage_placeimg.src = message_image;
+                          afficheImage_place.appendChild(afficheImage_placeimg);
+                      } 
+                  }
+                  mon_message.style.width="auto";
+                  monM_bg.appendChild(mon_message);
+                  messagesDiv.appendChild(monM_bg);
+              }
+            }
+        });
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    onValue(messageRef, (snapshot) => {
+       displayMessages(snapshot);
+    });
 
 
-  }
+   // const docRef = doc(db, typeamisMessage, idamisMessage);
+   // try {
+   //     const docSnap = await getDoc(docRef); 
+   //     if (docSnap.exists()) {
+   //         const datauser = docSnap.data(); 
+   //         const nameUserlisteamismessage = datauser.nom;
+   //         const prenimUserlisteamismessage = datauser.prenom;
+   //     }
+   // }catch{
+   // }
+   
 
 
 
+}
 
-  const sendImageicon = document.getElementById('sendImageicon');
-  const sendmessageicon = document.getElementById('sendmessageicon');
-  const QMPEUM_ = document.getElementById('QMPEUM');
+const afficheImagesBg = document.getElementById('afficheImagesBg');   
+afficheImagesBg.onclick = closeafficheImagesBgFunction;
+function closeafficheImagesBgFunction(){
+    const afficheImagesBg = document.getElementById('afficheImagesBg');
+    afficheImagesBg.style.display="none";
+    const afficheImage_place = document.getElementById('afficheImage_place');
+    afficheImage_place.style.display="none"
+    afficheImage_place.innerHTML="";
+}  
+
+
+const sendImageicon = document.getElementById('sendImageicon');
+const sendmessageicon = document.getElementById('sendmessageicon');
+const QMPEUM_ = document.getElementById('QMPEUM');
   
-
 function tailledecran(){
     const navbar_buttom = document.getElementById('navbar_buttom');
-
     if (window.innerWidth < 600) {
         navbar_buttom.style.display="flex";
     } else {
@@ -137,22 +377,18 @@ const messagebtnnavbuttom = document.getElementById('messagebtnnavbuttom');
 
 homebtnnavbuttom.onclick = homebtnnavbuttomFunction;
 function homebtnnavbuttomFunction(){
-
     leftespace.style.display = "none";
     rightespace.style.display = "none";
     midleespace.style.display = "flex";
     scrollToTop();
-
 }
 
 cabinsbtnnavbuttom.onclick = cabinsbtnnavbuttomFunction;
 function cabinsbtnnavbuttomFunction(){
-
     leftespace.style.display = "flex";
     rightespace.style.display = "none";
     midleespace.style.display = "none";
     scrollToTop();
-
 }
 
 messagebtnnavbuttom.onclick = messagebtnnavbuttomFunction;
@@ -162,55 +398,43 @@ function messagebtnnavbuttomFunction(){
     bgHome.style.padding="0";
     var navigationbar = document.querySelector('.navigationbar');
     navigationbar.style.display = "none";
-
     
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
-    navbarbuttom.style.display = "none";
+    navbarbuttom.style.display = "flex";
 
-    
     var navbar_buttom = document.querySelector('.navbar_buttom').clientHeight; 
-   const height_disc_bg = window.innerHeight  - navigationbarHeight ;
-   discution_bg.style.height = height_disc_bg + "px";
-   
-   var bottom_message = document.querySelector('.bottom_message').clientHeight;
-   var header_message = document.querySelector('.header_message').clientHeight;
-   content_message.style.height = height_disc_bg - header_message + "px";
-   console.log("content_message = "+content_message.style.height +"   /header_message="+header_message);
-   
-   const optionbg_wind = document.querySelector('.optionbg_wind');
-   optionbg_wind.style.top =header_message + "px";
-   
-   const option_header_message = document.getElementById('option_header_message');
-   const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
-   
-   
-   option_header_message.addEventListener('click', function() {
-       if( optionbg_wind.style.display === "flex"){
+    const height_disc_bg = window.innerHeight  - navigationbarHeight ;
+    discution_bg.style.height = height_disc_bg + "px";
+    var bottom_message = document.querySelector('.bottom_message').clientHeight;
+    var header_message = document.querySelector('.header_message').clientHeight;
+    content_message.style.height = height_disc_bg - header_message + "px";
+    console.log("content_message = "+content_message.style.height +"   /header_message="+header_message);
+    const optionbg_wind = document.querySelector('.optionbg_wind');
+    optionbg_wind.style.top =header_message + "px";
+    const option_header_message = document.getElementById('option_header_message');
+    const optionbg_wind_btn_home = document.getElementById('optionbg_wind_btn_home');
+
+    option_header_message.addEventListener('click', function() {
+        if( optionbg_wind.style.display === "flex"){
            optionbg_wind.style.display = "none";
-       }else{
+        }else{
            optionbg_wind.style.display = "flex";
-       }
-   });
- 
-   optionbg_wind_btn_home.addEventListener('click', function() {
-    refreshPage();
-  });  
-  
-  var contentMessage = document.querySelector('.content_message');
-  if (contentMessage.scrollTo) {
-      contentMessage.scrollTo({
+        }
+    });
+    optionbg_wind_btn_home.addEventListener('click', function() {
+       refreshPage();
+    });  
+    var contentMessage = document.querySelector('.content_message');
+    if (contentMessage.scrollTo) {
+        contentMessage.scrollTo({
           top: contentMessage.scrollHeight ,
           behavior: 'smooth' // pour un défilement fluide si pris en charge
-      });
-  } else {
-      // Alternative pour les navigateurs ne prenant pas en charge scrollTo
-      contentMessage.scrollTop = contentMessage.scrollHeight ;
-  }
-
-
-
+        });
+    } else {
+       contentMessage.scrollTop = contentMessage.scrollHeight ;
+    }
 
 }
 
@@ -336,344 +560,8 @@ const typeuserclick = urlParams.get('typeuserclick');
 const typeOfUser = urlParams.get('typeuserclick');
 
 
-
-
-
-
-
-
-if (window.innerWidth < 600) {
-    creemessagegroup();
-    messagegroupeCabine();
-    
-} else {
-    creemessagegroup();
-    messagegroupeCabine();
-}
-
-
-
-  //---------------------------------------- messagenging--------------------------------
-async function creemessagegroup(){
-    
-    const wating = document.getElementById("wating");
-    wating.style.display="flex";
-    const creeUneRoomCabineBg = document.getElementById("creeUneRoomCabineBg");
-    const confirmeCreeMeaasegCabine = document.getElementById("confirmeCreeMeaasegCabine");
-    const originalmessageCabine = document.getElementById("originalmessageCabine");
-    const loadermessageCabine = document.getElementById("loadermessageCabine");
-    const DonemessageCabine = document.getElementById("DonemessageCabine");
-  
-
-    try {
-        const docRef_CabineRoom = doc(db, "cabines","messagesCabine","messageCabineroom");
-        console.log(docRef_CabineRoom);
-    
-             const docSnapCabin = await getDoc(docRef_CabineRoom); 
-             const dataCabineRoom = docSnapCabin.data(); 
-             if(dataCabineRoom){   
-               const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
-               if(creatIdMessageRoom){
-                  creeUneRoomCabineBg.style.display="none";
-                  messagegroupeCabine();
-                }
-                else{
-                    creeUneRoomCabineBg.style.display="none";
-                }
-             }else{
-                confirmeCreeMeaasegCabine.onclick = confirmeCreeMeaasegCabineFunction;
-                async function confirmeCreeMeaasegCabineFunction(){
-                    
-                   originalmessageCabine.style.display="none";
-                   loadermessageCabine.style.display="block";
-                   const user = auth.currentUser;
-                   if (user) {
-                       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                       let creatIdMessageRoom = '';
-                       for (let i = 0; i < 20; i++) {
-                           const randomIndex = Math.floor(Math.random() * characters.length);
-                           creatIdMessageRoom += characters[randomIndex];
-                       }
-                       const userId = user.uid; 
-                       try {     
-                          await setDoc(doc(db, "cabines", IdCabine, "messagesCabine","messageCabineroom"), {
-                              idroomCabineMessage: creatIdMessageRoom,
-                          });
-                           //---------------- send message 
-                           try {
-                               const docRef_Cabine = doc(db, "cabines", IdCabine);
-                               const cabineRef = await getDoc(docRef_Cabine);
-                               if (cabineRef.exists()) {
-                                 const cabinInfo = cabineRef.data();
-                                 const nameCabine = cabinInfo.name;
-                                 const cabineImage = cabinInfo.cabineImage;
-                                 // Autres opérations avec les données de la cabine...
-                                    const database = getDatabase(app);
-                                    const messageRef = databaseRef(database, creatIdMessageRoom);
-                                    push(messageRef, {
-                                       text: "Salut les amis ! je vous souhaite la bienvenue sur notre espace de messagerie du "+nameCabine+". Ici, vous trouverez toutes les informations importantes sur les nouvelles de notre cabine. N'hésitez pas à explorer et à nous contacter si vous avez besoin de quoi que ce soit. Nous sommes là pour vous ! 🚀",
-                                       image_message:cabineImage,
-                                       id_usersent:userId,
-                                       timestamp: new Date().getTime() // Use local timestamp
-                                   })
-                                   .catch((error) => {
-                                       console.error("Error adding message: ", error);
-                                       wating.style.display="none";
-                                   });
-                                    DonemessageCabine.style.display="block";
-                                    originalmessageCabine.style.display="none";
-                                    loadermessageCabine.style.display="none";
-                                    creemessagegroup();
-                               } else {
-                                   console.log("La cabine n'existe pas.");
-                                   wating.style.display="none";
-                                 }
-                           }catch(error){
-                               console.error("Error adding message: ", error);
-                               wating.style.display="none";
-                           }
-                       } catch (error) {
-                           originalmessageCabine.style.display="block";
-                           loadermessageCabine.style.display="none";
-                           console.error("Error adding : ", error);
-                           wating.style.display="none";
-                       }
-                   } else {
-                       console.log("User not logged in");
-                       wating.style.display="none";
-                   }
-                
-                }
-             }   
-
-    } catch (error) {
-        console.error("Une erreur s'est produite : ", error);
-        wating.style.display="none";
-
-    }
-
-}
-  
-
-  
-
-
             //---------------- send message 
-async function messagegroupeCabine(){
-      const docRef_CabineRoom = doc(db, "cabines", IdCabine,"messagesCabine","messageCabineroom");
-      try {
-        const docSnapCabin = await getDoc(docRef_CabineRoom); 
-          if (docSnapCabin.exists()) {
-            const dataCabineRoom = docSnapCabin.data(); 
-            const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
-            
-              const database = getDatabase(app);
-              //const messageRef = databaseRef(database, 'messages');
-              const messageRef = databaseRef(database, creatIdMessageRoom );
-            
-              const messageInput = document.getElementById("messageecrit");
-              const sendButton = document.getElementById("sendmessageicon");
-              const messagesDiv = document.getElementById("content_message");
-              messagesDiv.style.width="100%";
-              wating.style.display="none";
-              sendButton.onclick = envoiyerMessage;
-              // Event listener for sending message
-              function envoiyerMessage() {
-                   const message = messageInput.value.trim();
-                    const user = auth.currentUser;
-                    if (user) {
-                      const userId = user.uid; 
-                      if (message !== "") {
-                          push(messageRef, {
-                              text: message,
-                              id_usersent:userId,
-                              timestamp: new Date().getTime() // Use local timestamp
-                          })
-                          .then(() => {
-                              messageInput.value = "";
-                          })
-                          .catch((error) => {
-                              console.error("Error adding message: ", error);
-                          });
-                      }
-                    }
-              }
-              const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
-              const nouveauimage_couv = document.getElementById("nouveauimage_couv");
-              const fermer2 = document.getElementById("fermer2");
-              const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
-              const Done_couv = document.getElementById("Done_couv");
-              const loader_couv = document.getElementById("loader_couv");
-              const original_couv = document.getElementById("original_couv");
-              
-              const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
-              sendImageicon.onclick = openphotocouverturechangerbg;
-              function openphotocouverturechangerbg(){
-                  photocouverturechangerbg.style.display="flex"
-              }
-              fermer2.onclick = closephotocouverturechangerbg;
-              function closephotocouverturechangerbg(){
-                  photocouverturechangerbg.style.display="none"
-              }
-              let file1;
-              const photochanger_couverture = document.getElementById('photochanger_couverture');
-              photochanger_couverture.onclick = open_photochanger_couverture;
-              function open_photochanger_couverture(){
-                  var input = document.createElement('input');
-                  input.type = 'file';
-                  input.accept = 'image/*';
-                  input.id = "fileInput1";
-                  input.onchange = function(e) {
-                      file1 = e.target.files[0];
-                      var reader = new FileReader();
-                      reader.readAsDataURL(file1);
-                      reader.onload = function() {
-                          const imageUrl = reader.result;
-                          photochanger_couverture_i.style.display = "none";
-                          nouveauimage_couv.style.display = "flex";
-                          partagerphotoPbtn_couv.style.display = "block";
-                          nouveauimage_couv.innerHTML = "";
-              
-                          // Affichage de l'image dans la galerie
-                          const img = document.createElement('img');
-                          img.src = imageUrl;
-                          nouveauimage_couv.appendChild(img);
-                      };
-                  };
-                  input.click();
-            }
-          partagerphotoPbtn_couv.onclick = partagerphotoPbtn_couvfunction;
-     async function partagerphotoPbtn_couvfunction(){
-            original_couv.style.display = "none";
-              loader_couv.style.display = "block";
-                loader_couv.style.color="white";
-    
-         if (file1) {
-             try {
-                 
-                 const storageRef2 = storageRef(storage, 'images/' + file1.name);
-                 await uploadBytes(storageRef2, file1);
-                 const downloadURL2 = await getDownloadURL(storageRef2);
-                 const user = auth.currentUser;
-                 if (user) {
-                   const userId = user.uid; 
-                   if (downloadURL2) {
-                       push(messageRef, {
-                           image_message: downloadURL2,
-                           id_usersent:userId,
-                           timestamp: new Date().getTime() // Use local timestamp
-                       })
-                       .catch((error) => {
-                           console.error("Error adding message: ", error);
-                       });
-                   }
-                 }
-                 original_couv.style.display = "none";
-                 loader_couv.style.display = "none";
-                 Done_couv.style.display = "block";
-                 photocouverturechangerbg.style.display="none"
-                 
-             } catch (error) {
-                     console.error(error);
-                     original_couv.style.display = "block";
-                     loader_couv.style.display = "none";
-                     Done_couv.style.display = "none";
-                     photocouverturechangerbg.style.display="none"
-                 }
-             }
-         }
 
-
-                          // Function to display messages
-                        function displayMessages(snapshot) {
-                              messagesDiv.innerHTML = "";
-                              snapshot.forEach((childSnapshot) => {
-                                  const message = childSnapshot.val().text;
-                                  const message_image = childSnapshot.val().image_message;
-                                  const mess_user_id = childSnapshot.val().id_usersent;
-                                  const user = auth.currentUser;
-                                  if (user) {
-                                    const userId = user.uid; 
-                                    if(mess_user_id === userId){
-                                        const monM_bg = document.createElement("div");
-                                        monM_bg.className = "monM_bg";
-                                        const mon_message = document.createElement("div");
-                                        mon_message.className = "mon_message";
-                                        if(message){
-                                            const messageElement = document.createElement("p");
-                                            messageElement.innerHTML = message;
-                                            mon_message.appendChild(messageElement);
-                                        }
-                                        if(message_image){
-                                            const messageElement_img = document.createElement("img");
-                                            messageElement_img.src = message_image;
-                                            mon_message.appendChild(messageElement_img);
-
-                                            messageElement_img.onclick = afficheimageFunction;
-                                            function afficheimageFunction(){
-                                                const afficheImagesBg = document.getElementById('afficheImagesBg');
-                                                afficheImagesBg.style.display="flex";
-                                                const afficheImage_place = document.getElementById('afficheImage_place');
-                                                afficheImage_place.style.display="flex";
-                                                afficheImage_place.innerHTML="";
-                                                const afficheImage_placeimg = document.createElement("img");
-                                                afficheImage_placeimg.src = message_image;
-                                                afficheImage_place.appendChild(afficheImage_placeimg);
-                                            }
-                                        }
-        
-                                        monM_bg.appendChild(mon_message);
-                                        messagesDiv.appendChild(monM_bg);
-        
-                                    }else{
-                                        const monM_bg = document.createElement("div");
-                                        monM_bg.className = "autreM_bg";
-                                        const mon_message = document.createElement("div");
-                                        mon_message.className = "autre_message";
-                                        if(message){
-                                            const messageElement = document.createElement("p");
-                                            messageElement.innerHTML = message;
-                                            mon_message.appendChild(messageElement);
-                                        }
-                                        if(message_image){
-                                            const messageElement_img = document.createElement("img");
-                                            messageElement_img.src = message_image;
-                                            mon_message.appendChild(messageElement_img);
-                                            messageElement_img.onclick = afficheimageFunction;
-                                            function afficheimageFunction(){
-                                                const afficheImagesBg = document.getElementById('afficheImagesBg');
-                                                afficheImagesBg.style.display="flex";
-                                                const afficheImage_place = document.getElementById('afficheImage_place');
-                                                afficheImage_place.style.display="flex";
-                                                afficheImage_place.innerHTML="";
-                                                const afficheImage_placeimg = document.createElement("img");
-                                                afficheImage_placeimg.src = message_image;
-                                                afficheImage_place.appendChild(afficheImage_placeimg);
-                                            }
-                                             
-                                        }
-                                        monM_bg.appendChild(mon_message);
-                                        messagesDiv.appendChild(monM_bg);
-        
-                                    }
-        
-                                  }
-                    
-                              });
-                      
-                              messagesDiv.scrollTop = messagesDiv.scrollHeight;
-                        }
-              
-                          // Listen for changes in the database and update message display
-                        onValue(messageRef, (snapshot) => {
-                              displayMessages(snapshot);
-                        });
-                    }
-              
-                } catch (error) {
-                    wating.style.display="none";
-                }
- }
             
 // const afficheImagesBg = document.getElementById('afficheImagesBg');   
 // afficheImagesBg.onclick = closeafficheImagesBgFunction;

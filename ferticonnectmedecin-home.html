@@ -125,7 +125,7 @@
                 </div>
                 <div class="content_message" id="content_message" ></div>
                 
-                <div class="bottom_message">
+                <div class="bottom_message" id="bottom_message">
                     <div class="sendImageicon" id="sendImageicon">
                         <i class="bi bi-image-fill"></i>
                     </div>
@@ -139,12 +139,22 @@
                 <div class="scrollButton" id="scrollButton">
                     <i class="bi bi-arrow-down-circle-fill"></i>
                 </div>
-
-                <div class="optionbg_wind" id="optionbg_wind">
+                <div class="optionbg_wind" id="optionbg_wind" style="display: none;" >
                     <div class="optionbg_wind_btn" id="optionbg_wind_btn_home">
-                        <i class="bi bi-arrow-return-left"></i>
+                        <i class="bi bi-house-heart-fill"></i>
                         <p>Retourner à la page d'accueil</p>
                     </div>
+
+                    <div class="optionbg_wind_btn" id="optionbg_wind_btn_liste_message">
+                        <i class="bi bi-chat-fill"></i>
+                        <p>Voir la liste des messages</p>
+                    </div>
+
+                    <div class="optionbg_wind_btn" id="optionbg_wind_btn_dossier">
+                        <i class="bi bi-folder-symlink-fill"></i>
+                        <p>Envoyer votre dossier médical</p>
+                    </div>
+
                 </div>
 
                 <div class="creeUneRoomCabineBg" id="creeUneRoomCabineBg" style="display: none;">
@@ -207,16 +217,7 @@
 
             </div>
 
-            <div class="listemesagebg" id="listemesagebg" >
-                <div class="amisbgmessage">
-                    <div class="imageamismessagebg">
-                        <img src="" alt="">
-                    </div>
-                    <div class="nameamismessagebg">
-                        <h1>abdeldjabar</h1>
-                    </div>
-                </div>
-            </div>
+            <div class="listemesagebg" id="listemesagebg" > </div>
 
         </div>
     </div>
@@ -327,6 +328,9 @@
         </div>
         
     </div>
+
+    <div class="afficheImagesBg" id="afficheImagesBg" style="display: none;"></div>
+    <div class="afficheImage_place" id="afficheImage_place"style="display: none;"></div>
 
     <script src="ferticonnectmedecin-home.js" type="module"></script>
     

@@ -46,7 +46,8 @@ const firebaseConfig = {
     storageBucket: "ferticonnect.appspot.com",
     messagingSenderId: "1061809723490",
     appId: "1:1061809723490:web:307b939a9e256dcc21593b",
-    measurementId: "G-XZT8HYB0DT"
+    measurementId: "G-XZT8HYB0DT",
+    databaseURL: "https://ferticonnect-default-rtdb.europe-west1.firebasedatabase.app/"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -108,6 +109,18 @@ const firebaseConfig = {
                         idRoomMessage: creatIdMessageRoom,
                         idamisMessage: userId,
                         TypeamisMessage :typeuseruserauth
+                    });
+                     // Autres opérations avec les données de la cabine...
+                     const database = getDatabase(app);
+                     const messageRef = databaseRef(database, creatIdMessageRoom);
+                     push(messageRef, {
+                        text: "Salut! C'est super de vous retrouver sur Ferticonnet!  🩺",
+                        id_usersent:userId,
+                        timestamp: new Date().getTime() // Use local timestamp
+                     })
+                    .catch((error) => {
+                        console.error("Error adding message: ", error);
+                        wating.style.display="none";
                     });
 
                     alert('Veuillez vérifier votre liste de messages.');

@@ -15,7 +15,7 @@ const firebaseConfig = {
     measurementId: "G-XZT8HYB0DT",
     databaseURL: "https://ferticonnect-default-rtdb.europe-west1.firebasedatabase.app/"
   };
-
+  
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
@@ -115,12 +115,12 @@ function messagebtnnavbuttomFunction(){
         sendmessageicon.style.display="flex";
         QMPEUM_.style.display="none";
     }
-
+    
     var bgHome = document.querySelector('.bgHome');
     bgHome.style.padding="0";
     var navigationbar = document.querySelector('.navigationbar');
     navigationbar.style.display = "none";
-
+    
     
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
@@ -210,21 +210,18 @@ async function creemessagegroup(){
   
 
     try {
-        const docRef_CabineRoom = doc(db, "cabines", IdCabine,"messagesCabine","messageCabineroom");
-        console.log(docRef_CabineRoom);
-    
-             const docSnapCabin = await getDoc(docRef_CabineRoom); 
-             const dataCabineRoom = docSnapCabin.data(); 
-             if(dataCabineRoom){   
+            const docRef_CabineRoom = doc(db, "cabines", IdCabine,"messagesCabine","messageCabineroom");
+            const docSnapCabin = await getDoc(docRef_CabineRoom); 
+            const dataCabineRoom = docSnapCabin.data(); 
+            if(dataCabineRoom){   
                const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
                if(creatIdMessageRoom){
                   creeUneRoomCabineBg.style.display="none";
                   messagegroupeCabine();
-                }
-                else{
+                }else{
                     creeUneRoomCabineBg.style.display="none";
                 }
-             }else{
+            }else{
                 confirmeCreeMeaasegCabine.onclick = confirmeCreeMeaasegCabineFunction;
                 async function confirmeCreeMeaasegCabineFunction(){
                     
@@ -259,7 +256,7 @@ async function creemessagegroup(){
                                        image_message:cabineImage,
                                        id_usersent:userId,
                                        timestamp: new Date().getTime() // Use local timestamp
-                                   })
+                                    })
                                    .catch((error) => {
                                        console.error("Error adding message: ", error);
                                        wating.style.display="none";
@@ -297,7 +294,7 @@ async function creemessagegroup(){
     }
 
 }
-  
+
 
   
 
