@@ -121,12 +121,16 @@ option_header_message.addEventListener('click', function() {
 async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage){
     const discution_bg = document.getElementById("discution_bg");
     discution_bg.style.right = "0";
-    var bottom_message = document.querySelector('.bottom_message').clientHeight;
-    content_message.style.bottom = bottom_message+"px";
+    const messagesDiv = document.getElementById("content_message");
+
     bottom_message_bar.style.bottom="0";
     const navbarbuttom = document.querySelector('.navbar_buttom');
     navbarbuttom.style.bottom = '-120%';
-    
+    if(window.innerWidth > 600){
+        var bottom_message = document.querySelector('.bottom_message').clientHeight;
+        messagesDiv.style.bottom = bottom_message+"px";
+        messagesDiv.style.position="absolute";
+      }
     const Image_header_message = document.getElementById("Image_header_message");
     const Image_header_messageimg = document.createElement("img");
     if(imageUserlisteamismessage){
@@ -145,7 +149,6 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
 
     const messageInput = document.getElementById("messageecrit");
     const sendButton = document.getElementById("sendmessageicon");
-    const messagesDiv = document.getElementById("content_message");
     messagesDiv.style.width="100%";
     wating.style.display="none";
     sendButton.onclick = envoiyerMessage;
