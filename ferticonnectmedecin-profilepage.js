@@ -32,7 +32,6 @@ titleoptionmycabinsbg2.addEventListener('click', function() {
     }
 });
 
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
 import { getFirestore, doc, getDoc, updateDoc, addDoc,setDoc, deleteDoc, query, orderBy, limit, where, getDocs, collection, serverTimestamp as firestoreServerTimestamp  } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
@@ -146,12 +145,16 @@ const firebaseConfig = {
             const docSnap = await getDoc(docRef); 
             if (docSnap.exists()) {
                 const datauser = docSnap.data(); 
+                const iduser =  docSnap.id;
                 const nameuserprofile = datauser.nom;
                 const prenomuserprofile = datauser.prenom;
                 const statut_du_compte = datauser.statut_du_compte;
                 const imguser = datauser.imguser;
                 const imgcouvertureuser = datauser.imgcouvertureuser;
-                const formulaire = datauser.formulaire;
+                const formulaire_liste1 = datauser.formulaire_liste1;
+                const formulaire_liste2 = datauser.formulaire_liste2;
+                const formulaire_liste3 = datauser.formulaire_liste3;
+                console.log(" id =======" + iduser);
 
                 const timestamp = datauser.timestamp;
                 const seconds = timestamp.seconds;
@@ -159,10 +162,28 @@ const firebaseConfig = {
                 // Créer une date à partir de la représentation Firebase Timestamp
                 const milliseconds = seconds * 1000 + nanoseconds / 1000000; // Convertir nanosecondes en millisecondes
                 const date = new Date(milliseconds);
-                
-                // Tableau des noms de mois
                 const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-                
+                if(iduser===useridclick){
+                   const idCopied = document.getElementById("idCopied");
+                   idCopied.style.display="flex";
+                   const iduser_for_copy = document.getElementById("iduser_for_copy");
+                   iduser_for_copy.innerHTML= "votre id : "+iduser;
+                   document.getElementById("idCopied").addEventListener("click", function() {
+                       var tempTextArea = document.createElement("textarea");
+                       document.getElementById("iduser_for_copy").style.color = "orange";
+                       document.getElementById("idCopied").style.transition = "color 1.5s ease";
+                       tempTextArea.value = iduser;
+                       document.body.appendChild(tempTextArea);
+                       tempTextArea.select();
+                       document.execCommand("copy");
+                       document.body.removeChild(tempTextArea);
+                       setTimeout(function() {
+                        document.getElementById("iduser_for_copy").style.color = "var(--second2-bg-color)"; 
+                    }, 2000); 
+                   });
+
+
+                }
                 // Extraire les composantes de la date
                 const day = date.getDate();
                 const monthIndex = date.getMonth(); // Les mois commencent à 0
@@ -218,7 +239,7 @@ const firebaseConfig = {
                     }
                     if (imguser==="") { // Vérification si imguser existe
 
-                        photoprofile.src = "img/ferticonnectiLogoGreen.png";
+                        photoprofile.src = "img/ferticonnectiLogoGreen.svg";
                         etap2.style.color="red"
                         etap2.style.fontWeight="500"
 
@@ -229,7 +250,7 @@ const firebaseConfig = {
                         etap2.style.fontWeight="500"
                     }
                     if (imgcouvertureuser==="") { // Vérification si couvertur existe
-                        photocouverture.src = "img/ferticonnectiLogoWhite.png";
+                        photocouverture.src = "img/ferticonnectiLogoWhite.svg";
                         etap3.style.color="red"
                         etap3.style.fontWeight="500"
                     } else {
@@ -238,15 +259,35 @@ const firebaseConfig = {
                         etap3.style.color="#00ea13"
                         etap3.style.fontWeight="500"
                     }
-                    if (formulaire=== "remplir") { // Vérification si couvertur existe
-                        a=a+25;
-                        etap4.style.color="#00ea13"
-                        etap4.style.fontWeight="500"
 
+                    // Vérification si le formulaire liste 1 est vide
+                    if (!formulaire_liste1 || Object.keys(formulaire_liste1).length === 0) {
+                        etap4.style.color = "red";
+                        etap4.style.fontWeight = "500";
                     } else {
-                        etap4.style.color="red"
-                        etap4.style.fontWeight="500"
+                        a += 5;
                     }
+                    
+                    // Vérification si le formulaire liste 2 est vide
+                    if (!formulaire_liste2 || Object.keys(formulaire_liste2).length === 0) {
+                        etap4.style.color = "red";
+                        etap4.style.fontWeight = "500";
+                    } else {
+                        
+                        a += 10;
+                    }
+                    
+                    // Vérification si le formulaire liste 3 est vide
+                    if (!formulaire_liste3 || Object.keys(formulaire_liste3).length === 0) {
+                        etap4.style.color = "red";
+                        etap4.style.fontWeight = "500";
+                    } else {
+                        a += 10;
+                        etap4.style.color = "#00ea13";
+                        etap4.style.fontWeight = "500";
+                    }
+
+
                     if(a===100){
                         completeprofilnotif.style.display="none";
                     }
@@ -293,7 +334,7 @@ const firebaseConfig = {
                         };
                         input.click();
                     });
-                    
+                    //ferticonnectiLogoGreen.png
                     partagerphotoPbtn.addEventListener('click', async function() {
                         originalprofile.style.display = "none";
                         loaderprofile.style.display = "block";
@@ -302,7 +343,7 @@ const firebaseConfig = {
                         if (file) {
                             try {
                                 // Upload des images dans le stockage Firebase
-                                const storageRef1 = ref(storage, 'images/' + file.name);
+                                const storageRef1 = storageRef(storage, 'images/' + file.name);
                                 await uploadBytes(storageRef1, file);
                                 const downloadURL1 = await getDownloadURL(storageRef1);
                                 const userDocRef = doc(db, typeuserclick, iduser);
@@ -313,6 +354,7 @@ const firebaseConfig = {
                                 loaderprofile.style.display = "none";
                                 Doneprofile.style.display = "block";
                                 refreshPage();
+
                             } catch (error) {
                                 console.error(error);
                                 originalprofile.style.display = "block";
@@ -365,7 +407,7 @@ const firebaseConfig = {
                         input.click();
                     });
                     
-                    partagerphotoPbtn_couv.addEventListener('click', async function() {
+                    partagerphotoPbtn_couv.addEventListener('click', async function() {  
                         original_couv.style.display = "none";
                         loader_couv.style.display = "block";
                         loader_couv.style.color="white";
@@ -373,7 +415,7 @@ const firebaseConfig = {
                         if (file1) {
                             try {
                                 // Upload des images dans le stockage Firebase
-                                const storageRef2 = ref(storage, 'images/' + file1.name);
+                                const storageRef2 = storageRef(storage, 'images/' + file1.name);
                                 await uploadBytes(storageRef2, file1);
                                 const downloadURL2 = await getDownloadURL(storageRef2);
                                 const userDocRef = doc(db, typeuserclick, iduser);
@@ -394,7 +436,6 @@ const firebaseConfig = {
                         }
                     });
                     
-
                     
                 }
                 else{
@@ -404,8 +445,8 @@ const firebaseConfig = {
                             afficheleprofile_med();
                         }
                         else{
-                            photoprofile.src = "img/ferticonnectiLogoGreen.png";
-                            photocouverture.src = "img/ferticonnectiLogoWhite.png";
+                            photoprofile.src = "img/ferticonnectiLogoGreen.svg";
+                            photocouverture.src = "img/ferticonnectiLogoWhite.svg";
                             nameuser.innerHTML="Utilisateur fertiConnect";
                             abonnerbutton.style.display="none";
                             messagebutton.style.display="none";
@@ -424,12 +465,12 @@ const firebaseConfig = {
                     async function afficheleprofile_med(){
                         
                          if (imguser==="") { // Vérification si imguser existe
-                             photoprofile.src = "img/ferticonnectiLogoGreen.png";
+                             photoprofile.src = "img/ferticonnectiLogoGreen.svg";
                          } else {
                              photoprofile.src = imguser;
                          }
                          if (imgcouvertureuser==="") { // Vérification si couvertur existe
-                             photocouverture.src = "img/ferticonnectiLogoWhite.png";
+                             photocouverture.src = "img/ferticonnectiLogoWhite.svg";
                          } else {
                              photocouverture.src = imgcouvertureuser;
                          }
@@ -639,7 +680,9 @@ async function  AjouteIdinSearchlist(cabineId,userId){
     });
 }
 
-
+etap4.addEventListener('click', () => {
+    window.location.href = `formulairepatien.html?userformulaireid=${useridclick}&typeuserformulaire=${typeuseruserauth}`; // Redirection vers la page du produit avec l'ID du produit
+}); 
 
 
 

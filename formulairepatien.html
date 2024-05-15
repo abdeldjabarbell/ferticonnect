@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informations Personnelles</title>
+  <style>
+    :root {
+      --bg-color: #e6f3ea;
+      --second-bg-color: #bcc9c1;
+      --pub-bg-color: #c8d6d442;
+      --second2-bg-color: #176561;
+      --text-color: #000000;
+      --btn-color: #69A88D;
+      --btnHover-color: #53e896;
+      --error-text: rgb(160, 13, 0);
+    }
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 20px;
+    }
+  
+    h1 {
+      color: var(--second2-bg-color);
+    }
+    
+    p {
+      font-size: 16px;
+      color: var(--btn-color);
+    }
+  
+    form {
+      background-color: var(--bg-color);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px var(--second2-bg-color);
+      max-width: 600px;
+      margin: auto;
+      box-sizing: border-box; /* Ajout pour compatibilité */
+    }
+  
+    form h2 {
+      color: var(--second2-bg-color);
+      margin-bottom: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--second2-bg-color);
+    }
+  
+    input[type="text"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid var(--second-bg-color);
+      border-radius: 4px;
+      color: var(--second2-bg-color);
+      box-sizing: border-box;
+    }
+  
+    textarea {
+      height: 100px;
+    }
+  
+    button {
+      background-color: var(--btn-color);
+      color: var(--bg-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  
+    button:hover {
+      background-color: var(--btnHover-color);
+    }
+  
+    .description {
+      font-size: 14px;
+      color: var(--btn-color);
+      margin-bottom: 10px;
+    }
+  
+    .step {
+      display: none;
+    }
+  
+    .step.active {
+      display: block;
+    }
+  
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .formulaireheader {
+      max-width: 600px;
+    }
+  
+    .logo_form {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .logo_form img {
+      width: 100%; /* Mise à jour pour assurer la compatibilité */
+      height: 100%; /* Mise à jour pour assurer la compatibilité */
+    }
+  
+    .img_ullistration {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .img_ullistration img {
+      max-width: 200px;
+    }
+  
+    .message {
+      font-size: 10px;
+      color: red;
+    }
+    .profilepartenairebg{
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        background-color: var(--pub-bg-color);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+    }
+    .photoferticonnect{
+      width: 25px;
+      height: 25px;
+      background-color: var(--second2-bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin-right: 10px;
+      
+    }
+    .photoferticonnect img{
+      width: 25px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      object-fit: cover;
+      
+    }
+    .nomdupartenaire h1{
+      font-size: 10px;
+      color: var(--second2-bg-color);
+
+    }
+
+
+
+
+
+
+
+  </style>
+  
+</head>
+<body>
+
+
+
+  <!-- Formulaire de collecte d'informations personnelles -->
+
+  <form id="personalInfoForm">
+    <div class="step active" id="step0">
+      <div class="logo_form">
+        <img src="img/ferticonnectiLogoGreen.svg" alt="">
+      </div>
+  
+      <h1>Bienvenue sur FertiConnect votre plateforme de santé reproductive </h1>
+  
+      <p>
+        Nous vous remercions de bien vouloir prendre quelques minutes pour remplir ce formulaire.
+        Vos réponses nous aideront à mieux comprendre votre situation personnelle et médicale afin de vous offrir un soutien personnalisé.
+        Toutes les informations que vous fournissez resteront strictement confidentielles.
+      </p>
+
+
+      <div class="img_ullistration">
+        <img src="img/medcinlogin.svg" alt="">
+      </div>
+      <br>
+      <div class="navigation-buttons">
+        <button type="button"  id="annulerFormulaire" style="color: rgb(157, 0, 0); background-color: rgb(255, 194, 194);">annuler</button>
+        <button type="button"  id="nextStep0" >Suivant</button>
+      </div>
+    </div>
+
+    <div class="step" id="step1">
+      <h2>Informations Personnelles</h2>
+      
+      <label for="dob">Date de naissance:</label>
+      <p class="description">Indiquez votre date de naissance.</p>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="gender">Sexe:</label>
+      <p class="description">Sélectionnez votre sexe.</p>
+      <select id="gender" name="gender" required>
+        <option value="female">Femme</option>
+        <option value="male">Homme</option>
+      </select>
+
+      <label for="address">Adresse:</label>
+      <p class="description">Entrez votre adresse complète.</p>
+      <input type="text" id="address" name="address" required>
+
+      <label for="phoneNumber">Numéro de téléphone:</label>
+      <p class="description">Indiquez votre numéro de téléphone.</p>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+
+      <div class="navigation-buttons">
+        <button type="button"  id="prevStep1" >Précédent</button>
+        <button type="button"  id="nextStep1" >Suivant</button>
+      </div>
+
+      <p id="message1" class="message"></p>
+
+    </div>
+
+    <div class="step" id="step2">
+      <h2>Informations Médicales</h2>
+
+      <label for="age">Âge :</label>
+      <p class="description">Indiquez votre âge actuel.</p>
+      <input type="number" id="age" name="age" required>
+
+      <label for="maritalStatus">État civil :</label>
+      <p class="description">Sélectionnez votre état civil actuel.</p>
+      <select id="maritalStatus" name="maritalStatus" required>
+        <option value="Mariée">Mariée</option>
+        <option value="Célibataire">Célibataire</option>
+      </select>
+
+      <label for="children">Combien d'enfants avez-vous? :</label>
+      <p class="description">Indiquez le nombre d'enfants que vous avez.</p>
+      <input type="number" id="children" name="children" required >
+
+      <label for="moreChildren">Souhaitez-vous avoir plus d'enfants? :</label>
+      <p class="description">Indiquez si vous souhaitez avoir plus d'enfants.</p>
+      <select id="moreChildren" name="moreChildren" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      
+      <label for="partenaire">Si vous êtes en couple, ajoutez le compte de votre partenaire :</label>
+      <p class="description">Veuillez insérer l'ID de votre partenaire. Vous pouvez trouver cet ID dans le profil de votre partenaire. L'ID comporte 28 caractères et est au format suivant : "xxxxxxxxxxxxxxxxxxxxxxxxxxxx".</p>
+      <input type="text" id="partenaire" name="partenaire" required >
+
+      <div class="profilepartenairebg" style="display: flex;">
+        <div class="photoferticonnect">
+          <img src="img/ferticonnectiLogoWhite.svg" alt="">
+        </div>
+        <h1 id="nomdupartenaire"></h1>
+      </div>
+
+
+      <label for="medicalHistory">Avez-vous des antécédents médicaux importants? Si oui, veuillez les décrire brièvement:</label>
+      <p class="description">Décrivez brièvement vos antécédents médicaux importants.</p>
+      <textarea id="medicalHistory" name="medicalHistory" required></textarea>
+
+      <label for="allergies">Avez-vous des allergies connues? Si oui, lesquelles? :</label>
+      <p class="description">Indiquez si vous avez des allergies connues et lesquelles.</p>
+      <textarea id="allergies" name="allergies" required></textarea>
+
+      <label for="medications">Prenez-vous actuellement des médicaments ou des compléments alimentaires ? Si oui, lesquels :</label>
+      <p class="description">Listez les médicaments ou compléments alimentaires que vous prenez actuellement.</p>
+      <textarea id="medications" name="medications" required></textarea>
+
+      <label for="fertilityIssues">Avez-vous déjà eu des problèmes de fertilité? :</label>
+      <p class="description">Indiquez si vous avez déjà rencontré des problèmes de fertilité.</p>
+      <select id="fertilityIssues" name="fertilityIssues" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="hormonalDisorders">Avez-vous déjà été diagnostiqué avec des troubles hormonaux? :</label>
+      <p class="description">Indiquez si vous avez été diagnostiqué avec des troubles hormonaux.</p>
+      <select id="hormonalDisorders" name="hormonalDisorders" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <div class="navigation-buttons">
+        <button type="button" id="prevStep2" >Précédent</button>
+        <button type="button" id="nextStep2" >Suivant</button>
+      </div>
+
+      <p id="message2" class="message"></p>
+
+    </div>
+
+    <div class="step" id="step3">
+      <h2>Informations Complémentaires</h2>
+
+      <label for="stdHistory">Avez-vous des antécédents de maladies sexuellement transmissibles? :</label>
+      <p class="description">Indiquez si vous avez des antécédents de maladies sexuellement transmissibles.</p>
+      <select id="stdHistory" name="stdHistory" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="cycleRegularity">Est-ce que votre cycle est régulier ? :</label>
+      <p class="description">Indiquez si votre cycle menstruel est régulier.</p>
+      <input type="text" id="cycleRegularity" name="cycleRegularity" required>
+
+      <label for="pregnancyComplications">Avez-vous déjà eu des complications lors de grossesses précédentes? :</label>
+      <p class="description">Indiquez si vous avez déjà eu des complications lors de grossesses précédentes.</p>
+      <select id="pregnancyComplications" name="pregnancyComplications" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="abortionTrimester">Si des avortements, précisez le trimestre :</label>
+      <p class="description">Précisez le trimestre de l'avortement le cas échéant.</p>
+      <select id="abortionTrimester" name="abortionTrimester">
+        <option value="1er trimestre">1er trimestre</option>
+        <option value="2ème trimestre">2ème trimestre</option>
+        <option value="3ème trimestre">3ème trimestre</option>
+      </select>
+
+      <label for="profession">Quel est votre profession ?</label>
+      <p class="description">Indiquez votre profession actuelle.</p>
+      <input type="text" id="profession" name="profession" required>
+
+      <label for="workConditions">Est-ce que vous êtes exposés au : pesticides / température importante :</label>
+      <p class="description">Indiquez si vous êtes exposés à des pesticides ou des températures importantes dans votre travail.</p>
+      <input type="text" id="workConditions" name="workConditions" required>
+
+      <label for="workStress">Est-ce que vous travaillez dans des conditions stressantes :</label>
+      <p class="description">Indiquez si vous travaillez dans des conditions stressantes.</p>
+      <input type="text" id="workStress" name="workStress" required>
+
+      <label for="smoker">Êtes-vous un fumeur? :</label>
+      <p class="description">Indiquez si vous êtes fumeur.</p>
+      <select id="smoker" name="smoker" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="cigarettesPerDay">Si oui, combien de cigarettes fumez-vous par jour? :</label>
+      <p class="description">Indiquez le nombre de cigarettes que vous fumez par jour, le cas échéant.</p>
+      <input type="number" id="cigarettesPerDay" name="cigarettesPerDay">
+
+      <label for="alcoholConsumption">Consommez-vous de l'alcool? :</label>
+      <p class="description">Indiquez si vous consommez de l'alcool.</p>
+      <select id="alcoholConsumption" name="alcoholConsumption" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="alcoholPerWeek">Si oui, quelle est votre consommation hebdomadaire? :</label>
+      <p class="description">Indiquez votre consommation d'alcool hebdomadaire, le cas échéant.</p>
+      <input type="text" id="alcoholPerWeek" name="alcoholPerWeek" required>
+
+      <label for="cannabisConsumption">Consommez-vous du cannabis? :</label>
+      <p class="description">Indiquez si vous consommez du cannabis.</p>
+      <select id="cannabisConsumption" name="cannabisConsumption" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="cannabisPerWeek">Si oui, quelle est votre consommation hebdomadaire? :</label>
+      <p class="description">Indiquez votre consommation hebdomadaire de cannabis, le cas échéant.</p>
+      <input type="text" id="cannabisPerWeek" name="cannabisPerWeek"required>
+
+      <label for="physicalActivity">Pratiquez-vous une activité physique régulière? :</label>
+      <p class="description">Indiquez si vous pratiquez une activité physique régulière.</p>
+      <select id="physicalActivity" name="physicalActivity" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+
+      <label for="activityDetails">Si oui, laquelle et à quelle fréquence? :</label>
+      <p class="description">Précisez quelle activité physique vous pratiquez et à quelle fréquence, le cas échéant.</p>
+      <input type="text" id="activityDetails" name="activityDetails"required>
+
+      <label for="healthGoals">Quels sont vos objectifs en matière de santé reproductive? :</label>
+      <p class="description">Décrivez vos objectifs en matière de santé reproductive.</p>
+      <textarea id="healthGoals" name="healthGoals" required></textarea>
+
+      <label for="platformExpectations">Qu'attendez-vous de cette plateforme pour vous aider dans votre parcours de santé reproductive? :</label>
+      <p class="description">Décrivez ce que vous attendez de cette plateforme pour vous aider dans votre parcours de santé reproductive.</p>
+      <textarea id="platformExpectations" name="platformExpectations" required></textarea>
+      <div class="img_ullistration">
+        <img src="img/email.svg" alt="">
+      </div>
+      <br>
+      <div class="navigation-buttons">
+        <button type="button" id="prevStep3">Précédent</button>
+        <button type="submit" id="SoumettreFormulaire">Soumettre</button>
+      </div>
+
+      <p id="message3" class="message"></p>
+
+    </div>
+
+    <div class="step" id="step4">
+      <div class="img_ullistration">
+        <img src="img/email.svg" alt="">
+      </div>
+      <br>
+      <div class="navigation-buttons">
+        <button type="button" id="prevStep3">Précédent</button>
+        <button type="submit" id="SoumettreFormulaire">Soumettre</button>
+      </div>
+
+
+        
+    </div>
+
+  </form>
+
+  <script src="formulairepatien.js" type="module"></script>
+
+</body>
+</html>

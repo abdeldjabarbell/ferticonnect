@@ -307,11 +307,10 @@ async function messagegroupeCabine(){
           if (docSnapCabin.exists()) {
             const dataCabineRoom = docSnapCabin.data(); 
             const creatIdMessageRoom = dataCabineRoom.idroomCabineMessage;
-            
               const database = getDatabase(app);
               //const messageRef = databaseRef(database, 'messages');
               const messageRef = databaseRef(database, creatIdMessageRoom );
-            
+              //img/ferticonnectiLogoWhite.svg
               const messageInput = document.getElementById("messageecrit");
               const sendButton = document.getElementById("sendmessageicon");
               const messagesDiv = document.getElementById("content_message");
@@ -742,7 +741,7 @@ try {
     couvertureCabine.src= cabineImage;
     messageAjoutePhoto.style.color="var(--second2-bg-color)";
   }else{
-    couvertureCabine.src="img/ferticonnectiLogoWhite.png";
+    couvertureCabine.src="img/ferticonnectiLogoWhite.svg";
     messageAjoutePhoto.style.color="red";
   }
 
@@ -869,7 +868,7 @@ try {
                     if (imguser) { // Vérification si imguser existe
                         image_user_pub_img.src = imguser;
                     } else {
-                        image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
+                        image_user_pub_img.src = "img/ferticonnectiLogoWhite.svg";
                     }
                     
     
@@ -886,7 +885,7 @@ try {
                                         nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
                                     }
                                     else{
-                                        image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
+                                        image_user_pub_img.src = "img/ferticonnectiLogoWhite.svg";
                                         nameuserpubh1.innerHTML ="Utilisateur fertiConnect";
     
                                     }
@@ -1049,7 +1048,7 @@ try {
                                 if (imguser) {
                                     photoprofilepubadd_comments.src = imguser;
                                 } else {
-                                    photoprofilepubadd_comments.src = "img/ferticonnectiLogoWhite.png";
+                                    photoprofilepubadd_comments.src = "img/ferticonnectiLogoWhite.svg";
                                 }
                         }
                         AficherLesCommentaire();
@@ -1118,7 +1117,7 @@ try {
                                                     }
                                                     else{
                                                         hedercomment_h1.innerHTML ="Utilisateur fertiConnect";
-                                                        hedercomment_img_img.src = "img/ferticonnectiLogoWhite.png";
+                                                        hedercomment_img_img.src = "img/ferticonnectiLogoWhite.svg";
     
                                                     }
                     
@@ -1127,14 +1126,14 @@ try {
                                         }
                                         else{
                                             hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
-                                            hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+                                            hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.svg";
     
     
                                         }
                                     }
                                     else{
                                         hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
-                                        hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+                                        hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.svg";
     
     
                                     }
@@ -1452,7 +1451,7 @@ else{
             if(imguser){
                 mescabins_image_img.src=imguser;
             }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";
@@ -1497,7 +1496,7 @@ else{
             if(cabine_Image){
                 mescabins_image_img.src=cabine_Image;
             }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";

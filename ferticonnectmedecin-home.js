@@ -93,7 +93,7 @@ option_header_message.addEventListener('click', function() {
                     if(imageUserlisteamismessage){
                         imageamismessagebgimg.src= imageUserlisteamismessage;
                     }else{
-                        imageamismessagebgimg.src= "img/ferticonnectiLogoWhite.png";
+                        imageamismessagebgimg.src= "img/ferticonnectiLogoWhite.svg";
                     }
                     const  nameamismessagebg = document.createElement("div");
                     nameamismessagebg.className="nameamismessagebg";
@@ -136,7 +136,7 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
     if(imageUserlisteamismessage){
         Image_header_messageimg.src= imageUserlisteamismessage;
     }else{
-        Image_header_messageimg.src= "img/ferticonnectiLogoWhite.png";
+        Image_header_messageimg.src= "img/ferticonnectiLogoWhite.svg";
     }
     Image_header_message.innerHTML="";
     Image_header_message.appendChild(Image_header_messageimg);
@@ -419,7 +419,6 @@ function messagebtnnavbuttomFunction(){
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
     navbarbuttom.style.display = "flex";
-
     var navbar_buttom = document.querySelector('.navbar_buttom').clientHeight; 
     const height_disc_bg = window.innerHeight  - navigationbarHeight ;
     discution_bg.style.height = height_disc_bg + "px";
@@ -739,7 +738,7 @@ else{
             if(imguser){
                 mescabins_image_img.src=imguser;
             }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";
@@ -785,7 +784,7 @@ else{
             if(cabine_Image){
                 mescabins_image_img.src=cabine_Image;
             }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";
@@ -838,7 +837,7 @@ else{
             if(langue_image){
                 mescabins_image_img.src=langue_image;
             }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.png";
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
             }
             const mescabins_name = document.createElement('div');
             mescabins_name.className="mescabins_name";
@@ -1179,7 +1178,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                 if (imguser) { // Vérification si imguser existe
                     image_user_pub_img.src = imguser;
                 } else {
-                    image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
+                    image_user_pub_img.src = "img/ferticonnectiLogoWhite.svg";
                 }
                 
 
@@ -1196,7 +1195,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                     nameuserpubh1.innerHTML =prenameuser+ " " + nameuser;
                                 }
                                 else{
-                                    image_user_pub_img.src = "img/ferticonnectiLogoWhite.png";
+                                    image_user_pub_img.src = "img/ferticonnectiLogoWhite.svg";
                                     nameuserpubh1.innerHTML ="Utilisateur fertiConnect";
 
                                 }
@@ -1360,7 +1359,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                             if (imguser) {
                                 photoprofilepubadd_comments.src = imguser;
                             } else {
-                                photoprofilepubadd_comments.src = "img/ferticonnectiLogoWhite.png";
+                                photoprofilepubadd_comments.src = "img/ferticonnectiLogoWhite.svg";
                             }
                     }
                     AficherLesCommentaire();
@@ -1429,7 +1428,7 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                                 }
                                                 else{
                                                     hedercomment_h1.innerHTML ="Utilisateur fertiConnect";
-                                                    hedercomment_img_img.src = "img/ferticonnectiLogoWhite.png";
+                                                    hedercomment_img_img.src = "img/ferticonnectiLogoWhite.svg";
 
                                                 }
                 
@@ -1438,14 +1437,14 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                                     }
                                     else{
                                         hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
-                                        hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+                                        hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.svg";
 
 
                                     }
                                 }
                                 else{
                                     hedercomment_h1.innerHTML = nameuser + " " + prenameuser;
-                                    hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.png";
+                                    hedercomment_img_img.src = imguser ? imguser : "img/ferticonnectiLogoWhite.svg";
 
 
                                 }

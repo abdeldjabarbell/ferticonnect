@@ -23,12 +23,13 @@
    --btnHover-color:#53e8de;
    --error-text: rgb(160, 13, 0);
 }
+29746A
 */
 :root{
   --bg-color:#e6f3ea;
   --second-bg-color:#bcc9c1;
   --pub-bg-color:#c8d6d442;
-  --second2-bg-color:#29746A;
+  --second2-bg-color:#176561;
   --text-color:#000000;
   --btn-color:#69A88D;
   --btnHover-color:#53e896;
@@ -1922,6 +1923,22 @@ cursor: pointer;
 
 
 
+.idCopied{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.idCopied i{
+  margin-left: 10px;
+color: var(--second2-bg-color);
+font-size: 1rem;
+}
+.idCopied p{
+  color: var(--second2-bg-color);
+  font-size: 1rem;
+
+
+}
 
 
 
