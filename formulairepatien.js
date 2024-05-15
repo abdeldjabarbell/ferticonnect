@@ -93,9 +93,14 @@ function nextStep_1(){
                 nomdupartenaire.innerHTML= prenom + " ****** ";
                 nomdupartenaire.style.fontSize="1.4rem";
             }
+            else{
+                const nomdupartenaire = document.getElementById("nomdupartenaire");
+                nomdupartenaire.value = "Aucun résultat trouvé";
+            }
         }catch(error){
             console.error(error);
         }
+
     });
     const requiredFields = document.querySelectorAll('#step1 [required]');
     let allFieldsValid = true;
@@ -250,6 +255,26 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                 document.getElementById("medications").value = formulaire_liste2.medications;
                 document.getElementById("fertilityIssues").value = formulaire_liste2.fertilityIssues;
                 document.getElementById("hormonalDisorders").value = formulaire_liste2.hormonalDisorders;
+
+                const docRef = doc(db, "patient", partenaire);
+
+                try {
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const datauser = docSnap.data();
+                        const prenom = datauser.prenom;
+                        const nomdupartenaire = document.getElementById("nomdupartenaire");
+                        nomdupartenaire.innerHTML= prenom + " ****** ";
+                        nomdupartenaire.style.fontSize="1.4rem";
+                    }
+                    else{
+                        const nomdupartenaire = document.getElementById("nomdupartenaire");
+                        nomdupartenaire.value = "Aucun résultat trouvé";
+        
+                    }
+                }catch(error){
+                    console.error(error);
+                }
                 
 
 
@@ -331,6 +356,11 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                medications: medications,
                fertilityIssues: fertilityIssues,
                hormonalDisorders: hormonalDisorders
+           },
+       });
+        await updateDoc(doc(db, typeuserformulaire, partenaire), {
+           formulaire_liste2: {
+               partenaire: userformulaireid,
            },
        });
     }
