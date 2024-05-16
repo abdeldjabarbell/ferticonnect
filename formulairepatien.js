@@ -89,14 +89,17 @@ function nextStep_1(){
             if (docSnap.exists()) {
                 const datauser = docSnap.data();
                 const prenom = datauser.prenom;
-                const nomdupartenaire = document.getElementById("nomdupartenaire");
-                nomdupartenaire.innerHTML= prenom + " ****** ";
-                nomdupartenaire.style.fontSize="1.4rem";
+                if(prenom){
+                    const nomdupartenaire = document.getElementById("nomdupartenaire");
+                    nomdupartenaire.innerHTML= prenom + " ****** ";
+                    nomdupartenaire.style.fontSize="1.4rem";
+                }
+                else{
+                    const nomdupartenaire = document.getElementById("nomdupartenaire");
+                    nomdupartenaire.innerHTML = "Aucun résultat trouvé";
+                }
             }
-            else{
-                const nomdupartenaire = document.getElementById("nomdupartenaire");
-                nomdupartenaire.value = "Aucun résultat trouvé";
-            }
+
         }catch(error){
             console.error(error);
         }
@@ -158,8 +161,9 @@ function soumettre_Formulaire(){
     });
     if (allFieldsValid) {
         summetreLeFormulaire_Stap3();
-        alert('Formulaire soumis avec succès!');
         message3.innerHTML="";
+
+        window.location.replace(`ferticonnectmedecin-home.html?typeuserclick=${typeuserformulaire}`);
     }
 }
 
@@ -454,9 +458,6 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
            },
        });
 
-       await updateDoc(doc(db, typeuserformulaire, partenaire), {
-            partenaire: userformulaireid,
-       });
     
        
 
@@ -502,7 +503,6 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                 healthGoals: healthGoals,
                 platformExpectations: platformExpectations
             },
-            formulaire:"remplir",
         
         });
         
