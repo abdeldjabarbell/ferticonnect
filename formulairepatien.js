@@ -122,6 +122,9 @@ function nextStep_1(){
     }
 }
 
+
+
+
 nextStep2.onclick = nextStep_2;
 function nextStep_2(){
     const requiredFields = document.querySelectorAll('#step2 [required]');
@@ -226,11 +229,26 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                 const datauser = docSnap.data();
                 const formulaire_liste1 = datauser.formulaire_liste1;
                 console.log("formulaire_liste1 =", formulaire_liste1);
-    
-                document.getElementById("dob").value = formulaire_liste1.dateOfBirth;
-                document.getElementById("gender").value = formulaire_liste1.gender;
-                document.getElementById("address").value = formulaire_liste1.address;
-                document.getElementById("phoneNumber").value = formulaire_liste1.phoneNumber;
+                if (formulaire_liste1.age) {
+                    document.getElementById("age").value = formulaire_liste1.age;
+                }
+                
+                if (formulaire_liste1.dateOfBirth) {
+                    document.getElementById("dob").value = formulaire_liste1.dateOfBirth;
+                }
+                
+                if (formulaire_liste1.gender) {
+                    document.getElementById("gender").value = formulaire_liste1.gender;
+                }
+                
+                if (formulaire_liste1.address) {
+                    document.getElementById("address").value = formulaire_liste1.address;
+                }
+                
+                if (formulaire_liste1.phoneNumber) {
+                    document.getElementById("phoneNumber").value = formulaire_liste1.phoneNumber;
+                }
+                
             }
         } catch (error) {
             console.error(error);
@@ -244,40 +262,66 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                 const datauser = docSnap.data();
                 const formulaire_liste2 = datauser.formulaire_liste2;
                 console.log("formulaire_liste2 =", formulaire_liste2);
-    
-                document.getElementById("age").value = formulaire_liste2.age;
-                document.getElementById("maritalStatus").value = formulaire_liste2.maritalStatus;
-                document.getElementById("children").value = formulaire_liste2.children;
-                document.getElementById("moreChildren").value = formulaire_liste2.moreChildren;
-                document.getElementById("partenaire").value = formulaire_liste2.partenaire;
-                document.getElementById("medicalHistory").value = formulaire_liste2.medicalHistory;
-                document.getElementById("allergies").value = formulaire_liste2.allergies;
-                document.getElementById("medications").value = formulaire_liste2.medications;
-                document.getElementById("fertilityIssues").value = formulaire_liste2.fertilityIssues;
-                document.getElementById("hormonalDisorders").value = formulaire_liste2.hormonalDisorders;
-
-                const docRef = doc(db, "patient", partenaire);
-
-                try {
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        const datauser = docSnap.data();
-                        const prenom = datauser.prenom;
-                        const nomdupartenaire = document.getElementById("nomdupartenaire");
-                        nomdupartenaire.innerHTML= prenom + " ****** ";
-                        nomdupartenaire.style.fontSize="1.4rem";
-                    }
-                    else{
-                        const nomdupartenaire = document.getElementById("nomdupartenaire");
-                        nomdupartenaire.value = "Aucun résultat trouvé";
-        
-                    }
-                }catch(error){
-                    console.error(error);
+                if (formulaire_liste2.age) {
+                    document.getElementById("age").value = formulaire_liste2.age;
                 }
                 
+                if (formulaire_liste2.maritalStatus) {
+                    document.getElementById("maritalStatus").value = formulaire_liste2.maritalStatus;
+                }
+                
+                if (formulaire_liste2.children) {
+                    document.getElementById("children").value = formulaire_liste2.children;
+                }
+                
+                if (formulaire_liste2.moreChildren) {
+                    document.getElementById("moreChildren").value =  formulaire_liste2.moreChildren;
+                }
+                
+                if (formulaire_liste2.partenaire) {
+                    const partenaireinpt=document.getElementById("partenaire");
+                    partenaireinpt.value = formulaire_liste2.partenaire;
 
+                    const docRef = doc(db, "patient", partenaireinpt.value);
+                    try {
+                        const docSnap = await getDoc(docRef);
+                        if (docSnap.exists()) {
+                            const datauser = docSnap.data();
+                            const prenom = datauser.prenom;
+                            const nomdupartenaire = document.getElementById("nomdupartenaire");
+                            nomdupartenaire.innerHTML= prenom + " ****** ";
+                            nomdupartenaire.style.fontSize="1.4rem";
+                        }
+                        else{
+                            const nomdupartenaire = document.getElementById("nomdupartenaire");
+                            nomdupartenaire.value = "Aucun résultat trouvé";
+                        }
+                    }catch(error){
+                        console.error(error);
+                    }
 
+                }
+                
+                if (formulaire_liste2.medicalHistory) {
+                    document.getElementById("medicalHistory").value = formulaire_liste2.medicalHistory;
+                }
+                
+                if (formulaire_liste2.allergies) {
+                    document.getElementById("allergies").value = formulaire_liste2.allergies;
+                }
+                
+                if (formulaire_liste2.medications) {
+                    document.getElementById("medications").value =  formulaire_liste2.medications;
+                }
+                
+                if (formulaire_liste2.fertilityIssues) {
+                    document.getElementById("fertilityIssues").value = formulaire_liste2.fertilityIssues;
+                }
+                
+                if (formulaire_liste2.hormonalDisorders) {
+                    document.getElementById("hormonalDisorders").value = formulaire_liste2.hormonalDisorders;
+                }
+                
             }
         } catch (error) {
             console.error(error);
@@ -291,23 +335,74 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                 const datauser = docSnap.data();
                 const formulaire_liste3 = datauser.formulaire_liste3;
                 console.log("formulaire_liste1 =", formulaire_liste3);
-                document.getElementById("stdHistory").value = formulaire_liste3.stdHistory;
-                document.getElementById("cycleRegularity").value = formulaire_liste3.cycleRegularity;
-                document.getElementById("pregnancyComplications").value = formulaire_liste3.pregnancyComplications;
-                document.getElementById("abortionTrimester").value = formulaire_liste3.abortionTrimester;
-                document.getElementById("profession").value = formulaire_liste3.profession;
-                document.getElementById("workConditions").value = formulaire_liste3.workConditions;
-                document.getElementById("workStress").value = formulaire_liste3.workStress;
-                document.getElementById("smoker").value = formulaire_liste3.smoker;
-                document.getElementById("cigarettesPerDay").value = formulaire_liste3.cigarettesPerDay;
-                document.getElementById("alcoholConsumption").value = formulaire_liste3.alcoholConsumption;
-                document.getElementById("alcoholPerWeek").value = formulaire_liste3.alcoholPerWeek;
-                document.getElementById("cannabisConsumption").value = formulaire_liste3.cannabisConsumption;
-                document.getElementById("cannabisPerWeek").value = formulaire_liste3.cannabisPerWeek;
-                document.getElementById("physicalActivity").value = formulaire_liste3.physicalActivity;
-                document.getElementById("activityDetails").value = formulaire_liste3.activityDetails;
-                document.getElementById("healthGoals").value = formulaire_liste3.healthGoals;
-                document.getElementById("platformExpectations").value = formulaire_liste3.platformExpectations;
+
+                if (formulaire_liste3.stdHistory) {
+                    document.getElementById("stdHistory").value = formulaire_liste3.stdHistory;
+                }
+                
+                if (formulaire_liste3.cycleRegularity) {
+                    document.getElementById("cycleRegularity").value = formulaire_liste3.cycleRegularity;
+                }
+                
+                if (formulaire_liste3.pregnancyComplications) {
+                    document.getElementById("pregnancyComplications").value = formulaire_liste3.pregnancyComplications;
+                }
+                
+                if (formulaire_liste3.abortionTrimester) {
+                    document.getElementById("abortionTrimester").value = formulaire_liste3.abortionTrimester;
+                }
+                
+                if (formulaire_liste3.profession) {
+                    document.getElementById("profession").value = formulaire_liste3.profession;
+                }
+                
+                if (formulaire_liste3.workConditions) {
+                    document.getElementById("workConditions").value = formulaire_liste3.workConditions;
+                }
+                
+                if (formulaire_liste3.workStress) {
+                    document.getElementById("workStress").value = formulaire_liste3.workStress;
+                }
+                
+                if (formulaire_liste3.smoker) {
+                    document.getElementById("smoker").value = formulaire_liste3.smoker;
+                }
+                
+                if (formulaire_liste3.cigarettesPerDay) {
+                    document.getElementById("cigarettesPerDay").value = formulaire_liste3.cigarettesPerDay;
+                }
+                
+                if (formulaire_liste3.alcoholConsumption) {
+                    document.getElementById("alcoholConsumption").value = formulaire_liste3.alcoholConsumption;
+                }
+                
+                if (formulaire_liste3.alcoholPerWeek) {
+                    document.getElementById("alcoholPerWeek").value = formulaire_liste3.alcoholPerWeek;
+                }
+                
+                if (formulaire_liste3.cannabisConsumption) {
+                    document.getElementById("cannabisConsumption").value = formulaire_liste3.cannabisConsumption;
+                }
+                
+                if (formulaire_liste3.cannabisPerWeek) {
+                    document.getElementById("cannabisPerWeek").value = formulaire_liste3.cannabisPerWeek;
+                }
+                
+                if (formulaire_liste3.physicalActivity) {
+                    document.getElementById("physicalActivity").value = formulaire_liste3.physicalActivity;
+                }
+                
+                if (formulaire_liste3.activityDetails) {
+                    document.getElementById("activityDetails").value = formulaire_liste3.activityDetails;
+                }
+                
+                if (formulaire_liste3.healthGoals) {
+                    document.getElementById("healthGoals").value = formulaire_liste3.healthGoals;
+                }
+                
+                if (formulaire_liste3.platformExpectations) {
+                    document.getElementById("platformExpectations").value = formulaire_liste3.platformExpectations;
+                }
                 
             }
         } catch (error) {
@@ -358,11 +453,13 @@ document.getElementById('maritalStatus').addEventListener('change', function() {
                hormonalDisorders: hormonalDisorders
            },
        });
-        await updateDoc(doc(db, typeuserformulaire, partenaire), {
-           formulaire_liste2: {
-               partenaire: userformulaireid,
-           },
+
+       await updateDoc(doc(db, typeuserformulaire, partenaire), {
+            partenaire: userformulaireid,
        });
+    
+       
+
     }
     async function summetreLeFormulaire_Stap3(){
                  // Step 3

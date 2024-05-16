@@ -62,6 +62,7 @@ const firebaseConfig = {
         
         const mail = user.email;
         const iduser = user.uid;
+        
         console.log('iduser = ' + iduser);
         const doclistemessageref = collection(db, typeuseruserauth, iduser, "listeMessage");
         const querySnapshot = await getDocs(doclistemessageref);
@@ -74,6 +75,7 @@ const firebaseConfig = {
             const messagebuttonicon = document.getElementById('messagebuttonicon');
 
             if (idamisMessage === useridclick) {
+                
                 messagebuttonicon.style.color = "#007bbe";
                 messagebutton.addEventListener('click', async function() {
                     alert('Vous avez déjà créé un espace de messagerie entre vous deux. Veuillez vérifier votre liste de messages.');
@@ -81,9 +83,8 @@ const firebaseConfig = {
                 });
             }   
         });
-        
-        console.log("G");
 
+        
         messagebutton.addEventListener('click', async function() {
           console.log("messagebutton");
 
@@ -145,7 +146,7 @@ const firebaseConfig = {
             const docSnap = await getDoc(docRef); 
             if (docSnap.exists()) {
                 const datauser = docSnap.data(); 
-                const iduser =  docSnap.id;
+                const id__user =  docSnap.id;
                 const nameuserprofile = datauser.nom;
                 const prenomuserprofile = datauser.prenom;
                 const statut_du_compte = datauser.statut_du_compte;
@@ -154,7 +155,6 @@ const firebaseConfig = {
                 const formulaire_liste1 = datauser.formulaire_liste1;
                 const formulaire_liste2 = datauser.formulaire_liste2;
                 const formulaire_liste3 = datauser.formulaire_liste3;
-                console.log(" id =======" + iduser);
 
                 const timestamp = datauser.timestamp;
                 const seconds = timestamp.seconds;
@@ -164,15 +164,16 @@ const firebaseConfig = {
                 const date = new Date(milliseconds);
                 const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
                 if(iduser===useridclick){
+                    compeleleprofile.style.display='flex';
                    const idCopied = document.getElementById("idCopied");
                    idCopied.style.display="flex";
                    const iduser_for_copy = document.getElementById("iduser_for_copy");
-                   iduser_for_copy.innerHTML= "votre id : "+iduser;
+                   iduser_for_copy.innerHTML= "votre id : "+id__user;
                    document.getElementById("idCopied").addEventListener("click", function() {
                        var tempTextArea = document.createElement("textarea");
                        document.getElementById("iduser_for_copy").style.color = "orange";
                        document.getElementById("idCopied").style.transition = "color 1.5s ease";
-                       tempTextArea.value = iduser;
+                       tempTextArea.value = id__user;
                        document.body.appendChild(tempTextArea);
                        tempTextArea.select();
                        document.execCommand("copy");
@@ -184,6 +185,13 @@ const firebaseConfig = {
 
 
                 }
+                else{
+                    compeleleprofile.style.display="none";
+                    infobtn.style.display="none";
+                }
+                console.log("useridclick"+useridclick);
+                console.log("useridclick"+iduser);
+
                 // Extraire les composantes de la date
                 const day = date.getDate();
                 const monthIndex = date.getMonth(); // Les mois commencent à 0
@@ -442,6 +450,9 @@ const firebaseConfig = {
 
                     if(typeuseruserauth === "patient"){
                         if(typeuserclick==="medecin"){
+                            compeleleprofile.style.display="none";
+                            infobtn.style.display="none";
+
                             afficheleprofile_med();
                         }
                         else{
