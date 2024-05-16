@@ -17,37 +17,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Calligraffitti&family=Grape+Nuts&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="watingDiv" id="watingDiv" >
         <div class="logoBg">
             <div class="caeee_logo" id="caeee_logo"></div>
             <div class="textLogo" id="textLogo">
-                <h1>FertiConnect</h1>
+                <h1 id="ferticonnect">FertiConnect</h1>
             </div>
             <div class="imagelogo" id="imagelogo">
                 <img src="img/ferticonnectiLogoGreen.svg" alt="">
             </div>
             <div class="bg_choix_user" id="bg_choix_user">
+                <div class="language-selector" id="languageselector">
+                    <img src="img/undraw_around_the_world_re_rb1p.svg" alt="">
+                    <br>
+                    <select id="language">
+                        <option value="" selected disabled>language</option>
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="ar">العربية</option>
+                        <option value="pt">Portugaise</option>
+                    </select> 
+                    
 
-                <div class="bgmedcinpatient" id="medcinclick">
-                    <div class="img_bgmedcinpatient">
-                        <i id="loadingi1" class="bi bi-journal-medical"></i> 
-                        <img id="loadinglogo1" src="img/ferticonnectiLogoGreen.svg" style="display: none;"  alt="" ic>                  
-                    </div>
-                    <h1>Bienvenue Médecin</h1>
-                    <p>Accédez à votre espace médical en vous connectant en tant que médecin.</p>
-                </div>
+                    <br>
 
-                <div class="bgmedcinpatient" id="patientclick">
-                    <div class="img_bgmedcinpatient">
-                        <i id="loadingi2" class="bi bi-person-heart"></i>
-                        <img id="loadinglogo2" src="img/ferticonnectiLogoGreen.svg"  style="display: none;" alt="" ic>                  
-                    </div>
-                    <h1>Bienvenue Utilisateur</h1>
-                    <p>Accédez à votre espace médical en vous connectant en tant qu'utilisateur.</p>
                 </div>
+                <div class="text-container" id="containerText">
+                    <p id="animated-text"><span id="typed-text"></span></p>
+                    <div id="text-bar"></div>
+                </div>
+                <div class="buttonnext" id="buttonnext1" >
+                    <button class="btn souvgarder" id="suivant1"></button>
+                </div>
+                <br><br>
+                <p id="tomedcinePage" class="tomedcinePage"></p>
+
+                
             </div>
         </div>
     </div>
