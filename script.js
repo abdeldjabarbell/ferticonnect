@@ -169,13 +169,6 @@ function animationText1(text,direction,selectedLanguage){
         const buttonnext = document.getElementById('buttonnext1');
         buttonnext.style.opacity="0";
         buttonnext.style.display="none";
-
-        const suivant1 = document.getElementById('suivant1');
-        if (suivant1) {
-            suivant1.removeAttribute('id'); // Supprime l'attribut id
-            suivant1.id = 'suivant2'; // Remplace l'identifiant par 'suivant3'
-        }
-
         
         toNextText1(selectedLanguage);
     });
@@ -225,7 +218,7 @@ function toNextText1(selectedLanguage){
     setTimeout(function() {
         animationText2(text,direction,selectedLanguage);
         setTimeout(function(){
-            const buttonnext = document.getElementById('buttonnext1');
+            const buttonnext = document.getElementById('buttonnext2');
             buttonnext.style.display="flex";
             buttonnext.style.opacity="0";
             setTimeout(function(){        
@@ -265,17 +258,12 @@ function animationText2(text,direction,selectedLanguage){
     const suivant2 = document.getElementById("suivant2");
     suivant2.addEventListener('click', function() {
         textContainer.innerHTML = '';
-        const buttonnext = document.getElementById('buttonnext1');
+        const buttonnext = document.getElementById('buttonnext2');
         buttonnext.style.display="none";
         buttonnext.style.opacity="0";
         buttonnext.style.display="none";
+
         toNextText3(selectedLanguage);
-        const suivant2 = document.getElementById('suivant2');
-        if (suivant2) {
-            suivant2.removeAttribute('id'); // Supprime l'attribut id
-            suivant2.id = 'suivant3'; // Remplace l'identifiant par 'suivant3'
-        }
-        
 
     });
 }
@@ -334,7 +322,7 @@ function toNextText3(selectedLanguage){
         animationText3(text,direction,selectedLanguage,message);
         
         setTimeout(function(){
-            const buttonnext = document.getElementById('buttonnext1');
+            const buttonnext = document.getElementById('buttonnext3');
             buttonnext.style.display="flex";
             buttonnext.style.opacity="0";
             setTimeout(function(){        
