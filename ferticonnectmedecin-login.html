@@ -24,8 +24,8 @@
         <div class="contet_bg">
             <div class="image_L_R">
                 <img src="img/ferticonnectiLogoGreen.svg" alt="">
-                <p>Bienvenue sur</p>
-                <h1> FertiConnect</h1>
+                <p id="text1">Bienvenue sur</p>
+                <h1 id="text2"> FertiConnect</h1>
                 <p id="p_image_L_R">connecttez vous avect votre copmt </p>
                 <div class="img_login" id="med"  style="display: none;">
                     <img src="img/medcinlogin.svg" alt="">
@@ -47,21 +47,21 @@
                 </div>
                 <div class="con_content_L_R" style="display: flex;" id="login_bg">
                     <form id="loginForm" class="conncxion_inputs">
-                        <h1>Connectez-vous</h1>
-                        <p>Bienvenue dans vote espace de FertiConnect</p>
+                        <h1 id="text3">Connectez-vous</h1>
+                        <p id="text4">Bienvenue dans vote espace de FertiConnect</p>
                         <br>
                         <div class="input_styl">
-                            <label for="email">Email:</label>
+                            <label for="email" id="text0">Email:</label>
                             <input type="email" id="loginEmail_medecin" required>
                         </div>
                         <div class="input_styl">
-                            <label for="password">Mot de passe:</label>
+                            <label for="password" id="text5">Mot de passe:</label>
                             <input type="password" id="loginPassword_medecin" required autocomplete="current-password">
                         </div>
                         <br>
                       <button class="btn" type="submit">
-                            <div id="original" style="display: block;">
-                                Se Connecter
+                            <div id="original" style="display: block;" >
+                                <p id="text6"></p>
                             </div>
                             <div class="cs-loader-inner" id="loader" style="display: none;">
                                 <label>	●</label>
@@ -69,41 +69,41 @@
                                 <label>	●</label>
                                 <label>	●</label>
                             </div>
-                            <div id="Done" style="display: none;">
-                                terminée
+                            <div id="Done" style="display: none;" >
+                                <p id="text7"></p>
                             </div>
                       </button>
                       <br>
-                      <p>J'ai oublié mon mot de passe ,<a href="#" id="recupereMDP"> Récupérer mon compt.</a> </p>
-                      <p>Je n'ai pas de compte, <a href="#" id="creeCompte">créez un compt.</a></p>
+                      <p id="text8">J'ai oublié mon mot de passe ,<a href="#" id="recupereMDP"> Récupérer mon compt.</a> </p>
+                      <p id="text9">Je n'ai pas de compte, <a href="#" id="creeCompte">créez un compt.</a></p>
                       <p id="message_firebase_login"></p>
                     </form>
                 </div>
                 <div class="con_content_L_R" style="display: none;" id="register_bg">
                     <form id="registerForm" class="conncxion_inputs">
-                        <h1>S'inscrire</h1>
-                        <p>Bienvenue dans vote espace de FertiConnect</p>
+                        <h1 id="text10">S'inscrire</h1>
+                        <p id="text11">Bienvenue dans vote espace de FertiConnect</p>
                         <br>
                         <div class="input_styl">
-                            <label for="nommedin">Nom:</label>
+                            <label for="nommedin" id="text12">Nom:</label>
                             <input type="text" id="nom_medecin" required>
                         </div>
                         <div class="input_styl">
-                            <label for="registerPrenom_medecin">Prénom:</label>
+                            <label for="registerPrenom_medecin" id="text13">Prénom:</label>
                             <input type="text" id="registerPrenom_medecin" required autocomplete="current-password">
                         </div>
                         <div class="input_styl">
-                            <label for="email">Email:</label>
+                            <label for="email" id="text14">Email:</label>
                             <input type="email" id="registerEmail_medecin" required>
                         </div>
                         <div class="input_styl">
-                            <label for="password">Mot de passe:</label>
+                            <label for="password" id="text15">Mot de passe:</label>
                             <input type="password" id="registerPassword_medecin" required autocomplete="current-password">
                         </div>
                         <br>
                         <button class="btn" type="submit">
-                            <div id="original1" style="display: block;">
-                                S'inscrire
+                            <div id="original1" style="display: block;" >
+                                <p id="text16"></p>
                             </div>
                             <div class="cs-loader-inner" id="loader1" style="display: none;">
                                 <label>	●</label>
@@ -111,27 +111,27 @@
                                 <label>	●</label>
                                 <label>	●</label>
                             </div>
-                            <div id="Done1" style="display: none;">
-                                terminée
+                            <div id="Done1" style="display: none;" id="text17">
+                                <p id="text17"></p>
                             </div>
                       </button>
                       <br>
-                      <p>J'ai un compte, <a href="#" id="connecter">Connectez-vous</a></p>
+                      <p id="text18">J'ai un compte, <a href="#" id="connecter">Connectez-vous</a></p>
                       <p id="message_firebase_register"></p>
                     </form>
                 </div>
                 <div class="con_content_L_R" style="display: none;" id="recuperation_bg">
                     <form id="recuperationForm" class="conncxion_inputs">
-                        <h1>Récupération de Mot de Passe</h1>
-                        <p>Entrez votre adresse e-mail ci-dessous. Un lien de réinitialisation de mot de passe vous sera envoyé.</p>
+                        <h1 id="text19">Récupération de Mot de Passe</h1>
+                        <p id="text20">Entrez votre adresse e-mail ci-dessous. Un lien de réinitialisation de mot de passe vous sera envoyé.</p>
                         <div class="input_styl">
-                            <label for="email">Email:</label>
+                            <label for="email" id="text21">Email:</label>
                             <input type="email" id="recuperationEmail" required>
                         </div>
                         <br>
                       <button class="btn" type="submit">
-                            <div id="original2" style="display: block;">
-                                Envoyer le lien
+                            <div id="original2" style="display: block;" >
+                               <p id="text22"></p> Envoyer le lien
                             </div>
                             <div class="cs-loader-inner" id="loader2" style="display: none;">
                                 <label>	●</label>
@@ -139,12 +139,12 @@
                                 <label>	●</label>
                                 <label>	●</label>
                             </div>
-                            <div id="Done2" style="display: none;">
-                                terminée
+                            <div id="Done2" style="display: none;" >
+                                <p id="text23"></p>
                             </div>
                       </button>
                       <br>
-                      <p>Retour à la page de <a href="#" id="anuulerRecuperation">connexion</a>.</p>
+                      <p id="text24">Retour à la page de <a href="#" id="anuulerRecuperation">connexion</a>.</p>
                       <p id="message_firebase_recuperation"></p>
                     </form>
                 </div>

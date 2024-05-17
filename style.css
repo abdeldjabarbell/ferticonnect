@@ -1963,6 +1963,7 @@ font-size: 1rem;
   font-family: "Grape Nuts", cursive;
   font-weight: 600;
   font-style: normal;
+  text-align: justify;
 }
 .buttonnext h1{
   font-family: "Grape Nuts", cursive;
@@ -2001,6 +2002,7 @@ font-size: 1rem;
 .text-container{
   opacity: 0;
   transition: 1s ease;
+  text-align: justify;
 }
 
 .language-selector select{
