@@ -113,7 +113,22 @@ const wating = document.getElementById("wating");
 
 const text1 = document.getElementById("text1");
 if (selectedLanguage === "fr") {
-    message_firebase_register.innerHTML = "Bienvenue sur";
+    text1.innerHTML = "Bienvenue sur";
+} else if (selectedLanguage === "en") {
+    text1.innerHTML = "Welcome to";
+} else if (selectedLanguage === "es") {
+    text1.innerHTML = "Bienvenido a";
+} else if (selectedLanguage === "ar") {
+    text1.innerHTML = "مرحبا بك في";
+} else if (selectedLanguage === "pt") {
+    text1.innerHTML = "Bem-vindo a";
+} else {
+    text1.innerHTML = "Bienvenue sur";
+}
+
+
+if (selectedLanguage === "fr") {
+    message_firebase_register.innerHTML = "Inscription réussie";
 } else if (selectedLanguage === "en") {
     message_firebase_register.innerHTML = "Registration successful!";
 } else if (selectedLanguage === "es") {
@@ -233,28 +248,28 @@ if (selectedLanguage === "fr") {
 // Définition du contenu pour text8
 const text8 = document.getElementById("text8");
 if (selectedLanguage === "fr") {
-    text8.innerHTML = "J'ai oublié mon mot de passe, <a href='#' id='recupereMDP'></a> ";
+    text8.innerHTML = "J'ai oublié mon mot de passe,";
 } else if (selectedLanguage === "en") {
-    text8.innerHTML = "I forgot my password, <a href='#' id='recupereMDP'></a> ";
+    text8.innerHTML = "I forgot my password,";
 } else if (selectedLanguage === "es") {
-    text8.innerHTML = "Olvidé mi contraseña, <a href='#' id='recupereMDP'></a> ";
+    text8.innerHTML = "Olvidé mi contraseña,";
 } else if (selectedLanguage === "ar") {
-    text8.innerHTML = "لقد نسيت كلمة المرور الخاصة بي، <a href='#' id='recupereMDP'></a> ";
+    text8.innerHTML = "لقد نسيت كلمة المرور الخاصة بي،";
 } else if (selectedLanguage === "pt") {
-    text8.innerHTML = "Esqueci minha senha, <a href='#' id='recupereMDP'></a> ";
+    text8.innerHTML = "Esqueci minha senha,";
 }
 
 const text9 = document.getElementById("text9");
 if (selectedLanguage === "fr") {
-    text9.innerHTML = "Je n'ai pas de compte, <a href='#' id='creeCompte'></a>";
+    text9.innerHTML = "Je n'ai pas de compte,";
 } else if (selectedLanguage === "en") {
-    text9.innerHTML = "I don't have an account, <a href='#' id='creeCompte'></a>";
+    text9.innerHTML = "I don't have an account,";
 } else if (selectedLanguage === "es") {
-    text9.innerHTML = "No tengo una cuenta, <a href='#' id='creeCompte'></a>";
+    text9.innerHTML = "No tengo una cuenta,";
 } else if (selectedLanguage === "ar") {
-    text9.innerHTML = "ليس لدي حساب، <a href='#' id='creeCompte'></a>";
+    text9.innerHTML = "ليس لدي حساب،";
 } else if (selectedLanguage === "pt") {
-    text9.innerHTML = "Eu não tenho uma conta, <a href='#' id='creeCompte'></a>";
+    text9.innerHTML = "Eu não tenho uma conta,";
 }
 
 const text10 = document.getElementById("text10");
@@ -372,15 +387,15 @@ if (selectedLanguage === "fr") {
 // Définition du contenu pour text18
 const text18 = document.getElementById("text18");
 if (selectedLanguage === "fr") {
-    text18.innerHTML = "J'ai un compte, <a href='#' id='connecter'></a>";
+    text18.innerHTML = "J'ai un compte,";
 } else if (selectedLanguage === "en") {
-    text18.innerHTML = "I have an account, <a href='#' id='connecter'></a>";
+    text18.innerHTML = "I have an account,";
 } else if (selectedLanguage === "es") {
-    text18.innerHTML = "Tengo una cuenta, <a href='#' id='connecter'></a>";
+    text18.innerHTML = "Tengo una cuenta,";
 } else if (selectedLanguage === "ar") {
-    text18.innerHTML = "لدي حساب، <a href='#' id='connecter'></a>";
+    text18.innerHTML = "لدي حساب،";
 } else if (selectedLanguage === "pt") {
-    text18.innerHTML = "Eu tenho uma conta, <a href='#' id='connecter'></a>";
+    text18.innerHTML = "Eu tenho uma conta,";
 }
 
 // Définition du contenu pour text19
@@ -456,15 +471,15 @@ if (selectedLanguage === "fr") {
 // Définition du contenu pour text24
 const text24 = document.getElementById("text24");
 if (selectedLanguage === "fr") {
-    text24.innerHTML = "Retour à la page de <a href='#' id='anuulerRecuperation'></a>";
+    text24.innerHTML = "Retour à la page de";
 } else if (selectedLanguage === "en") {
-    text24.innerHTML = "Return to page of <a href='#' id='anuulerRecuperation'></a>";
+    text24.innerHTML = "Return to page of";
 } else if (selectedLanguage === "es") {
-    text24.innerHTML = "Volver a la página de <a href='#' id='anuulerRecuperation'></a>";
+    text24.innerHTML = "Volver a la página de";
 } else if (selectedLanguage === "ar") {
-    text24.innerHTML = "<a href='#' id='anuulerRecuperation'></a> العودة إلى صفحة";
+    text24.innerHTML = "العودة إلى صفحة";
 } else if (selectedLanguage === "pt") {
-    text24.innerHTML = "Voltar para a página de <a href='#' id='anuulerRecuperation'></a>";
+    text24.innerHTML = "Voltar para a página de ";
 }
 
 
@@ -529,6 +544,9 @@ if (selectedLanguage === "fr") {
     retourne.innerHTML = "العودة";
 } else if (selectedLanguage === "pt") {
     retourne.innerHTML = "Voltar";
+} else {
+    // Par défaut en français si aucune langue correspondante n'est trouvée
+    retourne.innerHTML = "Retour";
 }
 
 //---------------------------------------------- registration
