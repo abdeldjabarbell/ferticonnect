@@ -2066,7 +2066,7 @@ font-size: 1rem;
   .quinousbg2{
     display: flex;
     width: 90%;
-    height: 90%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: start;
