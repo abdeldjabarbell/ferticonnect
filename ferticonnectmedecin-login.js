@@ -801,6 +801,8 @@ async function envoyerEmail() {
             message_firebase_recuperation.innerHTML = recuperationEmail+ "تم إرسال بريد استرداد كلمة المرور إلى ";
         } else if (selectedLanguage === "pt") {
             message_firebase_recuperation.innerHTML = "Um email de recuperação de senha foi enviado para " + recuperationEmail;
+        }else if (selectedLanguage === "de") {
+            message_firebase_recuperation.innerHTML = "Ein E-Mail zur Passwortwiederherstellung wurde gesendet an." + recuperationEmail;
         }
      });
     } catch (error) {
@@ -870,6 +872,8 @@ console.log(typeOfUser);
                     message_firebase_login.innerHTML = "غير مصرح لك بالوصول إلى هذه الميزة.";
                 } else if (selectedLanguage === "pt") {
                     message_firebase_login.innerHTML = "Você não está autorizado a acessar este recurso.";
+                }else if (selectedLanguage === "de") {
+                    message_firebase_login.innerHTML = "Sie sind nicht berechtigt, auf diese Ressource zuzugreifen.";
                 }
                 
             }
@@ -901,6 +905,8 @@ async function login() {
             message_firebase_login.innerHTML = 'تم تسجيل الؤخول بواسطة  ' + loginEmail;
         } else if (selectedLanguage === "pt") {
             message_firebase_login.innerHTML = 'Conectado como: ' + loginEmail;
+        }else if (selectedLanguage === "de") {
+            message_firebase_login.innerHTML = 'Angemeldet als: ' + loginEmail;
         }
                 loader.style.display="none"
         Done.style.display="block"

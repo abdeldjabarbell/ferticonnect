@@ -95,53 +95,71 @@ function afficheLaPresentation(selectedLanguage){
         FertiConnect 💡, une plateforme 100% algérienne 🇩🇿, aide les personnes avec des problèmes reproductifs comme le SOPK, l'endométriose, et les dysfonctionnements érectiles. Elle vise à améliorer l'expérience des couples infertiles 👫, en offrant une prise en charge globale 🌐, une coordination efficace 🤝, et des services accessibles 📲.
         `;
         next_lang = `Suivant`;
+        skip_btn= `Passer`;
+
     } else if (selectedLanguage === 'en') {
         text = `
         FertiConnect 💡, a 100% Algerian platform 🇩🇿, helps individuals with reproductive issues like PCOS, endometriosis, and erectile dysfunction. It aims to improve the experience of infertile couples 👫 by offering comprehensive care 🌐, efficient coordination 🤝, and accessible services 📲.
         `;
         next_lang = `Next`;
+        skip_btn= `Skip`;
+
     } else if (selectedLanguage === 'es') {
         text = `
         FertiConnect 💡, una plataforma 100% argelina 🇩🇿, ayuda a personas con problemas reproductivos como el SOP, la endometriosis y la disfunción eréctil. Su objetivo es mejorar la experiencia de las parejas infértiles 👫 ofreciendo atención integral 🌐, coordinación eficiente 🤝 y servicios accesibles 📲.
         `;
         next_lang = `Siguiente`;
+        skip_btn= `Saltar`;
+
     } else if (selectedLanguage === 'ar') {
         text = `
         فرتي كونكت 💡، منصة جزائرية 100% 🇩🇿، تساعد الأشخاص الذين يعانون من مشاكل الإنجاب مثل متلازمة تكيس المبايض، بطانة الرحم المهاجرة، والخلل الوظيفي الانتصابي. تهدف إلى تحسين تجربة الأزواج الذين يعانون من العقم 👫، من خلال تقديم رعاية شاملة 🌐، تنسيق فعال 🤝، وخدمات متاحة 📲.
         `;
         next_lang = `التالي`;
+        skip_btn= `تخطي`;
+
         direction = 'rtl'; // Change text direction to right-to-left
     } else if (selectedLanguage === 'pt') {
         text = `
         FertiConnect 💡, uma plataforma 100% argelina 🇩🇿, ajuda pessoas com problemas reprodutivos como SOP, endometriose e disfunção erétil. Seu objetivo é melhorar a experiência de casais inférteis 👫 oferecendo cuidados abrangentes 🌐, coordenação eficiente 🤝 e serviços acessíveis 📲.
         `;
         next_lang = `Próximo`;
+        skip_btn= `Pular`;
+
     } else if (selectedLanguage === 'de') {
         text = `
         FertiConnect 💡, eine 100% algerische Plattform 🇩🇿, hilft Menschen mit reproduktiven Problemen wie PCOS, Endometriose und Erektionsstörungen. Sie zielt darauf ab, die Erfahrung unfruchtbarer Paare 👫 zu verbessern, indem sie umfassende Betreuung 🌐, effiziente Koordination 🤝 und zugängliche Dienstleistungen 📲 bietet.
         `;
         next_lang = `Weiter`;
+        skip_btn= `Überspringen`;
     }
       
         setTimeout(function() {
-             animationText1(text,direction,selectedLanguage);
+             animationText1(text,direction,selectedLanguage,next_lang);
              setTimeout(function(){
                 const buttonnext = document.getElementById('buttonnext1');
+                const buttonnext4 = document.getElementById('buttonnext4');
                 buttonnext.style.display="flex";
                 buttonnext.style.opacity="0";
+                buttonnext4.style.display="flex";
+                buttonnext4.style.opacity="0";
+
                 setTimeout(function(){        
                     buttonnext.style.opacity="1";
     
                  },700);
+                 setTimeout(function(){        
+                    buttonnext4.style.opacity="1";
+                 },700);
                  const suivant1 = document.getElementById('suivant1');
                  suivant1.innerHTML="<h3>"+next_lang+"</h3>";
-                 
+                 const suivant4 = document.getElementById('suivant4');
+                 suivant4.innerHTML=skip_btn;
                  }, 2000);
          }, 1000);
 }
 
-function animationText1(text,direction,selectedLanguage){
-    console.log("text ="+text);
+function animationText1(text,direction,selectedLanguage,next_lang){
     
     const texto = text;
     const textContainer = document.getElementById('typed-text');
@@ -169,6 +187,217 @@ function animationText1(text,direction,selectedLanguage){
         
         toNextText1(selectedLanguage);
     });
+    const suivant4 = document.getElementById("suivant4");
+    suivant4.addEventListener('click', function() {
+        const quinousbg = document.getElementById("quinousbg");
+        quinousbg.style.display="flex";
+
+        affucheLeSkip(selectedLanguage);
+        function  affucheLeSkip(selectedLanguage){
+
+            const quinousbgHeadertext = document.getElementById("quinousbgHeadertext");
+            if (selectedLanguage === "fr") {
+                quinousbgHeadertext.innerHTML = "FertiConnect";
+            } else if (selectedLanguage === "en") {
+                quinousbgHeadertext.innerHTML = "FertiConnect";
+            } else if (selectedLanguage === "es") {
+                quinousbgHeadertext.innerHTML = "FertiConnect";
+            } else if (selectedLanguage === "ar") {
+                quinousbgHeadertext.innerHTML = "فيرتيكونيكت";
+            } else if (selectedLanguage === "pt") {
+                quinousbgHeadertext.innerHTML = "FertiConnect";
+            } else if (selectedLanguage === "de") {
+                quinousbgHeadertext.innerHTML = "FertiConnect";
+            }        
+            const pesentationquinous = document.getElementById("pesentationquinous");
+    
+            if (selectedLanguage === "fr") {
+                pesentationquinous.innerHTML = `
+                    FertiConnect est une plateforme innovante 100% algérienne destinée pour toute personne souffrant de pathologies reproductives (SOPK, Endométriose, troubles du cycle, Troubles de l'érection...). 
+                    Notre objectif est d'améliorer l'expérience des couples infertiles, d'augmenter leurs chances de succès et de leur offrir une meilleure qualité de vie. <br><br>
+                    FertiConnect s'attaque à la complexité et au manque de prise en charge globale du parcours de reproduction en offrant une plateforme centralisée, une coordination efficace, un soutien personnalisé et des services accessibles.<br><br>
+            
+                    1. Manque de coordination et communication entre les différents acteurs clés de la santé reproductive<br>
+                    2. Manque d'accessibilité à l'information sur la santé reproductive<br>
+                    3. Problèmes de suivi et de gestion du temps et des documents médicaux papier<br>
+                    4. Manque du soutien émotionnel<br><br>
+            
+                    Ce qui rend le parcours de reproduction fragmenté et complexe, impliquant plusieurs spécialistes, cliniques et tests différents, ceci pourrait entraîner :<br>
+                    - Des retards de diagnostic<br>
+                    - Des traitements inefficaces<br>
+                    - Et une expérience frustrante pour les patients<br><br>
+            
+                    FertiConnect est une plateforme 100% algérienne en ligne multilingue qui offre un suivi complet et personnalisé à ses utilisateurs ! Notre mission est de vous aider à :<br>
+                    - Trouver des cliniques et des spécialistes de la santé reproductive qualifiés dans votre région<br>
+                    - Gérer vos dossiers médicaux et vos rendez-vous en toute simplicité<br>
+                    - Accéder à des informations fiables et à des ressources éducatives sur la santé reproductive en différentes langues<br>
+                    - Bénéficier d'un soutien émotionnel et psychologique par le biais de forums, de groupes de discussion et de services de messagerie instantanée.<br><br>
+            
+                    Accédez à la plateforme depuis n'importe quel appareil connecté à internet, ordinateur, tablette ou Smartphone. Vous allez vous retrouver dans un espace sûr et anonyme où vous pouvez poser des questions et obtenir des conseils sans crainte de stigmatisation et sans jugement ! Avec FertiConnect, vous avez accès à un réseau de professionnels de la santé reproductive qualifiés, à des informations fiables et à une communauté de soutien.<br><br>
+                `;
+            } else if (selectedLanguage === "en") {
+                pesentationquinous.innerHTML = `
+                    FertiConnect is an innovative 100% Algerian platform designed for anyone suffering from reproductive pathologies (PCOS, Endometriosis, cycle disorders, Erectile dysfunction...). 
+                    Our goal is to improve the experience of infertile couples, increase their chances of success, and provide them with a better quality of life. <br><br>
+                    FertiConnect addresses the complexity and lack of comprehensive care in the reproductive journey by offering a centralized platform, efficient coordination, personalized support, and accessible services.<br><br>
+            
+                    1. Lack of coordination and communication among key reproductive health stakeholders<br>
+                    2. Lack of access to reproductive health information<br>
+                    3. Problems with monitoring and managing time and paper medical documents<br>
+                    4. Lack of emotional support<br><br>
+            
+                    This makes the reproductive journey fragmented and complex, involving multiple specialists, clinics, and different tests, which could lead to:<br>
+                    - Diagnostic delays<br>
+                    - Ineffective treatments<br>
+                    - A frustrating experience for patients<br><br>
+            
+                    FertiConnect is a 100% Algerian online multilingual platform that offers comprehensive and personalized support to its users! Our mission is to help you:<br>
+                    - Find clinics and qualified reproductive health specialists in your area<br>
+                    - Manage your medical records and appointments with ease<br>
+                    - Access reliable information and educational resources on reproductive health in different languages<br>
+                    - Benefit from emotional and psychological support through forums, discussion groups, and instant messaging services.<br><br>
+            
+                    Access the platform from any internet-connected device, computer, tablet, or smartphone. You will find yourself in a safe and anonymous space where you can ask questions and get advice without fear of stigmatization and judgment! With FertiConnect, you have access to a network of qualified reproductive health professionals, reliable information, and a support community.<br><br>
+    *            `;
+            } else if (selectedLanguage === "es") {
+                pesentationquinous.innerHTML = `
+                    FertiConnect es una plataforma innovadora 100% argelina diseñada para cualquier persona que sufra de patologías reproductivas (SOP, Endometriosis, trastornos del ciclo, disfunción eréctil...). 
+                    Nuestro objetivo es mejorar la experiencia de las parejas infértiles, aumentar sus posibilidades de éxito y brindarles una mejor calidad de vida. <br><br>
+                    FertiConnect aborda la complejidad y la falta de atención integral en el recorrido reproductivo al ofrecer una plataforma centralizada, una coordinación eficiente, un apoyo personalizado y servicios accesibles.<br><br>
+            
+                    1. Falta de coordinación y comunicación entre los actores clave de la salud reproductiva<br>
+                    2. Falta de acceso a información sobre salud reproductiva<br>
+                    3. Problemas con el seguimiento y la gestión del tiempo y los documentos médicos en papel<br>
+                    4. Falta de apoyo emocional<br><br>
+            
+                    Esto hace que el recorrido reproductivo sea fragmentado y complejo, involucrando múltiples especialistas, clínicas y diferentes pruebas, lo que podría llevar a:<br>
+                    - Retrasos en el diagnóstico<br>
+                    - Tratamientos ineficaces<br>
+                    - Una experiencia frustrante para los pacientes<br><br>
+            
+                    FertiConnect es una plataforma multilingüe en línea 100% argelina que ofrece un apoyo integral y personalizado a sus usuarios! Nuestra misión es ayudarte a:<br>
+                    - Encontrar clínicas y especialistas calificados en salud reproductiva en tu área<br>
+                    - Gestionar tus expedientes médicos y citas con facilidad<br>
+                    - Acceder a información confiable y recursos educativos sobre salud reproductiva en diferentes idiomas<br>
+                    - Beneficiarte de apoyo emocional y psicológico a través de foros, grupos de discusión y servicios de mensajería instantánea.<br><br>
+            
+                    Accede a la plataforma desde cualquier dispositivo conectado a Internet, computadora, tableta o teléfono inteligente. Te encontrarás en un espacio seguro y anónimo donde podrás hacer preguntas y obtener consejos sin temor a la estigmatización y sin juicio! Con FertiConnect, tienes acceso a una red de profesionales calificados en salud reproductiva, información confiable y una comunidad de apoyo.<br><br>
+                `;
+            } else if (selectedLanguage === "ar") {
+                pesentationquinous.innerHTML = `
+                فيرتي كونيكت هي منصة مبتكرة 100٪ جزائرية مصممة لأي شخص يعاني من أمراض تناسلية (متلازمة تكيس المبايض، بطانة الرحم، اضطرابات الدورة، ضعف الانتصاب...). 
+                هدفنا هو تحسين تجربة الأزواج العقيمين، وزيادة فرصهم في النجاح، وتقديم نوعية حياة أفضل لهم.<br><br> 
+                فيرتي كونيكت تتعامل مع التعقيد ونقص الرعاية الشاملة في رحلة التكاثر من خلال تقديم منصة مركزية، وتنسيق فعال، ودعم شخصي، وخدمات يمكن الوصول إليها.<br><br>
+        
+                1. نقص التنسيق والتواصل بين الجهات الرئيسية في الصحة التناسلية<br>
+                2. نقص الوصول إلى معلومات الصحة التناسلية<br>
+                3. مشاكل في متابعة وإدارة الوقت والوثائق الطبية الورقية<br>
+                4. نقص الدعم العاطفي<br><br>
+        
+                هذا يجعل رحلة التكاثر مجزأة ومعقدة، مما يشمل العديد من الأخصائيين، والعيادات، والاختبارات المختلفة، مما قد يؤدي إلى:<br>
+                - تأخيرات في التشخيص<br>
+                - علاجات غير فعالة<br>
+                - وتجربة محبطة للمرضى<br><br>
+        
+                فيرتي كونيكت هي منصة متعددة اللغات على الإنترنت 100٪ جزائرية تقدم دعمًا شاملاً وشخصيًا لمستخدميها! مهمتنا هي مساعدتك في:<br>
+                - العثور على عيادات وأخصائيين في الصحة التناسلية مؤهلين في منطقتك<br>
+                - إدارة ملفاتك الطبية ومواعيدك بسهولة<br>
+                - الوصول إلى معلومات موثوقة وموارد تعليمية عن الصحة التناسلية بلغات مختلفة<br>
+                - الاستفادة من الدعم العاطفي والنفسي من خلال المنتديات، ومجموعات المناقشة، وخدمات المراسلة الفورية.<br><br>
+        
+                الوصول إلى المنصة من أي جهاز متصل بالإنترنت، كمبيوتر، جهاز لوحي أو هاتف ذكي. ستجد نفسك في مساحة آمنة ومجهولة حيث يمكنك طرح الأسئلة والحصول على المشورة دون خوف من الوصم ودون حكم! مع FertiConnect، لديك إمكانية الوصول إلى شبكة من المهنيين المؤهلين في الصحة التناسلية، ومعلومات موثوقة، ومجتمع دعم.<br><br>
+                
+            
+                 `;
+            } else if (selectedLanguage === "pt") {
+                pesentationquinous.innerHTML = `
+                    FertiConnect é uma plataforma inovadora 100% argelina projetada para qualquer pessoa que sofra de patologias reprodutivas (SOP, Endometriose, distúrbios do ciclo, disfunção erétil...). 
+                    Nosso objetivo é melhorar a experiência dos casais inférteis, aumentar suas chances de sucesso e proporcionar-lhes uma melhor qualidade de vida. <br><br>
+                    FertiConnect aborda a complexidade e a falta de atendimento abrangente na jornada reprodutiva, oferecendo uma plataforma centralizada, coordenação eficiente, suporte personalizado e serviços acessíveis.<br><br>
+            
+                    1. Falta de coordenação e comunicação entre os principais atores da saúde reprodutiva<br>
+                    2. Falta de acesso à informação sobre saúde reprodutiva<br>
+                    3. Problemas com o acompanhamento e gestão do tempo e dos documentos médicos em papel<br>
+                    4. Falta de apoio emocional<br><br>
+            
+                    Isso torna a jornada reprodutiva fragmentada e complexa, envolvendo vários especialistas, clínicas e diferentes testes, o que pode levar a:<br>
+                    - Atrasos no diagnóstico<br>
+                    - Tratamentos ineficazes<br>
+                    - Uma experiência frustrante para os pacientes<br><br>
+            
+                    FertiConnect é uma plataforma online multilingue 100% argelina que oferece suporte abrangente e personalizado aos seus usuários! Nossa missão é ajudá-lo a:<br>
+                    - Encontrar clínicas e especialistas qualificados em saúde reprodutiva na sua região<br>
+                    - Gerenciar seus registros médicos e consultas com facilidade<br>
+                    - Acessar informações confiáveis e recursos educacionais sobre saúde reprodutiva em diferentes idiomas<br>
+                    - Beneficiar-se de apoio emocional e psicológico através de fóruns, grupos de discussão e serviços de mensagens instantâneas.<br><br>
+            
+                    Acesse a plataforma de qualquer dispositivo conectado à internet, computador, tablet ou smartphone. Você se encontrará em um espaço seguro e anônimo onde pode fazer perguntas e obter conselhos sem medo de estigmatização e sem julgamento! Com o FertiConnect, você tem acesso a uma rede de profissionais qualificados em saúde reprodutiva, informações confiáveis e uma comunidade de apoio.<br><br>
+                `;
+            } else if (selectedLanguage === "de") {
+                pesentationquinous.innerHTML = `
+                    FertiConnect ist eine innovative 100% algerische Plattform, die für alle Personen mit reproduktiven Erkrankungen (PCOS, Endometriose, Zyklusstörungen, Erektionsstörungen...) entwickelt wurde. 
+                    Unser Ziel ist es, die Erfahrung unfruchtbarer Paare zu verbessern, ihre Erfolgschancen zu erhöhen und ihnen eine bessere Lebensqualität zu bieten. <br><br>
+                    FertiConnect adressiert die Komplexität und den Mangel an umfassender Betreuung im reproduktiven Weg, indem es eine zentralisierte Plattform, effiziente Koordination, personalisierte Unterstützung und zugängliche Dienstleistungen bietet.<br><br>
+            
+                    1. Mangelnde Koordination und Kommunikation zwischen den wichtigsten Akteuren der reproduktiven Gesundheit<br>
+                    2. Mangelnder Zugang zu Informationen über reproduktive Gesundheit<br>
+                    3. Probleme mit der Überwachung und Verwaltung von Zeit und Papierdokumenten<br>
+                    4. Mangel an emotionaler Unterstützung<br><br>
+            
+                    Dies macht den reproduktiven Weg fragmentiert und komplex, da mehrere Spezialisten, Kliniken und verschiedene Tests beteiligt sind, was zu folgenden Problemen führen kann:<br>
+                    - Diagnoseverzögerungen<br>
+                    - Ineffektive Behandlungen<br>
+                    - Eine frustrierende Erfahrung für die Patienten<br><br>
+            
+                    FertiConnect ist eine 100% algerische Online-Mehrsprachplattform, die umfassende und personalisierte Unterstützung für ihre Nutzer bietet! Unsere Mission ist es, Ihnen zu helfen:<br>
+                    - Finden Sie Kliniken und qualifizierte Spezialisten für reproduktive Gesundheit in Ihrer Region<br>
+                    - Verwalten Sie Ihre medizinischen Unterlagen und Termine ganz einfach<br>
+                    - Greifen Sie auf zuverlässige Informationen und Bildungsressourcen zur reproduktiven Gesundheit in verschiedenen Sprachen zu<br>
+                    - Profitieren Sie von emotionaler und psychologischer Unterstützung durch Foren, Diskussionsgruppen und Instant-Messaging-Dienste.<br><br>
+            
+                    Greifen Sie von jedem internetfähigen Gerät, Computer, Tablet oder Smartphone auf die Plattform zu. Sie werden sich in einem sicheren und anonymen Raum wiederfinden, in dem Sie Fragen stellen und Ratschläge einholen können, ohne Angst vor Stigmatisierung und ohne Urteil! Mit FertiConnect haben Sie Zugang zu einem Netzwerk von qualifizierten Fachkräften für reproduktive Gesundheit, zuverlässigen Informationen und einer unterstützenden Gemeinschaft.<br><br>
+                `;
+            }
+            
+            
+    
+            const boxchecktext = document.getElementById("boxchecktext");
+            if (selectedLanguage === "fr") {
+                boxchecktext.innerHTML = "Si vous êtes médecin, cochez ici";
+            } else if (selectedLanguage === "en") {
+                boxchecktext.innerHTML = "If you are a doctor, check here";
+            } else if (selectedLanguage === "es") {
+                boxchecktext.innerHTML = "Si eres médico, marca aquí";
+            } else if (selectedLanguage === "ar") {
+                boxchecktext.innerHTML = "إذا كنت طبيباً، ضع علامة هنا";
+            } else if (selectedLanguage === "pt") {
+                boxchecktext.innerHTML = "Se você é médico, marque aqui";
+            } else if (selectedLanguage === "de") {
+                boxchecktext.innerHTML = "Wenn Sie Arzt sind, markieren Sie hier";
+            }
+            
+        }
+
+        
+        
+        const boxcheck = document.getElementById("boxcheck");
+        const suivant6 = document.getElementById("suivant6");
+        suivant6.innerHTML= next_lang;
+
+        suivant6.addEventListener('click', function() {
+            if (boxcheck.checked) {
+                let typeOfUser = "medecin";
+                window.location.href = `ferticonnectmedecin-login.html?typeOfUser=${typeOfUser}&selectedLanguage=${selectedLanguage}`; 
+                return;
+            } else {
+                let typeOfUser = "patient";
+                window.location.href = `ferticonnectmedecin-login.html?typeOfUser=${typeOfUser}&selectedLanguage=${selectedLanguage}`; 
+                return;
+    
+            }
+        });     
+
+    });
 }
    
 
@@ -176,6 +405,7 @@ function toNextText1(selectedLanguage){
     let text="";
     let next_lang;
     let direction = 'ltr'; // Default text direction is left-to-right
+    
 
     if (selectedLanguage === 'fr') {
         text = `
