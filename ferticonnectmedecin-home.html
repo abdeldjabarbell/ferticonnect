@@ -26,7 +26,7 @@
             <div class="logonav">
                 <img src="img/ferticonnectiLogoGreen.svg" alt="">
             </div>
-            <h1> FertiConnect</h1>
+            <h1 id="ferticonnect_name_text"> </h1>
         </div>
 
 
@@ -54,7 +54,7 @@
             <div class="mycabinsbg" id="mycabinsbg"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg">
                     <i class="bi bi-hospital"></i>
-                    <h2>cabines</h2>
+                    <h2 id="cabines"></h2>
                 </div>
                 <div class="mescabins_" id="mescabins_" style="display: none;"></div>
                 
@@ -64,7 +64,7 @@
             <div class="mycabinsbg" id="mycabinsbg2"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg2">
                     <i class="bi bi-people"></i>
-                    <h2>Amis</h2>
+                    <h2 id="Amis"></h2>
                 </div>
                 <div class="mescabins_" id="mescabins_2" style="display: none;"></div>
                 
@@ -74,7 +74,7 @@
             <div class="mycabinsbg" id="mycabinsbg3"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg3">
                     <i class="bi bi-translate"></i>
-                    <h2>Langues</h2>
+                    <h2 id="Langues"></h2>
                 </div>
                 <div class="mescabins_" id="mescabins_3" style="display: none;"></div>
             </div>
@@ -88,7 +88,7 @@
                     <div class="photoprofilepubadd">
                         <img id="photoprofilepubadd" src="img/ferticonnectiLogoWhite.svg" alt="">
                     </div>
-                    <textarea class="inputpubadd" id="inputpubadd" rows="1" cols="50" placeholder="Quoi de neuf ?"></textarea>
+                    <textarea class="inputpubadd" id="inputpubadd" rows="1" cols="50" ></textarea>
                 </div>
                 <div class="ligne_"></div>
 
@@ -129,11 +129,11 @@
                     <div class="sendImageicon" id="sendImageicon">
                         <i class="bi bi-image-fill"></i>
                     </div>
-                    <textarea class="messageecrit" name="" id="messageecrit"placeholder="Écris un message"></textarea>
+                    <textarea class="messageecrit" name="" id="messageecrit"></textarea>
                     <div class="sendmessageicon" id="sendmessageicon">
                         <i class="bi bi-send"></i>
                     </div>
-                    <p id="QMPEUM" style="display: none;">Que le médecin peut envoyer un message </p>
+                    <p id="QMPEUM" style="display: none;"></p>
                 </div>
                 
                 <div class="scrollButton" id="scrollButton">
@@ -142,17 +142,17 @@
                 <div class="optionbg_wind" id="optionbg_wind" style="display: none;" >
                     <div class="optionbg_wind_btn" id="optionbg_wind_btn_home">
                         <i class="bi bi-house-heart-fill"></i>
-                        <p>Retourner à la page d'accueil</p>
+                        <p id="retourPAC"></p>
                     </div>
 
                     <div class="optionbg_wind_btn" id="optionbg_wind_btn_liste_message">
                         <i class="bi bi-chat-fill"></i>
-                        <p>Voir la liste des messages</p>
+                        <p id="Voirlalistedesmessages"></p>
                     </div>
 
                     <div class="optionbg_wind_btn" id="optionbg_wind_btn_dossier">
                         <i class="bi bi-folder-symlink-fill"></i>
-                        <p>Envoyer votre dossier médical</p>
+                        <p id="Envoyervotredossier"></p>
                     </div>
 
                 </div>
@@ -160,12 +160,13 @@
                 <div class="creeUneRoomCabineBg" id="creeUneRoomCabineBg" style="display: none;">
                     <div class="bg_cree_CabineRoom_place">
                         <i class="bi bi-chat-right-text"></i>
-                        <h1>Créez une messagerie pour votre cabinet</h1>
-                        <p> Vous seul pouvez envoyer des messages.</p>                        
+                        <h1 id="creeUneMessage"></h1>
+                        <p id="noSendMessage"> </p>                        
 
                         <button class="btn souvgarder"  id="confirmeCreeMeaasegCabine">
                             <div id="originalmessageCabine" style="display: block;">
-                                Créez
+                                <p id="cree"></p>
+                                
                             </div>
                             <div class="cs-loader-inner" id="loadermessageCabine" style="display: none;">
                                 <label>	●</label>
@@ -174,7 +175,7 @@
                                 <label>	●</label>
                             </div>
                             <div id="DonemessageCabine" style="display: none;">
-                                terminée
+                                <p id="termine"></p>
                             </div>
                       </button>
                     </div>
@@ -182,7 +183,7 @@
 
                 <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
                     <div class="bgcahngePhoto">
-                        <h3>Choisir une image à envoyer</h3>
+                        <h3 id="imageSend"></h3>
                         <br>
                         <div class="photochanger_couverture" id="photochanger_couverture">
             
@@ -194,7 +195,7 @@
                         <div class="btns_bg_info">
                            <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
                                 <div id="original_couv" style="display: block;">
-                                    Partager
+                                    <p id="Partager"></p>
                                 </div>
                                 <div class="cs-loader-inner" id="loader_couv" style="display: none;">
                                     <label>	●</label>
@@ -203,11 +204,11 @@
                                     <label>	●</label>
                                 </div>
                                 <div id="Done_couv" style="display: none;">
-                                    terminée
+                                    <p id="termine2"></p>
                                 </div>
                           </button>
                           <br>
-                          <button class="btn supprimer" id="fermer2">fermer</button>
+                          <button class="btn supprimer" id="fermer2"></button>
                         </div>
                     </div>
                 </div>
@@ -222,7 +223,7 @@
                     <div class="image_title_listemesagebg">
                         <img src="img/ferticonnectiLogoWhite.svg" alt="">
                     </div>
-                    <h1>FertiConnect messagerie</h1>
+                    <h1 id="fertiMessage"></h1>
                 </div>
                 <div class="ligne_"></div>
 
@@ -248,7 +249,7 @@
     <div class="commentaire_bg" id="commentaire_bg" style="display: none;" >
         <div class="commentaire_" >
             <div class="head_commentaire_">
-                <h1>Commentaires </h1>
+                <h1 id="Commentaires"> </h1>
                 <i class="bi bi-x-octagon-fill" id="closecommentair"></i>
             </div>
             <div class="listeComments_bg" id="listeComments_bg_list">
@@ -279,17 +280,17 @@
 
     <div class="activatoin_compt" id="activatoin_compt" style="display: none;">
         <div class="boxactivation" id="boxactivation">
-            <h1>Activation de compte</h1>
+            <h1 id="atcvcompttext"></h1>
             <img src="img/verifierlecompt.svg"  alt="">
             <br>
             <br>
-            <p>Bienvenue dans l'Espace de FertiConnect ! Pour activer votre compte, veuillez saisir le code de vérification que vous avez reçu par e-mail :</p>
+            <p id="bienvenudansderticonnect"></p>
             <form id="acive_compt_form"  method="post">
-                <label for="code_verification">Code de vérification :</label><br>
+                <label for="code_verification"></label><br>
                 <input type="text" id="code_verification" name="code_verification" required><br><br>
                 <button class="btn souvgarder" type="submit" style="font-size: 11px;">
                     <div id="original" style="display: block;">
-                        Activer mon compte
+                        <p id="Activermoncompte"></p>
                     </div>
                     <div class="cs-loader-inner" id="loader" style="display: none;">
                         <label>	●</label>
@@ -298,20 +299,20 @@
                         <label>	●</label>
                     </div>
                     <div id="Done" style="display: none;">
-                        terminée
+                        <p id="termine3"></p>
                     </div>
                 
                 </button>
             </form>
             <br>
-            <p>Si vous n'avez pas reçu de code de vérification, veuillez vérifier votre dossier de courriers indésirables (spam).</p>
-            <p>Je ne veux pas activer mon compte. <a href="#" id="deconnecter_acv_msg">Me déconnecter.</a></p>
+            <p id="infoActv"></p>
+            <p><p id="noactvaccuntexit"></p><a href="#" id="deconnecter_acv_msg"></a></p>
             <br>
             <p id="message_cerification"></p>
         </div>
         <div class="boxactivation" id="boxactivation_done" style="display: none; flex-direction: column;">
             <img src="img/verifierd.svg" alt="">
-            <h2 style="color: green;">Le compte a été activé avec succès.</h2>
+            <h2 id="actvsuucss" style="color: green;"></h2>
 
         </div>
     </div>
@@ -324,15 +325,15 @@
     
     <div class="photoprofilchangerbg" id="deconnectionbg" style="display: none;">
         <div class="deconnection">
-            <p>Souhaites-tu te déconnecter ?</p>
+            <p id="deco"></p>
             
             <img src="img/deconecter.svg" alt="">
 
             <br>
             <div class="btns_bg_info">
-               <button class="btn supprimer" type="submit" id="deco_neccterbtn">déconnecter</button>
+               <button class="btn supprimer" type="submit" id="deco_neccterbtn"></button>
                <br>
-               <button class="btn souvgarder" id="anulerdeco_neccterbtn">fermer</button>
+               <button class="btn souvgarder" id="anulerdeco_neccterbtn"></button>
              </div>
 
         </div>

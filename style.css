@@ -1960,14 +1960,12 @@ font-size: 1rem;
 }
 
 #typed-text{
-  font-family: "Grape Nuts", cursive;
-  font-weight: 600;
+  /* font-family: "Grape Nuts", cursive;*/
   font-style: normal;
   text-align: justify;
 }
 .buttonnext h1{
-  font-family: "Grape Nuts", cursive;
-  font-weight: 600;
+  /*font-family: "Grape Nuts", cursive;*/
   font-style: normal;
 }
 #text-bar {
@@ -2004,7 +2002,10 @@ font-size: 1rem;
   transition: 1s ease;
   text-align: justify;
 }
-
+ p{
+ display: flex;
+ flex-direction: row;
+}
 .language-selector select{
   background-color: var(--pub-bg-color);
   color: var(--second2-bg-color);
@@ -2014,10 +2015,10 @@ font-size: 1rem;
   border: 1px solid var(--second2-bg-color);
 }
 .tomedcinePage {
+  margin-top: 5px;
   cursor: pointer;
   transition: .3s ease;
-  font-family: "Grape Nuts", cursive;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
   padding: 10px;
 

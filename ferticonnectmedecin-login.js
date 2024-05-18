@@ -25,7 +25,10 @@ if(typeOfUser === "medecin"){
         titreindex.innerHTML = "أهلا بك";
     } else if (selectedLanguage === "pt") {
         titreindex.innerHTML = "Bem-vindo";
+    } else if (selectedLanguage === "de") {
+        titreindex.innerHTML = "Willkommen";
     }
+    
     
 }
 
@@ -110,8 +113,6 @@ const wating = document.getElementById("wating");
 
 //---------------------------------------------- language
 
-
-const text1 = document.getElementById("text1");
 if (selectedLanguage === "fr") {
     text1.innerHTML = "Bienvenue sur";
 } else if (selectedLanguage === "en") {
@@ -122,22 +123,12 @@ if (selectedLanguage === "fr") {
     text1.innerHTML = "مرحبا بك في";
 } else if (selectedLanguage === "pt") {
     text1.innerHTML = "Bem-vindo a";
+} else if (selectedLanguage === "de") {
+    text1.innerHTML = "Willkommen bei";
 } else {
     text1.innerHTML = "Bienvenue sur";
 }
 
-
-if (selectedLanguage === "fr") {
-    message_firebase_register.innerHTML = "Inscription réussie";
-} else if (selectedLanguage === "en") {
-    message_firebase_register.innerHTML = "Registration successful!";
-} else if (selectedLanguage === "es") {
-    message_firebase_register.innerHTML = "¡Registro exitoso!";
-} else if (selectedLanguage === "ar") {
-    message_firebase_register.innerHTML = "التسجيل ناجح!";
-} else if (selectedLanguage === "pt") {
-    message_firebase_register.innerHTML = "Inscrição bem-sucedida!";
-}
 const text2 = document.getElementById("text2");
 if (selectedLanguage === "fr") {
     text2.innerHTML = "FertiConnect";
@@ -149,7 +140,10 @@ if (selectedLanguage === "fr") {
     text2.innerHTML = "فيرتيكونيكت";
 } else if (selectedLanguage === "pt") {
     text2.innerHTML = "FertiConnect";
+} else if (selectedLanguage === "de") {
+    text2.innerHTML = "FertiConnect";
 }
+
 const p_image_L_R = document.getElementById("p_image_L_R");
 if (selectedLanguage === "fr") {
     p_image_L_R.innerHTML = "Connectez-vous avec votre compte";
@@ -161,7 +155,10 @@ if (selectedLanguage === "fr") {
     p_image_L_R.innerHTML = "قم بتسجيل الدخول باستخدام حسابك";
 } else if (selectedLanguage === "pt") {
     p_image_L_R.innerHTML = "Faça login com sua conta";
+} else if (selectedLanguage === "de") {
+    p_image_L_R.innerHTML = "Melden Sie sich mit Ihrem Konto an";
 }
+
 
 const text3 = document.getElementById("text3");
 if (selectedLanguage === "fr") {
@@ -174,7 +171,10 @@ if (selectedLanguage === "fr") {
     text3.innerHTML = "تسجيل الدخول";
 } else if (selectedLanguage === "pt") {
     text3.innerHTML = "Entrar";
+} else if (selectedLanguage === "de") {
+    text3.innerHTML = "Anmelden";
 }
+
 const text4 = document.getElementById("text4");
 if (selectedLanguage === "fr") {
     text4.innerHTML = "Bienvenue dans votre espace FertiConnect";
@@ -186,6 +186,8 @@ if (selectedLanguage === "fr") {
     text4.innerHTML = "مرحبًا بك في مساحتك فيرتيكونيكت";
 } else if (selectedLanguage === "pt") {
     text4.innerHTML = "Bem-vindo ao seu espaço FertiConnect";
+} else if (selectedLanguage === "de") {
+    text4.innerHTML = "Willkommen in Ihrem FertiConnect-Bereich";
 }
 
 
@@ -201,7 +203,10 @@ if (selectedLanguage === "fr") {
     text0.innerHTML = "البريد الإلكتروني";
 } else if (selectedLanguage === "pt") {
     text0.innerHTML = "Email";
+} else if (selectedLanguage === "de") {
+    text0.innerHTML = "E-Mail";
 }
+
 
 // Définition du contenu pour text5
 const text5 = document.getElementById("text5");
@@ -215,7 +220,10 @@ if (selectedLanguage === "fr") {
     text5.innerHTML = "كلمة المرور:";
 } else if (selectedLanguage === "pt") {
     text5.innerHTML = "Senha:";
+} else if (selectedLanguage === "de") {
+    text5.innerHTML = "Passwort:";
 }
+
 
 // Définition du contenu pour text6
 const text6 = document.getElementById("text6");
@@ -229,7 +237,10 @@ if (selectedLanguage === "fr") {
     text6.innerHTML = "تسجيل الدخول";
 } else if (selectedLanguage === "pt") {
     text6.innerHTML = "Entrar";
+} else if (selectedLanguage === "de") {
+    text6.innerHTML = "Anmelden";
 }
+
 
 // Définition du contenu pour text7
 const text7 = document.getElementById("text7");
@@ -243,7 +254,10 @@ if (selectedLanguage === "fr") {
     text7.innerHTML = "مكتمل";
 } else if (selectedLanguage === "pt") {
     text7.innerHTML = "completado";
+} else if (selectedLanguage === "de") {
+    text7.innerHTML = "abgeschlossen";
 }
+
 
 // Définition du contenu pour text8
 const text8 = document.getElementById("text8");
@@ -257,7 +271,10 @@ if (selectedLanguage === "fr") {
     text8.innerHTML = "لقد نسيت كلمة المرور الخاصة بي،";
 } else if (selectedLanguage === "pt") {
     text8.innerHTML = "Esqueci minha senha,";
+} else if (selectedLanguage === "de") {
+    text8.innerHTML = "Ich habe mein Passwort vergessen,";
 }
+
 
 const text9 = document.getElementById("text9");
 if (selectedLanguage === "fr") {
@@ -270,7 +287,10 @@ if (selectedLanguage === "fr") {
     text9.innerHTML = "ليس لدي حساب،";
 } else if (selectedLanguage === "pt") {
     text9.innerHTML = "Eu não tenho uma conta,";
+} else if (selectedLanguage === "de") {
+    text9.innerHTML = "Ich habe kein Konto,";
 }
+
 
 const text10 = document.getElementById("text10");
 if (selectedLanguage === "fr") {
@@ -283,6 +303,8 @@ if (selectedLanguage === "fr") {
     text10.innerHTML = "اشترك";
 } else if (selectedLanguage === "pt") {
     text10.innerHTML = "Inscrever-se";
+} else if (selectedLanguage === "de") {
+    text10.innerHTML = "Registrieren";
 }
 
 
@@ -298,6 +320,8 @@ if (selectedLanguage === "fr") {
     text11.innerHTML = "مرحبًا بك في مساحتك FertiConnect";
 } else if (selectedLanguage === "pt") {
     text11.innerHTML = "Bem-vindo ao seu espaço FertiConnect";
+} else if (selectedLanguage === "de") {
+    text11.innerHTML = "Willkommen in Ihrem FertiConnect-Bereich";
 }
 
 // Définition du contenu pour text12
@@ -312,7 +336,10 @@ if (selectedLanguage === "fr") {
     text12.innerHTML = "الاسم:";
 } else if (selectedLanguage === "pt") {
     text12.innerHTML = "Nome:";
+} else if (selectedLanguage === "de") {
+    text12.innerHTML = "Name:";
 }
+
 
 // Définition du contenu pour text13
 const text13 = document.getElementById("text13");
@@ -326,7 +353,10 @@ if (selectedLanguage === "fr") {
     text13.innerHTML = "الاسم الأول:";
 } else if (selectedLanguage === "pt") {
     text13.innerHTML = "Primeiro Nome:";
+} else if (selectedLanguage === "de") {
+    text13.innerHTML = "Vorname:";
 }
+
 
 // Définition du contenu pour text14
 const text14 = document.getElementById("text14");
@@ -340,7 +370,10 @@ if (selectedLanguage === "fr") {
     text14.innerHTML = "البريد الإلكتروني:";
 } else if (selectedLanguage === "pt") {
     text14.innerHTML = "Email:";
+} else if (selectedLanguage === "de") {
+    text14.innerHTML = "E-Mail:";
 }
+
 
 // Définition du contenu pour text15
 const text15 = document.getElementById("text15");
@@ -368,7 +401,10 @@ if (selectedLanguage === "fr") {
     text16.innerHTML = "سجل";
 } else if (selectedLanguage === "pt") {
     text16.innerHTML = "Inscrever-se";
+} else if (selectedLanguage === "de") {
+    text16.innerHTML = "Registrieren";
 }
+
 
 // Définition du contenu pour text17
 const text17 = document.getElementById("text17");
@@ -382,7 +418,10 @@ if (selectedLanguage === "fr") {
     text17.innerHTML = "مكتمل";
 } else if (selectedLanguage === "pt") {
     text17.innerHTML = "completado";
+} else if (selectedLanguage === "de") {
+    text17.innerHTML = "abgeschlossen";
 }
+
 
 // Définition du contenu pour text18
 const text18 = document.getElementById("text18");
@@ -396,6 +435,8 @@ if (selectedLanguage === "fr") {
     text18.innerHTML = "لدي حساب،";
 } else if (selectedLanguage === "pt") {
     text18.innerHTML = "Eu tenho uma conta,";
+} else if (selectedLanguage === "de") {
+    text18.innerHTML = "Ich habe ein Konto,";
 }
 
 // Définition du contenu pour text19
@@ -410,7 +451,10 @@ if (selectedLanguage === "fr") {
     text19.innerHTML = "استعادة كلمة المرور";
 } else if (selectedLanguage === "pt") {
     text19.innerHTML = "Recuperação de Senha";
+} else if (selectedLanguage === "de") {
+    text19.innerHTML = "Passwort-Wiederherstellung";
 }
+
 
 // Définition du contenu pour text20
 const text20 = document.getElementById("text20");
@@ -424,7 +468,10 @@ if (selectedLanguage === "fr") {
     text20.innerHTML = "أدخل عنوان بريدك الإلكتروني أدناه. سيتم إرسال رابط إعادة تعيين كلمة المرور إليك.";
 } else if (selectedLanguage === "pt") {
     text20.innerHTML = "Digite seu endereço de e-mail abaixo. Um link para redefinir a senha será enviado a você.";
+} else if (selectedLanguage === "de") {
+    text20.innerHTML = "Geben Sie unten Ihre E-Mail-Adresse ein. Ein Link zum Zurücksetzen des Passworts wird an Sie gesendet.";
 }
+
 
 // Définition du contenu pour text21
 const text21 = document.getElementById("text21");
@@ -438,7 +485,10 @@ if (selectedLanguage === "fr") {
     text21.innerHTML = "البريد الإلكتروني:";
 } else if (selectedLanguage === "pt") {
     text21.innerHTML = "Email:";
+} else if (selectedLanguage === "de") {
+    text21.innerHTML = "E-Mail:";
 }
+
 
 // Définition du contenu pour text22
 const text22 = document.getElementById("text22");
@@ -452,7 +502,10 @@ if (selectedLanguage === "fr") {
     text22.innerHTML = "إرسال الرابط";
 } else if (selectedLanguage === "pt") {
     text22.innerHTML = "Enviar link";
+} else if (selectedLanguage === "de") {
+    text22.innerHTML = "Link senden";
 }
+
 
 // Définition du contenu pour text23
 const text23 = document.getElementById("text23");
@@ -466,7 +519,10 @@ if (selectedLanguage === "fr") {
     text23.innerHTML = "مكتمل";
 } else if (selectedLanguage === "pt") {
     text23.innerHTML = "completado";
+} else if (selectedLanguage === "de") {
+    text23.innerHTML = "abgeschlossen";
 }
+
 
 // Définition du contenu pour text24
 const text24 = document.getElementById("text24");
@@ -480,8 +536,9 @@ if (selectedLanguage === "fr") {
     text24.innerHTML = "العودة إلى صفحة";
 } else if (selectedLanguage === "pt") {
     text24.innerHTML = "Voltar para a página de ";
+} else if (selectedLanguage === "de") {
+    text24.innerHTML = "Zurück zur Seite von";
 }
-
 
 
 
@@ -496,9 +553,11 @@ if (selectedLanguage === "fr") {
     recupereMDP.innerHTML = "استعادة حسابي";
 } else if (selectedLanguage === "pt") {
     recupereMDP.innerHTML = "Recuperar minha conta";
+} else if (selectedLanguage === "de") {
+    recupereMDP.innerHTML = "Konto wiederherstellen";
 }
 
- if (selectedLanguage === "fr") {
+if (selectedLanguage === "fr") {
     creeCompte.innerHTML = "créez un compte";
 } else if (selectedLanguage === "en") {
     creeCompte.innerHTML = "create an account";
@@ -508,9 +567,11 @@ if (selectedLanguage === "fr") {
     creeCompte.innerHTML = "أنشئ حسابًا";
 } else if (selectedLanguage === "pt") {
     creeCompte.innerHTML = "criar uma conta";
+} else if (selectedLanguage === "de") {
+    creeCompte.innerHTML = "ein Konto erstellen";
 }
- 
- if (selectedLanguage === "fr") {
+
+if (selectedLanguage === "fr") {
     connecter.innerHTML = "Connectez-vous";
 } else if (selectedLanguage === "en") {
     connecter.innerHTML = "Log in";
@@ -520,9 +581,11 @@ if (selectedLanguage === "fr") {
     connecter.innerHTML = "تسجيل الدخول";
 } else if (selectedLanguage === "pt") {
     connecter.innerHTML = "Entrar";
+} else if (selectedLanguage === "de") {
+    connecter.innerHTML = "Anmelden";
 }
 
- if (selectedLanguage === "fr") {
+if (selectedLanguage === "fr") {
     anuulerRecuperation.innerHTML = "connexion";
 } else if (selectedLanguage === "en") {
     anuulerRecuperation.innerHTML = "login";
@@ -532,6 +595,8 @@ if (selectedLanguage === "fr") {
     anuulerRecuperation.innerHTML = "تسجيل الدخول";
 } else if (selectedLanguage === "pt") {
     anuulerRecuperation.innerHTML = "login";
+} else if (selectedLanguage === "de") {
+    anuulerRecuperation.innerHTML = "Anmeldung";
 }
 
 if (selectedLanguage === "fr") {
@@ -544,10 +609,13 @@ if (selectedLanguage === "fr") {
     retourne.innerHTML = "العودة";
 } else if (selectedLanguage === "pt") {
     retourne.innerHTML = "Voltar";
+} else if (selectedLanguage === "de") {
+    retourne.innerHTML = "Zurück";
 } else {
     // Par défaut en français si aucune langue correspondante n'est trouvée
     retourne.innerHTML = "Retour";
 }
+
 
 //---------------------------------------------- registration
 
@@ -666,6 +734,7 @@ async function signUp() {
         // button loder
         loader1.style.display="none"
         Done1.style.display="block"
+        
         // message
         message_firebase_register.style.color="#33ff00";
         if (selectedLanguage === "fr") {

@@ -49,7 +49,732 @@ const firebaseConfig = {
     
   }  
 
-  
+
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        // Récupération de l'adresse e-mail de l'utilisateur connecté
+        const mail = user.email;
+        const userId = user.uid;
+        console.log(userId);
+        const userRef = doc(db, typeuserclick, userId);
+        const docSnapshot = await getDoc(userRef);
+        
+        
+        if (docSnapshot.exists()) {
+            const photoprofilepubadd = document.getElementById("photoprofilepubadd");
+            const photoprofilepubadd1 = document.getElementById("photoprofilepubadd1");
+            const imguser = docSnapshot.data().imguser;
+            if(imguser){
+                photoprofilepubadd.src=imguser;
+                photoprofilepubadd1.src=imguser;
+                  photoprofilepubadd.addEventListener('click', () => {
+                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+                  }); 
+                  photoprofilepubadd1.addEventListener('click', () => {
+                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+                  }); 
+            }
+
+        }
+        const profilinfobg = document.getElementById("profilinfobg");
+        profilinfobg.addEventListener('click', () => {
+            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+        }); 
+
+        const amisquerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"amis")));
+        amisquerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const iduseramis = data.iduser;
+            const typeuseramis = data.typeuser;
+
+            recupereAmis(iduseramis,typeuseramis);
+
+        });
+        async function recupereAmis(iduseramis,typeuseramis){
+            const docRef = doc(db, typeuseramis, iduseramis);
+            const docSnap = await getDoc(docRef); 
+            const datauser = docSnap.data(); 
+            const prenameuser = datauser.prenom;
+            const nameuser = datauser.nom;
+            const imguser = datauser.imguser;
+            const type_user = datauser.typeOfUser;
+            
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(imguser){
+                mescabins_image_img.src=imguser;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML=prenameuser+" "+nameuser;
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+            mescabins_2.appendChild(cabinfoss);
+
+            cabinfoss.addEventListener('click', () => {
+                window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
+            }); 
+        }
+        
+
+        const cabinequerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"cabines")));
+        cabinequerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const cabineId = data.cabineId;
+            recupereCabine(cabineId);
+
+        });
+        
+        async function recupereCabine(cabineId){
+            const docRef = doc(db, "cabines", cabineId);
+            const docSnap = await getDoc(docRef); 
+            const dataCabine = docSnap.data(); 
+            const nameCabine = dataCabine.nameCabine;
+            const cabine_Image = dataCabine.cabineImage;
+            const creator_Id = dataCabine.creatorId;
+            
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(cabine_Image){
+                mescabins_image_img.src=cabine_Image;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+            
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML= nameCabine;
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+            mescabins_.appendChild(cabinfoss);
+
+
+           cabinfoss.addEventListener('click', () => {
+               window.location.href = `ferticonnectmedecin-cabine.html?cabineidclick=${cabineId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+           }); 
+        }
+
+
+        //const langauequerySnapshot = doc(db, typeOfUser, userId);
+        const langauequerySnapshot = await getDocs(query(collection(db, "languesList")));
+        langauequerySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const langue = data.langue;
+            const langue_image = data.img_langue;
+            console.log("langaue database = "+langue);
+            recupereLang(langue,langue_image);
+
+        });
+        async function recupereLang(langue,langue_image){
+            const docRef = doc(db, typeOfUser, userId);
+            const docSnap = await getDoc(docRef); 
+            const datauser = docSnap.data(); 
+            const lang = datauser.lang;
+
+           // console.log("typeOfUser ="+typeOfUser);
+           // console.log("userId ="+userId);
+           // console.log("lang  ="+lang);
+
+
+
+            const cabinfoss = document.createElement('div');
+            cabinfoss.className="cabinfoss";
+
+            const mescabins_image = document.createElement('div');
+            mescabins_image.className="mescabins_image";
+
+            const mescabins_image_img = document.createElement('img');
+            if(langue_image){
+                mescabins_image_img.src=langue_image;
+            }else{
+                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
+            }
+            const mescabins_name = document.createElement('div');
+            mescabins_name.className="mescabins_name";
+            const mescabins_nameh1 = document.createElement('h1');
+            mescabins_nameh1.innerHTML=" "+langue+" ";
+
+            const langue_check = document.createElement('div');
+            langue_check.className="langue_check";
+            const langue_check_i = document.createElement('i');
+            langue_check_i.className='bi bi-check-lg';
+
+            mescabins_image.appendChild(mescabins_image_img);
+            cabinfoss.appendChild(mescabins_image);
+
+            mescabins_name.appendChild(mescabins_nameh1);
+            cabinfoss.appendChild(mescabins_name);
+
+            if(lang === langue){
+                langue_check.appendChild(langue_check_i);
+                cabinfoss.appendChild(langue_check);
+            }
+            mescabins_3.appendChild(cabinfoss);
+            
+            cabinfoss.addEventListener('click', async() => {
+                wating.style.display="flex";
+                await updateDoc(doc(db, typeOfUser,userId), {
+                    lang: langue,
+                });
+                refreshPage();
+            }); 
+        }
+        
+        
+
+        
+
+
+
+        // Vérification si l'e-mail existe dans la collection "admins"
+        const q = query(collection(db, typeuserclick), where("email", "==", mail));
+
+        try {
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+                const watingAccount = document.getElementById("wating");
+                watingAccount.style.display = "flex";
+
+                const userId = user.uid;
+                const userRef = doc(db, typeuserclick, userId);
+                const docSnapshot = await getDoc(userRef);
+
+
+                if (docSnapshot.exists()) {
+                    // Correction : récupération de l'e-mail depuis docSnapshot.data()
+                    const statut_du_compte = docSnapshot.data().statut_du_compte;
+                    const nomAdm = docSnapshot.data().nom;
+                    const prenomAdm = docSnapshot.data().prenom;
+                    const lango = docSnapshot.data().lang;
+
+                    
+
+                    const nom_prenom_admin = document.getElementById("nameUser_connect");
+                    nom_prenom_admin.innerHTML = prenomAdm.toUpperCase() + " " + nomAdm.toUpperCase();
+                    const activatoin_compt = document.getElementById("activatoin_compt");
+                    if (statut_du_compte === "desactive") {
+                        watingAccount.style.display = "none";
+                        activatoin_compt.style.display = "flex";
+                    } else {
+                        activatoin_compt.style.display = "none";
+                        watingAccount.style.display = "none";
+                    }
+
+
+
+                    traduction_systeme(lango);
+
+                    
+
+
+
+
+
+
+
+
+                    
+
+                    
+                }
+            } else {
+                console.log("déconnection en cours ...")
+                logout();
+            }
+        } catch (error) {
+            console.error("Erreur lors de la vérification du email :", error);
+        }
+    } else {
+        window.location.href = 'index.html';
+    }
+});
+function traduction_systeme(lango){
+    
+const messageecrit = document.getElementById("messageecrit");
+const ferticonnect_name_text = document.getElementById("ferticonnect_name_text");
+const cabines = document.getElementById("cabines");
+const Amis = document.getElementById("Amis");
+const Langues = document.getElementById("Langues");
+const QMPEUM = document.getElementById("QMPEUM");
+const retourPAC = document.getElementById("retourPAC");
+const Voirlalistedesmessages = document.getElementById("Voirlalistedesmessages");
+const Envoyervotredossier = document.getElementById("Envoyervotredossier");
+const creeUneMessage = document.getElementById("creeUneMessage");
+const noSendMessage = document.getElementById("noSendMessage");
+const cree = document.getElementById("cree");
+const termine = document.getElementById("termine");
+const imageSend = document.getElementById("imageSend");
+const Partager = document.getElementById("Partager");
+const termine2 = document.getElementById("termine2");
+const fertiMessage = document.getElementById("fertiMessage");
+const Commentaires = document.getElementById("Commentaires");
+const atcvcompttext = document.getElementById("atcvcompttext");
+const bienvenudansderticonnect = document.getElementById("bienvenudansderticonnect");
+const code_verification = document.getElementById("code_verification");
+const Activermoncompte = document.getElementById("Activermoncompte");
+const termine3 = document.getElementById("termine3");
+const infoActv = document.getElementById("infoActv");
+const noactvaccuntexit = document.getElementById("noactvaccuntexit");
+const deconnecter_acv_msg = document.getElementById("deconnecter_acv_msg");
+const actvsuucss = document.getElementById("actvsuucss");
+const deco = document.getElementById("deco");
+const deco_neccterbtn = document.getElementById("deco_neccterbtn");
+const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
+const inputpubadd = document.getElementById("inputpubadd");
+
+
+if (lango === "Français") {
+    messageecrit.placeholder = "Écris un message";
+} else if (lango === "Anglais") {
+    messageecrit.placeholder = "Write a message";
+} else if (lango === "Espagnol") {
+    messageecrit.placeholder = "Escribe un mensaje";
+} else if (lango === "Arabe") {
+    messageecrit.placeholder = "اكتب رسالة";
+} else if (lango === "Portugais") {
+    messageecrit.placeholder = "Escreva uma mensagem";
+} else if (lango === "Allemand") {
+    messageecrit.placeholder = "Schreibe eine Nachricht";
+}
+
+
+
+if (lango === "Français") {
+    inputpubadd.placeholder = "Quoi de neuf ?";
+} else if (lango === "Anglais") {
+    inputpubadd.placeholder = "What's new?";
+} else if (lango === "Espagnol") {
+    inputpubadd.placeholder = "¿Qué hay de nuevo?";
+} else if (lango === "Arabe") {
+    inputpubadd.placeholder = "ما الجديد؟";
+} else if (lango === "Portugais") {
+    inputpubadd.placeholder = "O que há de novo?";
+} else if (lango === "Allemand") {
+    inputpubadd.placeholder = "Was gibt's Neues?";
+}
+
+
+
+
+if (lango === "Français") {
+    ferticonnect_name_text.innerHTML = "FertiConnect";
+} else if (lango === "Anglais") {
+    ferticonnect_name_text.innerHTML = "FertiConnect";
+} else if (lango === "Espagnol") {
+    ferticonnect_name_text.innerHTML = "FertiConnect";
+} else if (lango === "Arabe") {
+    ferticonnect_name_text.innerHTML = "فيرتيكونيكت";
+} else if (lango === "Portugais") {
+    ferticonnect_name_text.innerHTML = "FertiConnect";
+} else if (lango === "Allemand") {
+    ferticonnect_name_text.innerHTML = "FertiConnect";
+}
+if (lango === "Français") {
+    cabines.innerHTML = "clinique";
+} else if (lango === "Anglais") {
+    cabines.innerHTML = "clinic";
+} else if (lango === "Espagnol") {
+    cabines.innerHTML = "clínica";
+} else if (lango === "Arabe") {
+    cabines.innerHTML = "عيادة";
+} else if (lango === "Portugais") {
+    cabines.innerHTML = "clínica";
+} else if (lango === "Allemand") {
+    cabines.innerHTML = "Klinik";
+}
+
+
+if (lango === "Français") {
+    Amis.innerHTML = "Amis";
+} else if (lango === "Anglais") {
+    Amis.innerHTML = "Friends";
+} else if (lango === "Espagnol") {
+    Amis.innerHTML = "Amigos";
+} else if (lango === "Arabe") {
+    Amis.innerHTML = "أصدقاء";
+} else if (lango === "Portugais") {
+    Amis.innerHTML = "Amigos";
+} else if (lango === "Allemand") {
+    Amis.innerHTML = "Freunde";
+}
+
+if (lango === "Français") {
+    Langues.innerHTML = "Langues";
+} else if (lango === "Anglais") {
+    Langues.innerHTML = "Languages";
+} else if (lango === "Espagnol") {
+    Langues.innerHTML = "Idiomas";
+} else if (lango === "Arabe") {
+    Langues.innerHTML = "اللغات";
+} else if (lango === "Portugais") {
+    Langues.innerHTML = "Idiomas";
+} else if (lango === "Allemand") {
+    Langues.innerHTML = "Sprachen";
+}
+
+if (lango === "Français") {
+    QMPEUM.innerHTML = "Que le médecin peut envoyer un message";
+} else if (lango === "Anglais") {
+    QMPEUM.innerHTML = "That the doctor can send a message";
+} else if (lango === "Espagnol") {
+    QMPEUM.innerHTML = "Que el médico puede enviar un mensaje";
+} else if (lango === "Arabe") {
+    QMPEUM.innerHTML = "أن الطبيب يمكنه إرسال رسالة";
+} else if (lango === "Portugais") {
+    QMPEUM.innerHTML = "Que o médico pode enviar uma mensagem";
+} else if (lango === "Allemand") {
+    QMPEUM.innerHTML = "Dass der Arzt eine Nachricht senden kann";
+}
+
+if (lango === "Français") {
+    retourPAC.innerHTML = "Retourner à la page d'accueil";
+} else if (lango === "Anglais") {
+    retourPAC.innerHTML = "Return to the homepage";
+} else if (lango === "Espagnol") {
+    retourPAC.innerHTML = "Volver a la página de inicio";
+} else if (lango === "Arabe") {
+    retourPAC.innerHTML = "العودة إلى الصفحة الرئيسية";
+} else if (lango === "Portugais") {
+    retourPAC.innerHTML = "Voltar para a página inicial";
+} else if (lango === "Allemand") {
+    retourPAC.innerHTML = "Zurück zur Startseite";
+}
+
+if (lango === "Français") {
+    Voirlalistedesmessages.innerHTML = "Voir la liste des messages";
+} else if (lango === "Anglais") {
+    Voirlalistedesmessages.innerHTML = "View the list of messages";
+} else if (lango === "Espagnol") {
+    Voirlalistedesmessages.innerHTML = "Ver la lista de mensajes";
+} else if (lango === "Arabe") {
+    Voirlalistedesmessages.innerHTML = "عرض قائمة الرسائل";
+} else if (lango === "Portugais") {
+    Voirlalistedesmessages.innerHTML = "Ver a lista de mensagens";
+} else if (lango === "Allemand") {
+    Voirlalistedesmessages.innerHTML = "Nachrichtenliste anzeigen";
+}
+
+if (lango === "Français") {
+    Envoyervotredossier.innerHTML = "Envoyer votre dossier médical";
+} else if (lango === "Anglais") {
+    Envoyervotredossier.innerHTML = "Send your medical file";
+} else if (lango === "Espagnol") {
+    Envoyervotredossier.innerHTML = "Enviar su expediente médico";
+} else if (lango === "Arabe") {
+    Envoyervotredossier.innerHTML = "إرسال ملفك الطبي";
+} else if (lango === "Portugais") {
+    Envoyervotredossier.innerHTML = "Envie seu arquivo médico";
+} else if (lango === "Allemand") {
+    Envoyervotredossier.innerHTML = "Senden Sie Ihre Krankenakte";
+}
+
+if (lango === "Français") {
+    creeUneMessage.innerHTML = "Créez une messagerie pour votre cabinet";
+} else if (lango === "Anglais") {
+    creeUneMessage.innerHTML = "Create a messaging service for your practice";
+} else if (lango === "Espagnol") {
+    creeUneMessage.innerHTML = "Cree un servicio de mensajería para su consultorio";
+} else if (lango === "Arabe") {
+    creeUneMessage.innerHTML = "قم بإنشاء خدمة مراسلة لعيادتك";
+} else if (lango === "Portugais") {
+    creeUneMessage.innerHTML = "Crie um serviço de mensagens para o seu consultório";
+} else if (lango === "Allemand") {
+    creeUneMessage.innerHTML = "Erstellen Sie einen Messaging-Service für Ihre Praxis";
+}
+
+if (lango === "Français") {
+    noSendMessage.innerHTML = "Vous seul pouvez envoyer des messages.";
+} else if (lango === "Anglais") {
+    noSendMessage.innerHTML = "Only you can send messages.";
+} else if (lango === "Espagnol") {
+    noSendMessage.innerHTML = "Solo usted puede enviar mensajes.";
+} else if (lango === "Arabe") {
+    noSendMessage.innerHTML = "أنت فقط يمكنك إرسال الرسائل.";
+} else if (lango === "Portugais") {
+    noSendMessage.innerHTML = "Apenas você pode enviar mensagens.";
+} else if (lango === "Allemand") {
+    noSendMessage.innerHTML = "Nur Sie können Nachrichten senden.";
+}
+
+if (lango === "Français") {
+    cree.innerHTML = "Créez";
+} else if (lango === "Anglais") {
+    cree.innerHTML = "Create";
+} else if (lango === "Espagnol") {
+    cree.innerHTML = "Crear";
+} else if (lango === "Arabe") {
+    cree.innerHTML = "إنشاء";
+} else if (lango === "Portugais") {
+    cree.innerHTML = "Criar";
+} else if (lango === "Allemand") {
+    cree.innerHTML = "Erstellen";
+}
+
+if (lango === "Français") {
+    termine.innerHTML = "terminée";
+} else if (lango === "Anglais") {
+    termine.innerHTML = "completed";
+} else if (lango === "Espagnol") {
+    termine.innerHTML = "terminado";
+} else if (lango === "Arabe") {
+    termine.innerHTML = "مكتمل";
+} else if (lango === "Portugais") {
+    termine.innerHTML = "completado";
+} else if (lango === "Allemand") {
+    termine.innerHTML = "abgeschlossen";
+}
+
+if (lango === "Français") {
+    imageSend.innerHTML = "Choisir une image à envoyer";
+} else if (lango === "Anglais") {
+    imageSend.innerHTML = "Choose an image to send";
+} else if (lango === "Espagnol") {
+    imageSend.innerHTML = "Elija una imagen para enviar";
+} else if (lango === "Arabe") {
+    imageSend.innerHTML = "اختر صورة للإرسال";
+} else if (lango === "Portugais") {
+    imageSend.innerHTML = "Escolha uma imagem para enviar";
+} else if (lango === "Allemand") {
+    imageSend.innerHTML = "Wählen Sie ein Bild zum Senden";
+}
+
+if (lango === "Français") {
+    Partager.innerHTML = "Partager";
+} else if (lango === "Anglais") {
+    Partager.innerHTML = "Share";
+} else if (lango === "Espagnol") {
+    Partager.innerHTML = "Compartir";
+} else if (lango === "Arabe") {
+    Partager.innerHTML = "مشاركة";
+} else if (lango === "Portugais") {
+    Partager.innerHTML = "Compartilhar";
+} else if (lango === "Allemand") {
+    Partager.innerHTML = "Teilen";
+}
+
+if (lango === "Français") {
+    termine2.innerHTML = "terminée";
+} else if (lango === "Anglais") {
+    termine2.innerHTML = "completed";
+} else if (lango === "Espagnol") {
+    termine2.innerHTML = "terminado";
+} else if (lango === "Arabe") {
+    termine2.innerHTML = "مكتمل";
+} else if (lango === "Portugais") {
+    termine2.innerHTML = "completado";
+}
+
+
+if (lango === "Français") {
+    fertiMessage.innerHTML = "Messagerie FertiConnect";
+} else if (lango === "Anglais") {
+    fertiMessage.innerHTML = "FertiConnect Messaging";
+} else if (lango === "Espagnol") {
+    fertiMessage.innerHTML = "Mensajería de FertiConnect";
+} else if (lango === "Arabe") {
+    fertiMessage.innerHTML = "الرسائل النصية في فيرتيكونيكت";
+} else if (lango === "Portugais") {
+    fertiMessage.innerHTML = "Mensagens FertiConnect";
+} else if (lango === "Allemand") {
+    fertiMessage.innerHTML = "FertiConnect-Nachrichten";
+}
+
+if (lango === "Français") {
+    Commentaires.innerHTML = "Commentaires";
+} else if (lango === "Anglais") {
+    Commentaires.innerHTML = "Comments";
+} else if (lango === "Espagnol") {
+    Commentaires.innerHTML = "Comentarios";
+} else if (lango === "Arabe") {
+    Commentaires.innerHTML = "تعليقات";
+} else if (lango === "Portugais") {
+    Commentaires.innerHTML = "Comentários";
+} else if (lango === "Allemand") {
+    Commentaires.innerHTML = "Kommentare";
+}
+
+if (lango === "Français") {
+    atcvcompttext.innerHTML = "Activation de compte";
+} else if (lango === "Anglais") {
+    atcvcompttext.innerHTML = "Account Activation";
+} else if (lango === "Espagnol") {
+    atcvcompttext.innerHTML = "Activación de cuenta";
+} else if (lango === "Arabe") {
+    atcvcompttext.innerHTML = "تفعيل الحساب";
+} else if (lango === "Portugais") {
+    atcvcompttext.innerHTML = "Ativação da Conta";
+} else if (lango === "Allemand") {
+    atcvcompttext.innerHTML = "Kontoaktivierung";
+}
+
+if (lango === "Français") {
+    bienvenudansderticonnect.innerHTML = "Bienvenue dans l'Espace de FertiConnect ! Pour activer votre compte, veuillez saisir le code de vérification que vous avez reçu par e-mail :";
+} else if (lango === "Anglais") {
+    bienvenudansderticonnect.innerHTML = "Welcome to FertiConnect Space! To activate your account, please enter the verification code you received by email:";
+} else if (lango === "Espagnol") {
+    bienvenudansderticonnect.innerHTML = "¡Bienvenido al Espacio de FertiConnect! Para activar su cuenta, ingrese el código de verificación que recibió por correo electrónico:";
+} else if (lango === "Arabe") {
+    bienvenudansderticonnect.innerHTML = "مرحبًا بك في مساحة فيرتيكونيكت! لتنشيط حسابك ، يرجى إدخال رمز التحقق الذي تلقيته عبر البريد الإلكتروني:";
+} else if (lango === "Portugais") {
+    bienvenudansderticonnect.innerHTML = "Bem-vindo ao Espaço FertiConnect! Para ativar sua conta, insira o código de verificação que você recebeu por e-mail:";
+} else if (lango === "Allemand") {
+    bienvenudansderticonnect.innerHTML = "Willkommen im FertiConnect Space! Um Ihr Konto zu aktivieren, geben Sie bitte den Verifizierungscode ein, den Sie per E-Mail erhalten haben:";
+}
+
+if (lango === "Français") {
+    code_verification.innerHTML = "Code de vérification :";
+} else if (lango === "Anglais") {
+    code_verification.innerHTML = "Verification Code :";
+} else if (lango === "Espagnol") {
+    code_verification.innerHTML = "Código de verificación :";
+} else if (lango === "Arabe") {
+    code_verification.innerHTML = "رمز التحقق :";
+} else if (lango === "Portugais") {
+    code_verification.innerHTML = "Código de Verificação :";
+} else if (lango === "Allemand") {
+    code_verification.innerHTML = "Bestätigungscode :";
+}
+
+if (lango === "Français") {
+    Activermoncompte.innerHTML = "Activer mon compte";
+} else if (lango === "Anglais") {
+    Activermoncompte.innerHTML = "Activate my account";
+} else if (lango === "Espagnol") {
+    Activermoncompte.innerHTML = "Activar mi cuenta";
+} else if (lango === "Arabe") {
+    Activermoncompte.innerHTML = "تفعيل حسابي";
+} else if (lango === "Portugais") {
+    Activermoncompte.innerHTML = "Ativar minha conta";
+} else if (lango === "Allemand") {
+    Activermoncompte.innerHTML = "Mein Konto aktivieren";
+}
+
+
+if (lango === "Français") {
+    termine3.innerHTML = "terminée";
+} else if (lango === "Anglais") {
+    termine3.innerHTML = "completed";
+} else if (lango === "Espagnol") {
+    termine3.innerHTML = "terminado";
+} else if (lango === "Arabe") {
+    termine3.innerHTML = "مكتمل";
+} else if (lango === "Portugais") {
+    termine3.innerHTML = "completado";
+} else if (lango === "Allemand") {
+    termine3.innerHTML = "abgeschlossen";
+}
+
+if (lango === "Français") {
+    infoActv.innerHTML = "Si vous n'avez pas reçu de code de vérification, veuillez vérifier votre dossier de courriers indésirables (spam).";
+} else if (lango === "Anglais") {
+    infoActv.innerHTML = "If you haven't received a verification code, please check your spam folder.";
+} else if (lango === "Espagnol") {
+    infoActv.innerHTML = "Si no ha recibido un código de verificación, por favor revise su carpeta de spam.";
+} else if (lango === "Arabe") {
+    infoActv.innerHTML = "إذا لم تتلق رمز التحقق، يرجى التحقق من مجلد الرسائل غير المرغوب فيها.";
+} else if (lango === "Portugais") {
+    infoActv.innerHTML = "Se você não recebeu um código de verificação, por favor, verifique sua pasta de spam.";
+} else if (lango === "Allemand") {
+    infoActv.innerHTML = "Wenn Sie keinen Verifizierungscode erhalten haben, überprüfen Sie bitte Ihren Spam-Ordner.";
+}
+
+if (lango === "Français") {
+    noactvaccuntexit.innerHTML = "Je ne veux pas activer mon compte.";
+} else if (lango === "Anglais") {
+    noactvaccuntexit.innerHTML = "I don't want to activate my account.";
+} else if (lango === "Espagnol") {
+    noactvaccuntexit.innerHTML = "No quiero activar mi cuenta.";
+} else if (lango === "Arabe") {
+    noactvaccuntexit.innerHTML = "لا أريد تفعيل حسابي.";
+} else if (lango === "Portugais") {
+    noactvaccuntexit.innerHTML = "Eu não quero ativar minha conta.";
+} else if (lango === "Allemand") {
+    noactvaccuntexit.innerHTML = "Ich möchte mein Konto nicht aktivieren.";
+}
+
+if (lango === "Français") {
+    deconnecter_acv_msg.innerHTML = "Me déconnecter.";
+} else if (lango === "Anglais") {
+    deconnecter_acv_msg.innerHTML = "Log me out.";
+} else if (lango === "Espagnol") {
+    deconnecter_acv_msg.innerHTML = "Cerrar sesión.";
+} else if (lango === "Arabe") {
+    deconnecter_acv_msg.innerHTML = "تسجيل الخروج.";
+} else if (lango === "Portugais") {
+    deconnecter_acv_msg.innerHTML = "Desconectar.";
+} else if (lango === "Allemand") {
+    deconnecter_acv_msg.innerHTML = "Abmelden.";
+}
+
+if (lango === "Français") {
+    actvsuucss.innerHTML = "Le compte a été activé avec succès.";
+} else if (lango === "Anglais") {
+    actvsuucss.innerHTML = "The account has been successfully activated.";
+} else if (lango === "Espagnol") {
+    actvsuucss.innerHTML = "La cuenta ha sido activada con éxito.";
+} else if (lango === "Arabe") {
+    actvsuucss.innerHTML = "تم تفعيل الحساب بنجاح.";
+} else if (lango === "Portugais") {
+    actvsuucss.innerHTML = "A conta foi ativada com sucesso.";
+} else if (lango === "Allemand") {
+    actvsuucss.innerHTML = "Das Konto wurde erfolgreich aktiviert.";
+}
+
+if (lango === "Français") {
+    deco.innerHTML = "Souhaites-tu te déconnecter ?";
+} else if (lango === "Anglais") {
+    deco.innerHTML = "Do you want to log out?";
+} else if (lango === "Espagnol") {
+    deco.innerHTML = "¿Quieres cerrar sesión?";
+} else if (lango === "Arabe") {
+    deco.innerHTML = "هل ترغب في تسجيل الخروج؟";
+} else if (lango === "Portugais") {
+    deco.innerHTML = "Você quer sair?";
+} else if (lango === "Allemand") {
+    deco.innerHTML = "Möchten Sie sich abmelden?";
+}
+if (lango === "Français") {
+    deco_neccterbtn.innerHTML = "déconnecter";
+    anulerdeco_neccterbtn.innerHTML = "fermer";
+} else if (lango === "Anglais") {
+    deco_neccterbtn.innerHTML = "log out";
+    anulerdeco_neccterbtn.innerHTML = "close";
+} else if (lango === "Espagnol") {
+    deco_neccterbtn.innerHTML = "cerrar sesión";
+    anulerdeco_neccterbtn.innerHTML = "cerrar";
+} else if (lango === "Arabe") {
+    deco_neccterbtn.innerHTML = "تسجيل الخروج";
+    anulerdeco_neccterbtn.innerHTML = "إغلاق";
+} else if (lango === "Portugais") {
+    deco_neccterbtn.innerHTML = "desconectar";
+    anulerdeco_neccterbtn.innerHTML = "fechar";
+} else if (lango === "Allemand") {
+    deco_neccterbtn.innerHTML = "abmelden";
+    anulerdeco_neccterbtn.innerHTML = "schließen";
+}
+
+}
 
 option_header_message.addEventListener('click', function() {
     const optionbg_wind = document.querySelector('.optionbg_wind');
@@ -57,7 +782,6 @@ option_header_message.addEventListener('click', function() {
        optionbg_wind.style.display = "none";
     }else{
        optionbg_wind.style.display = "flex";
-
     }
 });
 
@@ -339,7 +1063,7 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
        displayMessages(snapshot);
     });
 
-
+    
    // const docRef = doc(db, typeamisMessage, idamisMessage);
    // try {
    //     const docSnap = await getDoc(docRef); 
@@ -679,242 +1403,6 @@ else{
     veri_acco.style.display="none";
 }
 
-  auth.onAuthStateChanged(async (user) => {
-    if (user) {
-        // Récupération de l'adresse e-mail de l'utilisateur connecté
-        const mail = user.email;
-        const userId = user.uid;
-        console.log(userId);
-        const userRef = doc(db, typeuserclick, userId);
-        const docSnapshot = await getDoc(userRef);
-        
-        
-        if (docSnapshot.exists()) {
-            const photoprofilepubadd = document.getElementById("photoprofilepubadd");
-            const photoprofilepubadd1 = document.getElementById("photoprofilepubadd1");
-            const imguser = docSnapshot.data().imguser;
-            if(imguser){
-                photoprofilepubadd.src=imguser;
-                photoprofilepubadd1.src=imguser;
-                  photoprofilepubadd.addEventListener('click', () => {
-                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-                  }); 
-                  photoprofilepubadd1.addEventListener('click', () => {
-                       window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-                  }); 
-            }
-
-        }
-        const profilinfobg = document.getElementById("profilinfobg");
-        profilinfobg.addEventListener('click', () => {
-            window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-        }); 
-
-        const amisquerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"amis")));
-        amisquerySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const iduseramis = data.iduser;
-            const typeuseramis = data.typeuser;
-
-            recupereAmis(iduseramis,typeuseramis);
-
-        });
-        async function recupereAmis(iduseramis,typeuseramis){
-            const docRef = doc(db, typeuseramis, iduseramis);
-            const docSnap = await getDoc(docRef); 
-            const datauser = docSnap.data(); 
-            const nameuser = datauser.nom;
-            const prenameuser = datauser.prenom;
-            const imguser = datauser.imguser;
-            const type_user = datauser.typeOfUser;
-            
-            const cabinfoss = document.createElement('div');
-            cabinfoss.className="cabinfoss";
-
-            const mescabins_image = document.createElement('div');
-            mescabins_image.className="mescabins_image";
-
-            const mescabins_image_img = document.createElement('img');
-            if(imguser){
-                mescabins_image_img.src=imguser;
-            }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
-            }
-            const mescabins_name = document.createElement('div');
-            mescabins_name.className="mescabins_name";
-
-            const mescabins_nameh1 = document.createElement('h1');
-            mescabins_nameh1.innerHTML=prenameuser+" "+nameuser;
-
-            mescabins_image.appendChild(mescabins_image_img);
-            cabinfoss.appendChild(mescabins_image);
-            mescabins_name.appendChild(mescabins_nameh1);
-            cabinfoss.appendChild(mescabins_name);
-            mescabins_2.appendChild(cabinfoss);
-
-            cabinfoss.addEventListener('click', () => {
-                window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-            }); 
-        }
-        
-
-        const cabinequerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"cabines")));
-        cabinequerySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const cabineId = data.cabineId;
-            recupereCabine(cabineId);
-
-        });
-        
-        async function recupereCabine(cabineId){
-            const docRef = doc(db, "cabines", cabineId);
-            const docSnap = await getDoc(docRef); 
-            const dataCabine = docSnap.data(); 
-            const nameCabine = dataCabine.nameCabine;
-            const cabine_Image = dataCabine.cabineImage;
-            const creator_Id = dataCabine.creatorId;
-            
-            const cabinfoss = document.createElement('div');
-            cabinfoss.className="cabinfoss";
-
-            const mescabins_image = document.createElement('div');
-            mescabins_image.className="mescabins_image";
-
-            const mescabins_image_img = document.createElement('img');
-            if(cabine_Image){
-                mescabins_image_img.src=cabine_Image;
-            }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
-            }
-            const mescabins_name = document.createElement('div');
-            mescabins_name.className="mescabins_name";
-            
-            const mescabins_nameh1 = document.createElement('h1');
-            mescabins_nameh1.innerHTML= nameCabine;
-
-            mescabins_image.appendChild(mescabins_image_img);
-            cabinfoss.appendChild(mescabins_image);
-            mescabins_name.appendChild(mescabins_nameh1);
-            cabinfoss.appendChild(mescabins_name);
-            mescabins_.appendChild(cabinfoss);
-
-
-           cabinfoss.addEventListener('click', () => {
-               window.location.href = `ferticonnectmedecin-cabine.html?cabineidclick=${cabineId}&typeuserclick=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
-           }); 
-        }
-
-
-        //const langauequerySnapshot = doc(db, typeOfUser, userId);
-        const langauequerySnapshot = await getDocs(query(collection(db, "languesList")));
-        langauequerySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const langue = data.langue;
-            const langue_image = data.img_langue;
-            console.log("langaue database = "+langue);
-            recupereLang(langue,langue_image);
-
-        });
-        async function recupereLang(langue,langue_image){
-            const docRef = doc(db, typeOfUser, userId);
-            const docSnap = await getDoc(docRef); 
-            const datauser = docSnap.data(); 
-            const lang = datauser.lang;
-
-           // console.log("typeOfUser ="+typeOfUser);
-           // console.log("userId ="+userId);
-           // console.log("lang  ="+lang);
-
-
-
-            const cabinfoss = document.createElement('div');
-            cabinfoss.className="cabinfoss";
-
-            const mescabins_image = document.createElement('div');
-            mescabins_image.className="mescabins_image";
-
-            const mescabins_image_img = document.createElement('img');
-            if(langue_image){
-                mescabins_image_img.src=langue_image;
-            }else{
-                mescabins_image_img.src="img/ferticonnectiLogoWhite.svg";
-            }
-            const mescabins_name = document.createElement('div');
-            mescabins_name.className="mescabins_name";
-            const mescabins_nameh1 = document.createElement('h1');
-            mescabins_nameh1.innerHTML=" "+langue+" ";
-
-            const langue_check = document.createElement('div');
-            langue_check.className="langue_check";
-            const langue_check_i = document.createElement('i');
-            langue_check_i.className='bi bi-check-lg';
-
-            mescabins_image.appendChild(mescabins_image_img);
-            cabinfoss.appendChild(mescabins_image);
-
-            mescabins_name.appendChild(mescabins_nameh1);
-            cabinfoss.appendChild(mescabins_name);
-
-            if(lang === langue){
-                langue_check.appendChild(langue_check_i);
-                cabinfoss.appendChild(langue_check);
-            }
-            mescabins_3.appendChild(cabinfoss);
-
-            cabinfoss.addEventListener('click', () => {
-                window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${iduseramis}&typeuserclick=${typeuseramis}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
-            }); 
-        }
-        
-        
-
-        
-
-
-
-        // Vérification si l'e-mail existe dans la collection "admins"
-        const q = query(collection(db, typeuserclick), where("email", "==", mail));
-
-        try {
-            const querySnapshot = await getDocs(q);
-            if (!querySnapshot.empty) {
-                const watingAccount = document.getElementById("wating");
-                watingAccount.style.display = "flex";
-
-                const userId = user.uid;
-                const userRef = doc(db, typeuserclick, userId);
-                const docSnapshot = await getDoc(userRef);
-
-
-                if (docSnapshot.exists()) {
-                    // Correction : récupération de l'e-mail depuis docSnapshot.data()
-                    const statut_du_compte = docSnapshot.data().statut_du_compte;
-                    const nomAdm = docSnapshot.data().nom;
-                    const prenomAdm = docSnapshot.data().prenom;
-
-                    const nom_prenom_admin = document.getElementById("nameUser_connect");
-                    nom_prenom_admin.innerHTML = prenomAdm.toUpperCase() + " " + nomAdm.toUpperCase();
-
-                    const activatoin_compt = document.getElementById("activatoin_compt");
-                    if (statut_du_compte === "desactive") {
-                        watingAccount.style.display = "none";
-                        activatoin_compt.style.display = "flex";
-                    } else {
-                        activatoin_compt.style.display = "none";
-                        watingAccount.style.display = "none";
-                    }
-                }
-            } else {
-                console.log("déconnection en cours ...")
-                logout();
-            }
-        } catch (error) {
-            console.error("Erreur lors de la vérification du email :", error);
-        }
-    } else {
-        window.location.href = 'index.html';
-    }
-});
 
 acive_compt_form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -976,15 +1464,10 @@ acive_compt_form.addEventListener("submit", async (e) => {
 }
 
 
-
-const deconnecter_acv_msg = document.getElementById("deconnecter_acv_msg");
-
-
 deconnecter_acv_msg.addEventListener("click", async (e) => {
     e.preventDefault();
     logout();
 });    
-
 
 const deconnectionbg = document.getElementById("deconnectionbg");
 
@@ -994,12 +1477,11 @@ loggouut_nav.addEventListener("click", async (e) => {
     deconnectionbg.style.display="flex";
 });
 
-const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
 anulerdeco_neccterbtn.addEventListener("click", async (e) => {
     e.preventDefault();
     deconnectionbg.style.display="none";
 });
-const deco_neccterbtn = document.getElementById("deco_neccterbtn");
+
 deco_neccterbtn.addEventListener("click", async (e) => {
     e.preventDefault();
     logout();
@@ -1032,7 +1514,7 @@ document.getElementById('importphoto').addEventListener('click', function() {
         file = e.target.files[0];
         var reader = new FileReader();
         reader.readAsDataURL(file);
-
+        
         reader.onload = function() {
             const imageUrl = reader.result;
             gallery1.style.display = "flex";

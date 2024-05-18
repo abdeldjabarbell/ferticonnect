@@ -26,11 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
                   caeee_logo.style.height = "100vh";  
                   caeee_logo.style.borderRadius="0";  
                   setTimeout(function() {
-                    imagelogo.style.top = "-350%";
-                    bg_choix_user.style.top = "-250%";
-                    textLogo.style.top = "-250%";
-
-
+                    imagelogo.style.top = "-300%";
+                    bg_choix_user.style.top = "-200%";
+                    textLogo.style.top = "-200%";
                     setTimeout(function() {
                        const ferticonnect = document.getElementById('ferticonnect');
                        ferticonnect.style.transition="1s ease";
@@ -94,37 +92,36 @@ function afficheLaPresentation(selectedLanguage){
 
     if (selectedLanguage === 'fr') {
         text = `
-            FertiConnect 💡, une plateforme innovante 100% algérienne 🇩🇿, est destinée à toute personne souffrant de pathologies reproductives telles que le SOPK, l'endométriose, les troubles du cycle menstruel ou les dysfonctionnements érectiles. Notre objectif est d'améliorer l'expérience des couples infertiles 👫, d'augmenter leurs chances de succès et de leur offrir une meilleure qualité de vie. FertiConnect s'attaque à la complexité et au manque de prise en charge globale du parcours de reproduction en offrant une plateforme centralisée 📲, une coordination efficace 🤝, un soutien personnalisé et des services accessibles 🛤️.
+        FertiConnect 💡, une plateforme 100% algérienne 🇩🇿, aide les personnes avec des problèmes reproductifs comme le SOPK, l'endométriose, et les dysfonctionnements érectiles. Elle vise à améliorer l'expérience des couples infertiles 👫, en offrant une prise en charge globale 🌐, une coordination efficace 🤝, et des services accessibles 📲.
         `;
-        next_lang =`Suivant`;
+        next_lang = `Suivant`;
     } else if (selectedLanguage === 'en') {
         text = `
-            FertiConnect 💡, an innovative 100% Algerian 🇩🇿 platform, is designed for anyone suffering from reproductive pathologies such as PCOS, endometriosis, menstrual cycle disorders, or erectile dysfunctions. Our goal is to improve the experience of infertile couples 👫, increase their chances of success, and offer them a better quality of life. FertiConnect addresses the complexity and lack of comprehensive care in the reproductive journey by offering a centralized platform 📲, effective coordination 🤝, personalized support, and accessible services 🛤️.
+        FertiConnect 💡, a 100% Algerian platform 🇩🇿, helps individuals with reproductive issues like PCOS, endometriosis, and erectile dysfunction. It aims to improve the experience of infertile couples 👫 by offering comprehensive care 🌐, efficient coordination 🤝, and accessible services 📲.
         `;
-        next_lang =`Next`;
-
+        next_lang = `Next`;
     } else if (selectedLanguage === 'es') {
         text = `
-            FertiConnect 💡, una plataforma innovadora 100% argelina 🇩🇿, está destinada a cualquier persona que sufra de patologías reproductivas como el SOP, la endometriosis, los trastornos del ciclo menstrual o las disfunciones eréctiles. Nuestro objetivo es mejorar la experiencia de las parejas infértiles 👫, aumentar sus posibilidades de éxito y ofrecerles una mejor calidad de vida. FertiConnect aborda la complejidad y la falta de atención integral en el camino de la reproducción ofreciendo una plataforma centralizada 📲, una coordinación eficaz 🤝, un apoyo personalizado y servicios accesibles 🛤️.
+        FertiConnect 💡, una plataforma 100% argelina 🇩🇿, ayuda a personas con problemas reproductivos como el SOP, la endometriosis y la disfunción eréctil. Su objetivo es mejorar la experiencia de las parejas infértiles 👫 ofreciendo atención integral 🌐, coordinación eficiente 🤝 y servicios accesibles 📲.
         `;
-        next_lang =`Siguiente`;
-
+        next_lang = `Siguiente`;
     } else if (selectedLanguage === 'ar') {
         text = `
-            FertiConnect 💡، منصة مبتكرة 100% جزائرية 🇩🇿، مخصصة لأي شخص يعاني من أمراض الإنجاب مثل متلازمة تكيس المبايض، الانتباذ البطاني الرحمي، اضطرابات الدورة الشهرية أو ضعف الانتصاب. هدفنا هو تحسين تجربة الأزواج الذين يعانون من العقم 👫، وزيادة فرص نجاحهم وتقديم نوعية حياة أفضل لهم. FertiConnect تتعامل مع التعقيدات ونقص الرعاية الشاملة في رحلة الإنجاب من خلال تقديم منصة مركزية 📲، تنسيق فعال 🤝، دعم شخصي وخدمات متاحة 🛤️.
+        فرتي كونكت 💡، منصة جزائرية 100% 🇩🇿، تساعد الأشخاص الذين يعانون من مشاكل الإنجاب مثل متلازمة تكيس المبايض، بطانة الرحم المهاجرة، والخلل الوظيفي الانتصابي. تهدف إلى تحسين تجربة الأزواج الذين يعانون من العقم 👫، من خلال تقديم رعاية شاملة 🌐، تنسيق فعال 🤝، وخدمات متاحة 📲.
         `;
-        next_lang =`التالي`;
+        next_lang = `التالي`;
         direction = 'rtl'; // Change text direction to right-to-left
     } else if (selectedLanguage === 'pt') {
         text = `
-            FertiConnect 💡, uma plataforma inovadora 100% argelina 🇩🇿, é destinada a qualquer pessoa que sofra de patologias reprodutivas, como SOP, endometriose, distúrbios do ciclo menstrual ou disfunções eréteis. Nosso objetivo é melhorar a experiência dos casais inférteis 👫, aumentar suas chances de sucesso e oferecer-lhes uma melhor qualidade de vida. FertiConnect aborda a complexidade e a falta de atendimento abrangente na jornada reprodutiva, oferecendo uma plataforma centralizada 📲, coordenação eficaz 🤝, suporte personalizado e serviços acessíveis 🛤️.
+        FertiConnect 💡, uma plataforma 100% argelina 🇩🇿, ajuda pessoas com problemas reprodutivos como SOP, endometriose e disfunção erétil. Seu objetivo é melhorar a experiência de casais inférteis 👫 oferecendo cuidados abrangentes 🌐, coordenação eficiente 🤝 e serviços acessíveis 📲.
         `;
-        next_lang =`Próximo`;
-
-    } else {
-        text = 'Please select a language.';
+        next_lang = `Próximo`;
+    } else if (selectedLanguage === 'de') {
+        text = `
+        FertiConnect 💡, eine 100% algerische Plattform 🇩🇿, hilft Menschen mit reproduktiven Problemen wie PCOS, Endometriose und Erektionsstörungen. Sie zielt darauf ab, die Erfahrung unfruchtbarer Paare 👫 zu verbessern, indem sie umfassende Betreuung 🌐, effiziente Koordination 🤝 und zugängliche Dienstleistungen 📲 bietet.
+        `;
+        next_lang = `Weiter`;
     }
-
       
         setTimeout(function() {
              animationText1(text,direction,selectedLanguage);
@@ -139,7 +136,7 @@ function afficheLaPresentation(selectedLanguage){
                  const suivant1 = document.getElementById('suivant1');
                  suivant1.innerHTML="<h3>"+next_lang+"</h3>";
                  
-                 }, 4000);
+                 }, 2000);
          }, 1000);
 }
 
@@ -182,38 +179,37 @@ function toNextText1(selectedLanguage){
 
     if (selectedLanguage === 'fr') {
         text = `
-            Le parcours de reproduction peut être un défi complexe, souvent entravé par des obstacles tels que le manque de coordination entre les intervenants de la santé reproductive, l'absence d'accessibilité à l'information pertinente, les difficultés de suivi et de gestion des documents médicaux, ainsi que le besoin non comblé en soutien émotionnel. Cette fragmentation peut entraîner des retards dans les diagnostics, des traitements inefficaces et une expérience frustrante pour les patients. 💔🔄
-            `;
-        next_lang =`Suivant`;
+        Les défis du parcours de reproduction incluent le manque de coordination entre les professionnels de santé, l'accès restreint à l'information, les difficultés de gestion des documents médicaux et le besoin de soutien émotionnel. Ces obstacles peuvent provoquer des retards dans les diagnostics, des traitements inefficaces et une expérience frustrante pour les patients. 💔🔄
+        `;
+        next_lang = `Suivant`;
     } else if (selectedLanguage === 'en') {
         text = `
-            The reproductive journey can be a complex challenge, often hindered by obstacles such as lack of coordination among reproductive health stakeholders, lack of accessibility to relevant information, difficulties in tracking and managing medical documents, and unmet emotional support needs. This fragmentation can lead to delays in diagnoses, ineffective treatments, and a frustrating experience for patients. 💔🔄
-            `;
-        next_lang =`Next`;
-    
+        Challenges in the reproductive journey include lack of coordination among healthcare professionals, limited access to information, difficulties in managing medical records, and the need for emotional support. These obstacles can lead to delays in diagnosis, ineffective treatments, and a frustrating experience for patients. 💔🔄
+        `;
+        next_lang = `Next`;
     } else if (selectedLanguage === 'es') {
         text = `
-            El camino reproductivo puede ser un desafío complejo, a menudo obstaculizado por problemas como la falta de coordinación entre los actores de la salud reproductiva, la falta de accesibilidad a la información relevante, las dificultades para hacer seguimiento y gestionar documentos médicos, y las necesidades de apoyo emocional no satisfechas. Esta fragmentación puede provocar retrasos en los diagnósticos, tratamientos ineficaces y una experiencia frustrante para los pacientes. 💔🔄
-            `;
-        next_lang =`Siguiente`;
-    
+         Los desafíos en el viaje reproductivo incluyen la falta de coordinación entre los profesionales de la salud, el acceso limitado a la información, las dificultades para gestionar los registros médicos y la necesidad de apoyo emocional. Estos obstáculos pueden provocar retrasos en el diagnóstico, tratamientos ineficaces y una experiencia frustrante para los pacientes. 💔🔄
+        `;
+        next_lang = `Siguiente`;
     } else if (selectedLanguage === 'ar') {
         text = `
-            يمكن أن يكون الرحلة الإنجابية تحدياً معقداً، غالباً ما يتعثر بعوائق مثل النقص في التنسيق بين أصحاب مصلحة الصحة الإنجابية، وعدم الوصول إلى المعلومات ذات الصلة، وصعوبات تتبع وإدارة الوثائق الطبية، واحتياجات الدعم العاطفي غير الملباة. يمكن أن تؤدي هذه الانقسامات إلى تأخير التشخيصات، وعلاجات غير فعّالة، وتجربة محبطة للمرضى. 💔🔄
-            `;
-        next_lang =`التالي`;
-    
+         تشمل تحديات الرحلة التكاثرية نقص التنسيق بين المتخصصين الصحيين، والوصول المحدود إلى المعلومات، وصعوبات إدارة السجلات الطبية، والحاجة إلى الدعم العاطفي. يمكن أن تؤدي هذه العقبات إلى تأخير في التشخيص، وعلاجات غير فعالة، وتجربة محبطة للمرضى. 💔🔄
+        `;
+        next_lang = `التالي`;
+        direction = 'rtl'; // Change text direction to right-to-left
     } else if (selectedLanguage === 'pt') {
         text = `
-            A jornada reprodutiva pode ser um desafio complexo, frequentemente prejudicado por obstáculos como a falta de coordenação entre os intervenientes da saúde reprodutiva, a falta de acessibilidade à informação relevante, as dificuldades em acompanhar e gerir documentos médicos e as necessidades de apoio emocional não satisfeitas. Essa fragmentação pode levar a atrasos nos diagnósticos, tratamentos ineficazes e uma experiência frustrante para os pacientes. 💔🔄
-            `;
-        next_lang =`Próximo`;
-    
-    } else {
-        text = 'Please select a language.';
+        Os desafios no percurso reprodutivo incluem a falta de coordenação entre os profissionais de saúde, o acesso limitado à informação, as dificuldades na gestão de registos médicos e a necessidade de apoio emocional. Estes obstáculos podem levar a atrasos no diagnóstico, tratamentos ineficazes e uma experiência frustrante para os pacientes. 💔🔄
+        `;
+        next_lang = `Próximo`;
+    } else if (selectedLanguage === 'de') {
+        text = `
+        Herausforderungen im reproduktiven Weg umfassen mangelnde Koordination unter Gesundheitsfachkräften, begrenzten Zugang zu Informationen, Schwierigkeiten bei der Verwaltung von Krankenakten und dem Bedarf an emotionaler Unterstützung. Diese Hindernisse können zu Verzögerungen bei der Diagnose, ineffektiven Behandlungen und einer frustrierenden Erfahrung für Patienten führen. 💔🔄
+        `;
+        next_lang = `Weiter`;
     }
     
-
           
     setTimeout(function() {
         animationText2(text,direction,selectedLanguage);
@@ -228,7 +224,7 @@ function toNextText1(selectedLanguage){
             const suivant2 = document.getElementById('suivant2');
             suivant2.innerHTML="<h3>"+next_lang+"</h3>";
             
-            }, 4000);
+            }, 2000);
     }, 1000);
 
 
@@ -275,45 +271,50 @@ function toNextText3(selectedLanguage){
 
     if (selectedLanguage === 'fr') {
         text = `
-            FertiConnect 💡 s'engage à surmonter ces défis en offrant une solution complète et personnalisée. Notre plateforme en ligne multilingue facilite la recherche de cliniques et de spécialistes qualifiés, la gestion des dossiers médicaux et des rendez-vous, tout en fournissant des informations fiables et des ressources éducatives dans différentes langues. De plus, nous offrons un soutien émotionnel et psychologique via des forums, des groupes de discussion et des services de messagerie instantanée, dans un espace sûr et anonyme. Avec FertiConnect, vous avez accès à un réseau de professionnels qualifiés, à des informations précises et à une communauté de soutien dédiée. 🌐👩‍⚕️
-            `;
+        FertiConnect 💡 simplifie le parcours de reproduction avec une plateforme en ligne. Elle aide à trouver des cliniques et des spécialistes, gère les dossiers médicaux et offre un soutien émotionnel via des forums et des messageries sécurisées. Accessible et pratique, FertiConnect relie les couples à une communauté de soutien et à des professionnels qualifiés. 🌐👩‍⚕️
+        `;
             
         message =` <p id="clickHereMed"></p>  Si vous êtes médecin, cliquez ici 👨‍⚕️🖱️`;
 
         next_lang =`Suivant`;
     } else if (selectedLanguage === 'en') {
         text = `
-            FertiConnect 💡 is committed to overcoming these challenges by offering a comprehensive and personalized solution. Our multilingual online platform facilitates the search for qualified clinics and specialists, the management of medical records and appointments, while providing reliable information and educational resources in different languages. Additionally, we offer emotional and psychological support through forums, discussion groups, and instant messaging services, in a safe and anonymous space. With FertiConnect, you have access to a network of qualified professionals, accurate information, and a dedicated support community. 🌐👩‍⚕️
-            `;
+        FertiConnect 💡 simplifies the reproductive journey with an online platform. It helps find clinics and specialists, manages medical records, and provides emotional support through secure forums and messaging. Accessible and convenient, FertiConnect connects couples with a supportive community and qualified professionals. 🌐👩‍⚕️
+        `;
          message = ` <p id="clickHereMed">If you are a doctor, click here 👨‍⚕️🖱️</p> `;
         next_lang =`Next`;
     
     } else if (selectedLanguage === 'es') {
         text = `
-            FertiConnect 💡 se compromete a superar estos desafíos ofreciendo una solución completa y personalizada. Nuestra plataforma en línea multilingüe facilita la búsqueda de clínicas y especialistas calificados, la gestión de registros médicos y citas, al tiempo que proporciona información confiable y recursos educativos en diferentes idiomas. Además, ofrecemos apoyo emocional y psicológico a través de foros, grupos de discusión y servicios de mensajería instantánea, en un espacio seguro y anónimo. Con FertiConnect, tienes acceso a una red de profesionales calificados, información precisa y una comunidad de apoyo dedicada. 🌐👩‍⚕️
-            `;
+        FertiConnect 💡 simplifica el camino reproductivo con una plataforma en línea. Ayuda a encontrar clínicas y especialistas, administra registros médicos y brinda apoyo emocional a través de foros y mensajería seguros. Accesible y conveniente, FertiConnect conecta a las parejas con una comunidad de apoyo y profesionales calificados. 🌐👩‍⚕️
+        `;
          message = `<p id="clickHereMed">Si usted es médico, haga clic aquí.👨‍⚕️🖱️</p> `;
 
         next_lang =`Siguiente`;
     
     }else if (selectedLanguage === 'ar') {
         text = `
-        فيرتيكونيكت 💡 تلتزم بتجاوز هذه التحديات عن طريق تقديم حل شامل ومخصص. تسهل منصتنا عبر الإنترنت متعددة اللغات البحث عن العيادات والمتخصصين المؤهلين، وإدارة السجلات الطبية والمواعيد، بينما توفر معلومات موثوقة وموارد تعليمية بلغات مختلفة. بالإضافة إلى ذلك، نقدم الدعم العاطفي والنفسي من خلال المنتديات ومجموعات النقاش وخدمات المراسلة الفورية، في مساحة آمنة ومجهولة. مع فيرتيكونيكت لديك الوصول إلى شبكة من المحترفين المؤهلين، ومعلومات دقيقة، ومجتمع داعم مخصص. 🌐👩‍⚕️
-            `;
+        فرتي كونكت 💡 تبسط مسار الإنجاب مع منصة عبر الإنترنت. تساعد في العثور على العيادات والأخصائيين، وتدير السجلات الطبية، وتوفر الدعم العاطفي من خلال منتديات آمنة ورسائل. يعتبر FertiConnect متاحًا ومريحًا، حيث يربط الأزواج بمجتمع داعم ومحترفين مؤهلين. 🌐👩‍⚕️
+        `;
         message =` <p id="clickHereMed">👨‍⚕️🖱️ إذا كنت طبيبًا، انقر هنا</p> `;
 
         next_lang =`التالي`;
     
     } else if (selectedLanguage === 'pt') {
         text = `
-            FertiConnect 💡 está comprometida em superar esses desafios, oferecendo uma solução completa e personalizada. Nossa plataforma online multilíngue facilita a busca por clínicas e especialistas qualificados, a gestão de registros médicos e agendamentos, fornecendo informações confiáveis e recursos educacionais em diferentes idiomas. Além disso, oferecemos suporte emocional e psicológico através de fóruns, grupos de discussão e serviços de mensagens instantâneas, em um espaço seguro e anônimo. Com o FertiConnect, você tem acesso a uma rede de profissionais qualificados, informações precisas e uma comunidade de apoio dedicada. 🌐👩‍⚕️
+        FertiConnect 💡 simplifica a jornada reprodutiva com uma plataforma online. Ajuda a encontrar clínicas e especialistas, gerencia registros médicos e fornece apoio emocional através de fóruns seguros e mensagens. Acessível e conveniente, o FertiConnect conecta casais a uma comunidade de apoio e profissionais qualificados. 🌐👩‍⚕️
         `; 
          message =`Se você é médico, clique aqui.👨‍⚕️🖱️`;
 
         next_lang =`Próximo`;
     }
-     else {
-        text = 'Please select a language.';
+    else if (selectedLanguage === 'de') {
+        text = `
+        FertiConnect 💡 vereinfacht den reproduktiven Weg mit einer Online-Plattform. Es hilft dabei, Kliniken und Spezialisten zu finden, verwaltet medizinische Aufzeichnungen und bietet emotionale Unterstützung durch sichere Foren und Messaging. Zugänglich und bequem verbindet FertiConnect Paare mit einer unterstützenden Community und qualifizierten Fachleuten. 🌐👩‍⚕️
+        `; 
+         message =`Wenn Sie Arzt sind, klicken Sie hier.👨‍⚕️🖱️`;
+
+        next_lang =`Nächste`;
     }
     
 
@@ -328,7 +329,7 @@ function toNextText3(selectedLanguage){
             setTimeout(function(){        
                 buttonnext.style.opacity="1";
 
-             },700);
+            },700);
 
             const suivant3 = document.getElementById('suivant3');
             suivant3.innerHTML="<h3>"+next_lang+"</h3>";
@@ -340,7 +341,7 @@ function toNextText3(selectedLanguage){
             setTimeout(function(){   
                 tomedcinePage.innerHTML=message;     
                 tomedcinePage.style.opacity="1";
-             },1200);
+             },1000);
 
         
             tomedcinePage.addEventListener('click', function() {
@@ -357,7 +358,7 @@ function toNextText3(selectedLanguage){
 
             });
             
-            }, 4000);
+            }, 2000);
     }, 1000);
 
 
