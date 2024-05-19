@@ -5,6 +5,7 @@ import { getFirestore, doc, getDoc, updateDoc, addDoc,setDoc, deleteDoc, query, 
 import { getStorage,  ref as storageRef  , uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js';
 import { getDatabase,  ref as databaseRef, push, onValue, serverTimestamp as databaseServerTimestamp  } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js';
 import { serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js";
+import { PDFDocument, rgb } from 'https://cdn.skypack.dev/pdf-lib';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBlAbn2DAuE4kSVDtsNgdttwDeBT78YmL8",
@@ -182,7 +183,6 @@ const firebaseConfig = {
             const data = doc.data();
             const langue = data.langue;
             const langue_image = data.img_langue;
-            console.log("langaue database = "+langue);
             recupereLang(langue,langue_image);
 
         });
@@ -774,6 +774,23 @@ if (lango === "Français") {
     anulerdeco_neccterbtn.innerHTML = "schließen";
 }
 
+
+const input4 = document.getElementById("inputpubadd_comment");
+if (lango === "Français") {
+ input4.placeholder = "Ajouter un commentaire ?";
+} else if (lango === "Anglais") {
+ input4.placeholder = "Add a comment?";
+} else if (lango === "Espagnol") {
+    input4.placeholder = "¿Agregar un comentario?";
+} else if (lango === "Arabe") {
+    input4.placeholder = "إضافة تعليق؟";
+} else if (lango === "Portugais") {
+    input4.placeholder = "Adicionar um comentário?";
+} else if (lango === "Allemand") {
+    input4.placeholder = "Einen Kommentar hinzufügen?";
+ } 
+
+
 }
 
 option_header_message.addEventListener('click', function() {
@@ -797,9 +814,9 @@ option_header_message.addEventListener('click', function() {
           const idRoomMessage= data.idRoomMessage;
           const idamisMessage= data.idamisMessage;
           const typeamisMessage= data.TypeamisMessage;
-          afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage);
+          afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser);
         });
-        async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage){
+        async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser){
             const docRef = doc(db, typeamisMessage, idamisMessage);
             try {
                 const docSnap = await getDoc(docRef); 
@@ -808,6 +825,7 @@ option_header_message.addEventListener('click', function() {
                     const nameUserlisteamismessage = datauser.nom;
                     const prenimUserlisteamismessage = datauser.prenom;
                     const imageUserlisteamismessage = datauser.imguser;
+                    const emailUserlisteamismessage = datauser.email;
                     const  listemesagebg = document.getElementById("listemesagebg");
                     const  amisbgmessage = document.createElement("div");
                     amisbgmessage.className="amisbgmessage";
@@ -830,7 +848,7 @@ option_header_message.addEventListener('click', function() {
                     listemesagebg.appendChild(amisbgmessage);
                     amisbgmessage.onclick = amisbgmessageFunction;
                     function amisbgmessageFunction(){
-                        afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage);
+                        afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage,typeuserclick,iduser,emailUserlisteamismessage);
                     }
                 }
             }
@@ -842,7 +860,7 @@ option_header_message.addEventListener('click', function() {
 });
 
 
-async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage){
+async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlisteamismessage,prenimUserlisteamismessage,nameUserlisteamismessage,idRoomMessage,typeuserclick,iduser,emailUserlisteamismessage){
     const discution_bg = document.getElementById("discution_bg");
     discution_bg.style.right = "0";
     const messagesDiv = document.getElementById("content_message");
@@ -882,7 +900,7 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
         if (user) {
             const userId = user.uid; 
             console.log('userId ='+userId);
-
+            
             if (message !== "") {
                 push(messageRef, {
                     text: message,
@@ -899,8 +917,247 @@ async function afficherlesMessages(typeamisMessage, idamisMessage ,imageUserlist
             else{
                 console.log("messageInput impty");
             }
-          }else{console.log("user no");}
+          }else{console.log("user no");
+
+          }
     }
+    // pour envoyer le rapport medicale
+    const optionbg_wind_btn_dossier = document.getElementById("optionbg_wind_btn_dossier");
+    optionbg_wind_btn_dossier.onclick = envoiyerleRapportmedicale;
+    async function envoiyerleRapportmedicale() {
+        const docRef = doc(db, typeuserclick, iduser);
+        try {
+            const docSnap = await getDoc(docRef); 
+            if (docSnap.exists()) {
+                const datauser = docSnap.data();
+                
+                const name_formulaire = datauser.nom;
+                const prenom_formulaire = datauser.prenom;
+                const formulaire_liste1 = datauser.formulaire_liste1;
+                const formulaire_liste2 = datauser.formulaire_liste2;
+                const formulaire_liste3 = datauser.formulaire_liste3;
+
+                // Pour les données du formulaire_liste1
+                const adresseFormulaireListe1 = formulaire_liste1.address;
+                const dateNaissanceFormulaireListe1 = formulaire_liste1.dateOfBirth;
+                const genreFormulaireListe1 = formulaire_liste1.gender;
+                const numeroTelephoneFormulaireListe1 = formulaire_liste1.phoneNumber;
+                
+                // Pour les données du formulaire_liste2
+                const ageFormulaireListe2 = formulaire_liste2.age;
+                const allergiesFormulaireListe2 = formulaire_liste2.allergies;
+                const enfantsFormulaireListe2 = formulaire_liste2.children;
+                const problemesFertiliteFormulaireListe2 = formulaire_liste2.fertilityIssues;
+                const antecedentsMedicauxFormulaireListe2 = formulaire_liste2.medicalHistory;
+                const medicamentsFormulaireListe2 = formulaire_liste2.medications;
+                const plusEnfantsFormulaireListe2 = formulaire_liste2.moreChildren;
+                const partenaireFormulaireListe2 = formulaire_liste2.partenaire;
+                
+                // Pour les données du formulaire_liste3
+                const complicationsGrossesseFormulaireListe3 = formulaire_liste3.pregnancyComplications;
+                const trimestreAvortementFormulaireListe3 = formulaire_liste3.abortionTrimester;
+                const detailsActiviteFormulaireListe3 = formulaire_liste3.activityDetails;
+                const consommationAlcoolSemaineFormulaireListe3 = formulaire_liste3.alcoholPerWeek;
+                const consommationCannabisFormulaireListe3 = formulaire_liste3.cannabisConsumption;
+                const consommationCannabisSemaineFormulaireListe3 = formulaire_liste3.cannabisPerWeek;
+                const cigarettesParJourFormulaireListe3 = formulaire_liste3.cigarettesPerDay;
+                const regulariteCycleFormulaireListe3 = formulaire_liste3.cycleRegularity;
+                const objectifsSanteFormulaireListe3 = formulaire_liste3.healthGoals;
+                const activitePhysiqueFormulaireListe3 = formulaire_liste3.physicalActivity;
+                const attentesPlateformeFormulaireListe3 = formulaire_liste3.platformExpectations;
+                const professionFormulaireListe3 = formulaire_liste3.profession;
+                const fumeurFormulaireListe3 = formulaire_liste3.smoker;
+                const antecedentsMaladiesFormulaireListe3 = formulaire_liste3.stdHistory;
+                const conditionsTravailFormulaireListe3 = formulaire_liste3.workConditions;
+                const stressTravailFormulaireListe3 = formulaire_liste3.workStress;
+
+                const docRef = doc(db, typeuserclick, partenaireFormulaireListe2);
+                try {
+                    const docSnap = await getDoc(docRef); 
+                    if (docSnap.exists()) {
+                        const datauser_partenaire = docSnap.data();
+                        const name_partenaire_formulaire = datauser_partenaire.nom;
+                        const prenom_partenaire_formulaire = datauser_partenaire.prenom;
+                        const formulaire_partenaire_liste1 = datauser_partenaire.formulaire_liste1;
+                        const formulaire_partenaire_liste2 = datauser_partenaire.formulaire_liste2;
+                        const formulaire_partenaire_liste3 = datauser_partenaire.formulaire_liste3;
+                
+                        // Compléter avec les données du partenaire
+                        const adressePartenaireFormulaireListe1 = formulaire_partenaire_liste1.address;
+                        const dateNaissancePartenaireFormulaireListe1 = formulaire_partenaire_liste1.dateOfBirth;
+                        const genrePartenaireFormulaireListe1 = formulaire_partenaire_liste1.gender;
+                        const numeroTelephonePartenaireFormulaireListe1 = formulaire_partenaire_liste1.phoneNumber;
+                        
+                        const agePartenaireFormulaireListe2 = formulaire_partenaire_liste2.age;
+                        const allergiesPartenaireFormulaireListe2 = formulaire_partenaire_liste2.allergies;
+                        const enfantsPartenaireFormulaireListe2 = formulaire_partenaire_liste2.children;
+                        const problemesFertilitePartenaireFormulaireListe2 = formulaire_partenaire_liste2.fertilityIssues;
+                        const antecedentsMedicauxPartenaireFormulaireListe2 = formulaire_partenaire_liste2.medicalHistory;
+                        const medicamentsPartenaireFormulaireListe2 = formulaire_partenaire_liste2.medications;
+                        const plusEnfantsPartenaireFormulaireListe2 = formulaire_partenaire_liste2.moreChildren;
+                        
+                        const complicationsGrossessePartenaireFormulaireListe3 = formulaire_partenaire_liste3.pregnancyComplications;
+                        const trimestreAvortementPartenaireFormulaireListe3 = formulaire_partenaire_liste3.abortionTrimester;
+                        const detailsActivitePartenaireFormulaireListe3 = formulaire_partenaire_liste3.activityDetails;
+                        const consommationAlcoolSemainePartenaireFormulaireListe3 = formulaire_partenaire_liste3.alcoholPerWeek;
+                        const consommationCannabisPartenaireFormulaireListe3 = formulaire_partenaire_liste3.cannabisConsumption;
+                        const consommationCannabisSemainePartenaireFormulaireListe3 = formulaire_partenaire_liste3.cannabisPerWeek;
+                        const cigarettesParJourPartenaireFormulaireListe3 = formulaire_partenaire_liste3.cigarettesPerDay;
+                        const regulariteCyclePartenaireFormulaireListe3 = formulaire_partenaire_liste3.cycleRegularity;
+                        const objectifsSantePartenaireFormulaireListe3 = formulaire_partenaire_liste3.healthGoals;
+                        const activitePhysiquePartenaireFormulaireListe3 = formulaire_partenaire_liste3.physicalActivity;
+                        const attentesPlateformePartenaireFormulaireListe3 = formulaire_partenaire_liste3.platformExpectations;
+                        const professionPartenaireFormulaireListe3 = formulaire_partenaire_liste3.profession;
+                        const fumeurPartenaireFormulaireListe3 = formulaire_partenaire_liste3.smoker;
+                        const antecedentsMaladiesPartenaireFormulaireListe3 = formulaire_partenaire_liste3.stdHistory;
+                        const conditionsTravailPartenaireFormulaireListe3 = formulaire_partenaire_liste3.workConditions;
+                        const stressTravailPartenaireFormulaireListe3 = formulaire_partenaire_liste3.workStress;
+
+
+                        
+                         const messagePartenaire = `
+                       Informations du Partenaire :
+                       
+                       Nom : ${prenom_partenaire_formulaire} ${name_partenaire_formulaire}<br><br>
+                       
+                       Informations Personnelles :<br>
+                       - Date de naissance : ${dateNaissancePartenaireFormulaireListe1}<br>
+                       - Sexe : ${genrePartenaireFormulaireListe1}<br>
+                       - Adresse : ${adressePartenaireFormulaireListe1}<br>
+                       - Numéro de téléphone : ${numeroTelephonePartenaireFormulaireListe1}<br><br>
+                       
+                       Informations Médicales :<br>
+                       - Âge : ${agePartenaireFormulaireListe2}<br>
+                       - Allergies connues : ${allergiesPartenaireFormulaireListe2}<br>
+                       - Nombre d'enfants : ${enfantsPartenaireFormulaireListe2}<br>
+                       - Problèmes de fertilité : ${problemesFertilitePartenaireFormulaireListe2}<br>
+                       - Antécédents médicaux importants : ${antecedentsMedicauxPartenaireFormulaireListe2}<br>
+                       - Médicaments ou compléments alimentaires actuels : ${medicamentsPartenaireFormulaireListe2}<br>
+                       - Souhaitez-vous avoir plus d'enfants : ${plusEnfantsPartenaireFormulaireListe2}<br><br>
+                       
+                       Informations Complémentaires :<br>
+                       - Complications lors de grossesses précédentes : ${complicationsGrossessePartenaireFormulaireListe3}<br>
+                       - Trimestre des avortements : ${trimestreAvortementPartenaireFormulaireListe3}<br>
+                       - Détails de l'activité physique : ${detailsActivitePartenaireFormulaireListe3}<br>
+                       - Consommation d'alcool par semaine : ${consommationAlcoolSemainePartenaireFormulaireListe3}<br>
+                       - Consommation de cannabis : ${consommationCannabisPartenaireFormulaireListe3}<br>
+                       - Consommation de cannabis par semaine : ${consommationCannabisSemainePartenaireFormulaireListe3}<br>
+                       - Nombre de cigarettes fumées par jour : ${cigarettesParJourPartenaireFormulaireListe3}<br>
+                       - Régularité du cycle menstruel : ${regulariteCyclePartenaireFormulaireListe3}<br>
+                       - Objectifs en matière de santé reproductive : ${objectifsSantePartenaireFormulaireListe3}<br>
+                       - Activité physique régulière : ${activitePhysiquePartenaireFormulaireListe3}<br>
+                       - Attentes de la plateforme : ${attentesPlateformePartenaireFormulaireListe3}<br>
+                       - Profession : ${professionPartenaireFormulaireListe3}<br>
+                       - Fumeur : ${fumeurPartenaireFormulaireListe3}<br>
+                       - Antécédents de maladies sexuellement transmissibles : ${antecedentsMaladiesPartenaireFormulaireListe3}<br>
+                       - Exposition aux pesticides ou températures importantes : ${conditionsTravailPartenaireFormulaireListe3}<br>
+                       - Conditions de travail stressantes : ${stressTravailPartenaireFormulaireListe3}<br><br>
+                       `;
+                       
+                   
+
+
+                // Construction du message de courriel avec les données récupérées
+                 const message = `
+                 Objet : Formulaire de santé reproductive - Données soumises<br><br>
+                 
+                 Cher Dr. ${prenimUserlisteamismessage} ${nameUserlisteamismessage} ,<br><br>
+                 
+                 Votre patient, ${prenom_formulaire} ${name_formulaire}, a soumis son dossier médical ainsi que celui de leur partenaire ${prenom_partenaire_formulaire} ${name_partenaire_formulaire}, dans le but de vous permettre une meilleure compréhension de leur état de santé et de faciliter la prescription d'un traitement approprié. Voici un résumé des informations fournies : <br><br>                 
+                 Informations Personnelles :<br>
+                 - Date de naissance : ${dateNaissanceFormulaireListe1}<br>
+                 - Sexe : ${genreFormulaireListe1}<br>
+                 - Adresse : ${adresseFormulaireListe1}<br>
+                 - Numéro de téléphone : ${numeroTelephoneFormulaireListe1}<br><br>
+                 
+                 Informations Médicales :<br>
+                 - Âge : ${ageFormulaireListe2}<br>
+                 - Allergies connues : ${allergiesFormulaireListe2}<br>
+                 - Nombre d'enfants : ${enfantsFormulaireListe2}<br>
+                 - Problèmes de fertilité : ${problemesFertiliteFormulaireListe2}<br>
+                 - Antécédents médicaux importants : ${antecedentsMedicauxFormulaireListe2}<br>
+                 - Médicaments ou compléments alimentaires actuels : ${medicamentsFormulaireListe2}<br>
+                 - Souhaitez-vous avoir plus d'enfants : ${plusEnfantsFormulaireListe2}<br>
+                 - ID du partenaire : ${partenaireFormulaireListe2}<br><br>
+                 
+                 Informations Complémentaires :<br>
+                 - Complications lors de grossesses précédentes : ${complicationsGrossesseFormulaireListe3}<br>
+                 - Trimestre des avortements : ${trimestreAvortementFormulaireListe3}<br>
+                 - Détails de l'activité physique : ${detailsActiviteFormulaireListe3}<br>
+                 - Consommation d'alcool par semaine : ${consommationAlcoolSemaineFormulaireListe3}<br>
+                 - Consommation de cannabis : ${consommationCannabisFormulaireListe3}<br>
+                 - Consommation de cannabis par semaine : ${consommationCannabisSemaineFormulaireListe3}<br>
+                 - Nombre de cigarettes fumées par jour : ${cigarettesParJourFormulaireListe3}<br>
+                 - Régularité du cycle menstruel : ${regulariteCycleFormulaireListe3}<br>
+                 - Objectifs en matière de santé reproductive : ${objectifsSanteFormulaireListe3}<br>
+                 - Activité physique régulière : ${activitePhysiqueFormulaireListe3}<br>
+                 - Attentes de la plateforme : ${attentesPlateformeFormulaireListe3}<br>
+                 - Profession : ${professionFormulaireListe3}<br>
+                 - Fumeur : ${fumeurFormulaireListe3}<br>
+                 - Antécédents de maladies sexuellement transmissibles : ${antecedentsMaladiesFormulaireListe3}<br>
+                 - Exposition aux pesticides ou températures importantes : ${conditionsTravailFormulaireListe3}<br>
+                 - Conditions de travail stressantes : ${stressTravailFormulaireListe3}<br><br>
+                 
+                 <br><br>
+                 ------------------------------
+                 <br><br>
+                 
+                 ${messagePartenaire}
+
+                 <br><br>
+                 <br><br>
+
+                 Cordialement,<br><br>
+                 
+                 L'équipe de FertiConnect<br>
+                 `;
+                 
+
+                Email.send({
+                    Host : "smtp.elasticemail.com",
+                    Username : "ne.pas.rependre.ferticonnect@gmail.com",
+                    Password : "B58393493272B1AC4DFEF6455183C24DDCAB",
+                    To : emailUserlisteamismessage,
+                    From : 'ne.pas.rependre.ferticonnect@gmail.com',
+                    Subject : `Formulaire de santé reproductive - Soumission des données de ${prenom_formulaire} ${name_formulaire} et de leur partenaire ${prenom_partenaire_formulaire} ${name_partenaire_formulaire} `,
+                    Body : message ,
+        
+                    
+                }).then(
+                    console.log("email is send")
+                );
+                const user = auth.currentUser;
+                if (user) {
+                    const userId = user.uid;                     
+                        push(messageRef, {
+                            text: `Cher Dr. ${prenimUserlisteamismessage} ${nameUserlisteamismessage}, je vous informe que le dossier médical de ${prenom_formulaire} ${name_formulaire} ainsi que de leur partenaire ${prenom_partenaire_formulaire} ${name_partenaire_formulaire} a été envoyé à votre adresse e-mail.`,
+                            id_usersent:userId,
+                            timestamp: new Date().getTime()
+                        })
+                        .then(() => {
+                            messageInput.value = "";
+                        })
+                        .catch((error) => {
+                            console.error("Error adding message: ", error);
+                        });
+   
+                }
+              }
+            } catch (error) {
+                console.error("Error fetching document: ", error);
+            }
+                
+
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error fetching document: ", error);
+        }
+    }
+    
+    
+    
     const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
     const nouveauimage_couv = document.getElementById("nouveauimage_couv");
     const fermer2 = document.getElementById("fermer2");
@@ -1120,11 +1377,16 @@ function homebtnnavbuttomFunction(){
     leftespace.style.display = "none";
     rightespace.style.display = "none";
     midleespace.style.display = "flex";
+    const navigationbar = document.querySelector('.navigationbar');
+    navigationbar.style.top = "0";
+    refreshPage();
     scrollToTop();
 }
 
 cabinsbtnnavbuttom.onclick = cabinsbtnnavbuttomFunction;
 function cabinsbtnnavbuttomFunction(){
+    const navigationbar = document.querySelector('.navigationbar');
+    navigationbar.style.top = "0";
     leftespace.style.display = "flex";
     rightespace.style.display = "none";
     midleespace.style.display = "none";
@@ -1137,8 +1399,7 @@ function messagebtnnavbuttomFunction(){
     var bgHome = document.querySelector('.bgHome');
     bgHome.style.padding="0";
     var navigationbar = document.querySelector('.navigationbar');
-    navigationbar.style.display = "none";
-    
+    navigationbar.style.top = "-100%";
     leftespace.style.display = "none";
     rightespace.style.display = "flex";
     midleespace.style.display = "none";
@@ -1159,6 +1420,7 @@ function messagebtnnavbuttomFunction(){
     optionbg_wind_btn_home.addEventListener('click', function() {
        refreshPage();
     });  
+
     var contentMessage = document.querySelector('.content_message');
     if (contentMessage.scrollTo) {
         contentMessage.scrollTo({
@@ -2063,46 +2325,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

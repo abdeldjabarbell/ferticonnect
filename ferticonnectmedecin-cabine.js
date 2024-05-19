@@ -27,6 +27,429 @@ const typeuserclick = urlParams.get('typeuserclick');
 const typeOfUser = urlParams.get('typeuserclick');
 const IdCabine = urlParams.get('cabineidclick');
 
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        const userId = user.uid; 
+        const docRef_CabineRoom = doc(db, typeOfUser , userId);
+        console.log("userId ====="+userId);
+      try {
+          const docuser = await getDoc(docRef_CabineRoom); 
+          if (docuser.exists()) {
+              const docuserinfo = docuser.data(); 
+              const langue = docuserinfo.lang;
+              
+              const id1 = document.getElementById("FertiConnect");
+              if (langue === "Français") {
+                  id1.innerHTML = "FertiConnect";
+              } else if (langue === "Anglais") {
+                  id1.innerHTML = "FertiConnect";
+              } else if (langue === "Espagnol") {
+                  id1.innerHTML = "ConexiónFértil";
+              } else if (langue === "Arabe") {
+                  id1.innerHTML = "فرتي كونكت";
+              } else if (langue === "Portugais") {
+                  id1.innerHTML = "ConexãoFértil";
+              } else if (langue === "Allemand") {
+                  id1.innerHTML = "FertiVerbindung";
+              }
+              
+              const id2 = document.getElementById("messageAjoutePhoto");
+              if (langue === "Français") {
+                  id2.innerHTML = "Ajoutez une photo de couverture à votre groupe";
+              } else if (langue === "Anglais") {
+                  id2.innerHTML = "Add a cover photo to your group";
+              } else if (langue === "Espagnol") {
+                  id2.innerHTML = "Agrega una foto de portada a tu grupo";
+              } else if (langue === "Arabe") {
+                  id2.innerHTML = "أضف صورة غلاف لمجموعتك";
+              } else if (langue === "Portugais") {
+                  id2.innerHTML = "Adicione uma foto de capa ao seu grupo";
+              } else if (langue === "Allemand") {
+                  id2.innerHTML = "Fügen Sie ein Titelbild zu Ihrer Gruppe hinzu";
+              }
+              
+              const id3 = document.getElementById("versPageAcc");
+              if (langue === "Français") {
+                  id3.innerHTML = "fertiConnect - Page d'accueil";
+              } else if (langue === "Anglais") {
+                  id3.innerHTML = "fertiConnect - Home Page";
+              } else if (langue === "Espagnol") {
+                  id3.innerHTML = "fertiConnect - Página de inicio";
+              } else if (langue === "Arabe") {
+                  id3.innerHTML = "فرتي كونكت - الصفحة الرئيسية";
+              } else if (langue === "Portugais") {
+                  id3.innerHTML = "fertiConnect - Página inicial";
+              } else if (langue === "Allemand") {
+                  id3.innerHTML = "fertiConnect - Startseite";
+              }
+              
+              const id4 = document.getElementById("cliniques");
+              if (langue === "Français") {
+                  id4.innerHTML = "cliniques";
+              } else if (langue === "Anglais") {
+                  id4.innerHTML = "clinics";
+              } else if (langue === "Espagnol") {
+                  id4.innerHTML = "clínicas";
+              } else if (langue === "Arabe") {
+                  id4.innerHTML = "عيادات";
+              } else if (langue === "Portugais") {
+                  id4.innerHTML = "clínicas";
+              } else if (langue === "Allemand") {
+                  id4.innerHTML = "Kliniken";
+              }
+              
+              const id5 = document.getElementById("Amis_");
+              if (langue === "Français") {
+                  id5.innerHTML = "Amis";
+              } else if (langue === "Anglais") {
+                  id5.innerHTML = "Friends";
+              } else if (langue === "Espagnol") {
+                  id5.innerHTML = "Amigos";
+              } else if (langue === "Arabe") {
+                  id5.innerHTML = "أصدقاء";
+              } else if (langue === "Portugais") {
+                  id5.innerHTML = "Amigos";
+              } else if (langue === "Allemand") {
+                  id5.innerHTML = "Freunde";
+              }
+              
+              const id6 = document.getElementById("QMPEUM");
+              if (langue === "Français") {
+                  id6.innerHTML = "Que le médecin peut envoyer un message";
+              } else if (langue === "Anglais") {
+                  id6.innerHTML = "That the doctor can send a message";
+              } else if (langue === "Espagnol") {
+                  id6.innerHTML = "Que el médico puede enviar un mensaje";
+              } else if (langue === "Arabe") {
+                  id6.innerHTML = "أن الطبيب يمكنه إرسال رسالة";
+              } else if (langue === "Portugais") {
+                  id6.innerHTML = "Que o médico pode enviar uma mensagem";
+              } else if (langue === "Allemand") {
+                  id6.innerHTML = "Dass der Arzt eine Nachricht senden kann";
+              }
+              
+              const id7 = document.getElementById("RAPDACC");
+              if (langue === "Français") {
+                  id7.innerHTML = "Retourner à la page d'accueil";
+              } else if (langue === "Anglais") {
+                  id7.innerHTML = "Return to homepage";
+              } else if (langue === "Espagnol") {
+                  id7.innerHTML = "Volver a la página de inicio";
+              } else if (langue === "Arabe") {
+                  id7.innerHTML = "العودة إلى الصفحة الرئيسية";
+              } else if (langue === "Portugais") {
+                  id7.innerHTML = "Voltar para a página inicial";
+              } else if (langue === "Allemand") {
+                  id7.innerHTML = "Zurück zur Startseite";
+              }
+              
+              const id8 = document.getElementById("creeUneESpacemessageCabine");
+              if (langue === "Français") {
+                  id8.innerHTML = "Créez une messagerie pour votre cabinet";
+              } else if (langue === "Anglais") {
+                  id8.innerHTML = "Create a messaging system for your office";
+              } else if (langue === "Espagnol") {
+                  id8.innerHTML = "Cree un sistema de mensajería para su oficina";
+              } else if (langue === "Arabe") {
+                  id8.innerHTML = "إنشاء نظام مراسلة لمكتبك";
+              } else if (langue === "Portugais") {
+                  id8.innerHTML = "Crie um sistema de mensagens para o seu escritório";
+              } else if (langue === "Allemand") {
+                  id8.innerHTML = "Erstellen Sie ein Nachrichtensystem für Ihr Büro";
+              }
+              
+              const id9 = document.getElementById("vousseulpouversendmessage");
+              if (langue === "Français") {
+                  id9.innerHTML = "Vous seul pouvez envoyer des messages.";
+              } else if (langue === "Anglais") {
+                  id9.innerHTML = "Only you can send messages.";
+              } else if (langue === "Espagnol") {
+                  id9.innerHTML = "Solo tú puedes enviar mensajes.";
+              } else if (langue === "Arabe") {
+                  id9.innerHTML = "يمكنك فقط إرسال الرسائل.";
+              } else if (langue === "Portugais") {
+                  id9.innerHTML = "Só você pode enviar mensagens.";
+              } else if (langue === "Allemand") {
+                  id9.innerHTML = "Nur Sie können Nachrichten senden.";
+              }
+              
+              const id10 = document.getElementById("cree1");
+              if (langue === "Français") {
+                  id10.innerHTML = "Créez";
+              } else if (langue === "Anglais") {
+                  id10.innerHTML = "Create";
+              } else if (langue === "Espagnol") {
+                  id10.innerHTML = "Crear";
+              } else if (langue === "Arabe") {
+                  id10.innerHTML = "إنشاء";
+              } else if (langue === "Portugais") {
+                  id10.innerHTML = "Criar";
+              } else if (langue === "Allemand") {
+                  id10.innerHTML = "Erstellen";
+              }
+              
+              const id11 = document.getElementById("termin1");
+              if (langue === "Français") {
+                  id11.innerHTML = "terminée";
+              } else if (langue === "Anglais") {
+                  id11.innerHTML = "completed";
+              } else if (langue === "Espagnol") {
+                  id11.innerHTML = "terminada";
+              } else if (langue === "Arabe") {
+                  id11.innerHTML = "مكتمل";
+              } else if (langue === "Portugais") {
+                  id11.innerHTML = "concluída";
+              } else if (langue === "Allemand") {
+                  id11.innerHTML = "abgeschlossen";
+              }
+              
+              const id12 = document.getElementById("ChoisirUneImagesend");
+              if (langue === "Français") {
+                  id12.innerHTML = "Choisir une image à envoyer";
+              } else if (langue === "Anglais") {
+                  id12.innerHTML = "Choose an image to send";
+              } else if (langue === "Espagnol") {
+                  id12.innerHTML = "Elige una imagen para enviar";
+              } else if (langue === "Arabe") {
+                  id12.innerHTML = "اختر صورة لإرسالها";
+              } else if (langue === "Portugais") {
+                  id12.innerHTML = "Escolha uma imagem para enviar";
+              } else if (langue === "Allemand") {
+                  id12.innerHTML = "Wählen Sie ein Bild zum Senden aus";
+              }
+              
+              const id13 = document.getElementById("Partager");
+              if (langue === "Français") {
+                  id13.innerHTML = "Partager";
+              } else if (langue === "Anglais") {
+                  id13.innerHTML = "Share";
+              } else if (langue === "Espagnol") {
+                  id13.innerHTML = "Compartir";
+              } else if (langue === "Arabe") {
+                  id13.innerHTML = "مشاركة";
+              } else if (langue === "Portugais") {
+                  id13.innerHTML = "Compartilhar";
+              } else if (langue === "Allemand") {
+                  id13.innerHTML = "Teilen";
+              }
+              
+              const id14 = document.getElementById("termin2");
+              if (langue === "Français") {
+                  id14.innerHTML = "terminée";
+              } else if (langue === "Anglais") {
+                  id14.innerHTML = "completed";
+              } else if (langue === "Espagnol") {
+                  id14.innerHTML = "terminada";
+              } else if (langue === "Arabe") {
+                  id14.innerHTML = "مكتمل";
+              } else if (langue === "Portugais") {
+                  id14.innerHTML = "concluída";
+              } else if (langue === "Allemand") {
+                  id14.innerHTML = "abgeschlossen";
+              }
+              
+              const id15 = document.getElementById("Commentaires");
+              if (langue === "Français") {
+                  id15.innerHTML = "Commentaires";
+              } else if (langue === "Anglais") {
+                  id15.innerHTML = "Comments";
+              } else if (langue === "Espagnol") {
+                  id15.innerHTML = "Comentarios";
+              } else if (langue === "Arabe") {
+                  id15.innerHTML = "تعليقات";
+              } else if (langue === "Portugais") {
+                  id15.innerHTML = "Comentários";
+              } else if (langue === "Allemand") {
+                  id15.innerHTML = "Kommentare";
+              }
+              
+              const id16 = document.getElementById("SouDeconecter");
+              if (langue === "Français") {
+                  id16.innerHTML = "Souhaites-tu te déconnecter ?";
+              } else if (langue === "Anglais") {
+                  id16.innerHTML = "Do you want to log out?";
+              } else if (langue === "Espagnol") {
+                  id16.innerHTML = "¿Quieres cerrar sesión?";
+              } else if (langue === "Arabe") {
+                  id16.innerHTML = "هل تريد تسجيل الخروج؟";
+              } else if (langue === "Portugais") {
+                  id16.innerHTML = "Você quer sair?";
+              } else if (langue === "Allemand") {
+                  id16.innerHTML = "Möchten Sie sich abmelden?";
+              }
+              
+              const id17 = document.getElementById("deco_neccterbtn");
+              if (langue === "Français") {
+                  id17.innerHTML = "déconnecter";
+              } else if (langue === "Anglais") {
+                  id17.innerHTML = "log out";
+              } else if (langue === "Espagnol") {
+                  id17.innerHTML = "cerrar sesión";
+              } else if (langue === "Arabe") {
+                  id17.innerHTML = "تسجيل خروج";
+              } else if (langue === "Portugais") {
+                  id17.innerHTML = "sair";
+              } else if (langue === "Allemand") {
+                  id17.innerHTML = "abmelden";
+              }
+              
+              const id18 = document.getElementById("anulerdeco_neccterbtn");
+              if (langue === "Français") {
+                  id18.innerHTML = "fermer";
+              } else if (langue === "Anglais") {
+                  id18.innerHTML = "close";
+              } else if (langue === "Espagnol") {
+                  id18.innerHTML = "cerrar";
+              } else if (langue === "Arabe") {
+                  id18.innerHTML = "إغلاق";
+              } else if (langue === "Portugais") {
+                  id18.innerHTML = "fechar";
+              } else if (langue === "Allemand") {
+                  id18.innerHTML = "schließen";
+              }
+              
+              const id19 = document.getElementById("CommentairesH1");
+              if (langue === "Français") {
+                  id19.innerHTML = "Commentaires";
+              } else if (langue === "Anglais") {
+                  id19.innerHTML = "Comments";
+              } else if (langue === "Espagnol") {
+                  id19.innerHTML = "Comentarios";
+              } else if (langue === "Arabe") {
+                  id19.innerHTML = "تعليقات";
+              } else if (langue === "Portugais") {
+                  id19.innerHTML = "Comentários";
+              } else if (langue === "Allemand") {
+                  id19.innerHTML = "Kommentare";
+              }
+              
+              const id20 = document.getElementById("MLIDCDVC");
+              if (langue === "Français") {
+                  id20.innerHTML = "Modifiez l'image de couverture du votre cabine";
+              } else if (langue === "Anglais") {
+                  id20.innerHTML = "Modify the cover image of your office";
+              } else if (langue === "Espagnol") {
+                  id20.innerHTML = "Modificar la imagen de portada de tu oficina";
+              } else if (langue === "Arabe") {
+                  id20.innerHTML = "تعديل صورة غلاف مكتبك";
+              } else if (langue === "Portugais") {
+                  id20.innerHTML = "Modifique a imagem de capa do seu escritório";
+              } else if (langue === "Allemand") {
+                  id20.innerHTML = "Ändern Sie das Titelbild Ihres Büros";
+              }
+              
+              const id21 = document.getElementById("Partager3");
+              if (langue === "Français") {
+                  id21.innerHTML = "Partager";
+              } else if (langue === "Anglais") {
+                  id21.innerHTML = "Share";
+              } else if (langue === "Espagnol") {
+                  id21.innerHTML = "Compartir";
+              } else if (langue === "Arabe") {
+                  id21.innerHTML = "مشاركة";
+              } else if (langue === "Portugais") {
+                  id21.innerHTML = "Compartilhar";
+              } else if (langue === "Allemand") {
+                  id21.innerHTML = "Teilen";
+              }
+              
+              const id22 = document.getElementById("termin4");
+              if (langue === "Français") {
+                  id22.innerHTML = "terminée";
+              } else if (langue === "Anglais") {
+                  id22.innerHTML = "completed";
+              } else if (langue === "Espagnol") {
+                  id22.innerHTML = "terminada";
+              } else if (langue === "Arabe") {
+                  id22.innerHTML = "مكتمل";
+              } else if (langue === "Portugais") {
+                  id22.innerHTML = "concluída";
+              } else if (langue === "Allemand") {
+                  id22.innerHTML = "abgeschlossen";
+              }
+              
+              const id23 = document.getElementById("fermer4");
+              if (langue === "Français") {
+                  id23.innerHTML = "fermer";
+              } else if (langue === "Anglais") {
+                  id23.innerHTML = "close";
+              } else if (langue === "Espagnol") {
+                  id23.innerHTML = "cerrar";
+              } else if (langue === "Arabe") {
+                  id23.innerHTML = "إغلاق";
+              } else if (langue === "Portugais") {
+                  id23.innerHTML = "fechar";
+              } else if (langue === "Allemand") {
+                  id23.innerHTML = "schließen";
+              }
+              
+              const input1 = document.getElementById("inputpubadd");
+              if (langue === "Français") {
+                  input1.placeholder = "Quoi de neuf ?";
+              } else if (langue === "Anglais") {
+                  input1.placeholder = "What's new?";
+              } else if (langue === "Espagnol") {
+                  input1.placeholder = "¿Qué hay de nuevo?";
+              } else if (langue === "Arabe") {
+                  input1.placeholder = "ما الجديد؟";
+              } else if (langue === "Portugais") {
+                  input1.placeholder = "O que há de novo?";
+              } else if (langue === "Allemand") {
+                  input1.placeholder = "Was gibt's Neues?";
+                }
+              const input2 = document.getElementById("inputpubadd_comment");
+              if (langue === "Français") {
+                  input2.placeholder = "Ajouter un commentaire ?";
+              } else if (langue === "Anglais") {
+                  input2.placeholder = "Add a comment?";
+              } else if (langue === "Espagnol") {
+                  input2.placeholder = "¿Agregar un comentario?";
+              } else if (langue === "Arabe") {
+                  input2.placeholder = "إضافة تعليق؟";
+              } else if (langue === "Portugais") {
+                  input2.placeholder = "Adicionar um comentário?";
+              } else if (langue === "Allemand") {
+                  input2.placeholder = "Einen Kommentar hinzufügen?";
+                }
+              const input3 = document.getElementById("inputpubadd_comment");
+              if (langue === "Français") {
+                  input3.placeholder = "Ajouter un commentaire ?";
+              } else if (langue === "Anglais") {
+                  input3.placeholder = "Add a comment?";
+              } else if (langue === "Espagnol") {
+                  input3.placeholder = "¿Agregar un comentario?";
+              } else if (langue === "Arabe") {
+                  input3.placeholder = "إضافة تعليق؟";
+              } else if (langue === "Portugais") {
+                  input3.placeholder = "Adicionar um comentário?";
+              } else if (langue === "Allemand") {
+                  input3.placeholder = "Einen Kommentar hinzufügen?";
+               }  
+
+               const input4 = document.getElementById("inputpubadd_comment");
+               if (langue === "Français") {
+                input4.placeholder = "Ajouter un commentaire ?";
+               } else if (langue === "Anglais") {
+                input4.placeholder = "Add a comment?";
+               } else if (langue === "Espagnol") {
+                   input4.placeholder = "¿Agregar un comentario?";
+               } else if (langue === "Arabe") {
+                   input4.placeholder = "إضافة تعليق؟";
+               } else if (langue === "Portugais") {
+                   input4.placeholder = "Adicionar um comentário?";
+               } else if (langue === "Allemand") {
+                   input4.placeholder = "Einen Kommentar hinzufügen?";
+                } 
+               
+               
+               
+            }  
+      
+       }catch(error){
+ 
+       }
+    }
+});
 
 
 
@@ -294,9 +717,6 @@ async function creemessagegroup(){
     }
 
 }
-
-
-  
 
 
             //---------------- send message 
@@ -850,6 +1270,8 @@ try {
                 const nameuser = datauser.nom;
                 const prenameuser = datauser.prenom;
                 const imguser = datauser.imguser;
+
+
     
                 if (placepub === "cabine") {
     
@@ -1436,6 +1858,7 @@ else{
             const docRef = doc(db, typeuseramis, iduseramis);
             const docSnap = await getDoc(docRef); 
             const datauser = docSnap.data(); 
+            
             const nameuser = datauser.nom;
             const prenameuser = datauser.prenom;
             const imguser = datauser.imguser;

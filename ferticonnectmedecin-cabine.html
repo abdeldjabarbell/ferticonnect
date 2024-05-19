@@ -25,7 +25,7 @@
             <div class="logonav">
                 <img src="img/ferticonnectiLogoGreen.svg" alt="">
             </div>
-            <h1> FertiConnect</h1>
+            <h1 id="FertiConnect"> </h1>
         </div>
 
 
@@ -62,7 +62,7 @@
             <div class="mycabinsbg" id="mycabinsbg3"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg4">
                     <i class="bi bi-house-heart"></i>
-                    <h2>fertiConnect - Page d'accueil</h2>
+                    <h2 id="versPageAcc"></h2>
                 </div>
             </div>
             <br>
@@ -70,7 +70,7 @@
             <div class="mycabinsbg" id="mycabinsbg"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg">
                     <i class="bi bi-hospital"></i>
-                    <h2>cabines</h2>
+                    <h2 id="cliniques"></h2>
                 </div>
                 <div class="mescabins_" id="mescabins_" style="display: none;"></div>
                 
@@ -80,7 +80,7 @@
             <div class="mycabinsbg" id="mycabinsbg2"  style="height: auto;">
                 <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg2">
                     <i class="bi bi-people"></i>
-                    <h2>Amis</h2>
+                    <h2 id="Amis_"></h2>
                 </div>
                 <div class="mescabins_" id="mescabins_2" style="display: none;"></div>
                 
@@ -95,7 +95,7 @@
                     <div class="photoprofilepubadd">
                         <img id="photoprofilepubadd" src="img/ferticonnectiLogoWhite.svg" alt="">
                     </div>
-                    <textarea class="inputpubadd" id="inputpubadd" rows="1" cols="50" placeholder="Quoi de neuf ?"></textarea>
+                    <textarea class="inputpubadd" id="inputpubadd" rows="1" cols="50" placeholder=""></textarea>
                 </div>
                 <div class="ligne_"></div>
 
@@ -140,7 +140,7 @@
                     <div class="sendmessageicon" id="sendmessageicon">
                         <i class="bi bi-send"></i>
                     </div>
-                    <p id="QMPEUM" style="display: none;">Que le médecin peut envoyer un message </p>
+                    <p id="QMPEUM" style="display: none;"> </p>
                 </div>
                 
                 <div class="scrollButton" id="scrollButton">
@@ -150,19 +150,19 @@
                 <div class="optionbg_wind" id="optionbg_wind" style="display: none;">
                     <div class="optionbg_wind_btn" id="optionbg_wind_btn_home">
                         <i class="bi bi-arrow-return-left"></i>
-                        <p>Retourner à la page d'accueil</p>
+                        <p id="RAPDACC"></p>
                     </div>
                 </div>
 
                 <div class="creeUneRoomCabineBg" id="creeUneRoomCabineBg" style="display: none;">
                     <div class="bg_cree_CabineRoom_place">
                         <i class="bi bi-chat-right-text"></i>
-                        <h1>Créez une messagerie pour votre cabinet</h1>
-                        <p> Vous seul pouvez envoyer des messages.</p>                        
+                        <h1 id="creeUneESpacemessageCabine"></h1>
+                        <p id="vousseulpouversendmessage"> </p>                        
 
                         <button class="btn souvgarder"  id="confirmeCreeMeaasegCabine">
                             <div id="originalmessageCabine" style="display: block;">
-                                Créez
+                                <p id="cree1"></p>
                             </div>
                             <div class="cs-loader-inner" id="loadermessageCabine" style="display: none;">
                                 <label>	●</label>
@@ -171,7 +171,7 @@
                                 <label>	●</label>
                             </div>
                             <div id="DonemessageCabine" style="display: none;">
-                                terminée
+                                <p id="termin1"></p>
                             </div>
                       </button>
                     </div>
@@ -179,7 +179,7 @@
 
                 <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
                     <div class="bgcahngePhoto">
-                        <h3>Choisir une image à envoyer</h3>
+                        <h3 id="ChoisirUneImagesend"></h3>
                         <br>
                         <div class="photochanger_couverture" id="photochanger_couverture">
             
@@ -191,7 +191,7 @@
                         <div class="btns_bg_info">
                            <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
                                 <div id="original_couv" style="display: block;">
-                                    Partager
+                                    <p id="Partager"></p>
                                 </div>
                                 <div class="cs-loader-inner" id="loader_couv" style="display: none;">
                                     <label>	●</label>
@@ -200,7 +200,7 @@
                                     <label>	●</label>
                                 </div>
                                 <div id="Done_couv" style="display: none;">
-                                    terminée
+                                    <p id="termin2"></p>
                                 </div>
                           </button>
                           <br>
@@ -219,7 +219,7 @@
     <div class="commentaire_bg" id="commentaire_bg" style="display: none;" >
         <div class="commentaire_" >
             <div class="head_commentaire_">
-                <h1>Commentaires </h1>
+                <h1 id="Commentaires"> </h1>
                 <i class="bi bi-x-octagon-fill" id="closecommentair"></i>
             </div>
             <div class="listeComments_bg" id="listeComments_bg_list">
@@ -241,7 +241,7 @@
                     <div class="photoprofilepubadd comment">
                         <img id="photoprofilepubadd_comments" src="img/ferticonnectiLogoWhite.svg" alt="">
                     </div>
-                    <textarea class="inputpubadd" id="inputpubadd_comment" rows="1" cols="50" placeholder="Ajouter un commentaire ?"></textarea>
+                    <textarea class="inputpubadd" id="inputpubadd_comment" rows="1" cols="50" ></textarea>
                     <i class="bi bi-send" id="send_comment"></i>
                 </div>
             </div>
@@ -255,13 +255,13 @@
 
     <div class="photoprofilchangerbg" id="deconnectionbg" style="display: none;">
         <div class="deconnection">
-            <p>Souhaites-tu te déconnecter ?</p>
+            <p id="SouDeconecter"></p>
               <img src="img/deconecter.svg" alt="">
             <br>
             <div class="btns_bg_info">
-               <button class="btn supprimer" type="submit" id="deco_neccterbtn">déconnecter</button>
+               <button class="btn supprimer" type="submit" id="deco_neccterbtn"></button>
                <br>
-               <button class="btn souvgarder" id="anulerdeco_neccterbtn">fermer</button>
+               <button class="btn souvgarder" id="anulerdeco_neccterbtn"></button>
              </div>
 
         </div>
@@ -270,7 +270,7 @@
     <div class="commentaire_bg" id="commentaire_bg" style="display: none;" >
         <div class="commentaire_" >
             <div class="head_commentaire_">
-                <h1>Commentaires </h1>
+                <h1 id="CommentairesH1"> </h1>
                 <i class="bi bi-x-octagon-fill" id="closecommentair"></i>
             </div>
             <div class="listeComments_bg" id="listeComments_bg_list">
@@ -292,7 +292,7 @@
                     <div class="photoprofilepubadd comment">
                         <img id="photoprofilepubadd_comments" src="img/ferticonnectiLogoWhite.svg" alt="">
                     </div>
-                    <textarea class="inputpubadd" id="inputpubadd_comment" rows="1" cols="50" placeholder="Ajouter un commentaire ?"></textarea>
+                    <textarea class="inputpubadd" id="inputpubadd_comment" rows="1" cols="50" ></textarea>
                     <i class="bi bi-send" id="send_comment"></i>
                 </div>
             </div>
@@ -313,7 +313,7 @@
 
     <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
         <div class="bgcahngePhoto">
-            <h3>Modifiez l'image de couverture du votre cabine</h3>
+            <h3 id="MLIDCDVC"></h3>
             <br>
             <div class="photochanger_couverture" id="photochanger_couverture">
 
@@ -325,7 +325,7 @@
             <div class="btns_bg_info">
                <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
                     <div id="original_couv" style="display: block;">
-                        Partager
+                        <p id="Partager3"></p>
                     </div>
                     <div class="cs-loader-inner" id="loader_couv" style="display: none;">
                         <label>	●</label>
@@ -334,11 +334,13 @@
                         <label>	●</label>
                     </div>
                     <div id="Done_couv" style="display: none;">
-                        terminée
+                        <p id="termin4"></p>
                     </div>
               </button>
               <br>
-              <button class="btn supprimer" id="fermer2">fermer</button>
+              <button class="btn supprimer" id="fermer2">
+                <p id="fermer4"></p>
+              </button>
             </div>
         </div>
     </div>

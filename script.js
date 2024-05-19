@@ -185,6 +185,9 @@ function animationText1(text,direction,selectedLanguage,next_lang){
         buttonnext.style.opacity="0";
         buttonnext.style.display="none";
         
+        const quinousbg = document.getElementById('quinousbg');
+        quinousbg.style.display="none"
+        
         toNextText1(selectedLanguage);
     });
     const suivant4 = document.getElementById("suivant4");

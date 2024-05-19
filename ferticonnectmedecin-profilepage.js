@@ -695,8 +695,6 @@ etap4.addEventListener('click', () => {
     window.location.href = `formulairepatien.html?userformulaireid=${useridclick}&typeuserformulaire=${typeuseruserauth}`; // Redirection vers la page du produit avec l'ID du produit
 }); 
 
-
-
 // Récupérer l'ID du produit et le nom du magasin à partir de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const useridclick = urlParams.get('useridclick');
