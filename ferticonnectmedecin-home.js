@@ -1043,7 +1043,7 @@ option_header_message.addEventListener('click', function() {
             div.className="divnoamis";
             const divimg = document.createElement("img");
             divimg.className="divimg";
-            divimg.src="img/undraw_coffee_with_friends_3cbj.svg";
+            divimg.src="img/undraw_mailbox_re_dvds.svg";
             div.appendChild(divimg);
             listemesagebg.appendChild(div);
 

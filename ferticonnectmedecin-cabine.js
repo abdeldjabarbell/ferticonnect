@@ -172,7 +172,81 @@ auth.onAuthStateChanged(async (user) => {
               } else if (langue === "Allemand") {
                   id9.innerHTML = "Nur Sie können Nachrichten senden.";
               }
+              const input222 = document.getElementById("ajoutermembreTitle6");
+              if (langue === "Français") {
+                  input222.innerHTML = "Ajouter un membre dans cette clinique";
+              } else if (langue === "Anglais") {
+                  input222.innerHTML = "Add a member to this clinic";
+              } else if (langue === "Espagnol") {
+                  input222.innerHTML = "Añadir un miembro a esta clínica";
+              } else if (langue === "Arabe") {
+                  input222.innerHTML = "إضافة عضو إلى هذه العيادة";
+              } else if (langue === "Portugais") {
+                  input222.innerHTML = "Adicionar um membro a esta clínica";
+              } else if (langue === "Allemand") {
+                  input222.innerHTML = "Ein Mitglied zu dieser Klinik hinzufügen";
+              }
               
+              const input223 = document.getElementById("ajoutermembrediscreption6");
+              if (langue === "Français") {
+                  input223.innerHTML = "Ajouter un membre dans cette clinique, pour faire ça il faut accéder au profil de l'utilisateur que vous souhaitez ajouter à ce groupe et copier l'ID, puis le mettre ici";
+              } else if (langue === "Anglais") {
+                  input223.innerHTML = "Add a member to this clinic. To do this, access the profile of the user you want to add to this group, copy the ID, and enter it here";
+              } else if (langue === "Espagnol") {
+                  input223.innerHTML = "Añadir un miembro a esta clínica. Para hacer esto, acceda al perfil del usuario que desea agregar a este grupo, copie el ID y póngalo aquí";
+              } else if (langue === "Arabe") {
+                  input223.innerHTML = "أضف عضوًا إلى هذه العيادة. للقيام بذلك، قم بالوصول إلى ملف تعريف المستخدم الذي تريد إضافته إلى هذه المجموعة، وانسخ المعرف، وضعه هنا";
+              } else if (langue === "Portugais") {
+                  input223.innerHTML = "Adicionar um membro a esta clínica. Para fazer isso, acesse o perfil do usuário que deseja adicionar a este grupo, copie o ID e coloque-o aqui";
+              } else if (langue === "Allemand") {
+                  input223.innerHTML = "Fügen Sie ein Mitglied zu dieser Klinik hinzu. Um dies zu tun, greifen Sie auf das Profil des Benutzers zu, den Sie zu dieser Gruppe hinzufügen möchten, kopieren Sie die ID und geben Sie sie hier ein";
+              }
+              
+              const input224 = document.getElementById("text156");
+              if (langue === "Français") {
+                  input224.innerHTML = "id";
+              } else if (langue === "Anglais") {
+                  input224.innerHTML = "id";
+              } else if (langue === "Espagnol") {
+                  input224.innerHTML = "id";
+              } else if (langue === "Arabe") {
+                  input224.innerHTML = "معرف";
+              } else if (langue === "Portugais") {
+                  input224.innerHTML = "id";
+              } else if (langue === "Allemand") {
+                  input224.innerHTML = "ID";
+              }
+              
+              const input225 = document.getElementById("text166");
+              if (langue === "Français") {
+                  input225.innerHTML = "ajouter";
+              } else if (langue === "Anglais") {
+                  input225.innerHTML = "add";
+              } else if (langue === "Espagnol") {
+                  input225.innerHTML = "añadir";
+              } else if (langue === "Arabe") {
+                  input225.innerHTML = "إضافة";
+              } else if (langue === "Portugais") {
+                  input225.innerHTML = "adicionar";
+              } else if (langue === "Allemand") {
+                  input225.innerHTML = "hinzufügen";
+              }
+
+              
+              const input226 = document.getElementById("text176");
+              if (langue === "Français") {
+                  input226.innerHTML = "Fait";
+              } else if (langue === "Anglais") {
+                  input226.innerHTML = "Done";
+              } else if (langue === "Espagnol") {
+                  input226.innerHTML = "Hecho";
+              } else if (langue === "Arabe") {
+                  input226.innerHTML = "منجز"; // Arabic for "done"
+              } else if (langue === "Portugais") {
+                  input226.innerHTML = "Feito";
+              } else if (langue === "Allemand") {
+                  input226.innerHTML = "Erledigt";
+              }
               const id10 = document.getElementById("cree1");
               if (langue === "Français") {
                   id10.innerHTML = "Créez";
@@ -187,7 +261,20 @@ auth.onAuthStateChanged(async (user) => {
               } else if (langue === "Allemand") {
                   id10.innerHTML = "Erstellen";
               }
-              
+              const input221 = document.getElementById("AjouterMembre6");
+              if (langue === "Français") {
+                  input221.innerHTML = "Ajouter un membre ";
+              } else if (langue === "Anglais") {
+                  input221.innerHTML = "Add a member";
+              } else if (langue === "Espagnol") {
+                  input221.innerHTML = "Añadir un miembro";
+              } else if (langue === "Arabe") {
+                  input221.innerHTML = "إضافة عضو";
+              } else if (langue === "Portugais") {
+                  input221.innerHTML = "Adicionar um membro";
+              } else if (langue === "Allemand") {
+                  input221.innerHTML = "Mitglied hinzufügen";
+              }
               const id11 = document.getElementById("termin1");
               if (langue === "Français") {
                   id11.innerHTML = "terminée";
@@ -247,6 +334,9 @@ auth.onAuthStateChanged(async (user) => {
               } else if (langue === "Allemand") {
                   id14.innerHTML = "abgeschlossen";
               }
+
+
+              
               
               const id15 = document.getElementById("Commentaires");
               if (langue === "Français") {
@@ -383,6 +473,8 @@ auth.onAuthStateChanged(async (user) => {
                   id23.innerHTML = "schließen";
               }
               
+
+              
               const input1 = document.getElementById("inputpubadd");
               if (langue === "Français") {
                   input1.placeholder = "Quoi de neuf ?";
@@ -439,10 +531,15 @@ auth.onAuthStateChanged(async (user) => {
                    input4.placeholder = "Adicionar um comentário?";
                } else if (langue === "Allemand") {
                    input4.placeholder = "Einen Kommentar hinzufügen?";
-                } 
+                  } 
                
+
                
+
                
+
+
+                 
             }  
       
        }catch(error){
@@ -450,8 +547,6 @@ auth.onAuthStateChanged(async (user) => {
        }
     }
 });
-
-
 
 
 //const couvertureCabine = document.getElementById("messageAjoutePhoto");
@@ -1179,7 +1274,77 @@ titleoptionmycabinsbg2.addEventListener('click', function() {
         mycabinsbg2.style.height = "auto";
     }
 });
+//mes amis liste 
+const mescabins_6 = document.getElementById('mescabins_6');
+const mycabinsbg6 = document.getElementById('mycabinsbg6');
+const titleoptionmycabinsbg6 = document.getElementById('titleoptionmycabinsbg6');
 
+const submitajouterunmemebre = document.getElementById('ajouterunmembtreid') ;
+const Done1O6 = document.getElementById('Done1O6') ;
+const original1O6 = document.getElementById('original1O6') ;
+const loader1O6 = document.getElementById('loader1O6') ;
+
+titleoptionmycabinsbg6.addEventListener('click', function() {
+    if(mescabins_6.style.display === "none") {
+        mescabins_6.style.display = "flex";
+        mycabinsbg6.style.height = "400px";
+    } else {
+        mescabins_6.style.display = "none";
+        mycabinsbg6.style.height = "auto";
+    }
+});
+
+submitajouterunmemebre.addEventListener('click', async function() {
+    const inputid = document.getElementById('idamembreRajouter6').value;
+
+    original1O6.style.display = "none";
+    loader1O6.style.display = "flex";
+    
+    try {
+        // Check if inputid already exists
+        const querySnapshot = await getDocs(query(
+            collection(db, "cabines", IdCabine, "membres"),
+            where("idmembres", "==", inputid)
+        ));
+
+        if (!querySnapshot.empty) {
+            // inputid already exists, handle it accordingly
+            alert("This ID already exists in this group");
+            loader1O6.style.display = "none";
+            original1O6.style.display = "flex";
+        }
+        else{
+
+
+        // If inputid does not exist, proceed to add a new member
+        await addDoc(collection(db, "cabines", IdCabine, "membres"), {
+            idmembres: inputid,
+            typeuser: "patient",
+            timestamp: firestoreServerTimestamp()
+        });
+        
+        // Adding a reference to the 'patient' collection
+        await addDoc(collection(db, "patient", inputid, "cabines"), {
+            cabineId: IdCabine
+        });
+
+        loader1O6.style.display = "none";
+        Done1O6.style.display = "flex";
+        
+        setTimeout(() => {
+            Done1O6.style.display = "none";
+            original1O6.style.display = "flex";
+        }, 1000);
+    }
+
+
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        // Optionally handle the error here
+        original1O6.style.display = "flex";
+        loader1O6.style.display = "none";
+    }
+});
 
 
 
