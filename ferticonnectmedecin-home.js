@@ -1020,13 +1020,118 @@ option_header_message.addEventListener('click', function() {
         const iduser = user.uid;
         const doclistemessageref = collection(db,typeuserclick,iduser,"listeMessage");
         const querySnapshot = await getDocs(doclistemessageref);
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const idRoomMessage= data.idRoomMessage;
-          const idamisMessage= data.idamisMessage;
-          const typeamisMessage= data.TypeamisMessage;
-          afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser);
-        });
+
+
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const idRoomMessage= data.idRoomMessage;
+                const idamisMessage= data.idamisMessage;
+                const typeamisMessage= data.TypeamisMessage;
+                afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser);
+            });
+        } else {
+
+
+            const userRef = doc(db, typeuserclick,iduser );
+            const docSnapshot = await getDoc(userRef);
+            const lang = docSnapshot.data().lang;
+ 
+
+            const  listemesagebg = document.getElementById("listemesagebg");
+            const div = document.createElement("div");
+            div.className="divnoamis";
+            const divimg = document.createElement("img");
+            divimg.className="divimg";
+            divimg.src="img/undraw_coffee_with_friends_3cbj.svg";
+            div.appendChild(divimg);
+            listemesagebg.appendChild(div);
+
+            const divptext = document.createElement("div");
+            divptext.classList="divnoamis";
+            const divptextP = document.createElement("p");
+
+            if (lang === "Français") {
+                divptextP.innerHTML = `
+                Désolé, nous ne pouvons pas afficher votre liste de messages car vous n'avez pas encore envoyé de message à quelqu'un.<br><br>
+                
+                Pour créer une conversation avec une personne :<br>
+                - Veuillez accéder à son profil et cliquer sur le bouton "Message".<br>
+                - Ensuite, vous retrouverez cette personne ici dans votre liste de messages.<br>
+                <br><br>
+                Cordialement,<br>
+                
+                L'équipe de FertiConnect<br>
+                `;
+            } else if (lang === "Anglais") {
+                divptextP.innerHTML = `
+                Sorry, we cannot display your message list because you haven't sent a message to anyone yet.<br><br>
+                
+                To start a conversation with someone:<br>
+                - Please go to their profile and click the "Message" button.<br>
+                - Then you will find this person here in your message list.<br>
+                <br><br>
+                Best regards,<br>
+                
+                The FertiConnect Team<br>
+                `;
+            } else if (lang === "Espagnol") {
+                divptextP.innerHTML = `
+                Lo siento, no podemos mostrar su lista de mensajes porque aún no ha enviado un mensaje a nadie.<br><br>
+                
+                Para iniciar una conversación con alguien:<br>
+                - Vaya a su perfil y haga clic en el botón "Mensaje".<br>
+                - Luego encontrará a esta persona aquí en su lista de mensajes.<br>
+                <br><br>
+                Atentamente,<br>
+                
+                El equipo de FertiConnect<br>
+                `;
+            } else if (lang === "Arabe") {
+                divptextP.innerHTML = `
+                عذرًا، لا يمكننا عرض قائمة الرسائل الخاصة بك لأنك لم ترسل رسالة إلى أي شخص بعد.<br><br>
+                
+                لبدء محادثة مع شخص ما:<br>
+                - يرجى الانتقال إلى ملفه الشخصي والنقر على زر "رسالة".<br>
+                - بعد ذلك، ستجد هذا الشخص هنا في قائمة الرسائل الخاصة بك.<br>
+                <br><br>
+                مع تحيات،<br>
+                
+                فريق فيرتي كونكت<br>
+                `;
+            } else if (lang === "Portugais") {
+                divptextP.innerHTML = `
+                Desculpe, não podemos exibir sua lista de mensagens porque você ainda não enviou uma mensagem para ninguém.<br><br>
+                
+                Para iniciar uma conversa com alguém:<br>
+                - Por favor, vá ao perfil dela e clique no botão "Mensagem".<br>
+                - Depois, você encontrará essa pessoa aqui na sua lista de mensagens.<br>
+                <br><br>
+                Atenciosamente,<br>
+                
+                A equipe FertiConnect<br>
+                `;
+            } else if (lang === "Allemand") {
+                divptextP.innerHTML = `
+                Entschuldigung, wir können Ihre Nachrichtenliste nicht anzeigen, da Sie noch niemandem eine Nachricht gesendet haben.<br><br>
+                
+                Um eine Unterhaltung mit jemandem zu beginnen:<br>
+                - Gehen Sie bitte zu dessen Profil und klicken Sie auf die Schaltfläche "Nachricht".<br>
+                - Dann finden Sie diese Person hier in Ihrer Nachrichtenliste.<br>
+                <br><br>
+                Mit freundlichen Grüßen,<br>
+                
+                Das FertiConnect-Team<br>
+                `;
+            }
+            
+            divptextP.style.color="#176561";
+            divptext.appendChild(divptextP);
+            listemesagebg.appendChild(divptext);
+        }
+
+
+
         async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser){
             const docRef = doc(db, typeamisMessage, idamisMessage);
             try {
