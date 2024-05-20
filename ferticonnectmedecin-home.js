@@ -346,7 +346,7 @@ const firebaseConfig = {
             
             divptextP.style.color="#176561";
             divptext.appendChild(divptextP);
-            mescabins_2.appendChild(divptext);
+            mescabins_.appendChild(divptext);
         }
         
         async function recupereCabine(cabineId){
