@@ -27,7 +27,7 @@
 29746A
 */
 :root{
-  --bg-color:#e6f3ea;
+  --bg-color:#f1efef;
   --second-bg-color:#bcc9c1;
   --pub-bg-color:#c8d6d442;
   --second2-bg-color:#176561;
@@ -2118,6 +2118,18 @@ font-size: 1rem;
     font-size: 1.3rem;
     font-weight: 500;
     color: var(--second2-bg-color);
+  }
+
+  .divnoamis{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .divimg{
+    width: 120px;
   }
 @media (max-width:617px){
 

@@ -59,6 +59,7 @@ const firebaseConfig = {
         console.log(userId);
         const userRef = doc(db, typeuserclick, userId);
         const docSnapshot = await getDoc(userRef);
+        const lang = docSnapshot.data().lang;
         
         
         if (docSnapshot.exists()) {
@@ -82,15 +83,133 @@ const firebaseConfig = {
             window.location.href = `ferticonnectmedecin-profilepage.html?useridclick=${userId}&typeuserclick=${typeuserclick}&typeOfUser=${typeOfUser}`; // Redirection vers la page du produit avec l'ID du produit
         }); 
 
-        const amisquerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"amis")));
-        amisquerySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const iduseramis = data.iduser;
-            const typeuseramis = data.typeuser;
+        const amisquerySnapshot = await getDocs(query(collection(db, typeOfUser, userId, "amis")));
 
-            recupereAmis(iduseramis,typeuseramis);
+        if (!amisquerySnapshot.empty) {
+            amisquerySnapshot.forEach((doc) => {
+                const data = doc.data();
+                console.log(" friends data."+data);
 
-        });
+                const iduseramis = data.iduser;
+                const typeuseramis = data.typeuser;
+        
+                recupereAmis(iduseramis, typeuseramis);
+            });
+        } else {
+
+            const div = document.createElement("div");
+            div.className="divnoamis";
+            const divimg = document.createElement("img");
+            divimg.className="divimg";
+            divimg.src="img/undraw_coffee_with_friends_3cbj.svg";
+            div.appendChild(divimg);
+            mescabins_2.appendChild(div);
+
+            const divptext = document.createElement("div");
+            divptext.classList="divnoamis";
+            const divptextP = document.createElement("p");
+            if (lang === "Français") {
+                divptextP.innerHTML = `
+                    Désolé, nous ne pouvons pas afficher votre liste d'amis car vous n'avez pas encore ajouté d'amis. <br>
+                    
+                    - **Si vous êtes médecin**, vous pouvez ajouter n'importe qui à votre liste de contacts.<br>
+                    - **Si vous n'êtes pas médecin**, vous pouvez uniquement ajouter des médecins à votre liste de contacts.<br>
+                    <br>
+                    Pour trouver de nouveaux amis :<br>
+                    - Utilisez la barre de recherche.<br>
+                    - Consultez les profils des médecins directement via les publications sur la page d'accueil.<br>
+            
+                    <br><br>
+                    Cordialement,<br>
+                    
+                    L'équipe de FertiConnect<br>
+                `;
+            } else if (lang === "Anglais") {
+                divptextP.innerHTML = `
+                    Sorry, we cannot display your friends list because you have not added any friends yet. <br>
+                    
+                    - **If you are a doctor**, you can add anyone to your contact list.<br>
+                    - **If you are not a doctor**, you can only add doctors to your contact list.<br>
+                    <br>
+                    To find new friends:<br>
+                    - Use the search bar.<br>
+                    - Check the profiles of doctors directly through the posts on the homepage.<br>
+            
+                    <br><br>
+                    Sincerely,<br>
+                    
+                    The FertiConnect team<br>
+                `;
+            } else if (lang === "Espagnol") {
+                divptextP.innerHTML = `
+                    Lo sentimos, no podemos mostrar tu lista de amigos porque aún no has agregado a ningún amigo. <br>
+                    
+                    - **Si eres médico**, puedes agregar a cualquiera a tu lista de contactos.<br>
+                    - **Si no eres médico**, solo puedes agregar médicos a tu lista de contactos.<br>
+                    <br>
+                    Para encontrar nuevos amigos:<br>
+                    - Utiliza la barra de búsqueda.<br>
+                    - Consulta los perfiles de los médicos directamente a través de las publicaciones en la página de inicio.<br>
+            
+                    <br><br>
+                    Atentamente,<br>
+                    
+                    El equipo de ConexiónFértil<br>
+                `;
+            } else if (lang === "Arabe") {
+                divptextP.innerHTML = `
+                    نأسف، لا يمكننا عرض قائمة الأصدقاء الخاصة بك لأنك لم تقم بإضافة أي أصدقاء بعد. <br>
+                    
+                    - **إذا كنت طبيباً**، يمكنك إضافة أي شخص إلى قائمة جهات الاتصال الخاصة بك.<br>
+                    - **إذا لم تكن طبيباً**، يمكنك فقط إضافة الأطباء إلى قائمة جهات الاتصال الخاصة بك.<br>
+                    <br>
+                    للعثور على أصدقاء جدد:<br>
+                    - استخدم شريط البحث.<br>
+                    - تحقق من ملفات الأطباء مباشرة من خلال المنشورات على الصفحة الرئيسية.<br>
+            
+                    <br><br>
+                    مع خالص التحية,<br>
+                    
+                    فريق فرتي كونكت<br>
+                `;
+            } else if (lang === "Portugais") {
+                divptextP.innerHTML = `
+                    Desculpe, não podemos exibir sua lista de amigos porque você ainda não adicionou nenhum amigo. <br>
+                    
+                    - **Se você é médico**, você pode adicionar qualquer pessoa à sua lista de contatos.<br>
+                    - **Se você não é médico**, você só pode adicionar médicos à sua lista de contatos.<br>
+                    <br>
+                    Para encontrar novos amigos:<br>
+                    - Use a barra de pesquisa.<br>
+                    - Confira os perfis dos médicos diretamente através das postagens na página inicial.<br>
+            
+                    <br><br>
+                    Atenciosamente,<br>
+                    
+                    A equipe do ConexãoFértil<br>
+                `;
+            } else if (lang === "Allemand") {
+                divptextP.innerHTML = `
+                    Entschuldigung, wir können Ihre Freundesliste nicht anzeigen, da Sie noch keine Freunde hinzugefügt haben. <br>
+                    
+                    - **Wenn Sie Arzt sind**, können Sie jeden zu Ihrer Kontaktliste hinzufügen.<br>
+                    - **Wenn Sie kein Arzt sind**, können Sie nur Ärzte zu Ihrer Kontaktliste hinzufügen.<br>
+                    <br>
+                    Um neue Freunde zu finden:<br>
+                    - Verwenden Sie die Suchleiste.<br>
+                    - Überprüfen Sie die Profile der Ärzte direkt über die Beiträge auf der Startseite.<br>
+            
+                    <br><br>
+                    Mit freundlichen Grüßen,<br>
+                    
+                    Das FertiVerbindung-Team<br>
+                `;
+            }
+            divptextP.style.color="#176561";
+            divptext.appendChild(divptextP);
+            mescabins_2.appendChild(divptext);
+        }
+        
         async function recupereAmis(iduseramis,typeuseramis){
             const docRef = doc(db, typeuseramis, iduseramis);
             const docSnap = await getDoc(docRef); 
@@ -131,12 +250,104 @@ const firebaseConfig = {
         
 
         const cabinequerySnapshot = await getDocs(query(collection(db, typeOfUser,userId,"cabines")));
-        cabinequerySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const cabineId = data.cabineId;
-            recupereCabine(cabineId);
+        if (!cabinequerySnapshot.empty) {
+            cabinequerySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const cabineId = data.cabineId;
+                recupereCabine(cabineId);
+    
+            });
+        } else {
 
-        });
+            const div = document.createElement("div");
+            div.className="divnoamis";
+            const divimg = document.createElement("img");
+            divimg.className="divimg";
+            divimg.src="img/undraw_hooked_re_vl59.svg";
+            div.appendChild(divimg);
+            mescabins_2.appendChild(div);
+
+            const divptext = document.createElement("div");
+            divptext.classList="divnoamis";
+            const divptextP = document.createElement("p");
+            if (lang === "Français") {
+                divptextP.innerHTML = `
+                Désolé, nous ne pouvons pas afficher votre liste de cliniques car vous n'êtes pas encore associé à une clinique.<br><br>
+                
+                Pour accéder à une clinique :<br>
+                - Demandez à votre médecin de vous ajouter à leur clinique.<br>
+                - Utilisez la barre de recherche pour trouver la clinique souhaitée et envoyez une demande d'adhésion.<br>
+                <br><br>
+                Cordialement,<br>
+                
+                L'équipe de FertiConnect<br>
+                `;
+            } else if (lang === "Anglais") {
+                divptextP.innerHTML = `
+                Sorry, we cannot display your list of clinics because you are not yet associated with a clinic.<br><br>
+                
+                To access a clinic:<br>
+                - Ask your doctor to add you to their clinic.<br>
+                - Use the search bar to find the desired clinic and send a request.<br>
+                <br><br>
+                Best regards,<br>
+                
+                The FertiConnect Team<br>
+                `;
+            } else if (lang === "Espagnol") {
+                divptextP.innerHTML = `
+                Lo siento, no podemos mostrar su lista de clínicas porque aún no está asociado con una clínica.<br><br>
+                
+                Para acceder a una clínica:<br>
+                - Pida a su médico que lo agregue a su clínica.<br>
+                - Use la barra de búsqueda para encontrar la clínica deseada y enviar una solicitud.<br>
+                <br><br>
+                Atentamente,<br>
+                
+                El equipo de FertiConnect<br>
+                `;
+            } else if (lang === "Arabe") {
+                divptextP.innerHTML = `
+                عذرًا، لا يمكننا عرض قائمة العيادات الخاصة بك لأنك لم ترتبط بعد بعيادة.<br><br>
+                
+                للوصول إلى عيادة:<br>
+                - اطلب من طبيبك إضافتك إلى عيادتهم.<br>
+                - استخدم شريط البحث للعثور على العيادة المطلوبة وإرسال طلب.<br>
+                <br><br>
+                مع تحيات،<br>
+                
+                فريق FertiConnect<br>
+                `;
+            } else if (lang === "Portugais") {
+                divptextP.innerHTML = `
+                Desculpe, não podemos exibir sua lista de clínicas porque você ainda não está associado a uma clínica.<br><br>
+                
+                Para acessar uma clínica:<br>
+                - Peça ao seu médico para adicioná-lo à clínica deles.<br>
+                - Use a barra de pesquisa para encontrar a clínica desejada e enviar uma solicitação.<br>
+                <br><br>
+                Atenciosamente,<br>
+                
+                A equipe FertiConnect<br>
+                `;
+            } else if (lang === "Allemand") {
+                divptextP.innerHTML = `
+                Entschuldigung, wir können Ihre Liste der Kliniken nicht anzeigen, da Sie noch keiner Klinik zugeordnet sind.<br><br>
+                
+                Um auf eine Klinik zuzugreifen:<br>
+                - Bitten Sie Ihren Arzt, Sie seiner Klinik hinzuzufügen.<br>
+                - Verwenden Sie die Suchleiste, um die gewünschte Klinik zu finden und eine Anfrage zu senden.<br>
+                <br><br>
+                Mit freundlichen Grüßen,<br>
+                
+                Das FertiConnect-Team<br>
+                `;
+            }
+            
+            divptextP.style.color="#176561";
+            divptext.appendChild(divptextP);
+            mescabins_2.appendChild(divptext);
+        }
         
         async function recupereCabine(cabineId){
             const docRef = doc(db, "cabines", cabineId);

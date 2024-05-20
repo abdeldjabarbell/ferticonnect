@@ -196,8 +196,7 @@ const firebaseConfig = {
                     compeleleprofile.style.display="none";
                     infobtn.style.display="none";
                 }
-                console.log("useridclick"+useridclick);
-                console.log("useridclick"+iduser);
+
 
                 // Extraire les composantes de la date
                 const day = date.getDate();
@@ -209,32 +208,46 @@ const firebaseConfig = {
                 
                 // Formater la date en chaîne de caractères "DD Mois YY heure"
                 const formattedTimestamp = `${day} ${monthName} ${year}`;
+                traducFolder();
+                async function traducFolder(){
+                    const docRef = doc(db, typeuseruserauth, iduser);
+                    try {
+                        const docSnap = await getDoc(docRef); 
+                        if (docSnap.exists()) {
+                            const datauser = docSnap.data(); 
+                            const langue =  datauser.lang;
+                            const fotherprofile = document.getElementById("fotherprofile");
+                            const FertiConnect_ = document.getElementById("FertiConnect_");
+                          if (langue === "Français") {
+                            FertiConnect_.innerHTML = "FertiConnect";
+                            fotherprofile.innerHTML = "Cet utilisateur s'est enregistré en tant que " + typeuserclick + " sur Ferticonnect le " + formattedTimestamp;
+                        } else if (langue === "Anglais") {
+                            FertiConnect_.innerHTML = "FertiConnect";
+                            fotherprofile.innerHTML = "This user registered as " + typeuserclick + " on Ferticonnect on " + formattedTimestamp;
+                        } else if (langue === "Espagnol") {
+                            FertiConnect_.innerHTML = "FertiConnect";
+                            fotherprofile.innerHTML = "Este usuario se registró como " + typeuserclick + " en ConexiónFértil el " + formattedTimestamp;
+                        } else if (langue === "Arabe") {
+                            FertiConnect_.innerHTML = "فرتي كونكت";
+                            fotherprofile.innerHTML = "سجل هذا المستخدم كـ " + typeuserclick + " على فرتي كونكت في " + formattedTimestamp;
+                        } else if (langue === "Portugais") {
+                            FertiConnect_.innerHTML = "FertiConnect";
+                            fotherprofile.innerHTML = "Este usuário se registrou como " + typeuserclick + " no ConexãoFértil em " + formattedTimestamp;
+                        } else if (langue === "Allemand") {
+                            FertiConnect_.innerHTML = "FertiConnect";
+                            fotherprofile.innerHTML = "Dieser Benutzer hat sich als " + typeuserclick + " auf FertiVerbindung am " + formattedTimestamp + " registriert";
+                        }
+                        }
+                    }catch{}
+
+
+                }
                 
-                const fotherprofile = document.getElementById("fotherprofile");
 
                 nameuser.innerHTML=prenomuserprofile+" "+ nameuserprofile;
-                fotherprofile.innerHTML="Cet utilisateur s'est enregistré en tant que "+typeuserclick+" sur Ferticonnect le "+formattedTimestamp;
-                              
-              const FertiConnect_ = document.getElementById("FertiConnect_");
-              if (langue === "Français") {
-                FertiConnect_.innerHTML = "FertiConnect";
-                fotherprofile.innerHTML = "Cet utilisateur s'est enregistré en tant que " + typeuserclick + " sur Ferticonnect le " + formattedTimestamp;
-            } else if (langue === "Anglais") {
-                FertiConnect_.innerHTML = "FertiConnect";
-                fotherprofile.innerHTML = "This user registered as " + typeuserclick + " on Ferticonnect on " + formattedTimestamp;
-            } else if (langue === "Espagnol") {
-                FertiConnect_.innerHTML = "FertiConnect";
-                fotherprofile.innerHTML = "Este usuario se registró como " + typeuserclick + " en ConexiónFértil el " + formattedTimestamp;
-            } else if (langue === "Arabe") {
-                FertiConnect_.innerHTML = "فرتي كونكت";
-                fotherprofile.innerHTML = "سجل هذا المستخدم كـ " + typeuserclick + " على فرتي كونكت في " + formattedTimestamp;
-            } else if (langue === "Portugais") {
-                FertiConnect_.innerHTML = "FertiConnect";
-                fotherprofile.innerHTML = "Este usuário se registrou como " + typeuserclick + " no ConexãoFértil em " + formattedTimestamp;
-            } else if (langue === "Allemand") {
-                FertiConnect_.innerHTML = "FertiConnect";
-                fotherprofile.innerHTML = "Dieser Benutzer hat sich als " + typeuserclick + " auf FertiVerbindung am " + formattedTimestamp + " registriert";
-            }
+
+
+
             
                 numberamisList();
                 async function numberamisList(){
@@ -481,7 +494,6 @@ const firebaseConfig = {
                         if(typeuserclick==="medecin"){
                             compeleleprofile.style.display="none";
                             infobtn.style.display="none";
-
                             afficheleprofile_med();
                         }
                         else{
@@ -494,7 +506,9 @@ const firebaseConfig = {
                             compeleleprofile.style.display="none";
 
 
+
                         }
+                        
 
                         
                     }else{
