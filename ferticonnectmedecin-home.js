@@ -265,7 +265,7 @@ const firebaseConfig = {
             divimg.className="divimg";
             divimg.src="img/undraw_hooked_re_vl59.svg";
             div.appendChild(divimg);
-            mescabins_2.appendChild(div);
+            mescabins_.appendChild(div);
 
             const divptext = document.createElement("div");
             divptext.classList="divnoamis";
