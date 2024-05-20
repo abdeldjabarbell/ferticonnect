@@ -1037,7 +1037,7 @@ option_header_message.addEventListener('click', function() {
             const docSnapshot = await getDoc(userRef);
             const lang = docSnapshot.data().lang;
  
-
+            
             const  listemesagebg = document.getElementById("listemesagebg");
             const div = document.createElement("div");
             div.className="divnoamis";
@@ -2580,12 +2580,15 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
                           const userjaimeid = data.iduser;
 
                           if (userjaimeid === userId) {
+                            console.log('yes');
                               btnjaimei1.style.display = "none";
                               btnjaimei2.style.display = "flex";
-                          } else {
-                              btnjaimei1.style.display = "flex";
-                              btnjaimei2.style.display = "none";
                           }
+                          // else {
+                          //    btnjaimei1.style.display = "flex";
+                          //    btnjaimei2.style.display = "none";
+                          //    console.log('no');
+                          //}
                       });
                   
 

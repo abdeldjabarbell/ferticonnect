@@ -1449,7 +1449,7 @@ try {
     
                     async function afficheLesCommentairesFunction() {
                         commentaire_bg.style.display="flex";
-    
+                        
                         const height_commentaire_= commentaire_.getBoundingClientRect().height;
                         const height_addcommentaire_bg = addcommentaire_bg.getBoundingClientRect().height;
                         const height_head_commentaire_ = head_commentaire_.getBoundingClientRect().height;
@@ -1633,10 +1633,7 @@ try {
                               if (userjaimeid === userId) {
                                   btnjaimei1.style.display = "none";
                                   btnjaimei2.style.display = "flex";
-                              } else {
-                                  btnjaimei1.style.display = "flex";
-                                  btnjaimei2.style.display = "none";
-                              }
+                              } 
                           });
                       
     
