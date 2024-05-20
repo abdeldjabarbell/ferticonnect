@@ -2120,7 +2120,7 @@ async function sharePublication(file) {
             if (file) {
                 try {
                     // Upload des images dans le stockage Firebase
-                    const storageRef1 = ref(storage, 'images/' + file.name);
+                    const storageRef1 = storageRef(storage, 'images/' + file.name);
                     await uploadBytes(storageRef1, file);
                     const downloadURL1 = await getDownloadURL(storageRef1);
                     const inputpubadd = document.getElementById("inputpubadd").value;
@@ -2130,7 +2130,7 @@ async function sharePublication(file) {
                         iduser: userId,
                         placepub: "home",
                         typeuser: typeuserclick,
-                        timestamp: serverTimestamp()
+                        timestamp: firestoreServerTimestamp()
                     });
                     wating.style.display = "none";
                     refreshPage();
@@ -2147,7 +2147,7 @@ async function sharePublication(file) {
                         publication: inputpubadd,
                         iduser: userId,
                         placepub: "home",
-                        timestamp: serverTimestamp(),
+                        timestamp: firestoreServerTimestamp(),
                         typeuser: typeuserclick
                     });
                     wating.style.display = "none";

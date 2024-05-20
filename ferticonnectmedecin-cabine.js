@@ -453,6 +453,89 @@ auth.onAuthStateChanged(async (user) => {
 
 
 
+
+//const couvertureCabine = document.getElementById("messageAjoutePhoto");
+
+const messageAjoutePhoto = document.getElementById("messageAjoutePhoto");
+//messageAjoutePhoto.style.cursor="pointer";
+const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
+const nouveauimage_couv = document.getElementById("nouveauimage_couv");
+const fermer2 = document.getElementById("fermer2");
+const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
+const Done_couv = document.getElementById("Done_couv");
+const loader_couv = document.getElementById("loader_couv");
+const original_couv = document.getElementById("original_couv");
+
+const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
+messageAjoutePhoto.addEventListener("click", async (e) => {
+    e.preventDefault();
+    photocouverturechangerbg.style.display="flex";
+
+});
+fermer2.addEventListener('click', function() {
+    photocouverturechangerbg.style.display="none"
+});
+let file3;
+document.getElementById('photochanger_couverture').addEventListener('click', function() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.id = "fileInput1";
+    input.onchange = function(e) {
+        file3 = e.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file3);
+        reader.onload = function() {
+            const imageUrl = reader.result;
+            photochanger_couverture_i.style.display = "none";
+            nouveauimage_couv.style.display = "flex";
+            partagerphotoPbtn_couv.style.display = "block";
+            nouveauimage_couv.innerHTML = "";
+
+            // Affichage de l'image dans la galerie
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            nouveauimage_couv.appendChild(img);
+        };
+    };
+    input.click();
+});
+
+partagerphotoPbtn_couv.addEventListener('click', async function() {
+    original_couv.style.display = "none";
+    loader_couv.style.display = "block";
+    loader_couv.style.color="white";
+
+    if (file3) {
+        try {
+            // Upload des images dans le stockage Firebase
+            const storageRef2 = storageRef(storage, 'images/' + file3.name);
+            await uploadBytes(storageRef2, file3);
+            const downloadURL2 = await getDownloadURL(storageRef2);
+            const userDocRef = doc(db, "cabines", IdCabine);
+            await updateDoc(userDocRef, {
+                cabineImage: downloadURL2,
+            });
+            original_couv.style.display = "none";
+            loader_couv.style.display = "none";
+            Done_couv.style.display = "block";
+            refreshPage();
+        } catch (error) {
+            console.error(error);
+            original_couv.style.display = "block";
+            loader_couv.style.display = "none";
+            Done_couv.style.display = "none";
+
+        }
+    }
+});
+
+
+
+
+
+
+
 const sendImageicon = document.getElementById('sendImageicon');
 const messageecrit = document.getElementById('messageecrit');
 const sendmessageicon = document.getElementById('sendmessageicon');
@@ -711,7 +794,7 @@ async function creemessagegroup(){
                 
                 }
              }   
-
+             
     } catch (error) {
         console.error("Une erreur s'est produite : ", error);
         wating.style.display="none";
@@ -765,26 +848,26 @@ async function messagegroupeCabine(){
                       }
                     }
               }
-              const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
-              const nouveauimage_couv = document.getElementById("nouveauimage_couv");
-              const fermer2 = document.getElementById("fermer2");
-              const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
-              const Done_couv = document.getElementById("Done_couv");
-              const loader_couv = document.getElementById("loader_couv");
-              const original_couv = document.getElementById("original_couv");
+              const photochanger_couverture_i2 = document.getElementById("photochanger_couverture_i2");
+              const nouveauimage_couv2 = document.getElementById("nouveauimage_couv2");
+              const fermer22 = document.getElementById("fermer22");
+              const partagerphotoPbtn_couv2 = document.getElementById("partagerphotoPbtn_couv2");
+              const Done_couv2 = document.getElementById("Done_couv2");
+              const loader_couv2 = document.getElementById("loader_couv2");
+              const original_couv2 = document.getElementById("original_couv2");
               
-              const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
+              const photocouverturechangerbg2 = document.getElementById("photocouverturechangerbg2");
               sendImageicon.onclick = openphotocouverturechangerbg;
               function openphotocouverturechangerbg(){
-                  photocouverturechangerbg.style.display="flex"
+                  photocouverturechangerbg2.style.display="flex"
               }
-              fermer2.onclick = closephotocouverturechangerbg;
+              fermer22.onclick = closephotocouverturechangerbg;
               function closephotocouverturechangerbg(){
-                  photocouverturechangerbg.style.display="none"
+                  photocouverturechangerbg2.style.display="none"
               }
               let file1;
-              const photochanger_couverture = document.getElementById('photochanger_couverture');
-              photochanger_couverture.onclick = open_photochanger_couverture;
+              const photochanger_couverture2 = document.getElementById('photochanger_couverture2');
+              photochanger_couverture2.onclick = open_photochanger_couverture;
               function open_photochanger_couverture(){
                   var input = document.createElement('input');
                   input.type = 'file';
@@ -796,24 +879,24 @@ async function messagegroupeCabine(){
                       reader.readAsDataURL(file1);
                       reader.onload = function() {
                           const imageUrl = reader.result;
-                          photochanger_couverture_i.style.display = "none";
-                          nouveauimage_couv.style.display = "flex";
-                          partagerphotoPbtn_couv.style.display = "block";
-                          nouveauimage_couv.innerHTML = "";
+                          photochanger_couverture_i2.style.display = "none";
+                          nouveauimage_couv2.style.display = "flex";
+                          partagerphotoPbtn_couv2.style.display = "block";
+                          nouveauimage_couv2.innerHTML = "";
               
                           // Affichage de l'image dans la galerie
                           const img = document.createElement('img');
                           img.src = imageUrl;
-                          nouveauimage_couv.appendChild(img);
+                          nouveauimage_couv2.appendChild(img);
                       };
                   };
                   input.click();
             }
-          partagerphotoPbtn_couv.onclick = partagerphotoPbtn_couvfunction;
+          partagerphotoPbtn_couv2.onclick = partagerphotoPbtn_couvfunction;
      async function partagerphotoPbtn_couvfunction(){
-            original_couv.style.display = "none";
-              loader_couv.style.display = "block";
-                loader_couv.style.color="white";
+            original_couv2.style.display = "none";
+              loader_couv2.style.display = "block";
+                loader_couv2.style.color="white";
     
          if (file1) {
              try {
@@ -835,17 +918,17 @@ async function messagegroupeCabine(){
                        });
                    }
                  }
-                 original_couv.style.display = "none";
-                 loader_couv.style.display = "none";
-                 Done_couv.style.display = "block";
-                 photocouverturechangerbg.style.display="none"
+                 original_couv2.style.display = "none";
+                 loader_couv2.style.display = "none";
+                 Done_couv2.style.display = "block";
+                 photocouverturechangerbg2.style.display="none"
                  
              } catch (error) {
                      console.error(error);
                      original_couv.style.display = "block";
                      loader_couv.style.display = "none";
                      Done_couv.style.display = "none";
-                     photocouverturechangerbg.style.display="none"
+                     photocouverturechangerbg2.style.display="none"
                  }
              }
          }
@@ -1155,8 +1238,8 @@ try {
       const numberOfDocuments = snapshotmembre.size;
       numberofMembre.innerHTML=' <i class="bi bi-people-fill"></i>   '+numberOfDocuments +" members";
     }
-  const messageAjoutePhoto = document.getElementById("messageAjoutePhoto");
-  const couvertureCabine = document.getElementById("couvertureCabine");
+ // const messageAjoutePhoto = document.getElementById("messageAjoutePhoto");
+ // const couvertureCabine = document.getElementById("couvertureCabine");
 
 
   if(cabineImage){
@@ -1742,7 +1825,7 @@ try {
                      try {
 
                          // Upload des images dans le stockage Firebase
-                         const storageRef1 = ref(storage, 'images/' + file.name);
+                         const storageRef1 = storageRef(storage, 'images/' + file.name);
                          await uploadBytes(storageRef1, file);
                          const downloadURL1 = await getDownloadURL(storageRef1);
                          const inputpubadd = document.getElementById("inputpubadd").value;
@@ -1753,11 +1836,11 @@ try {
                              iduser: userId,
                              placepub: "cabine",
                              typeuser: typeuserclick,
-                             timestamp: serverTimestamp()
+                             timestamp: firestoreServerTimestamp()
                          });
                          const docRefadmin = await addDoc(collection(db, 'cabines',IdCabine,"publications"), {
                              publicationCabine_id: docRef.id,
-                             timestamp: serverTimestamp()
+                             timestamp: firestoreServerTimestamp()
 
                          });
                          
@@ -1776,12 +1859,12 @@ try {
                              publication: inputpubadd,
                              iduser: userId,
                              placepub: "cabine",
-                             timestamp: serverTimestamp(),
+                             timestamp: firestoreServerTimestamp(),
                              typeuser: typeuserclick
                          });
                          const docRefadmin = await addDoc(collection(db, 'cabines',IdCabine,"publications"), {
                             publicationCabine_id: docRef.id,
-                            timestamp: serverTimestamp()
+                            timestamp: firestoreServerTimestamp()
                         });
                         
                          wating.style.display = "none";
@@ -2020,85 +2103,4 @@ function logout() {
 function refreshPage() {
     window.location.reload(); 
 }
-
-
-
-//const couvertureCabine = document.getElementById("messageAjoutePhoto");
-
-const messageAjoutePhoto = document.getElementById("messageAjoutePhoto");
-//messageAjoutePhoto.style.cursor="pointer";
-const photochanger_couverture_i = document.getElementById("photochanger_couverture_i");
-const nouveauimage_couv = document.getElementById("nouveauimage_couv");
-const fermer2 = document.getElementById("fermer2");
-const partagerphotoPbtn_couv = document.getElementById("partagerphotoPbtn_couv");
-const Done_couv = document.getElementById("Done_couv");
-const loader_couv = document.getElementById("loader_couv");
-const original_couv = document.getElementById("original_couv");
-
-const photocouverturechangerbg = document.getElementById("photocouverturechangerbg");
-messageAjoutePhoto.addEventListener('click', function() {
-    photocouverturechangerbg.style.display="flex"
-});
-fermer2.addEventListener('click', function() {
-    photocouverturechangerbg.style.display="none"
-});
-let file3;
-document.getElementById('photochanger_couverture').addEventListener('click', function() {
-    var input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.id = "fileInput1";
-    input.onchange = function(e) {
-        file3 = e.target.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(file3);
-        reader.onload = function() {
-            const imageUrl = reader.result;
-            photochanger_couverture_i.style.display = "none";
-            nouveauimage_couv.style.display = "flex";
-            partagerphotoPbtn_couv.style.display = "block";
-            nouveauimage_couv.innerHTML = "";
-
-            // Affichage de l'image dans la galerie
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            nouveauimage_couv.appendChild(img);
-        };
-    };
-    input.click();
-});
-
-partagerphotoPbtn_couv.addEventListener('click', async function() {
-    original_couv.style.display = "none";
-    loader_couv.style.display = "block";
-    loader_couv.style.color="white";
-
-    if (file3) {
-        try {
-            // Upload des images dans le stockage Firebase
-            const storageRef2 = ref(storage, 'images/' + file3.name);
-            await uploadBytes(storageRef2, file3);
-            const downloadURL2 = await getDownloadURL(storageRef2);
-            const userDocRef = doc(db, "cabines", IdCabine);
-            await updateDoc(userDocRef, {
-                cabineImage: downloadURL2,
-            });
-            original_couv.style.display = "none";
-            loader_couv.style.display = "none";
-            Done_couv.style.display = "block";
-            refreshPage();
-        } catch (error) {
-            console.error(error);
-            original_couv.style.display = "block";
-            loader_couv.style.display = "none";
-            Done_couv.style.display = "none";
-
-        }
-    }
-});
-
-
-
-
-
 
