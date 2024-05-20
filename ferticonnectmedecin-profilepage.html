@@ -27,7 +27,7 @@
             <div class="logonav">
                 <img src="img/ferticonnectiLogoGreen.svg" alt="">
             </div>
-            <h1> FertiConnect</h1>
+            <h1 id="FertiConnect_"> </h1>
         </div>
         <div class="completeprofilnotif" id="completeprofilnotif" style="display: flex;">
             <h3 id="pourcentage"></h3>
@@ -68,10 +68,10 @@
             </div>
         </div>
         <div class="compeleleprofile" id="compeleleprofile" style="display: none;">
-            <p id="etap1">Vérifiez votre compte.</p>
-            <p id="etap2">Ajoutez une photo de profil.</p>
-            <p id="etap3">Ajoutez une photo de couverture.</p>
-            <p id="etap4">Remplissez le formulaire.</p>
+            <p id="etap1"></p>
+            <p id="etap2"></p>
+            <p id="etap3"></p>
+            <p id="etap4"></p>
             <div class="ligne_"></div>
 
             <div class="idCopied" id="idCopied" style="display: none;">
@@ -83,20 +83,20 @@
         <div class="mycabinsbg" id="mycabinsbg2"  style="height: auto; display: none;">
             <div class="titleoptionmycabinsbg" id="titleoptionmycabinsbg2">
                 <i class="bi bi-clipboard-plus"></i>
-                <h2>Créez votre propre espace cabine</h2>
+                <h2 id="creeCabine"></h2>
             </div>
             <div class="mescabins_" id="mescabins_2" style="display: none;">
                 <div id="creationcabineForm" class="conncxion_inputs">
-                    <h1>Création de cabine</h1>
-                    <p>Créez votre propre espace cabine sur "Ferticonnect" afin de partager des publications et des conseils entre les membres de cette cabine. Établissez également un espace médical axé sur la solidarité, favorisant ainsi l'échange d'informations et de soutien entre les utilisateurs.</p>
+                    <h1 id="creaCab"></h1>
+                    <p id="cvpecf"></p>
                     <div class="input_styl">
-                        <label for="nom">nom de cabine:</label>
+                        <label for="nom" id="nomtext"></label>
                         <input type="text" id="nomdecabin" required>
                     </div>
                     <br>
                   <button class="btn souvgarder"  id="confirmeCreecabine">
                         <div id="original2" style="display: block;">
-                            Créez
+                            <p id="Cr1"></p>
                         </div>
                         <div class="cs-loader-inner" id="loader2" style="display: none;">
                             <label>	●</label>
@@ -105,7 +105,7 @@
                             <label>	●</label>
                         </div>
                         <div id="Done2" style="display: none;">
-                            terminée
+                            <p id="termin"></p>
                         </div>
                   </button>
                   <br>
@@ -124,7 +124,7 @@
 
     <div class="photoprofilchangerbg" id="photoprofilchangerbg" style="display: none;">
         <div class="bgcahngePhoto">
-            <h3>Modifiez votre image de profil</h3>
+            <h3 id="mdfp"></h3>
             <br>
             <div class="photochanger" id="photochanger">
                 <i id="photochanger_i" class="bi bi-person-bounding-box" style="display: flex;"></i>
@@ -135,7 +135,7 @@
             <div class="btns_bg_info">
                <button class="btn souvgarder" type="submit" id="partagerphotoPbtn" style="display: none;">
                     <div id="originalprofile" style="display: block;">
-                        Partager
+                        <p id="prtg"></p>
                     </div>
                     <div class="cs-loader-inner" id="loaderprofile" style="display: none;">
                         <label>	●</label>
@@ -144,7 +144,7 @@
                         <label>	●</label>
                     </div>
                     <div id="Doneprofile" style="display: none;">
-                        terminée
+                        <p id="trm"></p>
                     </div>
               </button>
               <br>
@@ -156,7 +156,7 @@
 
     <div class="photoprofilchangerbg" id="photocouverturechangerbg" style="display: none;">
         <div class="bgcahngePhoto">
-            <h3>Modifiez votre image de couverture</h3>
+            <h3 id="couver"></h3>
             <br>
             <div class="photochanger_couverture" id="photochanger_couverture">
 
@@ -168,7 +168,7 @@
             <div class="btns_bg_info">
                <button class="btn souvgarder" type="submit" id="partagerphotoPbtn_couv" style="display: none;">
                     <div id="original_couv" style="display: block;">
-                        Partager
+                        <p id="Partager11"></p>
                     </div>
                     <div class="cs-loader-inner" id="loader_couv" style="display: none;">
                         <label>	●</label>
@@ -177,7 +177,7 @@
                         <label>	●</label>
                     </div>
                     <div id="Done_couv" style="display: none;">
-                        terminée
+                        <P id="termin1"></P>
                     </div>
               </button>
               <br>
@@ -195,13 +195,13 @@
 
 <div class="photoprofilchangerbg" id="deconnectionbg" style="display: none;">
     <div class="deconnection">
-        <p>Souhaites-tu te déconnecter ?</p>
+        <p id="deco"></p>
         <img src="img/deconecter.svg" alt="">
         <br>
         <div class="btns_bg_info">
-           <button class="btn supprimer" type="submit" id="deco_neccterbtn">déconnecter</button>
+           <button class="btn supprimer" type="submit" id="deco_neccterbtn"></button>
            <br>
-           <button class="btn souvgarder" id="anulerdeco_neccterbtn">fermer</button>
+           <button class="btn souvgarder" id="anulerdeco_neccterbtn"></button>
          </div>
 
     </div>

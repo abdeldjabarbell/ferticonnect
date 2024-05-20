@@ -58,7 +58,7 @@ const firebaseConfig = {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
-
+        fotherprofile
         
         const mail = user.email;
         const iduser = user.uid;
@@ -135,7 +135,12 @@ const firebaseConfig = {
  
             
         });
-      
+
+
+
+
+
+
         const log = document.getElementById("log");
         log.addEventListener('click', function() {
             window.history.back();
@@ -155,6 +160,8 @@ const firebaseConfig = {
                 const formulaire_liste1 = datauser.formulaire_liste1;
                 const formulaire_liste2 = datauser.formulaire_liste2;
                 const formulaire_liste3 = datauser.formulaire_liste3;
+                const langue = datauser.lang;
+
 
                 const timestamp = datauser.timestamp;
                 const seconds = timestamp.seconds;
@@ -207,6 +214,28 @@ const firebaseConfig = {
 
                 nameuser.innerHTML=prenomuserprofile+" "+ nameuserprofile;
                 fotherprofile.innerHTML="Cet utilisateur s'est enregistré en tant que "+typeuserclick+" sur Ferticonnect le "+formattedTimestamp;
+                              
+              const FertiConnect_ = document.getElementById("FertiConnect_");
+              if (langue === "Français") {
+                FertiConnect_.innerHTML = "FertiConnect";
+                fotherprofile.innerHTML = "Cet utilisateur s'est enregistré en tant que " + typeuserclick + " sur Ferticonnect le " + formattedTimestamp;
+            } else if (langue === "Anglais") {
+                FertiConnect_.innerHTML = "FertiConnect";
+                fotherprofile.innerHTML = "This user registered as " + typeuserclick + " on Ferticonnect on " + formattedTimestamp;
+            } else if (langue === "Espagnol") {
+                FertiConnect_.innerHTML = "FertiConnect";
+                fotherprofile.innerHTML = "Este usuario se registró como " + typeuserclick + " en ConexiónFértil el " + formattedTimestamp;
+            } else if (langue === "Arabe") {
+                FertiConnect_.innerHTML = "فرتي كونكت";
+                fotherprofile.innerHTML = "سجل هذا المستخدم كـ " + typeuserclick + " على فرتي كونكت في " + formattedTimestamp;
+            } else if (langue === "Portugais") {
+                FertiConnect_.innerHTML = "FertiConnect";
+                fotherprofile.innerHTML = "Este usuário se registrou como " + typeuserclick + " no ConexãoFértil em " + formattedTimestamp;
+            } else if (langue === "Allemand") {
+                FertiConnect_.innerHTML = "FertiConnect";
+                fotherprofile.innerHTML = "Dieser Benutzer hat sich als " + typeuserclick + " auf FertiVerbindung am " + formattedTimestamp + " registriert";
+            }
+            
                 numberamisList();
                 async function numberamisList(){
                     const docRef = collection(db,typeuserclick,useridclick,"amis");
@@ -606,6 +635,154 @@ const firebaseConfig = {
     }
 });
 
+
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        const userId = user.uid; 
+        const docRef_CabineRoom = doc(db, typeuseruserauth , userId);
+        console.log("userId ====="+userId);
+      try {
+        const docuser = await getDoc(docRef_CabineRoom); 
+        if (docuser.exists()) {
+          const docuserinfo = docuser.data(); 
+          const langue = docuserinfo.lang;      
+         if (langue === "Français") {
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "Vérifiez votre compte.";
+             document.getElementById("etap2").innerHTML = "Ajoutez une photo de profil.";
+             document.getElementById("etap3").innerHTML = "Ajoutez une photo de couverture.";
+             document.getElementById("etap4").innerHTML = "Remplissez le formulaire.";
+             document.getElementById("creeCabine").innerHTML = "Créez votre propre espace cabine";
+             document.getElementById("creaCab").innerHTML = "Création de cabine";
+             document.getElementById("cvpecf").innerHTML = "Créez votre propre espace cabine sur 'Ferticonnect' afin de partager des publications et des conseils entre les membres de cette cabine. Établissez également un espace médical axé sur la solidarité, favorisant ainsi l'échange d'informations et de soutien entre les utilisateurs.";
+             document.getElementById("nomtext").innerHTML = "nom de cabine:";
+             document.getElementById("Cr1").innerHTML = "Créez";
+             document.getElementById("termin").innerHTML = "terminée";
+             document.getElementById("mdfp").innerHTML = "Modifiez votre image de profil";
+             document.getElementById("prtg").innerHTML = "Partager";
+             document.getElementById("trm").innerHTML = "terminée";
+             document.getElementById("couver").innerHTML = "Modifiez votre image de couverture";
+             document.getElementById("Partager11").innerHTML = "Partager";
+             document.getElementById("termin1").innerHTML = "terminée";
+             document.getElementById("deco").innerHTML = "Souhaites-tu te déconnecter ?";
+             document.getElementById("deco_neccterbtn").innerHTML = "déconnecter";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "fermer";
+         } else if (langue === "Anglais") {
+             // Traductions en anglais
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "Check your account.";
+             document.getElementById("etap2").innerHTML = "Add a profile picture.";
+             document.getElementById("etap3").innerHTML = "Add a cover photo.";
+             document.getElementById("etap4").innerHTML = "Fill out the form.";
+             document.getElementById("creeCabine").innerHTML = "Create your own cabin space";
+             document.getElementById("creaCab").innerHTML = "Cabin creation";
+             document.getElementById("cvpecf").innerHTML = "Create your own cabin space on 'Ferticonnect' to share posts and advice among members of this cabin. Also, establish a solidarity-focused medical space, thus promoting the exchange of information and support among users.";
+             document.getElementById("nomtext").innerHTML = "cabin name:";
+             document.getElementById("Cr1").innerHTML = "Create";
+             document.getElementById("termin").innerHTML = "completed";
+             document.getElementById("mdfp").innerHTML = "Edit your profile picture";
+             document.getElementById("prtg").innerHTML = "Share";
+             document.getElementById("trm").innerHTML = "completed";
+             document.getElementById("couver").innerHTML = "Edit your cover photo";
+             document.getElementById("Partager11").innerHTML = "Share";
+             document.getElementById("termin1").innerHTML = "completed";
+             document.getElementById("deco").innerHTML = "Would you like to log out?";
+             document.getElementById("deco_neccterbtn").innerHTML = "log out";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "close";
+         } else if (langue === "Espagnol") {
+             // Traductions en espagnol
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "Verifique su cuenta.";
+             document.getElementById("etap2").innerHTML = "Añadir una foto de perfil.";
+             document.getElementById("etap3").innerHTML = "Añadir una foto de portada.";
+             document.getElementById("etap4").innerHTML = "Complete el formulario.";
+             document.getElementById("creeCabine").innerHTML = "Cree su propio espacio de cabina";
+             document.getElementById("creaCab").innerHTML = "Creación de cabina";
+             document.getElementById("cvpecf").innerHTML = "Cree su propio espacio de cabina en 'Ferticonnect' para compartir publicaciones y consejos entre los miembros de esta cabina. Además, establezca un espacio médico enfocado en la solidaridad, promoviendo así el intercambio de información y apoyo entre los usuarios.";
+             document.getElementById("nomtext").innerHTML = "nombre de la cabina:";
+             document.getElementById("Cr1").innerHTML = "Crear";
+             document.getElementById("termin").innerHTML = "terminado";
+             document.getElementById("mdfp").innerHTML = "Editar su foto de perfil";
+             document.getElementById("prtg").innerHTML = "Compartir";
+             document.getElementById("trm").innerHTML = "terminado";
+             document.getElementById("couver").innerHTML = "Editar su foto de portada";
+             document.getElementById("Partager11").innerHTML = "Compartir";
+             document.getElementById("termin1").innerHTML = "terminado";
+             document.getElementById("deco").innerHTML = "¿Te gustaría cerrar sesión?";
+             document.getElementById("deco_neccterbtn").innerHTML = "cerrar sesión";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "cerrar";
+         } else if (langue === "Arabe") {
+             // Traductions en arabe
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "تحقق من حسابك.";
+             document.getElementById("etap2").innerHTML = "إضافة صورة الملف الشخصي.";
+             document.getElementById("etap3").innerHTML = "إضافة صورة الغلاف.";
+             document.getElementById("etap4").innerHTML = "املأ النموذج.";
+             document.getElementById("creeCabine").innerHTML = "أنشئ مساحة الكوخ الخاصة بك";
+             document.getElementById("creaCab").innerHTML = "إنشاء كوخ";
+             document.getElementById("cvpecf").innerHTML = "أنشئ مساحة الكوخ الخاصة بك على 'Ferticonnect' لمشاركة المنشورات والنصائح بين أعضاء هذا الكوخ. بالإضافة إلى ذلك، قم بإنشاء مساحة طبية تركز على التضامن، مما يعزز تبادل المعلومات والدعم بين المستخدمين.";
+             document.getElementById("nomtext").innerHTML = "اسم الكوخ:";
+             document.getElementById("Cr1").innerHTML = "خلق";
+             document.getElementById("termin").innerHTML = "مكتمل";
+             document.getElementById("mdfp").innerHTML = "تحرير صورة الملف الشخصي الخاصة بك";
+             document.getElementById("prtg").innerHTML = "شارك";
+             document.getElementById("trm").innerHTML = "مكتمل";
+             document.getElementById("couver").innerHTML = "تحرير صورة الغلاف الخاصة بك";
+             document.getElementById("Partager11").innerHTML = "شارك";
+             document.getElementById("termin1").innerHTML = "مكتمل";
+             document.getElementById("deco").innerHTML = "هل ترغب في تسجيل الخروج؟";
+             document.getElementById("deco_neccterbtn").innerHTML = "تسجيل الخروج";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "إغلاق";
+         } else if (langue === "Portugais") {
+             // Traductions en portugais
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "Verifique sua conta.";
+             document.getElementById("etap2").innerHTML = "Adicionar uma foto de perfil.";
+             document.getElementById("etap3").innerHTML = "Adicionar uma foto de capa.";
+             document.getElementById("etap4").innerHTML = "Preencha o formulário.";
+             document.getElementById("creeCabine").innerHTML = "Crie seu próprio espaço de cabine";
+             document.getElementById("creaCab").innerHTML = "Criação de cabine";
+             document.getElementById("cvpecf").innerHTML = "Crie seu próprio espaço de cabine no 'Ferticonnect' para compartilhar postagens e conselhos entre os membros desta cabine. Além disso, estabeleça um espaço médico focado na solidariedade, promovendo assim a troca de informações e suporte entre os usuários.";
+             document.getElementById("nomtext").innerHTML = "nome da cabine:";
+             document.getElementById("Cr1").innerHTML = "Crie";
+             document.getElementById("termin").innerHTML = "completo";
+             document.getElementById("mdfp").innerHTML = "Edite sua foto de perfil";
+             document.getElementById("prtg").innerHTML = "Compartilhar";
+             document.getElementById("trm").innerHTML = "completo";
+             document.getElementById("couver").innerHTML = "Edite sua foto de capa";
+             document.getElementById("Partager11").innerHTML = "Compartilhar";
+             document.getElementById("termin1").innerHTML = "completo";
+             document.getElementById("deco").innerHTML = "Gostaria de fazer logout?";
+             document.getElementById("deco_neccterbtn").innerHTML = "sair";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "fechar";
+         } else if (langue === "Allemand") {
+             // Traductions en allemand
+             document.getElementById("FertiConnect_").innerHTML = "FertiConnect";
+             document.getElementById("etap1").innerHTML = "Überprüfen Sie Ihr Konto.";
+             document.getElementById("etap2").innerHTML = "Fügen Sie ein Profilbild hinzu.";
+             document.getElementById("etap3").innerHTML = "Fügen Sie ein Titelbild hinzu.";
+             document.getElementById("etap4").innerHTML = "Füllen Sie das Formular aus.";
+             document.getElementById("creeCabine").innerHTML = "Erstellen Sie Ihren eigenen Kabine-Bereich";
+             document.getElementById("creaCab").innerHTML = "Kabinenerstellung";
+             document.getElementById("cvpecf").innerHTML = "Erstellen Sie Ihren eigenen Kabine-Bereich auf 'Ferticonnect', um Beiträge und Ratschläge zwischen den Mitgliedern dieser Kabine zu teilen. Richten Sie auch einen auf Solidarität ausgerichteten medizinischen Bereich ein, der den Austausch von Informationen und Unterstützung zwischen den Benutzern fördert.";
+             document.getElementById("nomtext").innerHTML = "Kabinenname:";
+             document.getElementById("Cr1").innerHTML = "Erstellen";
+             document.getElementById("termin").innerHTML = "abgeschlossen";
+             document.getElementById("mdfp").innerHTML = "Bearbeiten Sie Ihr Profilbild";
+             document.getElementById("prtg").innerHTML = "Teilen";
+             document.getElementById("trm").innerHTML = "abgeschlossen";
+             document.getElementById("couver").innerHTML = "Bearbeiten Sie Ihr Titelbild";
+             document.getElementById("Partager11").innerHTML = "Teilen";
+             document.getElementById("termin1").innerHTML = "abgeschlossen";
+             document.getElementById("deco").innerHTML = "Möchtest du dich abmelden?";
+             document.getElementById("deco_neccterbtn").innerHTML = "abmelden";
+             document.getElementById("anulerdeco_neccterbtn").innerHTML = "schließen";
+         }
+        }
+      }catch
+      {}
+    }
+});
 
 
 
