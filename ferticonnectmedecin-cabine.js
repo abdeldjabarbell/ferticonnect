@@ -592,7 +592,6 @@ function messagebtnnavbuttomFunction(){
 
 
 
-
 }
 
 
@@ -641,10 +640,13 @@ async function creemessagegroup(){
                if(creatIdMessageRoom){
                   creeUneRoomCabineBg.style.display="none";
                   messagegroupeCabine();
+                  console.log('creatIdMessageRoom=  '+creatIdMessageRoom);
                 }else{
-                    creeUneRoomCabineBg.style.display="none";
+                    creeUneRoomCabineBg.style.display="flex";
                 }
             }else{
+                creeUneRoomCabineBg.style.display="flex";
+                
                 confirmeCreeMeaasegCabine.onclick = confirmeCreeMeaasegCabineFunction;
                 async function confirmeCreeMeaasegCabineFunction(){
                     
@@ -662,7 +664,7 @@ async function creemessagegroup(){
                        try {     
                           await setDoc(doc(db, "cabines", IdCabine, "messagesCabine","messageCabineroom"), {
                               idroomCabineMessage: creatIdMessageRoom,
-                          });
+                          }); 
                            //---------------- send message 
                            try {
                                const docRef_Cabine = doc(db, "cabines", IdCabine);
@@ -1636,7 +1638,6 @@ try {
                               } 
                           });
                       
-    
                     }
                     btnjaime.addEventListener("click", async (e) => {
                         e.preventDefault();
