@@ -892,3 +892,4 @@ const useridclick = urlParams.get('useridclick');
 const typeuserclick = urlParams.get('typeuserclick');
 const typeuseruserauth = urlParams.get('typeOfUser');
 
+//creatorId

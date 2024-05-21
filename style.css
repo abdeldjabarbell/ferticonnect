@@ -2131,6 +2131,77 @@ font-size: 1rem;
   .divimg{
     width: 120px;
   }
+
+
+
+
+
+
+
+
+
+
+
+  /*input[type="text"] {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }*/
+
+  
+  .cherchersettings {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+  
+  .seracherbackground input[type="text"] {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    border: 1px solid var(--bg-color);
+    border-radius: 4px;
+    color: var(--second2-bg-color);
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  #suggestions, #all-medecins, #search-results {
+    border: 1px solid var(--bg-color);
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  #suggestions div, #all-medecins div, #search-results div {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  #suggestions div:hover, #all-medecins div:hover, #search-results div:hover {
+    background-color: var(--bg-color);
+  }
+
+  .cherchersettings h2 {
+    margin-top: 40px;
+    color: var(--second2-bg-color);
+  }
+  .cherchersettings h1 {
+    color: var(--second2-bg-color);
+  }
+  .bagshearch{
+    background-color: var(--bg-color);
+  }
+  .suggebackground{
+    background-color: var(--pub-bg-color);
+    border-radius: 10px;
+  }
 @media (max-width:617px){
 
 

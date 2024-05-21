@@ -15,7 +15,7 @@ const firebaseConfig = {
     measurementId: "G-XZT8HYB0DT",
     databaseURL: "https://ferticonnect-default-rtdb.europe-west1.firebasedatabase.app/"
   };
-  
+  //cabinfoss
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);

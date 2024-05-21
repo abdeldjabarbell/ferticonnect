@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FertiConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+
 </head>
 <body>
+    <div class="navigationbar">
+        <div class="log">
+            <div class="logonav">
+                <img src="img/ferticonnectiLogoGreen.svg" alt="">
+            </div>
+            <h1 id="ferticonnect_name_text"> </h1>
+        </div>
+
+
+
+        <div class="optionsnavbar">
+            <i class="bi bi-house-heart-fill" id="returntohomepage"></i>
+        </div>
+
+
+
+    </div>
+    <section class="bagshearch">
+
+        <div class="seracherbackground">
+            <h1 id="chercherici">Chercher un médecin</h1>
+            <p id="nomdemedcin">Écrire le nom du médecin et il s'affichera ici dans les suggestions. Choisissez-en un.</p>
+            <input type="text" id="search-bar" placeholder="Rechercher un médecin...">
+        </div>
+        <div class="suggebackground"></div>
+
+        <div class="ligne_"></div>
+        <div class="toutlemedecinbackground" id="toutlemedecinbackground">
+            <h1 id="toutlesmedecinh1">Tous les médecins sur Ferticonnect</h1>
+            <p id="toutlesmedcinp">Voici tous les médecins sur Ferticonnect. Vous pouvez voir ici tous les médecins enregistrés sur notre plateforme.</p>
+        </div>
+
+    </section>
     
+
+
+
+
+    <script src="searchBr.js" type="module"></script>
 </body>
 </html>

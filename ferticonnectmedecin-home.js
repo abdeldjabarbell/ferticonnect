@@ -49,8 +49,19 @@ const firebaseConfig = {
     navbarbuttom.style.bottom="0";
     
   }  
+  
+  const shercheBtn = document.getElementById("shercheBtn");
+  shercheBtn.addEventListener('click', () => {
+      window.location.href = `searchBr.html?typeuserauth=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+  });
+  const searchbtnnavvbutton = document.getElementById("searchbtnnavvbutton");
+  searchbtnnavvbutton.addEventListener('click', () => {
+      window.location.href = `searchBr.html?typeuserauth=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+  });
 
 
+
+  
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
@@ -60,6 +71,8 @@ const firebaseConfig = {
         const userRef = doc(db, typeuserclick, userId);
         const docSnapshot = await getDoc(userRef);
         const lang = docSnapshot.data().lang;
+
+
         
         
         if (docSnapshot.exists()) {
@@ -1667,13 +1680,17 @@ function closeafficheImagesBgFunction(){
 const sendImageicon = document.getElementById('sendImageicon');
 const sendmessageicon = document.getElementById('sendmessageicon');
 const QMPEUM_ = document.getElementById('QMPEUM');
-  
+  //mescabins_name
 function tailledecran(){
     const navbar_buttom = document.getElementById('navbar_buttom');
+    const shercheBtn = document.getElementById('shercheBtn');
+
     if (window.innerWidth < 600) {
         navbar_buttom.style.display="flex";
+        shercheBtn.style.display="none";
     } else {
         navbar_buttom.style.display="none";
+        shercheBtn.style.display="flex";
     }
 }
 var navigationbarHeight = document.querySelector('.navigationbar').clientHeight;
@@ -2644,7 +2661,6 @@ async function creatpost(pubbg_,iduser,typeuser,placepub,formattedTimestamp,imag
 
     
 }
-
 
 
 
