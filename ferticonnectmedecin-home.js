@@ -77,8 +77,44 @@ const firebaseConfig = {
         const userRef = doc(db, typeuserclick, userId);
         const docSnapshot = await getDoc(userRef);
         const lang = docSnapshot.data().lang;
+        const emailconfirmation = docSnapshot.data().email;
+        const codeverification = docSnapshot.data().code;
+        const nomverification = docSnapshot.data().nom;
+        const prenomverification = docSnapshot.data().code;
 
+        const resendlecode = document.getElementById("resendlecode");
+        resendlecode.addEventListener('click', () => { enbyerlemail()}); 
 
+        async function enbyerlemail(){
+            Email.send({
+                Host : "smtp.elasticemail.com",
+                Username : "ne.pas.rependre.ferticonnect@gmail.com",
+                Password : "B58393493272B1AC4DFEF6455183C24DDCAB",
+                To : emailconfirmation,
+                From : 'ne.pas.rependre.ferticonnect@gmail.com',
+                Subject : "Confirmation de votre compte",
+                Body : 
+    
+                    "Cher "+prenomverification+" "+nomverification +",<br>"
+    
+                    +"<br>Nous vous remercions de votre inscription sur notre plateforme. Pour finaliser la création de votre compte, veuillez utiliser le code de vérification suivant :"
+                    
+                    +"<br>Code de vérification : <h3>"+codeverification+"</h3>"
+                    
+                    +"<br>Veuillez entrer ce code dans notre interface utilisateur pour confirmer votre compte. Si vous n'avez pas demandé cette procédure, vous pouvez ignorer ce message.<br>"
+                   
+                    +'<br><br>Cordialement,'
+                    +"<br>L'équipe de FertiConnect<br>" 
+    
+                    +"<br><span style='color:red;'>Ce message a été envoyé automatiquement. Merci de ne pas y répondre.</span>",
+    
+                    
+                
+            }).then(
+                console.log('message envoiyer')
+            );
+       
+        }
         
         
         if (docSnapshot.exists()) {
@@ -571,6 +607,25 @@ const deco = document.getElementById("deco");
 const deco_neccterbtn = document.getElementById("deco_neccterbtn");
 const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
 const inputpubadd = document.getElementById("inputpubadd");
+const resendlecode = document.getElementById("resendlecode");
+
+
+
+if (lango === "Français") {
+    resendlecode.innerHTML = "Réenvoyer le code de vérification";
+} else if (lango === "Anglais") {
+    resendlecode.innerHTML = "Resend verification code";
+} else if (lango === "Espagnol") {
+    resendlecode.innerHTML = "Reenviar el código de verificación";
+} else if (lango === "Arabe") {
+    resendlecode.innerHTML = "إعادة إرسال رمز التحقق";
+} else if (lango === "Portugais") {
+    resendlecode.innerHTML = "Reenviar código de verificação";
+} else if (lango === "Allemand") {
+    resendlecode.innerHTML = "Bestätigungscode erneut senden";
+} else {
+    resendlecode.innerHTML = "Resend verification code"; // Valeur par défaut en anglais
+}
 
 
 if (lango === "Français") {
