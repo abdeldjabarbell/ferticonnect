@@ -81,60 +81,62 @@ const firebaseConfig = {
                     alert('Vous avez déjà créé un espace de messagerie entre vous deux. Veuillez vérifier votre liste de messages.');
 
                 });
-            }   
+            }else{
+                messagebutton.addEventListener('click', async function() {
+                    console.log("messagebutton");
+          
+                      const user = auth.currentUser;
+                      if (user) {
+                           messagebutton.style.display = "none";
+                          const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                          let creatIdMessageRoom = '';
+                          for (let i = 0; i < 30; i++) {
+                              const randomIndex = Math.floor(Math.random() * characters.length);
+                              creatIdMessageRoom += characters[randomIndex];
+                          }
+                          const userId = user.uid; 
+                          try {
+                              await setDoc(doc(db, typeuseruserauth, userId, "listeMessage",creatIdMessageRoom), {
+                                  idRoomMessage: creatIdMessageRoom,
+                                  idamisMessage: useridclick,
+                                  TypeamisMessage :typeuserclick
+          
+                              });
+                              await setDoc(doc(db, typeuserclick, useridclick, "listeMessage",creatIdMessageRoom), {
+                                  idRoomMessage: creatIdMessageRoom,
+                                  idamisMessage: userId,
+                                  TypeamisMessage :typeuseruserauth
+                              });
+                               // Autres opérations avec les données de la cabine...
+                               const database = getDatabase(app);
+                               const messageRef = databaseRef(database, creatIdMessageRoom);
+                               push(messageRef, {
+                                  text: "Salut! C'est super de vous retrouver sur Ferticonnet!  🩺",
+                                  id_usersent:userId,
+                                  timestamp: new Date().getTime() // Use local timestamp
+                               })
+                              .catch((error) => {
+                                  console.error("Error adding message: ", error);
+                                  wating.style.display="none";
+                              });
+          
+                              alert('Veuillez vérifier votre liste de messages.');
+          
+                             
+                          }catch(error) {
+                              console.error("Error adding document: ", error);
+                          }
+                          
+          
+                      }
+           
+                      
+                });
+            }  
         });
 
         
-        messagebutton.addEventListener('click', async function() {
-          console.log("messagebutton");
-
-            const user = auth.currentUser;
-            if (user) {
-                 messagebutton.style.display = "none";
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                let creatIdMessageRoom = '';
-                for (let i = 0; i < 30; i++) {
-                    const randomIndex = Math.floor(Math.random() * characters.length);
-                    creatIdMessageRoom += characters[randomIndex];
-                }
-                const userId = user.uid; 
-                try {
-                    await setDoc(doc(db, typeuseruserauth, userId, "listeMessage",creatIdMessageRoom), {
-                        idRoomMessage: creatIdMessageRoom,
-                        idamisMessage: useridclick,
-                        TypeamisMessage :typeuserclick
-
-                    });
-                    await setDoc(doc(db, typeuserclick, useridclick, "listeMessage",creatIdMessageRoom), {
-                        idRoomMessage: creatIdMessageRoom,
-                        idamisMessage: userId,
-                        TypeamisMessage :typeuseruserauth
-                    });
-                     // Autres opérations avec les données de la cabine...
-                     const database = getDatabase(app);
-                     const messageRef = databaseRef(database, creatIdMessageRoom);
-                     push(messageRef, {
-                        text: "Salut! C'est super de vous retrouver sur Ferticonnet!  🩺",
-                        id_usersent:userId,
-                        timestamp: new Date().getTime() // Use local timestamp
-                     })
-                    .catch((error) => {
-                        console.error("Error adding message: ", error);
-                        wating.style.display="none";
-                    });
-
-                    alert('Veuillez vérifier votre liste de messages.');
-
-                   
-                }catch(error) {
-                    console.error("Error adding document: ", error);
-                }
-                
-
-            }
- 
-            
-        });
+    
 
 
 
@@ -610,7 +612,7 @@ const firebaseConfig = {
                          
                     }
 
-
+//alert
                     
                     
                     
@@ -733,7 +735,7 @@ auth.onAuthStateChanged(async (user) => {
              document.getElementById("etap3").innerHTML = "إضافة صورة الغلاف.";
              document.getElementById("etap4").innerHTML = "املأ النموذج.";
              document.getElementById("creeCabine").innerHTML = "أنشئ  العيادة الخاصة بك";
-             document.getElementById("creaCab").innerHTML = "إنشاء كوخ";
+             document.getElementById("creaCab").innerHTML = "إنشاء عيادة";
              document.getElementById("cvpecf").innerHTML = "أنشئ العيادة الخاصة بك على 'Ferticonnect' لمشاركة المنشورات والنصائح بين أعضاء هذا  العيادة. بالإضافة إلى ذلك، قم بإنشاء مساحة طبية تركز على التضامن، مما يعزز تبادل المعلومات والدعم بين المستخدمين.";
              document.getElementById("nomtext").innerHTML = "اسم  العيادة:";
              document.getElementById("Cr1").innerHTML = "خلق";

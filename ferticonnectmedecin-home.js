@@ -49,19 +49,25 @@ const firebaseConfig = {
     navbarbuttom.style.bottom="0";
     
   }  
+  const watingAccount = document.getElementById("wating");
+
   
   const shercheBtn = document.getElementById("shercheBtn");
   shercheBtn.addEventListener('click', () => {
+    watingAccount.style.display = "flex";
       window.location.href = `searchBr.html?typeuserauth=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+
   });
   const searchbtnnavvbutton = document.getElementById("searchbtnnavvbutton");
   searchbtnnavvbutton.addEventListener('click', () => {
+        watingAccount.style.display = "flex";
       window.location.href = `searchBr.html?typeuserauth=${typeuserclick}`; // Redirection vers la page du produit avec l'ID du produit
+
   });
 
 
+  //wating
 
-  
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
@@ -477,7 +483,6 @@ const firebaseConfig = {
         try {
             const querySnapshot = await getDocs(q);
             if (!querySnapshot.empty) {
-                const watingAccount = document.getElementById("wating");
                 watingAccount.style.display = "flex";
 
                 const userId = user.uid;
