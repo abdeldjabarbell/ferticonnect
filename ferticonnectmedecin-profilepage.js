@@ -58,7 +58,7 @@ const firebaseConfig = {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
         // Récupération de l'adresse e-mail de l'utilisateur connecté
-        fotherprofile
+        
         
         const mail = user.email;
         const iduser = user.uid;
@@ -68,9 +68,9 @@ const firebaseConfig = {
         const querySnapshot = await getDocs(doclistemessageref);
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            const idRoomMessage = data.idRoomMessage;
+           // const idRoomMessage = data.idRoomMessage;
             const idamisMessage = data.idamisMessage;
-            const typeamisMessage = data.typeamisMessage;
+            //const typeamisMessage = data.typeamisMessage;
             const messagebutton = document.getElementById('messagebutton');
             const messagebuttonicon = document.getElementById('messagebuttonicon');
 
@@ -81,62 +81,80 @@ const firebaseConfig = {
                     alert('Vous avez déjà créé un espace de messagerie entre vous deux. Veuillez vérifier votre liste de messages.');
 
                 });
-            }else{
-                messagebutton.addEventListener('click', async function() {
-                    console.log("messagebutton");
-          
-                      const user = auth.currentUser;
-                      if (user) {
-                           messagebutton.style.display = "none";
-                          const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                          let creatIdMessageRoom = '';
-                          for (let i = 0; i < 30; i++) {
-                              const randomIndex = Math.floor(Math.random() * characters.length);
-                              creatIdMessageRoom += characters[randomIndex];
-                          }
-                          const userId = user.uid; 
-                          try {
-                              await setDoc(doc(db, typeuseruserauth, userId, "listeMessage",creatIdMessageRoom), {
-                                  idRoomMessage: creatIdMessageRoom,
-                                  idamisMessage: useridclick,
-                                  TypeamisMessage :typeuserclick
-          
-                              });
-                              await setDoc(doc(db, typeuserclick, useridclick, "listeMessage",creatIdMessageRoom), {
-                                  idRoomMessage: creatIdMessageRoom,
-                                  idamisMessage: userId,
-                                  TypeamisMessage :typeuseruserauth
-                              });
-                               // Autres opérations avec les données de la cabine...
-                               const database = getDatabase(app);
-                               const messageRef = databaseRef(database, creatIdMessageRoom);
-                               push(messageRef, {
-                                  text: "Salut! C'est super de vous retrouver sur Ferticonnet!  🩺",
-                                  id_usersent:userId,
-                                  timestamp: new Date().getTime() // Use local timestamp
-                               })
-                              .catch((error) => {
-                                  console.error("Error adding message: ", error);
-                                  wating.style.display="none";
-                              });
-          
-                              alert('Veuillez vérifier votre liste de messages.');
-          
-                             
-                          }catch(error) {
-                              console.error("Error adding document: ", error);
-                          }
-                          
-          
+            }
+
+            messagebutton.addEventListener('click', async function() {
+                if (idamisMessage === useridclick) {
+                        messagebutton.addEventListener('click', async function() {
+                        alert('Vous avez déjà créé un espace de messagerie entre vous deux. Veuillez vérifier votre liste de messages.');
+    
+                    });
+                }else{
+    
+                console.log("messagebutton");
+      
+                  const user = auth.currentUser;
+                  if (user) {
+                       messagebutton.style.display = "none";
+                      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                      let creatIdMessageRoom = '';
+                      for (let i = 0; i < 30; i++) {
+                          const randomIndex = Math.floor(Math.random() * characters.length);
+                          creatIdMessageRoom += characters[randomIndex];
                       }
-           
+                      const userId = user.uid; 
+                      try {
+                          await setDoc(doc(db, typeuseruserauth, userId, "listeMessage",creatIdMessageRoom), {
+                              idRoomMessage: creatIdMessageRoom,
+                              idamisMessage: useridclick,
+                              TypeamisMessage :typeuserclick
+      
+                          });
+                          await setDoc(doc(db, typeuserclick, useridclick, "listeMessage",creatIdMessageRoom), {
+                              idRoomMessage: creatIdMessageRoom,
+                              idamisMessage: userId,
+                              TypeamisMessage :typeuseruserauth
+                          });
+                           // Autres opérations avec les données de la cabine...
+                           const database = getDatabase(app);
+                           const messageRef = databaseRef(database, creatIdMessageRoom);
+                           push(messageRef, {
+                              text: "Salut! C'est super de vous retrouver sur Ferticonnet!  🩺",
+                              id_usersent:userId,
+                              timestamp: new Date().getTime() // Use local timestamp
+                           })
+                          .catch((error) => {
+                              console.error("Error adding message: ", error);
+                              wating.style.display="none";
+                          });
+      
+                          alert('Veuillez vérifier votre liste de messages.');
+      
+                         
+                      }catch(error) {
+                          console.error("Error adding document: ", error);
+                      }
                       
-                });
-            }  
-        });
+      
+                  }
+       
+                  
+            
+    
+                }
+                
+       
+                  
+            });
+
+            
+
+
+         });
+
 
         
-    
+
 
 
 
