@@ -715,8 +715,8 @@ async function signUp() {
             prenom: registerPrenom,
             email: registerEmail,
             mot_de_passe: registerPassword,
-            //statut_du_compte: "desactive",active
-            statut_du_compte: "active",
+            statut_du_compte: "desactive",
+            //statut_du_compte: "active",
             code : code,
             imguser:"",
             imgcouvertureuser:"",

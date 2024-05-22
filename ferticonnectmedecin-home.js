@@ -612,6 +612,101 @@ const deco_neccterbtn = document.getElementById("deco_neccterbtn");
 const anulerdeco_neccterbtn = document.getElementById("anulerdeco_neccterbtn");
 const inputpubadd = document.getElementById("inputpubadd");
 const resendlecode = document.getElementById("resendlecode");
+ 
+const cycle = document.getElementById("cycle");
+const pathology = document.getElementById("pathology");
+const traitement = document.getElementById("traitement");
+const formus = document.getElementById("formus");
+const sports = document.getElementById("sports");
+const psycolog = document.getElementById("psycolog");
+
+
+if (lango === "Français") {
+    cycle.innerHTML = "le suivi de cycle mensuel";
+} else if (lango === "Anglais") {
+    cycle.innerHTML = "monthly cycle tracking";
+} else if (lango === "Espagnol") {
+    cycle.innerHTML = "seguimiento del ciclo mensual";
+} else if (lango === "Arabe") {
+    cycle.innerHTML = "متابعة الدورة الشهرية";
+} else if (lango === "Portugais") {
+    cycle.innerHTML = "rastreamento do ciclo mensal";
+} else if (lango === "Allemand") {
+    cycle.innerHTML = "monatliche Zyklusverfolgung";
+}
+
+if (lango === "Français") {
+    formus.innerHTML = "forums";
+} else if (lango === "Anglais") {
+    formus.innerHTML = "forums";
+} else if (lango === "Espagnol") {
+    formus.innerHTML = "foros";
+} else if (lango === "Arabe") {
+    formus.innerHTML = "منتديات";
+} else if (lango === "Portugais") {
+    formus.innerHTML = "fóruns";
+} else if (lango === "Allemand") {
+    formus.innerHTML = "Foren";
+}
+
+if (lango === "Français") {
+    psycolog.innerHTML = "suivi psychologique";
+} else if (lango === "Anglais") {
+    psycolog.innerHTML = "psychological support";
+} else if (lango === "Espagnol") {
+    psycolog.innerHTML = "seguimiento psicológico";
+} else if (lango === "Arabe") {
+    psycolog.innerHTML = "الدعم النفسي";
+} else if (lango === "Portugais") {
+    psycolog.innerHTML = "acompanhamento psicológico";
+} else if (lango === "Allemand") {
+    psycolog.innerHTML = "psychologische Unterstützung";
+}
+
+if (lango === "Français") {
+    sports.innerHTML = "coaching sportif";
+} else if (lango === "Anglais") {
+    sports.innerHTML = "sports coaching";
+} else if (lango === "Espagnol") {
+    sports.innerHTML = "entrenamiento deportivo";
+} else if (lango === "Arabe") {
+    sports.innerHTML = "التدريب الرياضي";
+} else if (lango === "Portugais") {
+    sports.innerHTML = "treinamento esportivo";
+} else if (lango === "Allemand") {
+    sports.innerHTML = "Sportcoaching";
+}
+
+if (lango === "Français") {
+    pathology.innerHTML = "les pathologies";
+} else if (lango === "Anglais") {
+    pathology.innerHTML = "pathologies";
+} else if (lango === "Espagnol") {
+    pathology.innerHTML = "patologías";
+} else if (lango === "Arabe") {
+    pathology.innerHTML = "الأمراض";
+} else if (lango === "Portugais") {
+    pathology.innerHTML = "as patologias";
+} else if (lango === "Allemand") {
+    pathology.innerHTML = "Pathologien";
+}
+
+if (lango === "Français") {
+    traitement.innerHTML = "les traitements";
+} else if (lango === "Anglais") {
+    traitement.innerHTML = "treatments";
+} else if (lango === "Espagnol") {
+    traitement.innerHTML = "los tratamientos";
+} else if (lango === "Arabe") {
+    traitement.innerHTML = "العلاجات";
+} else if (lango === "Portugais") {
+    traitement.innerHTML = "os tratamentos";
+} else if (lango === "Allemand") {
+    traitement.innerHTML = "die Behandlungen";
+}
+
+
+
 
 
 
@@ -1897,6 +1992,104 @@ titleoptionmycabinsbg3.addEventListener('click', function() {
         mycabinsbg3.style.height = "auto";
     }
 });
+
+
+// sycl liste 
+const mescabins_66 = document.getElementById('mescabins_66');
+const mycabinsbg66 = document.getElementById('mycabinsbg66');
+const titleoptionmycabinsbg66 = document.getElementById('titleoptionmycabinsbg66');
+
+titleoptionmycabinsbg66.addEventListener('click', function() {
+    if(mescabins_66.style.display === "none") {
+        mescabins_66.style.display = "flex";
+        mycabinsbg66.style.height = "400px";
+    } else {
+        mescabins_66.style.display = "none";
+        mycabinsbg66.style.height = "auto";
+    }
+});
+
+// formus liste 
+const mescabins_77 = document.getElementById('mescabins_77');
+const mycabinsbg77 = document.getElementById('mycabinsbg77');
+const titleoptionmycabinsbg77 = document.getElementById('titleoptionmycabinsbg77');
+
+titleoptionmycabinsbg77.addEventListener('click', function() {
+    if(mescabins_77.style.display === "none") {
+        mescabins_77.style.display = "flex";
+        mycabinsbg77.style.height = "400px";
+    } else {
+        mescabins_77.style.display = "none";
+        mycabinsbg77.style.height = "auto";
+    }
+});
+
+// psyco liste 
+const mescabins_88 = document.getElementById('mescabins_88');
+const mycabinsbg88 = document.getElementById('mycabinsbg88');
+const titleoptionmycabinsbg88 = document.getElementById('titleoptionmycabinsbg88');
+
+titleoptionmycabinsbg88.addEventListener('click', function() {
+    if(mescabins_88.style.display === "none") {
+        mescabins_88.style.display = "flex";
+        mycabinsbg88.style.height = "400px";
+    } else {
+        mescabins_88.style.display = "none";
+        mycabinsbg88.style.height = "auto";
+    }
+});
+
+
+// sports liste 
+const mescabins_818 = document.getElementById('mescabins_818');
+const mycabinsbg818 = document.getElementById('mycabinsbg818');
+const titleoptionmycabinsbg818 = document.getElementById('titleoptionmycabinsbg818');
+
+titleoptionmycabinsbg818.addEventListener('click', function() {
+    if(mescabins_818.style.display === "none") {
+        mescabins_818.style.display = "flex";
+        mycabinsbg818.style.height = "400px";
+    } else {
+        mescabins_818.style.display = "none";
+        mycabinsbg818.style.height = "auto";
+    }
+});
+
+
+
+// traitement liste 
+const mescabins_99 = document.getElementById('mescabins_99');
+const mycabinsbg99 = document.getElementById('mycabinsbg99');
+const titleoptionmycabinsbg99 = document.getElementById('titleoptionmycabinsbg99');
+
+titleoptionmycabinsbg99.addEventListener('click', function() {
+    if(mescabins_99.style.display === "none") {
+        mescabins_99.style.display = "flex";
+        mycabinsbg99.style.height = "400px";
+    } else {
+        mescabins_99.style.display = "none";
+        mycabinsbg99.style.height = "auto";
+    }
+});
+
+
+
+// pathology liste 
+const mescabins_00 = document.getElementById('mescabins_00');
+const mycabinsbg00 = document.getElementById('mycabinsbg00');
+const titleoptionmycabinsbg00 = document.getElementById('titleoptionmycabinsbg00');
+
+titleoptionmycabinsbg00.addEventListener('click', function() {
+    if(mescabins_00.style.display === "none") {
+        mescabins_00.style.display = "flex";
+        mycabinsbg00.style.height = "400px";
+    } else {
+        mescabins_00.style.display = "none";
+        mycabinsbg00.style.height = "auto";
+    }
+});
+
+
 
 
 

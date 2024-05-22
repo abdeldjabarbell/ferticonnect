@@ -2209,6 +2209,13 @@ font-size: 1rem;
   .bagshearch p{
     color: var(--second2-bg-color);
   }
+
+  .feedback{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--second-bg-color);
+    border-radius: 5px;
+  }
 @media (max-width:617px){
 
 
