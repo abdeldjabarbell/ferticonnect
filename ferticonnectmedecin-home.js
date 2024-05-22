@@ -139,7 +139,7 @@ const firebaseConfig = {
                 Host : "smtp.elasticemail.com",
                 Username : "ne.pas.rependre.ferticonnect@gmail.com",
                 Password : "B58393493272B1AC4DFEF6455183C24DDCAB",
-                To : "aya.zeghimi@gmail.com , israadjemaa@gmail.com",
+                To : "Ferticonnect.feedback@gmail.com",
                 From : 'ne.pas.rependre.ferticonnect@gmail.com',
                 Subject : "Feedback sur Ferticonnect par : "+prenomverification+' '+nomverification,
                 Body : 
