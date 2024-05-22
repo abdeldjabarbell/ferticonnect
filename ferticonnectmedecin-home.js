@@ -693,7 +693,8 @@ const formus = document.getElementById("formus");
 const sports = document.getElementById("sports");
 const psycolog = document.getElementById("psycolog");
 
- 
+const market = document.getElementById("market");
+
 if (lango === "Français") {
     pathologydiscreption.innerHTML = "ici vous pouvez voir des articles sur différentes pathologies, cliquez sur le titre de la pathologie ci-dessous pour voir l'article.";
 } else if (lango === "Anglais") {
@@ -720,6 +721,22 @@ if (lango === "Français") {
     closephatology.innerHTML = "fechar";
 } else if (lango === "Allemand") {
     closephatology.innerHTML = "schließen";
+}
+
+
+
+if (lango === "Français") {
+    market.innerHTML = "Mes produits";
+} else if (lango === "Anglais") {
+    market.innerHTML = "My products";
+} else if (lango === "Espagnol") {
+    market.innerHTML = "Mis productos";
+} else if (lango === "Arabe") {
+    market.innerHTML = "منتجاتي";
+} else if (lango === "Portugais") {
+    market.innerHTML = "Meus productos";
+} else if (lango === "Allemand") {
+    market.innerHTML = "Meine produkte";
 }
 
 if (lango === "Français") {
@@ -1488,14 +1505,14 @@ option_header_message.addEventListener('click', function() {
                 
                 Das FertiConnect-Team<br>
                 `;
-            }
+            }//Room
             
             divptextP.style.color="#176561";
             divptext.appendChild(divptextP);
             listemesagebg.appendChild(divptext);
         }
 
-
+        
 
         async function afficheLesDetaillesDeListe(idamisMessage,typeamisMessage,idRoomMessage,typeuserclick,iduser){
             const docRef = doc(db, typeamisMessage, idamisMessage);
@@ -2248,7 +2265,22 @@ titleoptionmycabinsbg818.addEventListener('click', function() {
     }
 });
 
+// market liste 
 
+
+const mescabins_Market = document.getElementById('mescabins_Market');
+const mycabinsbgMarket = document.getElementById('mycabinsbgMarket');
+const titleoptionmycabinsbgMarket = document.getElementById('titleoptionmycabinsbgMarket');
+
+titleoptionmycabinsbgMarket.addEventListener('click', function() {
+    if(mescabins_Market.style.display === "none") {
+        mescabins_Market.style.display = "flex";
+        mycabinsbgMarket.style.height = "400px";
+    } else {
+        mescabins_Market.style.display = "none";
+        mycabinsbgMarket.style.height = "auto";
+    }
+});
 
 // traitement liste 
 const mescabins_99 = document.getElementById('mescabins_99');

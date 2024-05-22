@@ -78,7 +78,6 @@ const firebaseConfig = {
                 messagebuttonicon.style.color = "#007bbe";
                 addmessage = 1;
                 console.log("addmessage ="+addmessage);
-             
             }
             else{
                 console.log("addmessage ="+addmessage);
