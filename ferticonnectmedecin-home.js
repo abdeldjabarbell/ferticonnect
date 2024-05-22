@@ -80,7 +80,7 @@ const firebaseConfig = {
         const emailconfirmation = docSnapshot.data().email;
         const codeverification = docSnapshot.data().code;
         const nomverification = docSnapshot.data().nom;
-        const prenomverification = docSnapshot.data().code;
+        const prenomverification = docSnapshot.data().prenom;
 
         const resendlecode = document.getElementById("resendlecode");
         resendlecode.addEventListener('click', () => { enbyerlemail()}); 
@@ -120,6 +120,60 @@ const firebaseConfig = {
        
         }
         
+
+        const sendfeedback = document.getElementById("sendfeedback");
+        const original10 = document.getElementById("original10");
+        const loader10 = document.getElementById("loader10");
+        const Done10 = document.getElementById("Done10");
+        const feebackenvoyer = document.getElementById("feebackenvoyer");
+        const feedbackdone = document.getElementById("feedbackdone");
+        const envoyerfeedbackp = document.getElementById("envoyerfeedbackp");
+        const ecrirfeedbach1 = document.getElementById("ecrirfeedbach1");
+
+        sendfeedback.addEventListener('click', () => {
+            original10.style.display="none";
+            loader10.style.display="flex";
+
+            const feedbackmessage  = document.getElementById("feedbackmessage").value;
+            Email.send({
+                Host : "smtp.elasticemail.com",
+                Username : "ne.pas.rependre.ferticonnect@gmail.com",
+                Password : "B58393493272B1AC4DFEF6455183C24DDCAB",
+                To : "aya.zeghimi@gmail.com , israadjemaa@gmail.com",
+                From : 'ne.pas.rependre.ferticonnect@gmail.com',
+                Subject : "Feedback sur Ferticonnect par : "+prenomverification+' '+nomverification,
+                Body : 
+
+                   "informations de l'utilisateur :<br>"+
+
+                    "email :  "+emailconfirmation+",<br>"+
+                    "nom :  "+nomverification+",<br>"+
+                    "prenom :  "+prenomverification+",<br>"+
+                    "id :  "+userId+",<br>"+
+
+                    "--------------------------------------<br>"
+                    +"Feedback :<br><br>"
+
+                    +feedbackmessage
+
+
+                    +"<br><br>FertiConnect<br>" 
+    
+                    +"<br><span style='color:red;'>Ce message a été envoyé pa lutilistaeur de ferti connect. Merci de ne pas y répondre ici.</span>",
+
+                
+                }).then(() => {
+                    alert('message envoyé');
+                    console.log('message envoyé');
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
+            
+                Done10.style.display="flex";
+                original10.style.display="none";
+                loader10.style.display="none";
+        }); 
         
         if (docSnapshot.exists()) {
             const photoprofilepubadd = document.getElementById("photoprofilepubadd");
@@ -578,6 +632,11 @@ const firebaseConfig = {
         window.location.href = 'index.html';
     }
 });
+
+
+
+
+
 function traduction_systeme(lango){
     
 const messageecrit = document.getElementById("messageecrit");
@@ -620,9 +679,68 @@ const formus = document.getElementById("formus");
 const sports = document.getElementById("sports");
 const psycolog = document.getElementById("psycolog");
 
+if (lango === "Français") {
+    envoyerfeedbackp.innerHTML = "Envoyez-nous un feedback concernant notre plateforme.";
+} else if (lango === "Anglais") {
+    envoyerfeedbackp.innerHTML = "Send us feedback about our platform.";
+} else if (lango === "Espagnol") {
+    envoyerfeedbackp.innerHTML = "Envíenos sus comentarios sobre nuestra plataforma.";
+} else if (lango === "Arabe") {
+    envoyerfeedbackp.innerHTML = "أرسل لنا ملاحظاتك حول منصتنا.";
+} else if (lango === "Portugais") {
+    envoyerfeedbackp.innerHTML = "Envie-nos feedback sobre nossa plataforma.";
+} else if (lango === "Allemand") {
+    envoyerfeedbackp.innerHTML = "Senden Sie uns Feedback zu unserer Plattform.";
+}
 
 if (lango === "Français") {
-    cycle.innerHTML = "le suivi de cycle mensuel";
+    ecrirfeedbach1.innerHTML = "Écrire un feedback";
+} else if (lango === "Anglais") {
+    ecrirfeedbach1.innerHTML = "Write feedback";
+} else if (lango === "Espagnol") {
+    ecrirfeedbach1.innerHTML = "Escribir comentarios";
+} else if (lango === "Arabe") {
+    ecrirfeedbach1.innerHTML = "كتابة ملاحظات";
+} else if (lango === "Portugais") {
+    ecrirfeedbach1.innerHTML = "Escrever feedback";
+} else if (lango === "Allemand") {
+    ecrirfeedbach1.innerHTML = "Feedback schreiben";
+}
+
+if (lango === "Français") {
+    feebackenvoyer.innerHTML = "Envoyer le feedback";
+} else if (lango === "Anglais") {
+    feebackenvoyer.innerHTML = "Send feedback";
+} else if (lango === "Espagnol") {
+    feebackenvoyer.innerHTML = "Enviar comentarios";
+} else if (lango === "Arabe") {
+    feebackenvoyer.innerHTML = "إرسال الملاحظات";
+} else if (lango === "Portugais") {
+    feebackenvoyer.innerHTML = "Enviar feedback";
+} else if (lango === "Allemand") {
+    feebackenvoyer.innerHTML = "Feedback senden";
+}
+
+if (lango === "Français") {
+    feedbackdone.innerHTML = "Le feedback a été envoyé";
+} else if (lango === "Anglais") {
+    feedbackdone.innerHTML = "Feedback has been sent";
+} else if (lango === "Espagnol") {
+    feedbackdone.innerHTML = "Los comentarios han sido enviados";
+} else if (lango === "Arabe") {
+    feedbackdone.innerHTML = "تم إرسال الملاحظات";
+} else if (lango === "Portugais") {
+    feedbackdone.innerHTML = "O feedback foi enviado";
+} else if (lango === "Allemand") {
+    feedbackdone.innerHTML = "Feedback wurde gesendet";
+}
+
+
+
+
+
+if (lango === "Français") {
+    cycle.innerHTML = "suivrement de cycle mensuel";
 } else if (lango === "Anglais") {
     cycle.innerHTML = "monthly cycle tracking";
 } else if (lango === "Espagnol") {
@@ -692,13 +810,13 @@ if (lango === "Français") {
 }
 
 if (lango === "Français") {
-    traitement.innerHTML = "les traitements";
+    traitement.innerHTML = "mes traitements";
 } else if (lango === "Anglais") {
-    traitement.innerHTML = "treatments";
+    traitement.innerHTML = "my treatments";
 } else if (lango === "Espagnol") {
     traitement.innerHTML = "los tratamientos";
 } else if (lango === "Arabe") {
-    traitement.innerHTML = "العلاجات";
+    traitement.innerHTML =" علاجاتي";
 } else if (lango === "Portugais") {
     traitement.innerHTML = "os tratamentos";
 } else if (lango === "Allemand") {

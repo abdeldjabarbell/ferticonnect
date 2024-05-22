@@ -60,7 +60,7 @@ section{
 }
  
 
-/*.header.sticky{
+/* btn .header.sticky{
    border-bottom: .1rem solid #00000000;
 }
 */
@@ -390,6 +390,7 @@ input:focus {
   .btn.souvgarder:hover {
     background-color:rgb(0, 45, 0); 
     color: #fff; 
+    
 
   }
 
