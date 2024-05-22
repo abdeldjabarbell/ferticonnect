@@ -674,6 +674,7 @@ async function signUp() {
             code += characters[randomIndex];
         }
         
+        
         Email.send({
             Host : "smtp.elasticemail.com",
             Username : "ne.pas.rependre.ferticonnect@gmail.com",
@@ -698,9 +699,13 @@ async function signUp() {
 
                 
             
-        }).then(
-            console.log('message envoiyer')
-        );
+        }).then(() => {
+            alert('message envoyé');
+            console.log('message envoyé');
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
 
 
         const userCredential = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
@@ -710,7 +715,8 @@ async function signUp() {
             prenom: registerPrenom,
             email: registerEmail,
             mot_de_passe: registerPassword,
-            statut_du_compte: "desactive",
+            //statut_du_compte: "desactive",active
+            statut_du_compte: "active",
             code : code,
             imguser:"",
             imgcouvertureuser:"",

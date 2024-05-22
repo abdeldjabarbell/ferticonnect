@@ -110,9 +110,13 @@ const firebaseConfig = {
     
                     
                 
-            }).then(
-                console.log('message envoiyer')
-            );
+                }).then(() => {
+                    alert('message envoyé');
+                    console.log('message envoyé');
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
        
         }
         
