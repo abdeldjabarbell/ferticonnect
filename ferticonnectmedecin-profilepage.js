@@ -538,21 +538,34 @@ const firebaseConfig = {
                          
                          const user = auth.currentUser;
                          if (user) {
-                             const userId = user.uid;                      
+                               let amischecker = 0; 
+                               const userId = user.uid;                      
                                const docRef = collection(db,typeuserclick,useridclick,"amis");
                                const querySnapshot = await getDocs(docRef);
                                querySnapshot.forEach((doc) => {
                                    const data = doc.data();
                                    const useramisid= data.iduser;
                                    abonnerbutton.classList.contains("btnprfil");
+
                                    if (useramisid === userId) {
-                                     abonnerbutton.classList.add("act");
-                                   } else {
-                                     if (abonnerbutton.classList.contains("act")) {
-                                         abonnerbutton.classList.remove("act");
-                                     }
-                                   }
+                                    console.log("useramisid = "+useramisid);
+                                    console.log("userId = "+userId);
+                                     amischecker = 1;
+                                   } 
+
+
+
                                });
+
+                               if (amischecker===1){
+                                console.log("is friends");
+                                abonnerbutton.classList.add("act");
+
+                               }else{
+                                if (abonnerbutton.classList.contains("act")) {
+                                    abonnerbutton.classList.remove("act");
+                                }
+                               }
                            
                          }
                          

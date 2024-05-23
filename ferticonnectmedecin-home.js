@@ -954,17 +954,17 @@ if (lango === "Français") {
 
 
 if (lango === "Français") {
-    inputpubadd.placeholder = "Quoi de neuf ?";
+    inputpubadd.placeholder = "partagez votre expérience";
 } else if (lango === "Anglais") {
-    inputpubadd.placeholder = "What's new?";
+    inputpubadd.placeholder = "share your experience";
 } else if (lango === "Espagnol") {
-    inputpubadd.placeholder = "¿Qué hay de nuevo?";
+    inputpubadd.placeholder = "comparte tu experiencia";
 } else if (lango === "Arabe") {
-    inputpubadd.placeholder = "ما الجديد؟";
+    inputpubadd.placeholder = "شارك تجربتك";
 } else if (lango === "Portugais") {
-    inputpubadd.placeholder = "O que há de novo?";
+    inputpubadd.placeholder = "compartilhe sua experiência";
 } else if (lango === "Allemand") {
-    inputpubadd.placeholder = "Was gibt's Neues?";
+    inputpubadd.placeholder = "teilen Sie Ihre Erfahrung";
 }
 
 

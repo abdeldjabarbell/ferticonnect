@@ -24,13 +24,14 @@
    --btnHover-color:#53e8de;
    --error-text: rgb(160, 13, 0);
 }
-29746A
+176561
+linear-gradient(to right, #176561, #16b3ab)
 */
 :root{
   --bg-color:#f1efef;
   --second-bg-color:#bcc9c1;
   --pub-bg-color:#c8d6d442;
-  --second2-bg-color:#176561;
+  --second2-bg-color: #176561;
   --text-color:#000000;
   --btn-color:#69A88D;
   --btnHover-color:#53e896;
@@ -40,6 +41,7 @@ html{
    font-size: 62.5%;
    overflow-x: hidden;
 }
+
 body{
   
   background-color: var(--bg-color);
@@ -1696,13 +1698,14 @@ cursor: pointer;
   display: flex;
   justify-content: start;
   align-items: center;
+  margin-top: 3px;
 }
 .mon_message {
   display: flex;
   flex-direction: column;
   position: relative;
   left: 0;
-  max-width: 48%;
+  max-width: 80%;
   padding: 10px;
   color: white;
   background-color: var(--second2-bg-color);
@@ -1719,6 +1722,7 @@ cursor: pointer;
   display: flex;
   justify-content: end;
   align-items: center;
+  margin-top: 3px;
 
 }
 .autre_message{
@@ -1726,7 +1730,7 @@ cursor: pointer;
   flex-direction: column;
   position: relative;
   right: 0;
-  max-width: 48%;
+  max-width: 80%;
   padding: 10px;
   color: var(--text-color);
   background-color: var(--second-bg-color);
